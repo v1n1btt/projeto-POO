@@ -1,3 +1,4 @@
+package projeto-POO;
 public class Curso {
     private String nome;
     private String codigo;
