@@ -6,11 +6,11 @@ public class Menu{
     public static void criarConta(){
 
         // Dados do usuario
-        string CPF;
-        string nome;
-        string dataNascimento;
-        string senha;
-        string confirmaSenha;
+        String CPF;
+        String nome;
+        String dataNascimento;
+        String senha;
+        String confirmaSenha;
 
         Scanner sc = new Scanner(System.in);
 
@@ -45,8 +45,8 @@ public class Menu{
     public static void fazerLogin(){
 
         // Dados do usuário
-        string CPF;
-        string senha;
+        String CPF;
+        String senha;
 
         Scanner sc = new Scanner(System.in);
 
