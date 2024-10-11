@@ -6,7 +6,7 @@ public class Menu{
     public static void criarConta(){
 
         // Dados do usuario
-        string cpf;
+        string CPF;
         string nome;
         string dataNascimento;
         string senha;
@@ -19,7 +19,7 @@ public class Menu{
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("====================\nREGISTRO\n====================\n\n");
         System.out.print("CPF do usuário: ");
-        cpf = sc.nextLine();
+        CPF = sc.nextLine();
         System.out.print("Nome completo: ");
         nome = sc.nextLine();
         System.out.print("Data de nascimento: ");
@@ -45,7 +45,7 @@ public class Menu{
     public static void fazerLogin(){
 
         // Dados do usuário
-        string cpf;
+        string CPF;
         string senha;
 
         Scanner sc = new Scanner(System.in);
@@ -54,7 +54,7 @@ public class Menu{
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("====================\nLOGIN\n====================\n\n");
         System.out.print("CPF do usuário: ");
-        cpf = sc.nextLine();
+        CPF = sc.nextLine();
         System.out.print("Senha: ");
         senha = sc.nextLine();
 
