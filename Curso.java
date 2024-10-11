@@ -7,11 +7,11 @@ public class Curso {
     private String preRequisitos;
 
     public Curso(String nome, String codigo, int cargaHoraria, String ementa, String preRequisitos) {
-        this.nome = nome;
-        this.codigo = codigo;
-        this.cargaHoraria = cargaHoraria;
-        this.ementa = ementa;
-        this.preRequisitos = preRequisitos;
+        setNome(nome);
+        setCodigo(codigo);
+        setCargaHoraria(cargaHoraria);
+        setEmenta(ementa);
+        setPreRequisitos(preRequisitos);
     }
 
     public String getNome() {
