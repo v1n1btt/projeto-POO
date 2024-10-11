@@ -13,7 +13,7 @@ public class Menu{
 
         Scanner sc = new Scanner(System.in);
 
-        // Insercao de dados do usuario
+        // Menu de cadastro
         limpaTela();
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("====================\nREGISTRO\n====================\n\n");
@@ -40,6 +40,24 @@ public class Menu{
         else
             Runtime.getRuntime().exec("clear");
     }
+
+    public static void fazerLogin(){
+
+        // Dados do usuário
+        string cpf;
+        string senha;
+
+        Scanner sc = new Scanner(System.in);
+
+        // Menu de login
+        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
+        System.out.print("====================\nLOGIN\n====================\n\n");
+        System.out.print("CPF do usuário: ");
+        cpf = sc.nextLine();
+        System.out.print("Senha: ");
+        senha = sc.nextLine();
+
+    }
     public static void main(String args[]){
         
         Scanner sc = new Scanner(System.in);
@@ -56,11 +74,11 @@ public class Menu{
         escolha = Integer.parseInt(sc.nextLine());
         switch(escolha){
             case 1:
-
+                criarConta();
                 break;
 
             case 2:
-
+                fazerLogin();
                 break;
 
             case 3:
