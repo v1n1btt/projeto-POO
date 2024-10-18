@@ -1,33 +1,14 @@
-package projeto-POO;
-public class Aluno {
-    private String nome;
-    private String codigo;
+public class Aluno extends Pessoa {
+    
     private int idade;
-    private String CPF;
+    private String cpf;
     private String plano;
 
-    public Aluno(String nome, String codigo, int idade, String CPF, String plano) {
-        this.nome = nome;
-        this.codigo = codigo;
+    public Aluno(String nome, String codigoUsuario, int idade, String cpf, String plano) {
+        super(nome, codigoUsuario);
         this.idade = idade;
-        this.CPF = CPF;
+        this.cpf = cpf;
         this.plano = plano;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public int getidade() {
@@ -39,11 +20,11 @@ public class Aluno {
     }
 
     public String getCPF() {
-        return CPF;
+        return cpf;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCPF(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getplano() {
