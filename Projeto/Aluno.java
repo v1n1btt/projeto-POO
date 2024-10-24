@@ -1,11 +1,12 @@
+package Projeto;
 public class Aluno extends Pessoa {
 
     private int idade;
     private String cpf;
     private String plano;
 
-    public Aluno(String nome, String codigoUsuario, int idade, String cpf, String plano) {
-        super(nome, codigoUsuario);
+    public Aluno(String nome, String codigoUsuario, String email, String senhaPessoal, int idade, String cpf, String plano) {
+        super(nome, codigoUsuario, email, senhaPessoal);
         this.idade = idade;
         this.cpf = cpf;
         this.plano = plano;

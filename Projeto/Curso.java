@@ -1,4 +1,4 @@
-package projeto-POO;
+package Projeto;
 public class Curso {
     private String nome;
     private String codigo;

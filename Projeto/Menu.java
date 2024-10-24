@@ -1,4 +1,4 @@
-package projeto-POO;
+package Projeto;
 import java.util.Scanner;
 
 public class Menu{

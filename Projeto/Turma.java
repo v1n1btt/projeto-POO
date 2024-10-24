@@ -1,3 +1,5 @@
+package Projeto;
+
 public class Turma extends Curso{
     private String sala;
     private String horario;
