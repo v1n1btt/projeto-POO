@@ -64,26 +64,33 @@ public class Menu{
         Scanner sc = new Scanner(System.in);
         int escolha;
 
-        // Menu principal
-        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
-        System.out.println("Selecione uma opção:");
-        System.out.println("1. Fazer cadastro");
-        System.out.println("2. Fazer login");
-        System.out.println("3. Sair");
-        System.out.print("\nDigite sua escolha: ");
+        do{
+            // Menu principal
+            System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
+            System.out.println("Selecione uma opção:");
+            System.out.println("1. Fazer cadastro");
+            System.out.println("2. Fazer login");
+            System.out.println("3. Sair");
+            System.out.print("\nDigite sua escolha: ");
+    
+            escolha = Integer.parseInt(sc.nextLine());
+            switch(escolha){
+                case 1:
+                    criarConta();
+                    break;
+    
+                case 2:
+                    fazerLogin();
+                    break;
+    
+                case 3:
+                    return;
 
-        escolha = Integer.parseInt(sc.nextLine());
-        switch(escolha){
-            case 1:
-                criarConta();
-                break;
-
-            case 2:
-                fazerLogin();
-                break;
-
-            case 3:
-                return;
-        }
+                default:
+                    System.out.print("\nOpção inválida, tente novamente.");
+                    getchar();
+                    break;
+            }
+        }while(escolha != 3);
     }
 }
