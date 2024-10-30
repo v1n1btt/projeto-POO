@@ -65,14 +65,8 @@ public class Menu{
         int escolha;
 
         do{
-            // Menu principal
-            System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
-            System.out.println("Selecione uma opção:");
-            System.out.println("1. Fazer cadastro");
-            System.out.println("2. Fazer login");
-            System.out.println("3. Sair");
-            System.out.print("\nDigite sua escolha: ");
-    
+            
+            MenuInicial();
             escolha = Integer.parseInt(sc.nextLine());
             switch(escolha){
                 case 1:
@@ -92,5 +86,15 @@ public class Menu{
                     break;
             }
         }while(escolha != 3);
+    }
+
+    public static void MenuInicial() {
+        // Menu principal
+        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
+        System.out.println("Selecione uma opção:");
+        System.out.println("1. Fazer cadastro");
+        System.out.println("2. Fazer login");
+        System.out.println("3. Sair");
+        System.out.print("\nDigite sua escolha: ");
     }
 }

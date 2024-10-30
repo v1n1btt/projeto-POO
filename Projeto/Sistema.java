@@ -1,7 +1,12 @@
 package Projeto;
 
+import java.util.Scanner; 
+
 public class Sistema {
-    public void cadastrarCurso(){
+    Scanner sc = new Scanner(System.in);
+
+    public void cadastrarCurso() {
+
         String nome;
         String codigo;
         int cargaHoraria;
@@ -34,7 +39,8 @@ public class Sistema {
 
     }
 
-    public void cadastrarProfessor(){
+    public void cadastrarProfessor() {
+
         String nome; 
         String codigoUsuario;
         String email; 
@@ -52,7 +58,7 @@ public class Sistema {
         System.out.print("Endereço de email do professor: ");
         email = sc.nextLine();
         System.out.print("Senha do professor: ");
-        senha = sc.nextLine();
+        senhaPessoal = sc.nextLine();
         System.out.print("Carga horária do professor: ");
         cargaHoraria = Integer.parseInt(sc.nextLine());
 
@@ -69,6 +75,7 @@ public class Sistema {
     public void menuAdmin(){
 
         int escolha;
+        
         do{
             // Menu do administrador
             //Menu.limpaTela();
@@ -104,5 +111,5 @@ public class Sistema {
                 
             }
         }while(escolha != 4);
-    }    
+    }
 }
