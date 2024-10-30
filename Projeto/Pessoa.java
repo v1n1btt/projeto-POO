@@ -6,6 +6,7 @@ public class Pessoa {
     private String codigoUsuario;
     private String email; 
     private String senhaPessoal;
+    private int nivelAcesso;
 
     public Pessoa(String nome, String codigoUsuario, String email, String senhaPessoal) {
         setNome(nome);
@@ -44,6 +45,14 @@ public class Pessoa {
 
     public String getSenhaPessoal() {
         return senhaPessoal;
+    }
+
+    public void setNivelAcesso(int nivelAcesso) {
+        this.nivelAcesso = nivelAcesso; 
+    }
+
+    public int getNivelAcesso() {
+        return nivelAcesso; 
     }
     
 }

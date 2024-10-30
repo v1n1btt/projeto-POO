@@ -9,6 +9,7 @@ public class Aluno extends Pessoa {
         super(nome, codigoUsuario, email, senhaPessoal);
         setCPF(cpf);
         setPlano(plano);
+        setNivelAcesso(3);
     }
 
     public void setCPF(String cpf) {
