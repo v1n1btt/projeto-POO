@@ -88,7 +88,7 @@ public class Menu{
 
                 default:
                     System.out.print("\nOpção inválida, tente novamente.");
-                    getchar();
+                    //getchar();
                     break;
             }
         }while(escolha != 3);

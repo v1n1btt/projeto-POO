@@ -19,7 +19,7 @@ public class Administrador extends Pessoa {
         boolean confirma;
 
         // Formulario de cadastro de curso
-        Menu.limpaTela();
+        //Menu.limpaTela();
         System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
         System.out.print("Nome do curso: ");
         nome = sc.nextLine();
@@ -52,7 +52,7 @@ public class Administrador extends Pessoa {
         boolean confirma;
 
         // Formulario de cadastro de professor
-        Menu.limpaTela();
+        //Menu.limpaTela();
         System.out.print("====================\nCADASTRO DE PROFESSOR\n====================\n\n");
         System.out.print("Nome do professor: ");
         nome = sc.nextLine();
@@ -80,7 +80,7 @@ public class Administrador extends Pessoa {
         int escolha;
         do{
             // Menu do administrador
-            Menu.limpaTela();
+            //Menu.limpaTela();
             System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como administrador\n\n");
             System.out.println("Selecione uma opção:");
             System.out.println("    1. Cadastrar novo curso");
@@ -108,7 +108,7 @@ public class Administrador extends Pessoa {
                 
                 default:
                     System.out.print("\nOpção inválida, tente novamente.");
-                    getchar();
+                    //getchar();
                     break;
                 
             }
