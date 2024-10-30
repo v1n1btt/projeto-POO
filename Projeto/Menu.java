@@ -15,7 +15,7 @@ public class Menu{
         Scanner sc = new Scanner(System.in);
 
         // Menu de cadastro
-        limpaTela();
+        //limpaTela();
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("====================\nREGISTRO\n====================\n\n");
         System.out.print("CPF do usuário: ");
@@ -34,13 +34,13 @@ public class Menu{
         }
     }
 
-    public static void limpaTela(){
+    /*public static void limpaTela(){
         final String os = System.getProperty("os.name");
         if (os.contains("Windows"))
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         else
             Runtime.getRuntime().exec("clear");
-    }
+    }*/
 
     public static void fazerLogin(){
 
