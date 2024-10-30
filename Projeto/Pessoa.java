@@ -8,10 +8,10 @@ public class Pessoa {
     private String senhaPessoal;
 
     public Pessoa(String nome, String codigoUsuario, String email, String senhaPessoal) {
-        this.nome = nome; 
-        this.codigoUsuario = codigoUsuario;
-        this.email = email; 
-        this.senhaPessoal = senhaPessoal;
+        setNome(nome);
+        setCodigoUsuario(codigoUsuario);
+        setEmail(email);
+        setSenhaPessoal(senhaPessoal);
     }
 
     public void setNome(String nome) {
@@ -22,11 +22,11 @@ public class Pessoa {
         return nome;
     }
 
-    public void setCodigo(String codigoUsuario) {
+    public void setCodigoUsuario(String codigoUsuario) {
         this.codigoUsuario = codigoUsuario;
     }
 
-    public String getCodigo() {
+    public String getCodigoUsuario() {
         return codigoUsuario;
     }
 
