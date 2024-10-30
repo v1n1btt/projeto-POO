@@ -7,24 +7,24 @@ public class Aluno extends Pessoa {
 
     public Aluno(String nome, String codigoUsuario, String email, String senhaPessoal, String cpf, String plano) {
         super(nome, codigoUsuario, email, senhaPessoal);
-        this.cpf = cpf;
-        this.plano = plano;
-    }
-
-    public String getCPF() {
-        return cpf;
+        setCPF(cpf);
+        setPlano(plano);
     }
 
     public void setCPF(String cpf) {
         this.cpf = cpf;
     }
 
-    public String getPlano() {
-        return plano;
+    public String getCPF() {
+        return cpf;
     }
 
     public void setPlano(String plano) {
         this.plano = plano;
+    }
+
+    public String getPlano() {
+        return plano;
     }
 
 }
