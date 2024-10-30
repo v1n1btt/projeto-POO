@@ -1,4 +1,5 @@
 package Projeto;
+
 public class Curso {
 
     private String nomeCurso;
