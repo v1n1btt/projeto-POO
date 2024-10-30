@@ -1,41 +1,42 @@
 package Projeto;
 public class Curso {
-    private String nome;
-    private String codigo;
-    private int cargaHoraria;
+
+    private String nomeCurso;
+    private String codigoCurso;
+    private int cargaHorariaCurso;
     private String ementa;
-    private String preRequisitos;
+    private boolean status; 
 
-    public Curso(String nome, String codigo, int cargaHoraria, String ementa, String preRequisitos) {
-        setNome(nome);
-        setCodigo(codigo);
-        setCargaHoraria(cargaHoraria);
+    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa) {
+        setNomeCurso(nomeCurso);
+        setCodigoCurso(codigoCurso);
+        setCargaHorariaCurso(cargaHorariaCurso);
         setEmenta(ementa);
-        setPreRequisitos(preRequisitos);
+        setStatus(true);
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeCurso() {
+        return nomeCurso;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeCurso(String nomeCurso) {
+        this.nomeCurso = nomeCurso;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCodigoCurso() {
+        return codigoCurso;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigoCurso(String codigoCurso) {
+        this.codigoCurso = codigoCurso;
     }
 
-    public int getCargaHoraria() {
-        return cargaHoraria;
+    public int getCargaHorariaCurso() {
+        return cargaHorariaCurso;
     }
 
-    public void setCargaHoraria(int cargaHoraria) {
-        this.cargaHoraria = cargaHoraria;
+    public void setCargaHorariaCurso(int cargaHorariaCurso) {
+        this.cargaHorariaCurso = cargaHorariaCurso;
     }
 
     public String getEmenta() {
@@ -46,12 +47,12 @@ public class Curso {
         this.ementa = ementa;
     }
 
-    public String getPreRequisitos() {
-        return preRequisitos;
+    public boolean getStatus() {
+        return status;
     }
 
-    public void setPreRequisitos(String preRequisitos) {
-        this.preRequisitos = preRequisitos;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
 }
