@@ -85,11 +85,13 @@ public class Sistema {
     //metodo para coletar os dados do login
     public void fazerLoginMenu(){
 
+        Scanner teclado = new Scanner(System.in);
+
         // Dados do usuário
         String email;
         String senha;
 
-        Scanner teclado = new Scanner(System.in);
+      
 
         // Menu de login
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
@@ -107,8 +109,8 @@ public class Sistema {
     public void fazerLoginUsuario(String email, String senha) {
 
         for(int i = 0; i < contadorAluno; i++) {
-            if(email == getAluno(i).getSenhaPessoal() && senha == getAluno(i).getSenhaPessoal()) {
-                MenuAluno();
+            if(VerificaSenha(getAluno(i).getEmail(), email) == true && VerificaSenha(getAluno(i).getSenhaPessoal(), senha) == true) {
+                MenuAluno(i);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
             }
@@ -116,10 +118,47 @@ public class Sistema {
 
     }
 
-    public void MenuAluno() {
-        
+    public void MenuAluno(int i) {
+
+        Scanner teclado = new Scanner(System.in);
+
+        int escolha = 0; 
+
+        do{ 
+
+            System.out.println("1 - Consultar seus Dados. ");
+            System.out.println("2 - Consultar Cursos disponíveis. ");
+            System.out.println("3 - Sair. ");
+
+            escolha = Integer.parseInt(teclado.nextLine());
+
+            switch(escolha) {
+                case 1:
+                    Dados(i);
+                    break;
+    
+                case 2:
+                    
+                    break;
+    
+                case 3:
+                    
+                    return;
+
+                default:
+                    System.out.print("\nOpção inválida, tente novamente.");
+                    break;
+            }
+        }while(escolha != 3);
     }
 
+    public void Dados(int i) {
+        System.out.println("Nome: " + getAluno(i).getNome());
+        System.out.println("Codigo do Usuário: " + getAluno(i).getCodigoUsuario());
+        System.out.println("Email: " + getAluno(i).getEmail());
+        System.out.println("CPF: " + getAluno(i).getCPF());
+        System.out.println("Plano: " + getAluno(i).getPlano());
+    }
     
 
 
