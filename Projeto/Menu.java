@@ -1,9 +1,9 @@
 package Projeto;
 import java.util.Scanner;
 
-public class Menu{
+public class Menu {
 
-    public static void criarConta(){
+    public static void criarConta() {
 
         // Dados do usuario
         String CPF;
@@ -59,7 +59,8 @@ public class Menu{
         senha = sc.nextLine();
 
     }
-    public static void main(String args[]){
+
+    public static void main(String args[]) {
         
         Scanner sc = new Scanner(System.in);
         int escolha;
