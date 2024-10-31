@@ -5,10 +5,35 @@ import java.util.Scanner;
 public class Sistema {
 
     private static int codigoUsuario = 10000;
-    private static int contadorAluno = 0; 
-    private Aluno[] alunos = new Aluno[1000]; 
+    private static int contadorAluno = 0;
+    private static int contadorAdministrador = 1;
+    private Aluno[] alunos = new Aluno[1000];
+    private Administrador[] administradores = new Administrador[100];
+    Administrador administrador1 = new Administrador("Admin", 99999, "admin", "admin"); 
 
     Scanner sc = new Scanner(System.in);
+
+    public void setAluno(Aluno aluno) {
+
+        this.alunos[contadorAluno] = aluno;
+        contadorAluno++; 
+    }
+
+    public Aluno getAluno(int i) {
+
+        return alunos[i]; 
+    }
+
+    public void setAdministrador(Administrador administrador) {
+
+        this.administradores[contadorAdministrador] = administrador;
+        contadorAdministrador++; 
+    }
+
+    public Administrador getAdministrador(int i) {
+
+        return administradores[i]; 
+    }
 
     //método que cria a conta do aluno
     public void criarContaAluno() {
@@ -36,23 +61,23 @@ public class Sistema {
         System.out.println("Escolha um plano: " + "1 - 19,90 Completo " + " 2 - 9,99 Básico");
         plano = teclado.nextLine();
         do{
-        System.out.print("Senha: ");
-        senha = teclado.nextLine();
-        System.out.print("Confirme a senha: ");
-        confirmaSenha = teclado.nextLine();
-        //verificacao de senha
-        boolean verifica = VerificaSenha(senha, confirmaSenha);
-        if(verifica == true) {
-            System.out.println("As senhas são iguais!");
-            controle = true;
-            GerarCodigoUsuario();
-            Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf, plano);
-            setAluno(aluno);
-            System.out.println("Conta Criada com Sucesso!");
-        }else {
-            System.out.println("A senha não é igual!" + "Tente Novamente!"); 
-            System.out.println();
-        }
+            System.out.print("Senha: ");
+            senha = teclado.nextLine();
+            System.out.print("Confirme a senha: ");
+            confirmaSenha = teclado.nextLine();
+            //verificacao de senha
+            boolean verifica = VerificaSenha(senha, confirmaSenha);
+            if(verifica == true) {
+                System.out.println("As senhas são iguais!");
+                controle = true;
+                GerarCodigoUsuario();
+                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf, plano);
+                setAluno(aluno);
+                System.out.println("Conta Criada com Sucesso!");
+            }else {
+                System.out.println("A senha não é igual!" + "Tente Novamente!"); 
+                System.out.println();
+            }
         } while(controle != true);
     }
 
@@ -70,16 +95,6 @@ public class Sistema {
     public int GerarCodigoUsuario() {
         codigoUsuario += 1;  
         return codigoUsuario; 
-    };
-
-    public void setAluno(Aluno aluno) {
-
-        this.alunos[contadorAluno] = aluno;
-        contadorAluno++; 
-    }
-
-    public Aluno getAluno(int i) {
-        return alunos[i]; 
     }
 
     //metodo para coletar os dados do login
@@ -90,8 +105,6 @@ public class Sistema {
         // Dados do usuário
         String email;
         String senha;
-
-      
 
         // Menu de login
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
@@ -109,8 +122,10 @@ public class Sistema {
     public void fazerLoginUsuario(String email, String senha) {
 
         for(int i = 0; i < contadorAluno; i++) {
-            if(VerificaSenha(getAluno(i).getEmail(), email) == true && VerificaSenha(getAluno(i).getSenhaPessoal(), senha) == true) {
+            if(VerificaSenha(getAluno(i).getEmail(), email) == true && VerificaSenha(getAluno(i).getSenhaPessoal(), senha) == true && getAluno(i).getNivelAcesso() == 3) {
                 MenuAluno(i);
+            } else if(VerificaSenha(getAdministrador(i).getEmail(), email) == true && VerificaSenha(getAdministrador(i).getSenhaPessoal(), senha) == true && getAdministrador(i).getNivelAcesso() == 1) {
+                MenuAdministrador(i);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
             }
@@ -159,17 +174,8 @@ public class Sistema {
         System.out.println("CPF: " + getAluno(i).getCPF());
         System.out.println("Plano: " + getAluno(i).getPlano());
     }
-    
-    public void CadastrarAdministrador() {
 
-    }
-
-    public void LoginAdministrador() {
-
-    }
-
-
-    public void MenuAdministrador() {
+    public void MenuAdministrador(int i) {
 
         int escolha;
         
@@ -178,8 +184,9 @@ public class Sistema {
             System.out.println("Selecione uma opção:");
             System.out.println("    1. Cadastrar novo curso");
             System.out.println("    2. Gerenciar curso");
-            System.out.println("    3. Cadastrar professor");
-            System.out.println("    4. Fazer logout");
+            System.out.println("    3. Cadastrar um novo Administrador");
+            System.out.println("    4. Cadastrar professor");
+            System.out.println("    5. Fazer logout");
             System.out.print("\nDigite uma opção: ");
 
             escolha = Integer.parseInt(sc.nextLine());
@@ -193,19 +200,67 @@ public class Sistema {
                     break;
 
                 case 3:
-
+                    FormularioCadastroAdministrador();
                     break;
 
                 case 4:
-                    return;
+
+                    break;
+                
+                case 5:
+
+                    break;
                 
                 default:
                     System.out.print("\nOpção inválida, tente novamente.");
-                    //getchar();
                     break;
             }
                 
-        } while(escolha != 4);
+        } while(escolha != 5);
+        
+    }
+
+    public void FormularioCadastroAdministrador() {
+        Scanner teclado = new Scanner(System.in);
+
+        // Dados do usuario
+        String nome;
+        String email;
+        String senha;
+        String confirmaSenha;
+        boolean controle = false; 
+
+        // Menu de cadastro
+        System.out.print("====================\nREGISTRO\n====================\n\n");
+        System.out.print("Nome completo: ");
+        nome = teclado.nextLine();
+        System.out.print("Digite seu Email: ");
+        email = teclado.nextLine();
+        do{
+            System.out.print("Senha: ");
+            senha = teclado.nextLine();
+            System.out.print("Confirme a senha: ");
+            confirmaSenha = teclado.nextLine();
+            //verificacao de senha
+            boolean verifica = VerificaSenha(senha, confirmaSenha);
+            if(verifica == true) {
+                System.out.println("As senhas são iguais!");
+                controle = true;
+                CadastrarAdministrador(nome, email, confirmaSenha);
+            }else {
+                System.out.println("A senha não é igual!" + "Tente Novamente!"); 
+                System.out.println();
+            }
+        } while(controle != true);
+    }
+
+    public void CadastrarAdministrador(String nome, String email, String senha) {
+
+        GerarCodigoUsuario();
+        Administrador administrador = new Administrador(nome, codigoUsuario, email, senha);
+        setAdministrador(administrador);
+        System.out.println("Conta Criada com Sucesso!");
+
     }
 
 
