@@ -22,6 +22,7 @@ public class Menu {
                     break;
     
                 case 3:
+                    System.out.println("Saindo...");
                     return;
 
                 default:
