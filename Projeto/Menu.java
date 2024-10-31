@@ -5,6 +5,7 @@ public class Menu {
     public static void main(String args[]) {
         
         Scanner teclado = new Scanner(System.in);
+        Sistema sistema = new Sistema();
         int escolha;
 
         do{
@@ -13,7 +14,7 @@ public class Menu {
             escolha = Integer.parseInt(teclado.nextLine());
             switch(escolha){
                 case 1:
-                    Sistema.criarContaAluno();
+                    sistema.criarContaAluno();
                     break;
     
                 case 2:
@@ -41,4 +42,5 @@ public class Menu {
         System.out.println("3. Sair");
         System.out.print("\nDigite sua escolha: ");
     }
+
 }

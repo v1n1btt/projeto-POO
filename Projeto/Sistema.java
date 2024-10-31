@@ -5,10 +5,13 @@ import java.util.Scanner;
 public class Sistema {
 
     private static int codigoUsuario = 10000;
+    private static int contadorAluno = 0; 
+    private Aluno[] alunos = new Aluno[1000]; 
 
     Scanner sc = new Scanner(System.in);
 
-    public static void criarContaAluno() {
+    //método que cria a conta do aluno
+    public void criarContaAluno() {
 
         Scanner teclado = new Scanner(System.in);
 
@@ -43,16 +46,18 @@ public class Sistema {
             System.out.println("As senhas são iguais!");
             controle = true;
             GerarCodigoUsuario();
+            Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf, plano);
+            setAluno(aluno);
+            System.out.println("Conta Criada com Sucesso!");
         }else {
             System.out.println("A senha não é igual!" + "Tente Novamente!"); 
             System.out.println();
         }
         } while(controle != true);
-
     }
 
     //método que verifica senhas
-    public static boolean VerificaSenha(String senha, String confirmaSenha) {
+    public boolean VerificaSenha(String senha, String confirmaSenha) {
 
         if (senha.equals(confirmaSenha)) {
             return true; 
@@ -62,12 +67,41 @@ public class Sistema {
     }
     
     //metodo que gera um codigo para o usuario
-    public static int GerarCodigoUsuario() {
+    public int GerarCodigoUsuario() {
         codigoUsuario += 1;  
         return codigoUsuario; 
     };
 
-    
+    public void setAluno(Aluno aluno) {
+
+        this.alunos[contadorAluno] = aluno;
+        contadorAluno++; 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
