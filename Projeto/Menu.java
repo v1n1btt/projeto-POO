@@ -23,11 +23,11 @@ public class Menu {
             escolha = Integer.parseInt(sc.nextLine());
             switch(escolha){
                 case 1:
-                    criarConta();
+                    Sistema.criarConta();
                     break;
     
                 case 2:
-                    fazerLogin();
+                    Sistema.fazerLogin();
                     break;
     
                 case 3:

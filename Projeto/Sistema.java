@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Sistema {
     Scanner sc = new Scanner(System.in);
 
-    public void cadastrarCurso() {
+    public static void cadastrarCurso() {
 
         String nome;
         String codigo;
@@ -39,7 +39,7 @@ public class Sistema {
 
     }
 
-    public void cadastrarProfessor() {
+    public static void cadastrarProfessor() {
 
         String nome; 
         String codigoUsuario;
@@ -72,7 +72,7 @@ public class Sistema {
             return;
     }
 
-    public void menuAdmin(){
+    public static void menuAdmin(){
 
         int escolha;
         
