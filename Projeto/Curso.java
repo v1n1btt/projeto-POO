@@ -63,7 +63,7 @@ public class Curso {
         this.quantidadeAlunos = quantidadeAlunos;
     }
 
-    public boolean getQuantidadeAlunos() {
+    public int getQuantidadeAlunos() {
         return quantidadeAlunos;
     }
 
