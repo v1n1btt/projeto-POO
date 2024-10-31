@@ -14,13 +14,13 @@ public class Menu {
 
     public static void main(String args[]) {
         
-        Scanner sc = new Scanner(System.in);
+        Scanner teclado = new Scanner(System.in);
         int escolha;
 
         do{
             
             MenuInicial();
-            escolha = Integer.parseInt(sc.nextLine());
+            escolha = Integer.parseInt(teclado.nextLine());
             switch(escolha){
                 case 1:
                     Sistema.criarConta();
@@ -39,10 +39,11 @@ public class Menu {
                     break;
             }
         }while(escolha != 3);
+        teclado.close();
     }
 
     public static void MenuInicial() {
-        // Menu principal
+    
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.println("Selecione uma opção:");
         System.out.println("1. Fazer cadastro");
