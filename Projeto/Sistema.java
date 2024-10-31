@@ -11,7 +11,7 @@ public class Sistema {
     private Administrador[] administradores = new Administrador[100];
     Administrador administrador1 = new Administrador("Admin", 99999, "admin", "admin"); 
 
-    Scanner sc = new Scanner(System.in);
+    Scanner teclado = new Scanner(System.in);
 
     public void setAluno(Aluno aluno) {
 
@@ -35,10 +35,59 @@ public class Sistema {
         return administradores[i]; 
     }
 
+    //metodo para fazer o login
+    public void fazerLoginUsuario(String email, String senha) {
+
+        for(int i = 0; i < contadorAluno; i++) {
+            if(VerificaSenha(getAluno(i).getEmail(), email) == true && VerificaSenha(getAluno(i).getSenhaPessoal(), senha) == true && getAluno(i).getNivelAcesso() == 3) {
+                MenuAluno(i);
+            } else if(VerificaSenha(getAdministrador(i).getEmail(), email) == true && VerificaSenha(getAdministrador(i).getSenhaPessoal(), senha) == true && getAdministrador(i).getNivelAcesso() == 1) {
+                MenuAdministrador(i);
+            } else {
+                System.out.println("Email ou senha Incorretos!"); 
+            }
+        }   
+    }
+
+    //método que verifica senhas
+    public boolean VerificaSenha(String senha, String confirmaSenha) {
+
+        if (senha.equals(confirmaSenha)) {
+            return true; 
+        } else {
+            return false; 
+        }
+    }
+
+    //metodo que gera um codigo para o usuario
+    public int GerarCodigoUsuario() {
+        codigoUsuario += 1;  
+        return codigoUsuario; 
+    }
+
+     //metodo para coletar os dados do login
+     public void fazerLoginMenu(){
+
+        // Dados do usuário
+        String email;
+        String senha;
+
+        // Menu de login
+        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
+        System.out.print("====================\nLOGIN\n====================\n\n");
+        System.out.print("email: ");
+        email = teclado.nextLine();
+        System.out.print("Senha: ");
+        senha = teclado.nextLine();
+
+        fazerLoginUsuario(email, senha); 
+
+    }
+
+    //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
+
     //método que cria a conta do aluno
     public void criarContaAluno() {
-
-        Scanner teclado = new Scanner(System.in);
 
         // Dados do usuario
         String nome;
@@ -81,61 +130,7 @@ public class Sistema {
         } while(controle != true);
     }
 
-    //método que verifica senhas
-    public boolean VerificaSenha(String senha, String confirmaSenha) {
-
-        if (senha.equals(confirmaSenha)) {
-            return true; 
-        } else {
-            return false; 
-        }
-    }
-    
-    //metodo que gera um codigo para o usuario
-    public int GerarCodigoUsuario() {
-        codigoUsuario += 1;  
-        return codigoUsuario; 
-    }
-
-    //metodo para coletar os dados do login
-    public void fazerLoginMenu(){
-
-        Scanner teclado = new Scanner(System.in);
-
-        // Dados do usuário
-        String email;
-        String senha;
-
-        // Menu de login
-        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
-        System.out.print("====================\nLOGIN\n====================\n\n");
-        System.out.print("email: ");
-        email = teclado.nextLine();
-        System.out.print("Senha: ");
-        senha = teclado.nextLine();
-
-        fazerLoginUsuario(email, senha); 
-
-    }
-
-    //metodo para fazer o login
-    public void fazerLoginUsuario(String email, String senha) {
-
-        for(int i = 0; i < contadorAluno; i++) {
-            if(VerificaSenha(getAluno(i).getEmail(), email) == true && VerificaSenha(getAluno(i).getSenhaPessoal(), senha) == true && getAluno(i).getNivelAcesso() == 3) {
-                MenuAluno(i);
-            } else if(VerificaSenha(getAdministrador(i).getEmail(), email) == true && VerificaSenha(getAdministrador(i).getSenhaPessoal(), senha) == true && getAdministrador(i).getNivelAcesso() == 1) {
-                MenuAdministrador(i);
-            } else {
-                System.out.println("Email ou senha Incorretos!"); 
-            }
-        }   
-
-    }
-
     public void MenuAluno(int i) {
-
-        Scanner teclado = new Scanner(System.in);
 
         int escolha = 0; 
 
@@ -175,6 +170,8 @@ public class Sistema {
         System.out.println("Plano: " + getAluno(i).getPlano());
     }
 
+    //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISRADOR!!!!
+
     public void MenuAdministrador(int i) {
 
         int escolha;
@@ -189,7 +186,7 @@ public class Sistema {
             System.out.println("    5. Fazer logout");
             System.out.print("\nDigite uma opção: ");
 
-            escolha = Integer.parseInt(sc.nextLine());
+            escolha = Integer.parseInt(teclado.nextLine());
             switch(escolha) {
                 case 1:
                    
@@ -217,11 +214,9 @@ public class Sistema {
             }
                 
         } while(escolha != 5);
-        
     }
 
     public void FormularioCadastroAdministrador() {
-        Scanner teclado = new Scanner(System.in);
 
         // Dados do usuario
         String nome;
@@ -260,9 +255,7 @@ public class Sistema {
         Administrador administrador = new Administrador(nome, codigoUsuario, email, senha);
         setAdministrador(administrador);
         System.out.println("Conta Criada com Sucesso!");
-
     }
-
 
 
 
