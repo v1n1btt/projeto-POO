@@ -3,12 +3,12 @@ package Projeto;
 public class Pessoa {
     
     private String nome; 
-    private String codigoUsuario;
+    private int codigoUsuario;
     private String email; 
     private String senhaPessoal;
     private int nivelAcesso;
 
-    public Pessoa(String nome, String codigoUsuario, String email, String senhaPessoal) {
+    public Pessoa(String nome, int codigoUsuario, String email, String senhaPessoal) {
         setNome(nome);
         setCodigoUsuario(codigoUsuario);
         setEmail(email);
@@ -23,11 +23,11 @@ public class Pessoa {
         return nome;
     }
 
-    public void setCodigoUsuario(String codigoUsuario) {
+    public void setCodigoUsuario(int codigoUsuario) {
         this.codigoUsuario = codigoUsuario;
     }
 
-    public String getCodigoUsuario() {
+    public int getCodigoUsuario() {
         return codigoUsuario;
     }
 

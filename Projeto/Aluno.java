@@ -5,7 +5,7 @@ public class Aluno extends Pessoa {
     private String cpf;
     private String plano;
 
-    public Aluno(String nome, String codigoUsuario, String email, String senhaPessoal, String cpf, String plano) {
+    public Aluno(String nome, int codigoUsuario, String email, String senhaPessoal, String cpf, String plano) {
         super(nome, codigoUsuario, email, senhaPessoal);
         setCPF(cpf);
         setPlano(plano);

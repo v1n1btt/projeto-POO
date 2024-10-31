@@ -4,7 +4,7 @@ public class Professor extends Pessoa {
 
     private int cargaHoraria;
 
-    public Professor(String nome, String codigoUsuario, String email, String senhaPessoal,int cargaHoraria) {
+    public Professor(String nome, int codigoUsuario, String email, String senhaPessoal,int cargaHoraria) {
         super(nome, codigoUsuario, email, senhaPessoal); 
         setCargaHoraria(cargaHoraria);
         setNivelAcesso(2);
