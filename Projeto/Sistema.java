@@ -112,4 +112,54 @@ public class Sistema {
             }
         }while(escolha != 4);
     }
+
+    public static void criarConta() {
+
+        // Dados do usuario
+        String CPF;
+        String nome;
+        String dataNascimento;
+        String senha;
+        String confirmaSenha;
+
+        Scanner sc = new Scanner(System.in);
+
+        // Menu de cadastro
+        //limpaTela();
+        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
+        System.out.print("====================\nREGISTRO\n====================\n\n");
+        System.out.print("CPF do usuário: ");
+        CPF = sc.nextLine();
+        System.out.print("Nome completo: ");
+        nome = sc.nextLine();
+        System.out.print("Data de nascimento: ");
+        dataNascimento = sc.nextLine();
+        System.out.print("Senha: ");
+        senha = sc.nextLine();
+        System.out.print("Confirme a senha: ");
+        confirmaSenha = sc.nextLine();
+
+        if(senha == confirmaSenha){
+
+        }
+    }
+
+    public static void fazerLogin(){
+
+        // Dados do usuário
+        String CPF;
+        String senha;
+
+        Scanner sc = new Scanner(System.in);
+
+        // Menu de login
+        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
+        System.out.print("====================\nLOGIN\n====================\n\n");
+        System.out.print("CPF do usuário: ");
+        CPF = sc.nextLine();
+        System.out.print("Senha: ");
+        senha = sc.nextLine();
+
+    }
+
 }
