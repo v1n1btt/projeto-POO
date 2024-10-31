@@ -1,13 +1,12 @@
 package Projeto;
 
-public class Turma extends Curso{
-    private String sala;
+public class Turma extends Curso {
+
     private String horario;
     private int quantidadeAlunos;
 
-    public Turma(String nome, String codigo, int cargaHoraria, String ementa, String preRequisitos, String sala, String horario, int quantidadeAlunos){
-        super(nome, codigo, cargaHoraria, ementa, preRequisitos);
-        setSala(sala);
+    public Turma(String getNomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String horario, int quantidadeAlunos) {
+        super(nomeCurso, codigoCursp, cargaHorariaCurso, ementa);
         setHorario(horario);
         setQuantidadeAlunos(quantidadeAlunos);
     }
@@ -16,23 +15,16 @@ public class Turma extends Curso{
         this.quantidadeAlunos = quantidadeAlunos;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
-
-    public void setSala(String sala) {
-        this.sala = sala;
-    }
-
     public int getQuantidadeAlunos() {
         return quantidadeAlunos;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 
     public String getHorario() {
         return horario;
     }
 
-    public String getSala() {
-        return sala;
-    }
 }
