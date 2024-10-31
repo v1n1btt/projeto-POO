@@ -3,9 +3,70 @@ package Projeto;
 import java.util.Scanner; 
 
 public class Sistema {
+
     Scanner sc = new Scanner(System.in);
 
-    public static void cadastrarCurso() {
+    public static void criarContaAluno() {
+
+        Scanner teclado = new Scanner(System.in);
+
+        // Dados do usuario
+        String nome;
+        String cpf;
+        String plano;
+        String senha;
+        String confirmaSenha;
+        boolean controle = false; 
+
+        // Menu de cadastro
+        System.out.println("SISTEMA DE GESTÃO DE CURSOS\n\n");
+        System.out.print("====================\nREGISTRO\n====================\n\n");
+        System.out.print("CPF: ");
+        cpf = teclado.nextLine();
+        System.out.print("Nome completo: ");
+        nome = teclado.nextLine();
+        System.out.println("Escolha um plano: " + "1 - 19,90 Completo " + " 2 - 9,99 Básico");
+        plano = teclado.nextLine();
+        do{
+        System.out.print("Senha: ");
+        senha = teclado.nextLine();
+        System.out.print("Confirme a senha: ");
+        confirmaSenha = teclado.nextLine();
+        //verificacao de senha
+        boolean verifica = VerificaSenha(senha, confirmaSenha);
+        if(verifica == true) {
+            System.out.println("As senhas são iguais!");
+            controle = true; 
+        }else {
+            System.out.println("A senha não é igual!" + "Tente Novamente!"); 
+            System.out.println();
+        }
+        } while(controle != true);
+
+    }
+
+    //método que verifica senhas
+    public static boolean VerificaSenha(String senha, String confirmaSenha) {
+
+        if (senha.equals(confirmaSenha)) {
+            return true; 
+        } else {
+            return false; 
+        }
+    }
+    
+    //metodo que gera um codigo para o usuario
+    public static int GerarCodigoUsuario() {
+        return 11111; 
+    };
+
+    
+
+
+
+
+
+    /*public static void cadastrarCurso() {
 
         String nome;
         String codigo;
@@ -113,37 +174,6 @@ public class Sistema {
         }while(escolha != 4);
     }
 
-    public static void criarConta() {
-
-        // Dados do usuario
-        String CPF;
-        String nome;
-        String dataNascimento;
-        String senha;
-        String confirmaSenha;
-
-        Scanner sc = new Scanner(System.in);
-
-        // Menu de cadastro
-        //limpaTela();
-        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
-        System.out.print("====================\nREGISTRO\n====================\n\n");
-        System.out.print("CPF do usuário: ");
-        CPF = sc.nextLine();
-        System.out.print("Nome completo: ");
-        nome = sc.nextLine();
-        System.out.print("Data de nascimento: ");
-        dataNascimento = sc.nextLine();
-        System.out.print("Senha: ");
-        senha = sc.nextLine();
-        System.out.print("Confirme a senha: ");
-        confirmaSenha = sc.nextLine();
-
-        if(senha == confirmaSenha){
-
-        }
-    }
-
     public static void fazerLogin(){
 
         // Dados do usuário
@@ -160,6 +190,6 @@ public class Sistema {
         System.out.print("Senha: ");
         senha = sc.nextLine();
 
-    }
+    }*/
 
 }

@@ -2,16 +2,6 @@ package Projeto;
 import java.util.Scanner;
 
 public class Menu {
-
-    
-    /*public static void limpaTela(){
-        final String os = System.getProperty("os.name");
-        if (os.contains("Windows"))
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        else
-            Runtime.getRuntime().exec("clear");
-    }*/
-
     public static void main(String args[]) {
         
         Scanner teclado = new Scanner(System.in);
@@ -23,11 +13,11 @@ public class Menu {
             escolha = Integer.parseInt(teclado.nextLine());
             switch(escolha){
                 case 1:
-                    Sistema.criarConta();
+                    Sistema.criarContaAluno();
                     break;
     
                 case 2:
-                    Sistema.fazerLogin();
+                    //Sistema.fazerLogin();
                     break;
     
                 case 3:
@@ -35,7 +25,6 @@ public class Menu {
 
                 default:
                     System.out.print("\nOpção inválida, tente novamente.");
-                    //getchar();
                     break;
             }
         }while(escolha != 3);
