@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Sistema {
 
+    private static int codigoUsuario = 10000;
+
     Scanner sc = new Scanner(System.in);
 
     public static void criarContaAluno() {
@@ -14,6 +16,7 @@ public class Sistema {
         String nome;
         String cpf;
         String plano;
+        String email;
         String senha;
         String confirmaSenha;
         boolean controle = false; 
@@ -25,6 +28,8 @@ public class Sistema {
         cpf = teclado.nextLine();
         System.out.print("Nome completo: ");
         nome = teclado.nextLine();
+        System.out.print("Digite seu Email: ");
+        email = teclado.nextLine();
         System.out.println("Escolha um plano: " + "1 - 19,90 Completo " + " 2 - 9,99 Básico");
         plano = teclado.nextLine();
         do{
@@ -36,7 +41,8 @@ public class Sistema {
         boolean verifica = VerificaSenha(senha, confirmaSenha);
         if(verifica == true) {
             System.out.println("As senhas são iguais!");
-            controle = true; 
+            controle = true;
+            GerarCodigoUsuario();
         }else {
             System.out.println("A senha não é igual!" + "Tente Novamente!"); 
             System.out.println();
@@ -57,7 +63,8 @@ public class Sistema {
     
     //metodo que gera um codigo para o usuario
     public static int GerarCodigoUsuario() {
-        return 11111; 
+        codigoUsuario += 1;  
+        return codigoUsuario; 
     };
 
     
