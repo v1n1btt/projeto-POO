@@ -78,9 +78,49 @@ public class Sistema {
         contadorAluno++; 
     }
 
+    public Aluno getAluno(int i) {
+        return alunos[i]; 
+    }
 
+    //metodo para coletar os dados do login
+    public void fazerLoginMenu(){
 
+        // Dados do usuário
+        String email;
+        String senha;
 
+        Scanner teclado = new Scanner(System.in);
+
+        // Menu de login
+        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
+        System.out.print("====================\nLOGIN\n====================\n\n");
+        System.out.print("email: ");
+        email = teclado.nextLine();
+        System.out.print("Senha: ");
+        senha = teclado.nextLine();
+
+        fazerLoginUsuario(email, senha); 
+
+    }
+
+    //metodo para fazer o login
+    public void fazerLoginUsuario(String email, String senha) {
+
+        for(int i = 0; i < contadorAluno; i++) {
+            if(email == getAluno(i).getSenhaPessoal() && senha == getAluno(i).getSenhaPessoal()) {
+                MenuAluno();
+            } else {
+                System.out.println("Email ou senha Incorretos!"); 
+            }
+        }   
+
+    }
+
+    public void MenuAluno() {
+        
+    }
+
+    
 
 
 
@@ -213,24 +253,6 @@ public class Sistema {
                 
             }
         }while(escolha != 4);
-    }
-
-    public static void fazerLogin(){
-
-        // Dados do usuário
-        String CPF;
-        String senha;
-
-        Scanner sc = new Scanner(System.in);
-
-        // Menu de login
-        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
-        System.out.print("====================\nLOGIN\n====================\n\n");
-        System.out.print("CPF do usuário: ");
-        CPF = sc.nextLine();
-        System.out.print("Senha: ");
-        senha = sc.nextLine();
-
-    }*/
+    } */
 
 }

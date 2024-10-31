@@ -12,13 +12,13 @@ public class Menu {
             
             MenuInicial();
             escolha = Integer.parseInt(teclado.nextLine());
-            switch(escolha){
+            switch(escolha) {
                 case 1:
                     sistema.criarContaAluno();
                     break;
     
                 case 2:
-                    //Sistema.fazerLogin();
+                    sistema.fazerLoginMenu();
                     break;
     
                 case 3:
