@@ -29,6 +29,7 @@ public class Menu {
                     break;
             }
         }while(escolha != 3);
+        
         teclado.close();
     }
 

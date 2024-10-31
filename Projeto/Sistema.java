@@ -134,7 +134,7 @@ public class Sistema {
 
             switch(escolha) {
                 case 1:
-                    Dados(i);
+                    DadosAluno(i);
                     break;
     
                 case 2:
@@ -152,7 +152,7 @@ public class Sistema {
         }while(escolha != 3);
     }
 
-    public void Dados(int i) {
+    public void DadosAluno(int i) {
         System.out.println("Nome: " + getAluno(i).getNome());
         System.out.println("Codigo do Usuário: " + getAluno(i).getCodigoUsuario());
         System.out.println("Email: " + getAluno(i).getEmail());
@@ -160,7 +160,53 @@ public class Sistema {
         System.out.println("Plano: " + getAluno(i).getPlano());
     }
     
+    public void CadastrarAdministrador() {
 
+    }
+
+    public void LoginAdministrador() {
+
+    }
+
+
+    public void MenuAdministrador() {
+
+        int escolha;
+        
+        do {
+            System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como administrador\n\n");
+            System.out.println("Selecione uma opção:");
+            System.out.println("    1. Cadastrar novo curso");
+            System.out.println("    2. Gerenciar curso");
+            System.out.println("    3. Cadastrar professor");
+            System.out.println("    4. Fazer logout");
+            System.out.print("\nDigite uma opção: ");
+
+            escolha = Integer.parseInt(sc.nextLine());
+            switch(escolha) {
+                case 1:
+                   
+                    break;
+
+                case 2:
+                
+                    break;
+
+                case 3:
+
+                    break;
+
+                case 4:
+                    return;
+                
+                default:
+                    System.out.print("\nOpção inválida, tente novamente.");
+                    //getchar();
+                    break;
+            }
+                
+        } while(escolha != 4);
+    }
 
 
 
@@ -251,47 +297,6 @@ public class Sistema {
         }
         else
             return;
-    }
-
-    public static void menuAdmin(){
-
-        int escolha;
-        
-        do{
-            // Menu do administrador
-            //Menu.limpaTela();
-            System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como administrador\n\n");
-            System.out.println("Selecione uma opção:");
-            System.out.println("    1. Cadastrar novo curso");
-            System.out.println("    2. Gerenciar curso");
-            System.out.println("    3. Cadastrar professor");
-            System.out.println("    4. Fazer logout");
-            System.out.print("\nDigite uma opção: ");
-
-            escolha = Integer.parseInt(sc.nextLine());
-            switch(escolha){
-                case 1:
-                    cadastrarCurso();
-                    break;
-
-                case 2:
-                
-                    break;
-
-                case 3:
-                    cadastrarProfessor();
-                    break;
-
-                case 4:
-                    return;
-                
-                default:
-                    System.out.print("\nOpção inválida, tente novamente.");
-                    //getchar();
-                    break;
-                
-            }
-        }while(escolha != 4);
-    } */
+    }*/
 
 }
