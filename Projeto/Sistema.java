@@ -6,12 +6,16 @@ public class Sistema {
 
     private static int codigoUsuario = 10000;
     private static int contadorAluno = 0;
-    private static int contadorAdministrador = 1;
+    private static int contadorAdministrador = 0;
     private Aluno[] alunos = new Aluno[1000];
-    private Administrador[] administradores = new Administrador[100];
-    Administrador administrador1 = new Administrador("Admin", 99999, "admin", "admin"); 
+    private Administrador[] administradores = new Administrador[100]; 
 
     Scanner teclado = new Scanner(System.in);
+
+    public Sistema() {
+        Administrador administrador = new Administrador("Admin", 99999, "admin", "admin");
+        setAdministrador(administrador);
+    }
 
     public void setAluno(Aluno aluno) {
 
