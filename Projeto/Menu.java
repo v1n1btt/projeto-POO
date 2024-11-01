@@ -117,8 +117,7 @@ public class Menu {
         System.out.print("Senha: ");
         senha = teclado.nextLine();
 
-        sistema.fazerLoginUsuario(email, senha); 
-        teclado.close();
+        sistema.fazerLoginUsuario(email, senha);
     }
 
     //método para limpar a tela
