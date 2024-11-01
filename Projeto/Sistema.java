@@ -13,6 +13,7 @@ public class Sistema {
     Scanner teclado = new Scanner(System.in);
 
     public Sistema() {
+
         Administrador administrador = new Administrador("Admin", 99999, "admin", "admin");
         setAdministrador(administrador);
     }
@@ -91,48 +92,6 @@ public class Sistema {
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
 
     //método que cria a conta do aluno
-    public void criarContaAluno() {
-
-        // Dados do usuario
-        String nome;
-        String cpf;
-        String plano;
-        String email;
-        String senha;
-        String confirmaSenha;
-        boolean controle = false; 
-
-        // Menu de cadastro
-        System.out.println("SISTEMA DE GESTÃO DE CURSOS\n\n");
-        System.out.print("====================\nREGISTRO\n====================\n\n");
-        System.out.print("CPF: ");
-        cpf = teclado.nextLine();
-        System.out.print("Nome completo: ");
-        nome = teclado.nextLine();
-        System.out.print("Digite seu Email: ");
-        email = teclado.nextLine();
-        System.out.println("Escolha um plano: " + "1 - 19,90 Completo " + " 2 - 9,99 Básico");
-        plano = teclado.nextLine();
-        do{
-            System.out.print("Senha: ");
-            senha = teclado.nextLine();
-            System.out.print("Confirme a senha: ");
-            confirmaSenha = teclado.nextLine();
-            //verificacao de senha
-            boolean verifica = VerificaSenha(senha, confirmaSenha);
-            if(verifica == true) {
-                System.out.println("As senhas são iguais!");
-                controle = true;
-                GerarCodigoUsuario();
-                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf, plano);
-                setAluno(aluno);
-                System.out.println("Conta Criada com Sucesso!");
-            }else {
-                System.out.println("A senha não é igual!" + "Tente Novamente!"); 
-                System.out.println();
-            }
-        } while(controle != true);
-    }
 
     public void MenuAluno(int i) {
 
