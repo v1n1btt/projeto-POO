@@ -3,6 +3,7 @@ package Projeto;
 import java.util.Scanner;
 import java.io.IOException;
 import java.lang.InterruptedException;
+import java.util.NoSuchElementException
 
 public class Menu {
     public static void main(String args[]) {
@@ -12,28 +13,31 @@ public class Menu {
         int escolha;
 
         do{
-            
-            MenuInicial();
-            escolha = Integer.parseInt(teclado.nextLine());
-            switch(escolha) {
-                case 1:
-                    limpaTela();
-                    criarContaAluno();
-                    break;
-    
-                case 2:
-                    limpaTela();
-                    fazerLoginMenu();
-                    break;
-    
-                case 3:
-                    System.out.println("Saindo...");
-                    return;
 
-                default:
-                    System.out.print("\nOpção inválida, tente novamente.");
-                    break;
-            }
+            try{
+                limpaTela();
+                MenuInicial();
+                escolha = Integer.parseInt(teclado.nextLine());
+                switch(escolha) {
+                    case 1:
+                        limpaTela();
+                        criarContaAluno();
+                        break;
+        
+                    case 2:
+                        limpaTela();
+                        fazerLoginMenu();
+                        break;
+        
+                    case 3:
+                        System.out.println("Saindo...");
+                        return;
+    
+                    default:
+                        System.out.print("\nOpção inválida, tente novamente.");
+                        break;
+                }
+            } catch(NoSuchElementException noSuchElementException){}
         }while(escolha != 3);
         
         teclado.close();
