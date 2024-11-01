@@ -3,6 +3,7 @@ package Projeto;
 import java.util.Scanner;
 import java.io.IOException;
 import java.lang.InterruptedException;
+import java.lang.NumberFormatException;
 
 public class Menu {
     public static void main(String args[]) {
@@ -12,28 +13,32 @@ public class Menu {
         int escolha = 0;
 
         do{
-
-            limpaTela();
-            MenuInicial();
-            escolha = Integer.parseInt(teclado.nextLine());
-            switch(escolha) {
-                case 1:
-                    limpaTela();
-                    criarContaAluno();
-                    break;
+            try{
+                limpaTela();
+                MenuInicial();
+                escolha = Integer.parseInt(teclado.nextLine());
+                switch(escolha) {
+                    case 1:
+                        limpaTela();
+                        criarContaAluno();
+                        break;
+            
+                    case 2:
+                        limpaTela();
+                        fazerLoginMenu();
+                        break;
+            
+                    case 3:
+                        System.out.println("Saindo...");
+                        return;
         
-                case 2:
-                    limpaTela();
-                    fazerLoginMenu();
-                    break;
-        
-                case 3:
-                    System.out.println("Saindo...");
-                    return;
-    
-                default:
-                    System.out.print("\nOpção inválida, tente novamente.");
-                    break;
+                    default:
+                        System.out.print("\nOpção inválida, tente novamente.");
+                        break;
+                }
+            } catch(NumberFormatException numberFormatException){
+                System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
             }
         }while(escolha != 3);
         
