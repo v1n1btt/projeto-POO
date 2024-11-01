@@ -1,6 +1,8 @@
 package Projeto;
 
-import java.util.Scanner; 
+import java.util.Scanner;
+import java.io.IOException;
+import java.lang.InterruptedException;
 
 public class Sistema {
 
@@ -308,6 +310,22 @@ public class Sistema {
         }
         else
             return;
-    }*/
+    }
+
+        public static void limpaTela(){
+
+            try{
+            if (System.getProperty("os.name").contains("Windows"))
+    
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    
+            else
+    
+                System.out.print("\033\143");
+
+        } catch (IOException | InterruptedException ex) {}
+
+    }
+    */
 
 }
