@@ -1,8 +1,6 @@
 package Projeto;
 
 import java.util.Scanner;
-import java.io.IOException;
-import java.lang.InterruptedException;
 
 public class Sistema {
 
@@ -70,25 +68,6 @@ public class Sistema {
     public int GerarCodigoUsuario() {
         codigoUsuario += 1;  
         return codigoUsuario; 
-    }
-
-     //metodo para coletar os dados do login
-     public void fazerLoginMenu(){
-
-        // Dados do usuário
-        String email;
-        String senha;
-
-        // Menu de login
-        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
-        System.out.print("====================\nLOGIN\n====================\n\n");
-        System.out.print("email: ");
-        email = teclado.nextLine();
-        System.out.print("Senha: ");
-        senha = teclado.nextLine();
-
-        fazerLoginUsuario(email, senha); 
-
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
@@ -222,29 +201,6 @@ public class Sistema {
         System.out.println("Conta Criada com Sucesso!");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /*public static void cadastrarCurso() {
 
         String nome;
@@ -310,22 +266,5 @@ public class Sistema {
         }
         else
             return;
-    }
-
-        public static void limpaTela(){
-
-            try{
-            if (System.getProperty("os.name").contains("Windows"))
-    
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-    
-            else
-    
-                System.out.print("\033\143");
-
-        } catch (IOException | InterruptedException ex) {}
-
-    }
-    */
-
+    }*/
 }

@@ -1,9 +1,10 @@
 package Projeto;
+
 import java.util.Scanner;
+import java.io.IOException;
+import java.lang.InterruptedException;
 
 public class Menu {
-
-    Sistema sistema = new Sistema();
     public static void main(String args[]) {
 
         Scanner teclado = new Scanner(System.in);
@@ -16,11 +17,13 @@ public class Menu {
             escolha = Integer.parseInt(teclado.nextLine());
             switch(escolha) {
                 case 1:
+                    limpaTela();
                     criarContaAluno();
                     break;
     
                 case 2:
-                    sistema.fazerLoginMenu();
+                    limpaTela();
+                    fazerLoginMenu();
                     break;
     
                 case 3:
@@ -49,6 +52,7 @@ public class Menu {
 
     public static void criarContaAluno() {
 
+        Sistema sistema = new Sistema();
         Scanner teclado = new Scanner(System.in);
 
         // Dados do usuario
@@ -58,7 +62,8 @@ public class Menu {
         String email;
         String senha;
         String confirmaSenha;
-        boolean controle = false; 
+        boolean controle = false;
+        int codigoUsuario; 
 
         // Menu de cadastro
         System.out.println("SISTEMA DE GESTÃO DE CURSOS\n\n");
@@ -81,9 +86,9 @@ public class Menu {
             if(verifica == true) {
                 System.out.println("As senhas são iguais!");
                 controle = true;
-                GerarCodigoUsuario();
+                codigoUsuario = sistema.GerarCodigoUsuario();
                 Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf, plano);
-                setAluno(aluno);
+                sistema.setAluno(aluno);
                 System.out.println("Conta Criada com Sucesso!");
             }else {
                 System.out.println("A senha não é igual!" + "Tente Novamente!"); 
@@ -91,6 +96,39 @@ public class Menu {
             }
 
         } while(controle != true);
+    }
+
+    //metodo para coletar os dados do login
+    public static void fazerLoginMenu(){
+
+        Sistema sistema = new Sistema();
+        Scanner teclado = new Scanner(System.in);
+
+        // Dados do usuário
+        String email;
+        String senha;
+
+        // Menu de login
+        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
+        System.out.print("====================\nLOGIN\n====================\n\n");
+        System.out.print("email: ");
+        email = teclado.nextLine();
+        System.out.print("Senha: ");
+        senha = teclado.nextLine();
+
+        sistema.fazerLoginUsuario(email, senha); 
+
+    }
+
+    //método para limpar a tela
+    public static void limpaTela(){
+
+        try{
+            if (System.getProperty("os.name").contains("Windows"))
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            else
+                System.out.print("\033\143");
+        } catch (IOException | InterruptedException ex) {}
     }
 
 }
