@@ -96,6 +96,7 @@ public class Menu {
             }
 
         } while(controle != true);
+        teclado.close();
     }
 
     //metodo para coletar os dados do login
@@ -117,7 +118,7 @@ public class Menu {
         senha = teclado.nextLine();
 
         sistema.fazerLoginUsuario(email, senha); 
-
+        teclado.close();
     }
 
     //método para limpar a tela
