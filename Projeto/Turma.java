@@ -4,8 +4,8 @@ public class Turma extends Curso {
 
     private String horario;
 
-    public Turma(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, int quantidadeAlunos, String horario) {
-        super(nomeCurso, codigoCurso, cargaHorariaCurso, ementa);
+    public Turma(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dataInicio, String dataFim,int quantidadeAtualAlunos, String horario) {
+        super(nomeCurso, codigoCurso, cargaHorariaCurso, ementa, dataInicio, dataFim, quantidadeAtualAlunos);
         setHorario(horario);
     }
 

@@ -9,14 +9,18 @@ public class Curso {
     private String dataInicio; 
     private String dataFim; 
     private boolean status;
+    private int quantidadeAtualAlunos; 
     private final int quantidadeMaximaAlunos = 50;
 
 
-    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dataInicio, String dataFim) {
+    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos) {
         setNomeCurso(nomeCurso);
         setCodigoCurso(codigoCurso);
         setCargaHorariaCurso(cargaHorariaCurso);
         setEmenta(ementa);
+        setDataInicio(dataInicio);
+        setDataFim(dataFim);
+        setQuantidadeAtualAlunos(quantidadeAtualAlunos);
         setStatus(true);
     }
 
@@ -63,8 +67,17 @@ public class Curso {
     public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
+
     public String getDataFim() {
         return dataFim;
+    }
+
+    public void setQuantidadeAtualAlunos(int quantidadeAtualAlunos) {
+        this.quantidadeAtualAlunos = quantidadeAtualAlunos;
+    }
+
+    public int getQuantidadeAtualAlunos() {
+        return quantidadeAtualAlunos;
     }
 
     public void setStatus(boolean status) {

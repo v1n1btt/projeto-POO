@@ -385,8 +385,10 @@ public class Sistema {
         int cargaHoraria;
         String ementa;
         String dataInicio;
-        String dataFim; 
-        boolean confirma;
+        String dataFim;
+        int quantidadeAtualAlunos;
+        String horario; 
+        //boolean confirma;
 
         // Formulario de cadastro de curso
         //Menu.limpaTela();
@@ -403,6 +405,11 @@ public class Sistema {
         dataInicio = teclado.nextLine();
         System.out.print("Data de inicio curso: ");
         dataFim = teclado.nextLine();
+        System.out.print("horario: ");
+        horario = teclado.nextLine();
+        System.out.print("Quantidade atual de alunos: ");
+        quantidadeAtualAlunos = teclado.nextInt();
+        CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario);
 
         /*System.out.print("\nConfirma o cadastro do curso? Digite 1 para confirmar, e 0 para cancelar: ");
         confirma = Boolean.parseBoolean(teclado.nextLine());
@@ -415,9 +422,9 @@ public class Sistema {
         */
     }
 
-    public void CadastrarTurma(String nome, String codigo,int cargaHoraria, String ementa) {
-        //Turma turma = new Turma(nome, codigo, cargaHoraria, ementa);
-        //setTurma(turma);
+    public void CadastrarTurma(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos, String horario) {
+        Turma turma = new Turma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario);
+        setTurma(turma);
         System.out.println("Curso Criado com Sucesso!");
     }
 
