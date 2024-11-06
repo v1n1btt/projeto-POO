@@ -100,7 +100,7 @@ public class Sistema {
         }   
     }
 
-    //método que verifica senhas
+    //método que verifica variaveis para ver se são iguais
     public boolean VerificaVariaveis(String variavel1, String variavel2) {
 
         if (variavel1.equals(variavel2)) {
@@ -110,7 +110,7 @@ public class Sistema {
         }
     }
 
-    //metodo que gera um codigo para o usuario
+    //metodo que gera um codigo para os usuarios
     public int GerarCodigoUsuario() {
         codigoUsuario += 1;  
         return codigoUsuario; 
@@ -125,16 +125,16 @@ public class Sistema {
         int opcao; 
 
         // Menu de login
-        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
-        System.out.println("Opções para Login: ");
-        System.out.println("1 - Aluno , 2 - Administrador ou 3 - Professor");
-        System.out.println("Escolha uma opção: ");
+        System.out.print("======================\nSISTEMA DE GESTÃO DE CURSOS\n=====================\n\n");
+        System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
+        System.out.println("Opções para Login: \n");
+        System.out.println("1 - Aluno, 2 - Administrador ou 3 - Professor");
+        System.out.print("\nEscolha uma opção: ");
         opcao = teclado.nextInt();
         teclado.nextLine();
-        System.out.print("====================\nLOGIN\n====================\n\n");
-        System.out.print("email: ");
+        System.out.print("\nemail: ");
         email = teclado.nextLine();
-        System.out.print("Senha: ");
+        System.out.print("\nSenha: ");
         senha = teclado.nextLine();
         
 
@@ -153,7 +153,6 @@ public class Sistema {
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
 
     //método que cria a conta do aluno
-
     public void criarContaAluno() {
        
         // Dados do usuario
@@ -169,7 +168,7 @@ public class Sistema {
         // Menu de cadastro
         System.out.println();
         System.out.println("SISTEMA DE GESTÃO DE CURSOS\n\n");
-        System.out.print("====================\nREGISTRO\n====================\n\n");
+        System.out.print("====================\nCADASTRO ALUNO\n====================\n\n");
         System.out.print("CPF: ");
         cpf = teclado.nextLine();
         System.out.print("Nome completo: ");
@@ -207,8 +206,8 @@ public class Sistema {
         do{ 
             System.out.println();
             System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Aluno\n\n");
-            System.out.println("Bem vindo: " + getAluno(i).getNome());
-            System.out.println("Selecione uma opção:");
+            System.out.print("Bem vindo: " + getAluno(i).getNome());
+            System.out.print("Selecione uma opção:\n\n");
             System.out.println("1 - Consultar seus Dados. ");
             System.out.println("2 - Consultar Cursos disponíveis. ");
             System.out.println("3 - Sair. ");
@@ -261,7 +260,7 @@ public class Sistema {
         do {
             System.out.println();
             System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como administrador\n\n");
-            System.out.println("Bem vindo: " + getAdministrador(i).getNome());
+            System.out.println("BEM VINDO: " + getAdministrador(i).getNome() + "\n");
             System.out.println("Selecione uma opção:");
             System.out.println("    1. Cadastrar novo curso");
             System.out.println("    2. Gerenciar curso");
@@ -312,7 +311,7 @@ public class Sistema {
         boolean controle = false; 
 
         // Menu de cadastro
-        System.out.print("====================\nREGISTRO\n====================\n\n");
+        System.out.print("====================\nCADASTRO ADMINISTRADOR\n====================\n\n");
         System.out.print("Nome completo: ");
         nome = teclado.nextLine();
         System.out.print("Digite seu Email: ");
