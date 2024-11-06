@@ -70,7 +70,7 @@ public class Sistema {
     public void fazerLoginUsuarioAluno(String email, String senha) {
 
         for(int i = 0; i < contadorAluno; i++) {
-            if(VerificaSenha(getAluno(i).getEmail(), email) == true && VerificaSenha(getAluno(i).getSenhaPessoal(), senha) == true && getAluno(i).getNivelAcesso() == 3) {
+            if(VerificaVariaveis(getAluno(i).getEmail(), email) == true && VerificaVariaveis(getAluno(i).getSenhaPessoal(), senha) == true && getAluno(i).getNivelAcesso() == 3) {
                 MenuAluno(i);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
@@ -81,7 +81,7 @@ public class Sistema {
     public void fazerLoginUsuarioAdministrador(String email, String senha) {
 
         for(int i = 0; i < contadorAdministrador; i++) {
-            if(VerificaSenha(getAdministrador(i).getEmail(), email) == true && VerificaSenha(getAdministrador(i).getSenhaPessoal(), senha) == true && getAdministrador(i).getNivelAcesso() == 1) {
+            if(VerificaVariaveis(getAdministrador(i).getEmail(), email) == true && VerificaVariaveis(getAdministrador(i).getSenhaPessoal(), senha) == true && getAdministrador(i).getNivelAcesso() == 1) {
                 MenuAdministrador(i);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
@@ -92,7 +92,7 @@ public class Sistema {
     public void fazerLoginUsuarioProfessor(String email, String senha) {
 
         for(int i = 0; i < contadorAdministrador; i++) {
-            if(VerificaSenha(getProfessor(i).getEmail(), email) == true && VerificaSenha(getProfessor(i).getSenhaPessoal(), senha) == true && getProfessor(i).getNivelAcesso() == 2) {
+            if(VerificaVariaveis(getProfessor(i).getEmail(), email) == true && VerificaVariaveis(getProfessor(i).getSenhaPessoal(), senha) == true && getProfessor(i).getNivelAcesso() == 2) {
                 MenuProfessor(i);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
@@ -101,9 +101,9 @@ public class Sistema {
     }
 
     //método que verifica senhas
-    public boolean VerificaSenha(String senha, String confirmaSenha) {
+    public boolean VerificaVariaveis(String variavel1, String variavel2) {
 
-        if (senha.equals(confirmaSenha)) {
+        if (variavel1.equals(variavel2)) {
             return true; 
         } else {
             return false; 
@@ -184,7 +184,7 @@ public class Sistema {
             System.out.print("Confirme a senha: ");
             confirmaSenha = teclado.nextLine();
             //verificacao de senha
-            boolean verifica = VerificaSenha(senha, confirmaSenha);
+            boolean verifica = VerificaVariaveis(senha, confirmaSenha);
             if(verifica == true) {
                 System.out.println("As senhas são iguais!");
                 controle = true;
@@ -323,7 +323,7 @@ public class Sistema {
             System.out.print("Confirme a senha: ");
             confirmaSenha = teclado.nextLine();
             //verificacao de senha
-            boolean verifica = VerificaSenha(senha, confirmaSenha);
+            boolean verifica = VerificaVariaveis(senha, confirmaSenha);
             if(verifica == true) {
                 System.out.println("As senhas são iguais!");
                 controle = true;
@@ -357,7 +357,7 @@ public class Sistema {
             System.out.print("Confirme a senha: ");
             confirmaSenha = teclado.nextLine();
             //verificacao de senha
-            boolean verifica = VerificaSenha(senha, confirmaSenha);
+            boolean verifica = VerificaVariaveis(senha, confirmaSenha);
             if(verifica == true) {
                 System.out.println("As senhas são iguais!");
                 controle = true;
@@ -385,6 +385,7 @@ public class Sistema {
         String codigo;
         int cargaHoraria;
         String ementa;
+        String horario; 
         boolean confirma;
 
         // Formulario de cadastro de curso
@@ -399,7 +400,7 @@ public class Sistema {
         System.out.print("Ementa do curso: ");
         ementa = teclado.nextLine();
         System.out.print("Data do curso: ");
-        ementa = teclado.nextLine();
+        horario = teclado.nextLine();
 
         /*System.out.print("\nConfirma o cadastro do curso? Digite 1 para confirmar, e 0 para cancelar: ");
         confirma = Boolean.parseBoolean(teclado.nextLine());
