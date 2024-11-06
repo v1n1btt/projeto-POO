@@ -35,7 +35,7 @@ public class Menu {
                         System.out.print("\nOpção inválida, tente novamente.");
                         break;
                 }
-            } catch(NumberFormatException numberFormatException){
+            } catch(NumberFormatException numberFormatException) {
                 System.out.print("\nEntrada inválida, tente novamente.");
                 teclado.nextLine();
             }
@@ -46,16 +46,6 @@ public class Menu {
 
     public static void MenuInicial() {
     
-        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
-        System.out.print("SEJA BEM VINDO!!!!\n\n");
-        System.out.println("Selecione uma opção:");
-        System.out.println("1. Fazer cadastro para ser o nosso Aluno!");
-        System.out.println("2. Fazer login");
-        System.out.println("3. Sair");
-        System.out.print("\nDigite sua escolha: ");
-    }
-
-    public static void MenuLogin()  {
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("SEJA BEM VINDO!!!!\n\n");
         System.out.println("Selecione uma opção:");
