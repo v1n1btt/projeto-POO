@@ -7,8 +7,10 @@ public class Sistema {
     private static int codigoUsuario = 10000;
     private static int contadorAluno = 0;
     private static int contadorAdministrador = 0;
+    private static int contadorProfessor = 0; 
     private Aluno[] alunos = new Aluno[1000];
     private Administrador[] administradores = new Administrador[100]; 
+    private Professor[] professores = new Professor[100];
 
     Scanner teclado = new Scanner(System.in);
 
@@ -40,13 +42,34 @@ public class Sistema {
         return administradores[i]; 
     }
 
-    //metodo para fazer o login
+    public void setProfessor(Professor professor) {
+
+        this.professores[contadorProfessor] = professor;
+        contadorProfessor++; 
+    }
+
+    public Professor getProfessor(int i) {
+
+        return professores[i]; 
+    }
+
+    //metodos para fazer os logins
     public void fazerLoginUsuario(String email, String senha) {
 
         for(int i = 0; i < contadorAluno; i++) {
             if(VerificaSenha(getAluno(i).getEmail(), email) == true && VerificaSenha(getAluno(i).getSenhaPessoal(), senha) == true && getAluno(i).getNivelAcesso() == 3) {
                 MenuAluno(i);
-            } else if(VerificaSenha(getAdministrador(i).getEmail(), email) == true && VerificaSenha(getAdministrador(i).getSenhaPessoal(), senha) == true && getAdministrador(i).getNivelAcesso() == 1) {
+            } else {
+                System.out.println("Email ou senha Incorretos!"); 
+            }
+        }   
+    }
+
+    public void fazerLoginUsuarioAdministrador(String email, String senha) {
+
+        for(int i = 0; i < contadorAdministrador; i++) {
+            if(VerificaSenha(getAdministrador(i).getEmail(), email) == true && VerificaSenha(getAdministrador(i).getSenhaPessoal(), senha) == true && getAdministrador(i).getNivelAcesso() == 1) {
+                System.out.println("Sucesso");
                 MenuAdministrador(i);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
@@ -70,9 +93,90 @@ public class Sistema {
         return codigoUsuario; 
     }
 
+    //metodo para coletar os dados do login
+    public void fazerLoginMenu(){
+
+        Scanner teclado = new Scanner(System.in);
+
+        // Dados do usuário
+        String email;
+        String senha;
+        int opcao; 
+
+        // Menu de login
+        System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
+        System.out.println("1 - Aluno ou 2 - Administrador");
+        opcao = teclado.nextInt();
+        teclado.nextLine();
+        System.out.print("====================\nLOGIN\n====================\n\n");
+        System.out.print("email: ");
+        email = teclado.nextLine();
+        System.out.print("Senha: ");
+        senha = teclado.nextLine();
+        
+
+        if(opcao == 1) {
+            Menu.limpaTela();
+            fazerLoginUsuario(email, senha);
+        } else if(opcao == 2) {
+            Menu.limpaTela();
+            fazerLoginUsuarioAdministrador(email, senha);
+        } else {
+
+        }
+    }
+
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
 
     //método que cria a conta do aluno
+
+    public void criarContaAluno() {
+
+        Sistema sistema = new Sistema();
+        Scanner teclado = new Scanner(System.in);
+
+        // Dados do usuario
+        String nome;
+        String cpf;
+        String plano;
+        String email;
+        String senha;
+        String confirmaSenha;
+        boolean controle = false;
+        int codigoUsuario; 
+
+        // Menu de cadastro
+        System.out.println("SISTEMA DE GESTÃO DE CURSOS\n\n");
+        System.out.print("====================\nREGISTRO\n====================\n\n");
+        System.out.print("CPF: ");
+        cpf = teclado.nextLine();
+        System.out.print("Nome completo: ");
+        nome = teclado.nextLine();
+        System.out.print("Digite seu Email: ");
+        email = teclado.nextLine();
+        System.out.println("Escolha um plano: " + "1 - 19,90 Completo " + " 2 - 9,99 Básico");
+        plano = teclado.nextLine();
+        do{
+            System.out.print("Senha: ");
+            senha = teclado.nextLine();
+            System.out.print("Confirme a senha: ");
+            confirmaSenha = teclado.nextLine();
+            //verificacao de senha
+            boolean verifica = sistema.VerificaSenha(senha, confirmaSenha);
+            if(verifica == true) {
+                System.out.println("As senhas são iguais!");
+                controle = true;
+                codigoUsuario = GerarCodigoUsuario();
+                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf, plano);
+                setAluno(aluno);
+                System.out.println("Conta Criada com Sucesso!");
+            }else {
+                System.out.println("A senha não é igual!" + "Tente Novamente!"); 
+                System.out.println();
+            }
+
+        } while(controle != true);
+    }
 
     public void MenuAluno(int i) {
 
@@ -116,6 +220,14 @@ public class Sistema {
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISRADOR!!!!
 
+    public void CadastrarAdministrador(String nome, String email, String senha) {
+        int codigoUsuario = 0; 
+        codigoUsuario = GerarCodigoUsuario();
+        Administrador administrador = new Administrador(nome, codigoUsuario, email, senha);
+        setAdministrador(administrador);
+        System.out.println("Conta Criada com Sucesso!");
+    }
+
     public void MenuAdministrador(int i) {
 
         int escolha;
@@ -141,11 +253,13 @@ public class Sistema {
                     break;
 
                 case 3:
+                    Menu.limpaTela();
                     FormularioCadastroAdministrador();
                     break;
 
                 case 4:
-
+                    Menu.limpaTela();
+                    FormulariocadastroProfessor();
                     break;
                 
                 case 5:
@@ -193,78 +307,35 @@ public class Sistema {
         } while(controle != true);
     }
 
-    public void CadastrarAdministrador(String nome, String email, String senha) {
-
-        GerarCodigoUsuario();
-        Administrador administrador = new Administrador(nome, codigoUsuario, email, senha);
-        setAdministrador(administrador);
-        System.out.println("Conta Criada com Sucesso!");
-    }
-
-    /*public static void cadastrarCurso() {
-
-        String nome;
-        String codigo;
-        int cargaHoraria;
-        String ementa;
-        String preRequisitos;
-        boolean confirma;
-
-        // Formulario de cadastro de curso
-        //Menu.limpaTela();
-        System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
-        System.out.print("Nome do curso: ");
-        nome = sc.nextLine();
-        System.out.print("Código do curso: ");
-        codigo = sc.nextLine();
-        System.out.print("Carga horária do curso: ");
-        cargaHoraria = Integer.parseInt(sc.nextLine());
-        System.out.print("Ementa do curso: ");
-        ementa = sc.nextLine();
-        System.out.print("Pré-requisitos do curso: ");
-        preRequisitos = sc.nextLine();
-
-        System.out.print("\nConfirma o cadastro do curso? Digite 1 para confirmar, e 0 para cancelar: ");
-        confirma = Boolean.parseBoolean(sc.nextLine());
-
-        if(confirma == true){
-
-        }
-        else
-            return;
-
-    }
-
-    public static void cadastrarProfessor() {
+    public void FormulariocadastroProfessor() {
 
         String nome; 
-        String codigoUsuario;
+        int codigoUsuario;
         String email; 
         String senhaPessoal;
-        int cargaHoraria;
-        boolean confirma;
+       //boolean confirma;
 
         // Formulario de cadastro de professor
         //Menu.limpaTela();
         System.out.print("====================\nCADASTRO DE PROFESSOR\n====================\n\n");
         System.out.print("Nome do professor: ");
-        nome = sc.nextLine();
-        System.out.print("Código de usuário do professor: ");
-        codigoUsuario = sc.nextLine();
+        nome = teclado.nextLine();
         System.out.print("Endereço de email do professor: ");
-        email = sc.nextLine();
+        email = teclado.nextLine();
         System.out.print("Senha do professor: ");
-        senhaPessoal = sc.nextLine();
-        System.out.print("Carga horária do professor: ");
-        cargaHoraria = Integer.parseInt(sc.nextLine());
+        senhaPessoal = teclado.nextLine();
 
-        System.out.print("\nConfirma o cadastro do professor? Digite 1 para confirmar, e 0 para cancelar: ");
-        confirma = Boolean.parseBoolean(sc.nextLine());
+        /*System.out.print("\nConfirma o cadastro do professor? Digite 1 para confirmar, e 0 para cancelar: ");
+        confirma = Boolean.parseBoolean(teclado.nextLine());
 
         if(confirma == true){
 
         }
         else
             return;
-    }*/
+        */
+    }
+
+    //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
+
 }
