@@ -384,7 +384,8 @@ public class Sistema {
         String codigo;
         int cargaHoraria;
         String ementa;
-        String horario; 
+        String dataInicio;
+        String dataFim; 
         boolean confirma;
 
         // Formulario de cadastro de curso
@@ -398,8 +399,10 @@ public class Sistema {
         cargaHoraria = Integer.parseInt(teclado.nextLine());
         System.out.print("Ementa do curso: ");
         ementa = teclado.nextLine();
-        System.out.print("Data do curso: ");
-        horario = teclado.nextLine();
+        System.out.print("Data de inicio curso: ");
+        dataInicio = teclado.nextLine();
+        System.out.print("Data de inicio curso: ");
+        dataFim = teclado.nextLine();
 
         /*System.out.print("\nConfirma o cadastro do curso? Digite 1 para confirmar, e 0 para cancelar: ");
         confirma = Boolean.parseBoolean(teclado.nextLine());
