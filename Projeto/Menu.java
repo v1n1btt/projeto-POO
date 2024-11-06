@@ -45,7 +45,7 @@ public class Menu {
     }
 
     public static void MenuInicial() {
-    
+        System.out.println();
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("SEJA BEM VINDO!!!!\n\n");
         System.out.println("Selecione uma opção:");

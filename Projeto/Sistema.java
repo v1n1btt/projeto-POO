@@ -113,7 +113,9 @@ public class Sistema {
 
         // Menu de login
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
+        System.out.println("Opções para Login: ");
         System.out.println("1 - Aluno , 2 - Administrador ou 3 - Professor");
+        System.out.println("Escolha uma opção: ");
         opcao = teclado.nextInt();
         teclado.nextLine();
         System.out.print("====================\nLOGIN\n====================\n\n");
@@ -152,6 +154,7 @@ public class Sistema {
         int codigoUsuario; 
 
         // Menu de cadastro
+        System.out.println();
         System.out.println("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("====================\nREGISTRO\n====================\n\n");
         System.out.print("CPF: ");
@@ -189,6 +192,7 @@ public class Sistema {
         int escolha = 0; 
 
         do{ 
+            System.out.println();
             System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Aluno\n\n");
             System.out.println("Bem vindo: " + getAluno(i).getNome());
             System.out.println("Selecione uma opção:");
@@ -227,7 +231,7 @@ public class Sistema {
         System.out.println("Plano: " + getAluno(i).getPlano());
     }
 
-    //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISRADOR!!!!
+    //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
 
     public void CadastrarAdministrador(String nome, String email, String senha) {
         int codigoUsuario = 0; 
@@ -242,6 +246,7 @@ public class Sistema {
         int escolha;
         
         do {
+            System.out.println();
             System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como administrador\n\n");
             System.out.println("Bem vindo: " + getAdministrador(i).getNome());
             System.out.println("Selecione uma opção:");
@@ -375,7 +380,8 @@ public class Sistema {
 
         int escolha = 0; 
 
-        do{ 
+        do{
+            System.out.println();
             System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Professor\n\n");
             System.out.println("Bem vindo: " + getProfessor(i).getNome());
             System.out.println("1 - Consultar seus Dados. ");
