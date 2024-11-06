@@ -8,9 +8,11 @@ public class Sistema {
     private static int contadorAluno = 0;
     private static int contadorAdministrador = 0;
     private static int contadorProfessor = 0; 
+    private static int contadorTurma = 0; 
     private Aluno[] alunos = new Aluno[1000];
     private Administrador[] administradores = new Administrador[100]; 
     private Professor[] professores = new Professor[100];
+    private Turma[] turmas = new Turma[100]; 
 
     Scanner teclado = new Scanner(System.in);
 
@@ -51,6 +53,17 @@ public class Sistema {
     public Professor getProfessor(int i) {
 
         return professores[i]; 
+    }
+
+    public void setTurma(Turma turma) {
+
+        this.turmas[contadorTurma] = turma;
+        contadorTurma++; 
+    }
+
+    public Turma getTurma(int i) {
+
+        return turmas[i]; 
     }
 
     //metodos para fazer os logins
