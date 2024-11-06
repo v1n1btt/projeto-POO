@@ -263,7 +263,7 @@ public class Sistema {
             System.out.println("BEM VINDO: " + getAdministrador(i).getNome() + "\n");
             System.out.println("Selecione uma opção:");
             System.out.println("    1. Cadastrar novo curso");
-            System.out.println("    2. Gerenciar curso");
+            System.out.println("    2. Mostrar cursos cadastrados");
             System.out.println("    3. Cadastrar um novo Administrador");
             System.out.println("    4. Cadastrar professor");
             System.out.println("    5. Fazer logout");
