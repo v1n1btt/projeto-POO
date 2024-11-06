@@ -7,15 +7,14 @@ public class Curso {
     private int cargaHorariaCurso;
     private String ementa;
     private boolean status;
-    private int quantidadeAlunos;
+    private final int quantidadeMaximaAlunos = 50;
 
 
-    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, int quantidadeAlunos) {
+    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa) {
         setNomeCurso(nomeCurso);
         setCodigoCurso(codigoCurso);
         setCargaHorariaCurso(cargaHorariaCurso);
         setEmenta(ementa);
-        setQuantidadeAlunos(quantidadeAlunos);
         setStatus(true);
     }
 
@@ -59,12 +58,8 @@ public class Curso {
         return status;
     }
 
-    public void setQuantidadeAlunos(int quantidadeAlunos) {
-        this.quantidadeAlunos = quantidadeAlunos;
-    }
-
-    public int getQuantidadeAlunos() {
-        return quantidadeAlunos;
+    public int getQuantidadeMaximaAlunos() {
+        return quantidadeMaximaAlunos;
     }
 
 }
