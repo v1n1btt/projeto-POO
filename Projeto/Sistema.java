@@ -272,13 +272,13 @@ public class Sistema {
             escolha = Integer.parseInt(teclado.nextLine());
             switch(escolha) {
                 case 1:
-                   
+                    Menu.limpaTela();
+                   FormulariocadastrarCurso();
                     break;
-
                 case 2:
-                
+                    Menu.limpaTela();
+                    DadosTurmas();
                     break;
-
                 case 3:
                     Menu.limpaTela();
                     FormularioCadastroAdministrador();
@@ -288,11 +288,9 @@ public class Sistema {
                     Menu.limpaTela();
                     FormulariocadastroProfessor();
                     break;
-                
                 case 5:
                     Menu.limpaTela();
                     break;
-                
                 default:
                     System.out.print("\nOpção inválida, tente novamente.");
                     break;
@@ -397,8 +395,6 @@ public class Sistema {
         nome = teclado.nextLine();
         System.out.print("Código do curso: ");
         codigo = teclado.nextLine();
-        System.out.print("Carga horária do curso: ");
-        cargaHoraria = Integer.parseInt(teclado.nextLine());
         System.out.print("Ementa do curso: ");
         ementa = teclado.nextLine();
         System.out.print("Data de inicio curso: ");
@@ -409,6 +405,10 @@ public class Sistema {
         horario = teclado.nextLine();
         System.out.print("Quantidade atual de alunos: ");
         quantidadeAtualAlunos = teclado.nextInt();
+        System.out.print("Carga horária do curso: ");
+        cargaHoraria = teclado.nextInt();
+        teclado.nextLine();
+        
         CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario);
 
         /*System.out.print("\nConfirma o cadastro do curso? Digite 1 para confirmar, e 0 para cancelar: ");
@@ -426,6 +426,23 @@ public class Sistema {
         Turma turma = new Turma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario);
         setTurma(turma);
         System.out.println("Curso Criado com Sucesso!");
+    }
+
+    public void DadosTurmas() {
+
+        for(int i = 0; i < contadorTurma; i++) {
+
+            System.out.println("Nome: " + getTurma(i).getNomeCurso());
+            System.out.println("Código Curso: " + getTurma(i).getCodigoCurso());
+            System.out.println("Carga Horária: " + getTurma(i).getCargaHorariaCurso());
+            System.out.println("Ementa: " + getTurma(i).getEmenta());
+            System.out.println("Data Inicio: " + getTurma(i).getDataInicio());
+            System.out.println("Data Fim: " + getTurma(i).getDataFim());
+            System.out.println("Quantidade de Alunos Matriculados: " + getTurma(i).getQuantidadeAtualAlunos());
+            System.out.println("Horários: : " + getTurma(i).getHorario());
+            System.out.println("Status do Curso: " + getTurma(i).getStatus());
+            System.out.println();
+        }
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
