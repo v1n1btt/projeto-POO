@@ -96,8 +96,6 @@ public class Sistema {
     //metodo para coletar os dados do login
     public void fazerLoginMenu(){
 
-        Scanner teclado = new Scanner(System.in);
-
         // Dados do usuário
         String email;
         String senha;
@@ -131,10 +129,7 @@ public class Sistema {
     //método que cria a conta do aluno
 
     public void criarContaAluno() {
-
-        Sistema sistema = new Sistema();
-        Scanner teclado = new Scanner(System.in);
-
+       
         // Dados do usuario
         String nome;
         String cpf;
@@ -162,7 +157,7 @@ public class Sistema {
             System.out.print("Confirme a senha: ");
             confirmaSenha = teclado.nextLine();
             //verificacao de senha
-            boolean verifica = sistema.VerificaSenha(senha, confirmaSenha);
+            boolean verifica = VerificaSenha(senha, confirmaSenha);
             if(verifica == true) {
                 System.out.println("As senhas são iguais!");
                 controle = true;
