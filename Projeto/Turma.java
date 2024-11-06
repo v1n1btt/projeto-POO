@@ -4,7 +4,7 @@ public class Turma extends Curso {
 
     private String horario;
 
-    public Turma(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa,int quantidadeAlunos, String horario) {
+    public Turma(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, int quantidadeAlunos, String horario) {
         super(nomeCurso, codigoCurso, cargaHorariaCurso, ementa);
         setHorario(horario);
     }

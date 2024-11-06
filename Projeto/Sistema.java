@@ -379,6 +379,45 @@ public class Sistema {
         */
     }
 
+    public void FormulariocadastrarCurso() {
+
+        String nome;
+        String codigo;
+        int cargaHoraria;
+        String ementa;
+        boolean confirma;
+
+        // Formulario de cadastro de curso
+        //Menu.limpaTela();
+        System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
+        System.out.print("Nome do curso: ");
+        nome = teclado.nextLine();
+        System.out.print("Código do curso: ");
+        codigo = teclado.nextLine();
+        System.out.print("Carga horária do curso: ");
+        cargaHoraria = Integer.parseInt(teclado.nextLine());
+        System.out.print("Ementa do curso: ");
+        ementa = teclado.nextLine();
+        System.out.print("Data do curso: ");
+        ementa = teclado.nextLine();
+
+        /*System.out.print("\nConfirma o cadastro do curso? Digite 1 para confirmar, e 0 para cancelar: ");
+        confirma = Boolean.parseBoolean(teclado.nextLine());
+
+        if(confirma == true){
+
+        }
+        else
+            return;
+        */
+    }
+
+    public void CadastrarTurma(String nome, String codigo,int cargaHoraria, String ementa) {
+        //Turma turma = new Turma(nome, codigo, cargaHoraria, ementa);
+        //setTurma(turma);
+        System.out.println("Curso Criado com Sucesso!");
+    }
+
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
 
     public void CadastrarProfessor(String nome, String email, String senha) {
@@ -405,7 +444,7 @@ public class Sistema {
 
             switch(escolha) {
                 case 1:
-                    //DadosAluno(i);
+                    
                     break;
     
                 case 2:
