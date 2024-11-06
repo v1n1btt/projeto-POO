@@ -69,7 +69,6 @@ public class Sistema {
 
         for(int i = 0; i < contadorAdministrador; i++) {
             if(VerificaSenha(getAdministrador(i).getEmail(), email) == true && VerificaSenha(getAdministrador(i).getSenhaPessoal(), senha) == true && getAdministrador(i).getNivelAcesso() == 1) {
-                System.out.println("Sucesso");
                 MenuAdministrador(i);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
@@ -81,7 +80,6 @@ public class Sistema {
 
         for(int i = 0; i < contadorAdministrador; i++) {
             if(VerificaSenha(getProfessor(i).getEmail(), email) == true && VerificaSenha(getProfessor(i).getSenhaPessoal(), senha) == true && getProfessor(i).getNivelAcesso() == 2) {
-                System.out.println("Sucesso");
                 MenuProfessor(i);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
@@ -115,7 +113,7 @@ public class Sistema {
 
         // Menu de login
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
-        System.out.println("1 - Aluno ou 2 - Administrador");
+        System.out.println("1 - Aluno , 2 - Administrador ou 3 - Professor");
         opcao = teclado.nextInt();
         teclado.nextLine();
         System.out.print("====================\nLOGIN\n====================\n\n");
@@ -191,7 +189,9 @@ public class Sistema {
         int escolha = 0; 
 
         do{ 
-
+            System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Aluno\n\n");
+            System.out.println("Bem vindo: " + getAluno(i).getNome());
+            System.out.println("Selecione uma opção:");
             System.out.println("1 - Consultar seus Dados. ");
             System.out.println("2 - Consultar Cursos disponíveis. ");
             System.out.println("3 - Sair. ");
@@ -200,6 +200,7 @@ public class Sistema {
 
             switch(escolha) {
                 case 1:
+                    Menu.limpaTela();
                     DadosAluno(i);
                     break;
     
@@ -208,7 +209,7 @@ public class Sistema {
                     break;
     
                 case 3:
-                    
+                    Menu.limpaTela();
                     return;
 
                 default:
@@ -242,6 +243,7 @@ public class Sistema {
         
         do {
             System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como administrador\n\n");
+            System.out.println("Bem vindo: " + getAdministrador(i).getNome());
             System.out.println("Selecione uma opção:");
             System.out.println("    1. Cadastrar novo curso");
             System.out.println("    2. Gerenciar curso");
@@ -331,9 +333,6 @@ public class Sistema {
         nome = teclado.nextLine();
         System.out.print("Endereço de email do professor: ");
         email = teclado.nextLine();
-        System.out.print("Senha do professor: ");
-        senha = teclado.nextLine();
-
         do{
             System.out.print("Senha: ");
             senha = teclado.nextLine();
@@ -377,7 +376,8 @@ public class Sistema {
         int escolha = 0; 
 
         do{ 
-
+            System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Professor\n\n");
+            System.out.println("Bem vindo: " + getProfessor(i).getNome());
             System.out.println("1 - Consultar seus Dados. ");
             System.out.println("2 - Consultar Cursos disponíveis. ");
             System.out.println("3 - Sair. ");
@@ -394,7 +394,7 @@ public class Sistema {
                     break;
     
                 case 3:
-                    
+                    Menu.limpaTela();
                     return;
 
                 default:
