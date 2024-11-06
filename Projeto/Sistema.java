@@ -54,7 +54,7 @@ public class Sistema {
     }
 
     //metodos para fazer os logins
-    public void fazerLoginUsuario(String email, String senha) {
+    public void fazerLoginUsuarioAluno(String email, String senha) {
 
         for(int i = 0; i < contadorAluno; i++) {
             if(VerificaSenha(getAluno(i).getEmail(), email) == true && VerificaSenha(getAluno(i).getSenhaPessoal(), senha) == true && getAluno(i).getNivelAcesso() == 3) {
@@ -71,6 +71,18 @@ public class Sistema {
             if(VerificaSenha(getAdministrador(i).getEmail(), email) == true && VerificaSenha(getAdministrador(i).getSenhaPessoal(), senha) == true && getAdministrador(i).getNivelAcesso() == 1) {
                 System.out.println("Sucesso");
                 MenuAdministrador(i);
+            } else {
+                System.out.println("Email ou senha Incorretos!"); 
+            }
+        }   
+    }
+
+    public void fazerLoginUsuarioProfessor(String email, String senha) {
+
+        for(int i = 0; i < contadorAdministrador; i++) {
+            if(VerificaSenha(getProfessor(i).getEmail(), email) == true && VerificaSenha(getProfessor(i).getSenhaPessoal(), senha) == true && getProfessor(i).getNivelAcesso() == 2) {
+                System.out.println("Sucesso");
+                MenuProfessor(i);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
             }
@@ -115,12 +127,13 @@ public class Sistema {
 
         if(opcao == 1) {
             Menu.limpaTela();
-            fazerLoginUsuario(email, senha);
+            fazerLoginUsuarioAluno(email, senha);
         } else if(opcao == 2) {
             Menu.limpaTela();
             fazerLoginUsuarioAdministrador(email, senha);
         } else {
-
+            Menu.limpaTela();
+            fazerLoginUsuarioProfessor(email, senha);
         }
     }
 
@@ -258,7 +271,7 @@ public class Sistema {
                     break;
                 
                 case 5:
-
+                    Menu.limpaTela();
                     break;
                 
                 default:
@@ -305,9 +318,10 @@ public class Sistema {
     public void FormulariocadastroProfessor() {
 
         String nome; 
-        int codigoUsuario;
         String email; 
-        String senhaPessoal;
+        String senha;
+        String confirmaSenha;
+        boolean controle = false; 
        //boolean confirma;
 
         // Formulario de cadastro de professor
@@ -318,7 +332,24 @@ public class Sistema {
         System.out.print("Endereço de email do professor: ");
         email = teclado.nextLine();
         System.out.print("Senha do professor: ");
-        senhaPessoal = teclado.nextLine();
+        senha = teclado.nextLine();
+
+        do{
+            System.out.print("Senha: ");
+            senha = teclado.nextLine();
+            System.out.print("Confirme a senha: ");
+            confirmaSenha = teclado.nextLine();
+            //verificacao de senha
+            boolean verifica = VerificaSenha(senha, confirmaSenha);
+            if(verifica == true) {
+                System.out.println("As senhas são iguais!");
+                controle = true;
+                CadastrarProfessor(nome, email, confirmaSenha);
+            }else {
+                System.out.println("A senha não é igual!" + "Tente Novamente!"); 
+                System.out.println();
+            }
+        } while(controle != true);
 
         /*System.out.print("\nConfirma o cadastro do professor? Digite 1 para confirmar, e 0 para cancelar: ");
         confirma = Boolean.parseBoolean(teclado.nextLine());
@@ -333,4 +364,43 @@ public class Sistema {
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
 
+    public void CadastrarProfessor(String nome, String email, String senha) {
+        int codigoUsuario = 0; 
+        codigoUsuario = GerarCodigoUsuario();
+        Professor professor = new Professor(nome, codigoUsuario, email, senha);
+        setProfessor(professor);
+        System.out.println("Conta Criada com Sucesso!");
+    }
+
+    public void MenuProfessor(int i) {
+
+        int escolha = 0; 
+
+        do{ 
+
+            System.out.println("1 - Consultar seus Dados. ");
+            System.out.println("2 - Consultar Cursos disponíveis. ");
+            System.out.println("3 - Sair. ");
+
+            escolha = Integer.parseInt(teclado.nextLine());
+
+            switch(escolha) {
+                case 1:
+                    //DadosAluno(i);
+                    break;
+    
+                case 2:
+                    
+                    break;
+    
+                case 3:
+                    
+                    return;
+
+                default:
+                    System.out.print("\nOpção inválida, tente novamente.");
+                    break;
+            }
+        }while(escolha != 3);
+    }
 }
