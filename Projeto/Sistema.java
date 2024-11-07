@@ -391,6 +391,7 @@ public class Sistema {
         String dataFim;
         int quantidadeAtualAlunos;
         String horario; 
+        Professor professor; 
         //boolean confirma;
 
         // Formulario de cadastro de curso
@@ -413,7 +414,7 @@ public class Sistema {
         cargaHoraria = teclado.nextInt();
         teclado.nextLine();
         
-        CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario);
+        CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario, professor);
 
         /*System.out.print("\nConfirma o cadastro do curso? Digite 1 para confirmar, e 0 para cancelar: ");
         confirma = Boolean.parseBoolean(teclado.nextLine());
@@ -426,9 +427,9 @@ public class Sistema {
         */
     }
 
-    public void CadastrarTurma(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos, String horario) {
+    public void CadastrarTurma(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos, String horario, Professor professor) {
 
-        Turma turma = new Turma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario);
+        Turma turma = new Turma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario, professor);
         setTurma(turma);
         System.out.println("Curso Criado com Sucesso!");
     }
