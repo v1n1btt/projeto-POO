@@ -221,7 +221,7 @@ public class Sistema {
                     break;
     
                 case 2:
-                    
+                    DadosTurmas();
                     break;
     
                 case 3:
