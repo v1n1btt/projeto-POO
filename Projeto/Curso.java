@@ -15,11 +15,12 @@ public class Curso {
     private String dataInicio; 
     private String dataFim; 
     private boolean status;
-    private int quantidadeAtualAlunos; 
+    private int quantidadeAtualAlunos;
+    private Professor professor;  
     private final int quantidadeMaximaAlunos = 50;
 
 
-    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos) {
+    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos, Professor professor) {
         setNomeCurso(nomeCurso);
         setCodigoCurso(codigoCurso);
         setCargaHorariaCurso(cargaHorariaCurso);
@@ -92,6 +93,14 @@ public class Curso {
 
     public boolean getStatus() {
         return status;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public Professor getProfessor() {
+        return professor;
     }
 
     public int getQuantidadeMaximaAlunos() {

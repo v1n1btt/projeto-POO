@@ -222,7 +222,7 @@ public class Sistema {
                     DadosAluno(i);
                     break;
                 case 2:
-                    DadosTurmas();
+                    DadosTurmasAluno();
                     break;
                 case 3:
                    
@@ -365,7 +365,7 @@ public class Sistema {
                 controle = true;
                 CadastrarProfessor(nome, email, confirmaSenha);
             }else {
-                System.out.println("A senha não é igual!" + "Tente Novamente!"); 
+                System.out.println("As senhas não são iguais!" + "Tente Novamente!"); 
                 System.out.println();
             }
         } while(controle != true);
@@ -394,7 +394,6 @@ public class Sistema {
         //boolean confirma;
 
         // Formulario de cadastro de curso
-        //Menu.limpaTela();
         System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
         System.out.print("Nome do curso: ");
         nome = teclado.nextLine();
@@ -428,6 +427,7 @@ public class Sistema {
     }
 
     public void CadastrarTurma(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos, String horario) {
+
         Turma turma = new Turma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario);
         setTurma(turma);
         System.out.println("Curso Criado com Sucesso!");
@@ -450,9 +450,29 @@ public class Sistema {
         }
     }
 
+    public void DadosTurmasAluno() {
+
+        for(int i = 0; i < contadorTurma; i++) {
+
+            if(getTurma(i).getStatus() == true) {
+            System.out.println("Nome: " + getTurma(i).getNomeCurso());
+            System.out.println("Código Curso: " + getTurma(i).getCodigoCurso());
+            System.out.println("Carga Horária: " + getTurma(i).getCargaHorariaCurso());
+            System.out.println("Ementa: " + getTurma(i).getEmenta());
+            System.out.println("Data Inicio: " + getTurma(i).getDataInicio());
+            System.out.println("Data Fim: " + getTurma(i).getDataFim());
+            System.out.println("Quantidade de Alunos Matriculados: " + getTurma(i).getQuantidadeAtualAlunos());
+            System.out.println("Horários: : " + getTurma(i).getHorario());
+            System.out.println();
+            } 
+        }
+    }
+
+
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
 
     public void CadastrarProfessor(String nome, String email, String senha) {
+
         int codigoUsuario = 0; 
         codigoUsuario = GerarCodigoUsuario();
         Professor professor = new Professor(nome, codigoUsuario, email, senha);
@@ -480,7 +500,7 @@ public class Sistema {
                     break;
     
                 case 2:
-                    
+                    DadosTurmasAluno();
                     break;
     
                 case 3:
