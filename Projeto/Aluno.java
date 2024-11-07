@@ -1,4 +1,9 @@
 package Projeto;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Aluno extends Pessoa {
 
@@ -27,5 +32,20 @@ public class Aluno extends Pessoa {
     public String getPlano() {
         return plano;
     }
+    public String salvaAluno(){
 
+        try {
+            FileWriter fw = new FileWriter("Aluno.txt");
+            PrintWriter pw = new PrintWriter("fw");
+            pw.println("CPF: "+this.cpf);
+            pw.println("Plano: "+this.plano);
+            pw.flush();
+            pw.close();
+            fw.close();
+
+        } catch (IOException ex){
+            Logger.getLogger(Pessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

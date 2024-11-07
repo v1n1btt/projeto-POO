@@ -1,4 +1,9 @@
 package Projeto;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Pessoa {
     
@@ -55,4 +60,23 @@ public class Pessoa {
         return nivelAcesso; 
     }
     
+    public String salvaPessoa(){
+
+        try {
+            FileWriter fw = new FileWriter("Pessoa.txt");
+            PrintWriter pw = new PrintWriter("fw");
+            pw.println("Nome: "+this.nome);
+            pw.println("Email: "+this.email);
+            pw.println("Senha: "+this.senhaPessoal);
+            pw.println("Cod: "+this.codigoUsuario);
+            pw.println("Perfil: "+this.nivelAcesso);
+            pw.flush();
+            pw.close();
+            fw.close();
+
+        } catch (IOException ex){
+            Logger.getLogger(Pessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }
