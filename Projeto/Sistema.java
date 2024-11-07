@@ -210,7 +210,9 @@ public class Sistema {
             System.out.print("Selecione uma opção:\n\n");
             System.out.println("1 - Consultar seus Dados. ");
             System.out.println("2 - Consultar Cursos disponíveis. ");
-            System.out.println("3 - Sair. ");
+            System.out.println("3 - Se matricular em Cursos disponíveis. ");
+            System.out.println("4 - Cancelar matricula em um curso. ");
+            System.out.println("5 - Sair. ");
 
             escolha = Integer.parseInt(teclado.nextLine());
 
@@ -219,20 +221,23 @@ public class Sistema {
                     Menu.limpaTela();
                     DadosAluno(i);
                     break;
-    
                 case 2:
                     DadosTurmas();
                     break;
-    
                 case 3:
+                   
+                    break;
+                case 4:
+                
+                    break;
+                case 5:
                     Menu.limpaTela();
-                    return;
-
+                    break;
                 default:
                     System.out.print("\nOpção inválida, tente novamente.");
                     break;
             }
-        }while(escolha != 3);
+        }while(escolha != 5);
     }
 
     public void DadosAluno(int i) {
