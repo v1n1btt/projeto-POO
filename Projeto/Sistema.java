@@ -1,9 +1,9 @@
 package Projeto;
 
 import java.util.Scanner;
-import java.io.IOException;
-import java.lang.InterruptedException;
-import java.lang.NumberFormatException;
+//import java.io.IOException;
+//import java.lang.InterruptedException;
+//import java.lang.NumberFormatException;
 
 public class Sistema {
 
@@ -128,37 +128,59 @@ public class Sistema {
         int opcao = 0;
 
         // Menu de login
-        do{
-            try{
-                Menu.limpaTela();
-                System.out.print("======================\nSISTEMA DE GESTÃO DE CURSOS\n=====================\n\n");
-                System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
-                System.out.println("Opções para Login: \n");
-                System.out.println("1 - Aluno, 2 - Administrador ou 3 - Professor");
-                System.out.print("\nEscolha uma opção: ");
-                opcao = teclado.nextInt();
-                teclado.nextLine();
-                System.out.print("\nemail: ");
-                email = teclado.nextLine();
-                System.out.print("\nSenha: ");
-                senha = teclado.nextLine();
-                if(opcao == 1) {
+        //do{
+            //try{
+                do {
                     Menu.limpaTela();
-                    fazerLoginUsuarioAluno(email, senha);
-                } else if(opcao == 2) {
-                    Menu.limpaTela();
-                    fazerLoginUsuarioAdministrador(email, senha);
-                } else if(opcao == 3){
-                    Menu.limpaTela();
-                    fazerLoginUsuarioProfessor(email, senha);
-                } else{
-                    System.out.print("\nOpção inválida, tente novamente.");
-                }
-            } catch(NumberFormatException numberFormatException){
-                System.out.print("\nEntrada inválida, tente novamente.");
-                teclado.nextLine();
-            }
-        } while(opcao != 1 || opcao != 2 || opcao != 3);
+                    System.out.print("======================\nSISTEMA DE GESTÃO DE CURSOS\n=====================\n\n");
+                    System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
+                    System.out.println("Opções para Login: \n");
+                    System.out.println("1 - Aluno");
+                    System.out.println("2 - Administrador");
+                    System.out.println("3 - Professor");
+                    System.out.println("4 - Voltar");
+                    System.out.print("\nEscolha uma opção: ");
+                    opcao = teclado.nextInt();
+                    teclado.nextLine();
+
+                    switch (opcao) {
+                        case 1:
+                            Menu.limpaTela();
+                            System.out.print("\nInsira seu email: ");
+                            email = teclado.nextLine();
+                            System.out.print("\nInsira sua Senha: ");
+                            senha = teclado.nextLine();
+                            fazerLoginUsuarioAluno(email, senha);
+                            break;
+                        case 2:
+                            Menu.limpaTela();
+                            System.out.print("\n Insira seu email: ");
+                            email = teclado.nextLine();
+                            System.out.print("\nInsira sua Senha: ");
+                            senha = teclado.nextLine();
+                            fazerLoginUsuarioAdministrador(email, senha);
+                            break;
+                        case 3:
+                            Menu.limpaTela();
+                            System.out.print("\n Insira seu email: ");
+                            email = teclado.nextLine();
+                            System.out.print("\nInsira sua Senha:");
+                            senha = teclado.nextLine();
+                            fazerLoginUsuarioProfessor(email, senha);
+                            break;
+                        case 4:
+                            Menu.limpaTela();
+                            return;
+                        default:
+                            System.out.print("\nOpção inválida, tente novamente.");
+                            break;
+                    }
+                } while(opcao != 4); 
+            //} catch(NumberFormatException numberFormatException){
+                //System.out.print("\nEntrada inválida, tente novamente.");
+                //teclado.nextLine();
+            //}
+        //} while(opcao != 1 || opcao != 2 || opcao != 3);
         
     }
 
@@ -368,8 +390,6 @@ public class Sistema {
         boolean controle = false; 
        //boolean confirma;
 
-        // Formulario de cadastro de professor
-        //Menu.limpaTela();
         System.out.print("====================\nCADASTRO DE PROFESSOR\n====================\n\n");
         System.out.print("Nome do professor: ");
         nome = teclado.nextLine();
@@ -414,7 +434,7 @@ public class Sistema {
         int quantidadeAtualAlunos;
         String horario; 
         int escolhaProfessor; 
-        boolean exception = false;
+        //boolean exception = false;
         //boolean confirma;
 
         // Formulario de cadastro de curso
