@@ -11,11 +11,11 @@ public class Sistema {
     private static int contadorAluno = 0;
     private static int contadorAdministrador = 0;
     private static int contadorProfessor = 0; 
-    private static int contadorTurma = 0; 
+    private static int contadorCurso = 0; 
     private Aluno[] alunos = new Aluno[1000];
     private Administrador[] administradores = new Administrador[100]; 
     private Professor[] professores = new Professor[100];
-    private Turma[] turmas = new Turma[100]; 
+    private Curso[] cursos = new Curso[100]; 
 
     Scanner teclado = new Scanner(System.in);
 
@@ -58,15 +58,15 @@ public class Sistema {
         return professores[i]; 
     }
 
-    public void setTurma(Turma turma) {
+    public void setTurma(Curso curso) {
 
-        this.turmas[contadorTurma] = turma;
-        contadorTurma++; 
+        this.cursos[contadorCurso] = curso;
+        contadorCurso++; 
     }
 
-    public Turma getTurma(int i) {
+    public Curso getCurso(int i) {
 
-        return turmas[i]; 
+        return cursos[i]; 
     }
 
     //metodos para fazer os logins
@@ -257,7 +257,7 @@ public class Sistema {
                         DadosAluno(i);
                         break;
                     case 2:
-                        DadosTurmasAluno();
+                        DadosCursosAluno();
                         break;
                     case 3:
                     
@@ -487,41 +487,41 @@ public class Sistema {
     public void CadastrarTurma(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos, String horario, int i) {
 
         Professor professores = getProfessor(i);
-        Turma turma = new Turma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, professores, horario);
-        setTurma(turma);
+        Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, professores, horario);
+        setTurma(curso);
         System.out.println("Curso Criado com Sucesso!");
     }
 
     public void DadosTurmas() {
 
-        for(int i = 0; i < contadorTurma; i++) {
+        for(int i = 0; i < contadorCurso; i++) {
 
-            System.out.println("Nome: " + getTurma(i).getNomeCurso());
-            System.out.println("Código Curso: " + getTurma(i).getCodigoCurso());
-            System.out.println("Carga Horária: " + getTurma(i).getCargaHorariaCurso());
-            System.out.println("Ementa: " + getTurma(i).getEmenta());
-            System.out.println("Data Inicio: " + getTurma(i).getDataInicio());
-            System.out.println("Data Fim: " + getTurma(i).getDataFim());
-            System.out.println("Quantidade de Alunos Matriculados: " + getTurma(i).getQuantidadeAtualAlunos());
-            System.out.println("Horários: : " + getTurma(i).getHorario());
-            System.out.println("Status do Curso: " + getTurma(i).getStatus());
+            System.out.println("Nome: " + getCurso(i).getNomeCurso());
+            System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
+            System.out.println("Carga Horária: " + getCurso(i).getCargaHorariaCurso());
+            System.out.println("Ementa: " + getCurso(i).getEmenta());
+            System.out.println("Data Inicio: " + getCurso(i).getDataInicio());
+            System.out.println("Data Fim: " + getCurso(i).getDataFim());
+            System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
+            System.out.println("Horários: : " + getCurso(i).getHorario());
+            System.out.println("Status do Curso: " + getCurso(i).getStatus());
             System.out.println();
         }
     }
 
-    public void DadosTurmasAluno() {
+    public void DadosCursosAluno() {
 
-        for(int i = 0; i < contadorTurma; i++) {
+        for(int i = 0; i < contadorCurso; i++) {
 
-            if(getTurma(i).getStatus() == true) {
-            System.out.println("Nome: " + getTurma(i).getNomeCurso());
-            System.out.println("Código Curso: " + getTurma(i).getCodigoCurso());
-            System.out.println("Carga Horária: " + getTurma(i).getCargaHorariaCurso());
-            System.out.println("Ementa: " + getTurma(i).getEmenta());
-            System.out.println("Data Inicio: " + getTurma(i).getDataInicio());
-            System.out.println("Data Fim: " + getTurma(i).getDataFim());
-            System.out.println("Quantidade de Alunos Matriculados: " + getTurma(i).getQuantidadeAtualAlunos());
-            System.out.println("Horários: : " + getTurma(i).getHorario());
+            if(getCurso(i).getStatus() == true) {
+            System.out.println("Nome: " + getCurso(i).getNomeCurso());
+            System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
+            System.out.println("Carga Horária: " + getCurso(i).getCargaHorariaCurso());
+            System.out.println("Ementa: " + getCurso(i).getEmenta());
+            System.out.println("Data Inicio: " + getCurso(i).getDataInicio());
+            System.out.println("Data Fim: " + getCurso(i).getDataFim());
+            System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
+            System.out.println("Horários: : " + getCurso(i).getHorario());
             System.out.println();
             } 
         }
@@ -561,7 +561,7 @@ public class Sistema {
                         break;
         
                     case 2:
-                        DadosTurmasAluno();
+                        DadosCursosAluno();
                         break;
         
                     case 3:

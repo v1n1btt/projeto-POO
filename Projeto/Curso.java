@@ -18,9 +18,11 @@ public class Curso {
     private int quantidadeAtualAlunos;
     private Professor professor;   
     private final int quantidadeMaximaAlunos = 50;
+    private String horario;
+    private Aluno[] alunosMatriculados;
 
 
-    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos, Professor professor) {
+    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos, Professor professor, String Horario) {
         setNomeCurso(nomeCurso);
         setCodigoCurso(codigoCurso);
         setCargaHorariaCurso(cargaHorariaCurso);
@@ -29,6 +31,8 @@ public class Curso {
         setDataFim(dataFim);
         setQuantidadeAtualAlunos(quantidadeAtualAlunos);
         setStatus(true);
+        setHorario(horario);
+        alunosMatriculados = new Aluno[getQuantidadeMaximaAlunos()];
     }
 
     public void setNomeCurso(String nomeCurso) {
@@ -105,6 +109,25 @@ public class Curso {
 
     public int getQuantidadeMaximaAlunos() {
         return quantidadeMaximaAlunos;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setAlunosMatriculados(Aluno aluno) {
+        for(int i = getQuantidadeAtualAlunos(); i <= getQuantidadeMaximaAlunos(); i++){
+            this.alunosMatriculados[i] = aluno;
+            setQuantidadeAtualAlunos(getQuantidadeAtualAlunos() + 1);
+        }
+    }
+
+    public Aluno getAlunosMatriculados(int i) {
+        return alunosMatriculados[i];
     }
 
     public String salvaAluno() {
