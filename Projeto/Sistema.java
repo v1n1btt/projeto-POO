@@ -413,7 +413,6 @@ public class Sistema {
         String dataFim;
         int quantidadeAtualAlunos;
         String horario; 
-        Professor professor;
         int escolhaProfessor; 
         boolean exception = false;
         //boolean confirma;
@@ -441,11 +440,11 @@ public class Sistema {
                 cargaHoraria = teclado.nextInt();
                 System.out.println("Escolha um professor:"); 
                 for(int i = 0; i < contadorProfessor; i++) {
-                    System.out.println(professores[i].getCodigoUsuario());
+                    System.out.println(getProfessor(i).getCodigoUsuario());
                 }
                 escolhaProfessor = teclado.nextInt();
                 teclado.nextLine();
-                CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario, professores[escolhaProfessor]);
+                CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario, escolhaProfessor);
             } catch(NumberFormatException numberFormatException){
                 exception = true;
                 System.out.print("\nEntrada inválida, tente novamente.");
@@ -464,9 +463,10 @@ public class Sistema {
         */
     }
 
-    public void CadastrarTurma(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos, String horario, Professor[] professores) {
+    public void CadastrarTurma(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos, String horario, int i) {
 
-        Turma turma = new Turma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario, professores);
+        Professor professores = getProfessor(i);
+        Turma turma = new Turma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, professores, horario);
         setTurma(turma);
         System.out.println("Curso Criado com Sucesso!");
     }
