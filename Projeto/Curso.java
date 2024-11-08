@@ -16,8 +16,7 @@ public class Curso {
     private String dataFim; 
     private boolean status;
     private int quantidadeAtualAlunos;
-    private Professor professor;
-    private Aluno[] alunosMatriculados;   
+    private Professor professor;   
     private final int quantidadeMaximaAlunos = 50;
 
 
@@ -30,7 +29,6 @@ public class Curso {
         setDataFim(dataFim);
         setQuantidadeAtualAlunos(quantidadeAtualAlunos);
         setStatus(true);
-        alunosMatriculados = new Aluno[quantidadeMaximaAlunos];
     }
 
     public void setNomeCurso(String nomeCurso) {
@@ -109,18 +107,7 @@ public class Curso {
         return quantidadeMaximaAlunos;
     }
 
-    public void setAlunosMatriculados(Aluno aluno) {
-        for(int i = quantidadeAtualAlunos; i <= quantidadeMaximaAlunos; i++){
-            this.alunosMatriculados[i] = aluno;
-            quantidadeAtualAlunos++; 
-        }
-    }
-
-    public Aluno getAlunosMatriculados(int i) {
-        return alunosMatriculados[i];
-    }
-
-    public String salvaAluno(){
+    public String salvaAluno() {
 
         try {
             FileWriter fw = new FileWriter("Curso.txt");
