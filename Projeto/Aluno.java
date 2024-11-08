@@ -8,12 +8,10 @@ import java.util.logging.Logger;
 public class Aluno extends Pessoa {
 
     private String cpf;
-    private String plano;
 
-    public Aluno(String nome, int codigoUsuario, String email, String senhaPessoal, String cpf, String plano) {
+    public Aluno(String nome, int codigoUsuario, String email, String senhaPessoal, String cpf) {
         super(nome, codigoUsuario, email, senhaPessoal);
         setCPF(cpf);
-        setPlano(plano);
         setNivelAcesso(3);
     }
 
@@ -24,21 +22,13 @@ public class Aluno extends Pessoa {
     public String getCPF() {
         return cpf;
     }
-
-    public void setPlano(String plano) {
-        this.plano = plano;
-    }
-
-    public String getPlano() {
-        return plano;
-    }
-    public String salvaAluno(){
+    
+    public String salvaAluno() {
 
         try {
             FileWriter fw = new FileWriter("Aluno.txt");
             PrintWriter pw = new PrintWriter("fw");
             pw.println("CPF: "+this.cpf);
-            pw.println("Plano: "+this.plano);
             pw.flush();
             pw.close();
             fw.close();

@@ -192,7 +192,6 @@ public class Sistema {
         // Dados do usuario
         String nome;
         String cpf;
-        String plano;
         String email;
         String senha;
         String confirmaSenha;
@@ -209,8 +208,6 @@ public class Sistema {
         nome = teclado.nextLine();
         System.out.print("Digite seu Email: ");
         email = teclado.nextLine();
-        System.out.println("Escolha um plano: " + "1 - 19,90 Completo " + " 2 - 9,99 Básico");
-        plano = teclado.nextLine();
         do{
             System.out.print("Senha: ");
             senha = teclado.nextLine();
@@ -222,7 +219,7 @@ public class Sistema {
                 System.out.println("As senhas são iguais!");
                 controle = true;
                 codigoUsuario = GerarCodigoUsuario();
-                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf, plano);
+                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf);
                 setAluno(aluno);
                 System.out.println("Conta Criada com Sucesso!");
             }else {
@@ -284,7 +281,6 @@ public class Sistema {
         System.out.println("Codigo do Usuário: " + getAluno(i).getCodigoUsuario());
         System.out.println("Email: " + getAluno(i).getEmail());
         System.out.println("CPF: " + getAluno(i).getCPF());
-        System.out.println("Plano: " + getAluno(i).getPlano());
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
@@ -431,7 +427,6 @@ public class Sistema {
         String ementa;
         String dataInicio;
         String dataFim;
-        int quantidadeAtualAlunos;
         String horario; 
         int escolhaProfessor; 
         //boolean exception = false;
@@ -454,8 +449,6 @@ public class Sistema {
                 dataFim = teclado.nextLine();
                 System.out.print("horario: ");
                 horario = teclado.nextLine();
-                System.out.print("Quantidade atual de alunos: ");
-                quantidadeAtualAlunos = teclado.nextInt();
                 System.out.print("Carga horária do curso: ");
                 cargaHoraria = teclado.nextInt();
                 teclado.nextLine();
@@ -465,7 +458,7 @@ public class Sistema {
                 }
                 System.out.println("Digite o número do professor acima: "); 
                 escolhaProfessor = teclado.nextInt();
-                CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario, escolhaProfessor);
+                CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, escolhaProfessor);
             //} catch(NumberFormatException numberFormatException){
                 //exception = true;
                 //System.out.print("\nEntrada inválida, tente novamente.");
@@ -484,10 +477,10 @@ public class Sistema {
         */
     }
 
-    public void CadastrarTurma(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos, String horario, int i) {
+    public void CadastrarTurma(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, String horario, int i) {
 
         Professor professores = getProfessor(i);
-        Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, professores, horario);
+        Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, professores, horario);
         setTurma(curso);
         System.out.println("Curso Criado com Sucesso!");
     }
@@ -526,7 +519,6 @@ public class Sistema {
             } 
         }
     }
-
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
 

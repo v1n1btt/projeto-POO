@@ -22,14 +22,14 @@ public class Curso {
     private Aluno[] alunosMatriculados;
 
 
-    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dataInicio, String dataFim, int quantidadeAtualAlunos, Professor professor, String Horario) {
+    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dataInicio, String dataFim, Professor professor, String Horario) {
         setNomeCurso(nomeCurso);
         setCodigoCurso(codigoCurso);
         setCargaHorariaCurso(cargaHorariaCurso);
         setEmenta(ementa);
         setDataInicio(dataInicio);
         setDataFim(dataFim);
-        setQuantidadeAtualAlunos(quantidadeAtualAlunos);
+        setQuantidadeAtualAlunos(0);
         setStatus(true);
         setHorario(horario);
         alunosMatriculados = new Aluno[getQuantidadeMaximaAlunos()];
