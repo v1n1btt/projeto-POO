@@ -1,6 +1,9 @@
 package Projeto;
 
 import java.util.Scanner;
+import java.io.IOException;
+import java.lang.InterruptedException;
+import java.lang.NumberFormatException;
 
 public class Sistema {
 
@@ -486,31 +489,37 @@ public class Sistema {
         int escolha = 0; 
 
         do{
-            System.out.println();
-            System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Professor\n\n");
-            System.out.println("Bem vindo: " + getProfessor(i).getNome());
-            System.out.println("1 - Consultar seus Dados. ");
-            System.out.println("2 - Consultar Cursos disponíveis. ");
-            System.out.println("3 - Sair. ");
+            try{
+                Menu.limpaTela();
+                System.out.println();
+                System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Professor\n\n");
+                System.out.println("Bem vindo: " + getProfessor(i).getNome());
+                System.out.println("1 - Consultar seus Dados. ");
+                System.out.println("2 - Consultar Cursos disponíveis. ");
+                System.out.println("3 - Sair. ");
 
-            escolha = Integer.parseInt(teclado.nextLine());
+                escolha = Integer.parseInt(teclado.nextLine());
 
-            switch(escolha) {
-                case 1:
-                    
-                    break;
-    
-                case 2:
-                    DadosTurmasAluno();
-                    break;
-    
-                case 3:
-                    Menu.limpaTela();
-                    return;
+                switch(escolha) {
+                    case 1:
+                        
+                        break;
+        
+                    case 2:
+                        DadosTurmasAluno();
+                        break;
+        
+                    case 3:
+                        Menu.limpaTela();
+                        return;
 
-                default:
-                    System.out.print("\nOpção inválida, tente novamente.");
-                    break;
+                    default:
+                        System.out.print("\nOpção inválida, tente novamente.");
+                        break;
+                }
+            } catch(NumberFormatException numberFormatException){
+                System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
             }
         }while(escolha != 3);
     }
