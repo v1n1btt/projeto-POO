@@ -280,8 +280,7 @@ public class Sistema {
             escolha = Integer.parseInt(teclado.nextLine());
             switch(escolha) {
                 case 1:
-                    Menu.limpaTela();
-                   FormulariocadastrarCurso();
+                    FormulariocadastrarCurso();
                     break;
                 case 2:
                     Menu.limpaTela();
@@ -394,30 +393,38 @@ public class Sistema {
         String dataFim;
         int quantidadeAtualAlunos;
         String horario; 
-        Professor professor; 
+        Professor professor;
+        boolean exception = false;
         //boolean confirma;
 
         // Formulario de cadastro de curso
-        System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
-        System.out.print("Nome do curso: ");
-        nome = teclado.nextLine();
-        System.out.print("Código do curso: ");
-        codigo = teclado.nextLine();
-        System.out.print("Ementa do curso: ");
-        ementa = teclado.nextLine();
-        System.out.print("Data de inicio curso: ");
-        dataInicio = teclado.nextLine();
-        System.out.print("Data de inicio curso: ");
-        dataFim = teclado.nextLine();
-        System.out.print("horario: ");
-        horario = teclado.nextLine();
-        System.out.print("Quantidade atual de alunos: ");
-        quantidadeAtualAlunos = teclado.nextInt();
-        System.out.print("Carga horária do curso: ");
-        cargaHoraria = teclado.nextInt();
-        teclado.nextLine();
-        
-        CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario, professor);
+        do{
+            try{
+                Menu.limpaTela();
+                System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
+                System.out.print("Nome do curso: ");
+                nome = teclado.nextLine();
+                System.out.print("Código do curso: ");
+                codigo = teclado.nextLine();
+                System.out.print("Ementa do curso: ");
+                ementa = teclado.nextLine();
+                System.out.print("Data de inicio curso: ");
+                dataInicio = teclado.nextLine();
+                System.out.print("Data de inicio curso: ");
+                dataFim = teclado.nextLine();
+                System.out.print("horario: ");
+                horario = teclado.nextLine();
+                System.out.print("Quantidade atual de alunos: ");
+                quantidadeAtualAlunos = teclado.nextInt();
+                System.out.print("Carga horária do curso: ");
+                cargaHoraria = teclado.nextInt();
+                teclado.nextLine();
+                CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario, professor);
+            } catch(NumberFormatException numberFormatException){
+                exception = true;
+                System.out.print("Entrada inválida, tente novamente.");
+            }
+        } while(exception = true);
 
         /*System.out.print("\nConfirma o cadastro do curso? Digite 1 para confirmar, e 0 para cancelar: ");
         confirma = Boolean.parseBoolean(teclado.nextLine());
