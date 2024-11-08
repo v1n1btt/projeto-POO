@@ -45,6 +45,7 @@ public class Menu {
     }
 
     public static void MenuInicial() {
+        limpaTela();
         System.out.println();
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("SEJA BEM VINDO!!!!\n\n");

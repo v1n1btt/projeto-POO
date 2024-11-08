@@ -74,6 +74,7 @@ public class Sistema {
 
         for(int i = 0; i < contadorAluno; i++) {
             if(VerificaVariaveis(getAluno(i).getEmail(), email) == true && VerificaVariaveis(getAluno(i).getSenhaPessoal(), senha) == true && getAluno(i).getNivelAcesso() == 3) {
+                Menu.limpaTela();
                 MenuAluno(i);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
@@ -133,7 +134,6 @@ public class Sistema {
                 do {
                     Menu.limpaTela();
                     System.out.print("======================\nSISTEMA DE GESTÃO DE CURSOS\n=====================\n\n");
-                    System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
                     System.out.println("Opções para Login: \n");
                     System.out.println("1 - Aluno");
                     System.out.println("2 - Administrador");
@@ -146,6 +146,7 @@ public class Sistema {
                     switch (opcao) {
                         case 1:
                             Menu.limpaTela();
+                            System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
                             System.out.print("\nInsira seu email: ");
                             email = teclado.nextLine();
                             System.out.print("\nInsira sua Senha: ");
@@ -154,6 +155,7 @@ public class Sistema {
                             break;
                         case 2:
                             Menu.limpaTela();
+                            System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
                             System.out.print("\n Insira seu email: ");
                             email = teclado.nextLine();
                             System.out.print("\nInsira sua Senha: ");
@@ -162,6 +164,7 @@ public class Sistema {
                             break;
                         case 3:
                             Menu.limpaTela();
+                            System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
                             System.out.print("\n Insira seu email: ");
                             email = teclado.nextLine();
                             System.out.print("\nInsira sua Senha:");
@@ -254,13 +257,13 @@ public class Sistema {
                         DadosAluno(i);
                         break;
                     case 2:
-                        DadosCursosAluno();
+                        CursosDisponiveis();
                         break;
                     case 3:
-                    
+                        
                         break;
                     case 4:
-                    
+
                         break;
                     case 5:
                         Menu.limpaTela();
@@ -283,10 +286,36 @@ public class Sistema {
         System.out.println("CPF: " + getAluno(i).getCPF());
     }
 
+    public void CursosDisponiveis() {
+
+        for( int i = 0; i < contadorCurso; i++) {
+            if (getCurso(i).getStatus() == true) {
+                System.out.println();
+                System.out.println("Nome do curso: " + getCurso(i).getNomeCurso());
+                System.out.println("Código do curso: " + getCurso(i).getCodigoCurso());
+                System.out.println("Carga Horária do curso: " + getCurso(i).getCargaHorariaCurso() + "horas");
+                System.out.println("Ementa do curso: " + getCurso(i).getEmenta());
+                System.out.println("Data Inicial do curso: " + getCurso(i).getDataInicio());
+                System.out.println("Data Final do curso: " + getCurso(i).getDataFim());
+                System.out.println("Professor do curso: " + getCurso(i).getProfessor());
+                System.out.println();
+            }
+        }
+    }
+
+    public void MatricularCurso() {
+
+        int codigo;
+        System.out.println("Digite o código do curso: ");
+        codigo = teclado.nextInt(); 
+        //setAlunosMatriculados();
+    }
+
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
 
     public void CadastrarAdministrador(String nome, String email, String senha) {
-        int codigoUsuario = 0; 
+
+        int codigoUsuario; 
         codigoUsuario = GerarCodigoUsuario();
         Administrador administrador = new Administrador(nome, codigoUsuario, email, senha);
         setAdministrador(administrador);
@@ -296,7 +325,6 @@ public class Sistema {
     public void MenuAdministrador(int i) {
 
         int escolha = 0;
-        
         do {
             try{
                 Menu.limpaTela();
@@ -340,20 +368,16 @@ public class Sistema {
                 System.out.print("\nEntrada inválida, tente novamente.");
                 teclado.nextLine();
             }
-                
         } while(escolha != 5);
     }
 
     public void FormularioCadastroAdministrador() {
-
-        // Dados do usuario
+        
         String nome;
         String email;
         String senha;
         String confirmaSenha;
         boolean controle = false; 
-
-        // Menu de cadastro
         System.out.print("====================\nCADASTRO ADMINISTRADOR\n====================\n\n");
         System.out.print("Nome completo: ");
         nome = teclado.nextLine();
@@ -385,7 +409,6 @@ public class Sistema {
         String confirmaSenha;
         boolean controle = false; 
        //boolean confirma;
-
         System.out.print("====================\nCADASTRO DE PROFESSOR\n====================\n\n");
         System.out.print("Nome do professor: ");
         nome = teclado.nextLine();
@@ -431,7 +454,6 @@ public class Sistema {
         int escolhaProfessor; 
         //boolean exception = false;
         //boolean confirma;
-
         // Formulario de cadastro de curso
         //do{
             //try{
@@ -458,7 +480,7 @@ public class Sistema {
                 }
                 System.out.println("Digite o número do professor acima: "); 
                 escolhaProfessor = teclado.nextInt();
-                CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, escolhaProfessor);
+                CadastrarCurso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, escolhaProfessor);
             //} catch(NumberFormatException numberFormatException){
                 //exception = true;
                 //System.out.print("\nEntrada inválida, tente novamente.");
@@ -477,7 +499,7 @@ public class Sistema {
         */
     }
 
-    public void CadastrarTurma(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, String horario, int i) {
+    public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, String horario, int i) {
 
         Professor professores = getProfessor(i);
         Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, professores, horario);
@@ -488,7 +510,6 @@ public class Sistema {
     public void DadosTurmas() {
 
         for(int i = 0; i < contadorCurso; i++) {
-
             System.out.println("Nome: " + getCurso(i).getNomeCurso());
             System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
             System.out.println("Carga Horária: " + getCurso(i).getCargaHorariaCurso());
@@ -505,7 +526,6 @@ public class Sistema {
     public void DadosCursosAluno() {
 
         for(int i = 0; i < contadorCurso; i++) {
-
             if(getCurso(i).getStatus() == true) {
             System.out.println("Nome: " + getCurso(i).getNomeCurso());
             System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
@@ -534,7 +554,6 @@ public class Sistema {
     public void MenuProfessor(int i) {
 
         int escolha = 0; 
-
         do{
             try{
                 Menu.limpaTela();
