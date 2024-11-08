@@ -418,8 +418,8 @@ public class Sistema {
         //boolean confirma;
 
         // Formulario de cadastro de curso
-        do{
-            try{
+        //do{
+            //try{
                 Menu.limpaTela();
                 System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
                 System.out.print("Nome do curso: ");
@@ -438,6 +438,7 @@ public class Sistema {
                 quantidadeAtualAlunos = teclado.nextInt();
                 System.out.print("Carga horária do curso: ");
                 cargaHoraria = teclado.nextInt();
+                teclado.nextLine();
                 System.out.println("Escolha um professor:"); 
                 for(int i = 0; i < contadorProfessor; i++) {
                     System.out.println("Indice do professor:  " + i + " Nome do professor:  " + getProfessor(i).getNome());
@@ -445,13 +446,12 @@ public class Sistema {
                 System.out.println("Digite o número do professor acima: "); 
                 escolhaProfessor = teclado.nextInt();
                 CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario, escolhaProfessor);
-                teclado.nextLine();
-            } catch(NumberFormatException numberFormatException){
-                exception = true;
-                System.out.print("\nEntrada inválida, tente novamente.");
-                teclado.nextLine();
-            }
-        } while(exception = true);
+            //} catch(NumberFormatException numberFormatException){
+                //exception = true;
+                //System.out.print("\nEntrada inválida, tente novamente.");
+                //teclado.nextLine();
+            //}
+        //} while(exception = true);
 
         /*System.out.print("\nConfirma o cadastro do curso? Digite 1 para confirmar, e 0 para cancelar: ");
         confirma = Boolean.parseBoolean(teclado.nextLine());
