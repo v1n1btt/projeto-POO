@@ -7,7 +7,7 @@ import java.lang.NumberFormatException;
 
 public class Sistema {
 
-    private static int codigoUsuario = 10000;
+    private static int codigoUsuario = 1000;
     private static int contadorAluno = 0;
     private static int contadorAdministrador = 0;
     private static int contadorProfessor = 0; 
@@ -292,10 +292,10 @@ public class Sistema {
                 System.out.println("    4. Cadastrar professor");
                 System.out.println("    5. Fazer logout");
                 System.out.print("\nDigite uma opção: ");
-
                 escolha = Integer.parseInt(teclado.nextLine());
                 switch(escolha) {
                     case 1:
+                        Menu.limpaTela();
                         FormulariocadastrarCurso();
                         break;
                     case 2:
@@ -440,11 +440,12 @@ public class Sistema {
                 cargaHoraria = teclado.nextInt();
                 System.out.println("Escolha um professor:"); 
                 for(int i = 0; i < contadorProfessor; i++) {
-                    System.out.println(getProfessor(i).getCodigoUsuario());
+                    System.out.println("Indice do professor:  " + i + " Nome do professor:  " + getProfessor(i).getNome());
                 }
+                System.out.println("Digite o número do professor acima: "); 
                 escolhaProfessor = teclado.nextInt();
-                teclado.nextLine();
                 CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario, escolhaProfessor);
+                teclado.nextLine();
             } catch(NumberFormatException numberFormatException){
                 exception = true;
                 System.out.print("\nEntrada inválida, tente novamente.");
