@@ -125,32 +125,41 @@ public class Sistema {
         // Dados do usuário
         String email;
         String senha;
-        int opcao; 
+        int opcao = 0;
 
         // Menu de login
-        System.out.print("======================\nSISTEMA DE GESTÃO DE CURSOS\n=====================\n\n");
-        System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
-        System.out.println("Opções para Login: \n");
-        System.out.println("1 - Aluno, 2 - Administrador ou 3 - Professor");
-        System.out.print("\nEscolha uma opção: ");
-        opcao = teclado.nextInt();
-        teclado.nextLine();
-        System.out.print("\nemail: ");
-        email = teclado.nextLine();
-        System.out.print("\nSenha: ");
-        senha = teclado.nextLine();
+        do{
+            try{
+                Menu.limpaTela();
+                System.out.print("======================\nSISTEMA DE GESTÃO DE CURSOS\n=====================\n\n");
+                System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
+                System.out.println("Opções para Login: \n");
+                System.out.println("1 - Aluno, 2 - Administrador ou 3 - Professor");
+                System.out.print("\nEscolha uma opção: ");
+                opcao = teclado.nextInt();
+                teclado.nextLine();
+                System.out.print("\nemail: ");
+                email = teclado.nextLine();
+                System.out.print("\nSenha: ");
+                senha = teclado.nextLine();
+                if(opcao == 1) {
+                    Menu.limpaTela();
+                    fazerLoginUsuarioAluno(email, senha);
+                } else if(opcao == 2) {
+                    Menu.limpaTela();
+                    fazerLoginUsuarioAdministrador(email, senha);
+                } else if(opcao == 3){
+                    Menu.limpaTela();
+                    fazerLoginUsuarioProfessor(email, senha);
+                } else{
+                    System.out.print("\nOpção inválida, tente novamente.");
+                }
+            } catch(NumberFormatException numberFormatException){
+                System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
+            }
+        } while(opcao != 1 || opcao != 2 || opcao != 3);
         
-
-        if(opcao == 1) {
-            Menu.limpaTela();
-            fazerLoginUsuarioAluno(email, senha);
-        } else if(opcao == 2) {
-            Menu.limpaTela();
-            fazerLoginUsuarioAdministrador(email, senha);
-        } else {
-            Menu.limpaTela();
-            fazerLoginUsuarioProfessor(email, senha);
-        }
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
@@ -206,39 +215,44 @@ public class Sistema {
 
         int escolha = 0; 
 
-        do{ 
-            System.out.println();
-            System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Aluno\n\n");
-            System.out.print("Bem vindo: " + getAluno(i).getNome());
-            System.out.print("Selecione uma opção:\n\n");
-            System.out.println("1 - Consultar seus Dados. ");
-            System.out.println("2 - Consultar Cursos disponíveis. ");
-            System.out.println("3 - Se matricular em Cursos disponíveis. ");
-            System.out.println("4 - Cancelar matricula em um curso. ");
-            System.out.println("5 - Sair. ");
+        do{
+            try{
+                System.out.println();
+                System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Aluno\n\n");
+                System.out.print("Bem vindo: " + getAluno(i).getNome());
+                System.out.print("Selecione uma opção:\n\n");
+                System.out.println("1 - Consultar seus Dados. ");
+                System.out.println("2 - Consultar Cursos disponíveis. ");
+                System.out.println("3 - Se matricular em Cursos disponíveis. ");
+                System.out.println("4 - Cancelar matricula em um curso. ");
+                System.out.println("5 - Sair. ");
 
-            escolha = Integer.parseInt(teclado.nextLine());
+                escolha = Integer.parseInt(teclado.nextLine());
 
-            switch(escolha) {
-                case 1:
-                    Menu.limpaTela();
-                    DadosAluno(i);
-                    break;
-                case 2:
-                    DadosTurmasAluno();
-                    break;
-                case 3:
-                   
-                    break;
-                case 4:
-                
-                    break;
-                case 5:
-                    Menu.limpaTela();
-                    break;
-                default:
-                    System.out.print("\nOpção inválida, tente novamente.");
-                    break;
+                switch(escolha) {
+                    case 1:
+                        Menu.limpaTela();
+                        DadosAluno(i);
+                        break;
+                    case 2:
+                        DadosTurmasAluno();
+                        break;
+                    case 3:
+                    
+                        break;
+                    case 4:
+                    
+                        break;
+                    case 5:
+                        Menu.limpaTela();
+                        break;
+                    default:
+                        System.out.print("\nOpção inválida, tente novamente.");
+                        break;
+                }
+            } catch(NumberFormatException numberFormatException){
+                System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
             }
         }while(escolha != 5);
     }
@@ -263,44 +277,50 @@ public class Sistema {
 
     public void MenuAdministrador(int i) {
 
-        int escolha;
+        int escolha = 0;
         
         do {
-            System.out.println();
-            System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como administrador\n\n");
-            System.out.println("BEM VINDO: " + getAdministrador(i).getNome() + "\n");
-            System.out.println("Selecione uma opção:");
-            System.out.println("    1. Cadastrar novo curso");
-            System.out.println("    2. Mostrar cursos cadastrados");
-            System.out.println("    3. Cadastrar um novo Administrador");
-            System.out.println("    4. Cadastrar professor");
-            System.out.println("    5. Fazer logout");
-            System.out.print("\nDigite uma opção: ");
+            try{
+                Menu.limpaTela();
+                System.out.println();
+                System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como administrador\n\n");
+                System.out.println("BEM VINDO: " + getAdministrador(i).getNome() + "\n");
+                System.out.println("Selecione uma opção:");
+                System.out.println("    1. Cadastrar novo curso");
+                System.out.println("    2. Mostrar cursos cadastrados");
+                System.out.println("    3. Cadastrar um novo Administrador");
+                System.out.println("    4. Cadastrar professor");
+                System.out.println("    5. Fazer logout");
+                System.out.print("\nDigite uma opção: ");
 
-            escolha = Integer.parseInt(teclado.nextLine());
-            switch(escolha) {
-                case 1:
-                    FormulariocadastrarCurso();
-                    break;
-                case 2:
-                    Menu.limpaTela();
-                    DadosTurmas();
-                    break;
-                case 3:
-                    Menu.limpaTela();
-                    FormularioCadastroAdministrador();
-                    break;
+                escolha = Integer.parseInt(teclado.nextLine());
+                switch(escolha) {
+                    case 1:
+                        FormulariocadastrarCurso();
+                        break;
+                    case 2:
+                        Menu.limpaTela();
+                        DadosTurmas();
+                        break;
+                    case 3:
+                        Menu.limpaTela();
+                        FormularioCadastroAdministrador();
+                        break;
 
-                case 4:
-                    Menu.limpaTela();
-                    FormulariocadastroProfessor();
-                    break;
-                case 5:
-                    Menu.limpaTela();
-                    break;
-                default:
-                    System.out.print("\nOpção inválida, tente novamente.");
-                    break;
+                    case 4:
+                        Menu.limpaTela();
+                        FormulariocadastroProfessor();
+                        break;
+                    case 5:
+                        Menu.limpaTela();
+                        break;
+                    default:
+                        System.out.print("\nOpção inválida, tente novamente.");
+                        break;
+                }
+            } catch(NumberFormatException numberFormatException){
+                System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
             }
                 
         } while(escolha != 5);
@@ -422,7 +442,8 @@ public class Sistema {
                 CadastrarTurma(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, quantidadeAtualAlunos, horario, professor);
             } catch(NumberFormatException numberFormatException){
                 exception = true;
-                System.out.print("Entrada inválida, tente novamente.");
+                System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
             }
         } while(exception = true);
 
