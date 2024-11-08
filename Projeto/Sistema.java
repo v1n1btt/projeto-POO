@@ -192,7 +192,6 @@ public class Sistema {
     //método que cria a conta do aluno
     public void criarContaAluno() {
        
-        // Dados do usuario
         String nome;
         String cpf;
         String email;
@@ -200,8 +199,6 @@ public class Sistema {
         String confirmaSenha;
         boolean controle = false;
         int codigoUsuario; 
-
-        // Menu de cadastro
         System.out.println();
         System.out.println("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("====================\nCADASTRO ALUNO\n====================\n\n");
@@ -236,7 +233,6 @@ public class Sistema {
     public void MenuAluno(int i) {
 
         int escolha = 0; 
-
         do{
             try{
                 System.out.println();
@@ -280,6 +276,7 @@ public class Sistema {
     }
 
     public void DadosAluno(int i) {
+
         System.out.println("Nome: " + getAluno(i).getNome());
         System.out.println("Codigo do Usuário: " + getAluno(i).getCodigoUsuario());
         System.out.println("Email: " + getAluno(i).getEmail());
@@ -303,12 +300,12 @@ public class Sistema {
         }
     }
 
-    public void MatricularCurso() {
+    public void MatricularCurso(int i) {
 
         int codigo;
         System.out.println("Digite o código do curso: ");
-        codigo = teclado.nextInt(); 
-        //setAlunosMatriculados();
+        codigo = teclado.nextInt();
+        //setAlunosMatriculados(alunos);
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
