@@ -1,4 +1,4 @@
-package Projeto;
+/*package Projeto;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileNotFoundException;
@@ -120,4 +120,4 @@ public class GeraArquivo {
         
         return resp;
     }
-}
+}*/
