@@ -14,24 +14,25 @@ public class Curso {
     private String ementa;
     private String dataInicio; 
     private String dataFim; 
-    private boolean status;
-    private int quantidadeAtualAlunos;
-    private Professor professor;   
-    private final int quantidadeMaximaAlunos = 50;
     private String horario;
+    protected Professor professor; 
+    private int quantidadeAtualAlunos;
+    private final int quantidadeMaximaAlunos = 50;
+    private boolean status;
     private Aluno[] alunosMatriculados;
 
 
-    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dataInicio, String dataFim, String Horario, Professor professor) {
+    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dataInicio, String dataFim, String horario, Professor professor) {
         setNomeCurso(nomeCurso);
         setCodigoCurso(codigoCurso);
         setCargaHorariaCurso(cargaHorariaCurso);
         setEmenta(ementa);
         setDataInicio(dataInicio);
         setDataFim(dataFim);
+        setHorario(horario);
+        setProfessor(professor);
         setQuantidadeAtualAlunos(0);
         setStatus(true);
-        setHorario(horario);
         alunosMatriculados = new Aluno[getQuantidadeMaximaAlunos()];
     }
 

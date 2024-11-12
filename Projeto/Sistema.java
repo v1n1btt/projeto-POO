@@ -1,9 +1,9 @@
 package Projeto;
 
 import java.util.Scanner;
-//import java.io.IOException;
-//import java.lang.InterruptedException;
-//import java.lang.NumberFormatException;
+import java.io.IOException;
+import java.lang.InterruptedException;
+import java.lang.NumberFormatException;
 
 public class Sistema {
 
@@ -117,8 +117,8 @@ public class Sistema {
         int opcao = 0;
 
         // Menu de login
-        //do{
-            //try{
+        do{
+            try{
                 do {
                     Menu.limpaTela();
                     System.out.print("======================\nSISTEMA DE GESTÃO DE CURSOS\n=====================\n\n");
@@ -167,11 +167,11 @@ public class Sistema {
                             break;
                     }
                 } while(opcao != 4); 
-            //} catch(NumberFormatException numberFormatException){
-                //System.out.print("\nEntrada inválida, tente novamente.");
-                //teclado.nextLine();
-            //}
-        //} while(opcao != 1 || opcao != 2 || opcao != 3);
+            } catch(NumberFormatException numberFormatException){
+                System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
+            }
+        } while(opcao != 1 || opcao != 2 || opcao != 3);
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
@@ -223,7 +223,7 @@ public class Sistema {
         int escolha = 0; 
 
         do{
-            //try{
+            try{
                 System.out.println();
                 System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Aluno\n\n");
                 System.out.print("Bem vindo: " + getAluno(i).getNome());
@@ -257,10 +257,10 @@ public class Sistema {
                         System.out.print("\nOpção inválida, tente novamente.");
                         break;
                 }
-            //} catch(NumberFormatException numberFormatException){
-                //System.out.print("\nEntrada inválida, tente novamente.");
-                //teclado.nextLine();
-            //}
+            } catch(NumberFormatException numberFormatException){
+                System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
+            }
         }while(escolha != 5);
     }
 
@@ -315,7 +315,7 @@ public class Sistema {
         int escolha = 0;
 
         do {
-            //try{
+            try{
                 System.out.println();
                 System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como administrador\n\n");
                 System.out.println("BEM VINDO: " + getAdministrador(i).getNome() + "\n");
@@ -352,10 +352,10 @@ public class Sistema {
                         System.out.print("\nOpção inválida, tente novamente.");
                         break;
                 }
-            //} catch(NumberFormatException numberFormatException){
-                //System.out.print("\nEntrada inválida, tente novamente.");
-                //teclado.nextLine();
-            //}
+            } catch(NumberFormatException numberFormatException){
+                System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
+            }
         } while(escolha != 5);
     }
 
@@ -442,11 +442,11 @@ public class Sistema {
         String dataFim;
         String horario; 
         int escolhaProfessor; 
-        //boolean exception = false;
+        boolean exception = false;
         //boolean confirma;
         // Formulario de cadastro de curso
-        //do{
-            //try{
+        do{
+            try{
                 System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
                 System.out.print("Nome do curso: ");
                 nome = teclado.nextLine();
@@ -472,12 +472,12 @@ public class Sistema {
                 escolhaProfessor = teclado.nextInt();
                 teclado.nextLine();
                 CadastrarCurso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, escolhaProfessor);
-            //} catch(NumberFormatException numberFormatException){
-                //exception = true;
-                //System.out.print("\nEntrada inválida, tente novamente.");
-                //teclado.nextLine();
-            //}
-        //} while(exception = true);
+            } catch(NumberFormatException numberFormatException){
+                exception = true;
+                System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
+            }
+        } while(exception = true);
 
         /*System.out.print("\nConfirma o cadastro do curso? Digite 1 para confirmar, e 0 para cancelar: ");
         confirma = Boolean.parseBoolean(teclado.nextLine());
@@ -491,9 +491,7 @@ public class Sistema {
     }
 
     public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, String horario, int escolhaProfessor) {
-        Professor professor = getProfessor(escolhaProfessor);
-        System.out.println();
-        Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, professor);
+        Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, professores[escolhaProfessor]);
         setCurso(curso);
         System.out.println("Curso Criado com Sucesso!");
     }
@@ -524,7 +522,7 @@ public class Sistema {
             System.out.println("Data Inicio: " + getCurso(i).getDataInicio());
             System.out.println("Data Fim: " + getCurso(i).getDataFim());
             System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
-            System.out.println("Professor do curso: " + getCurso(i).getProfessor());
+            System.out.println("Professor do curso: " + getCurso(i).getProfessor().getNome());
             System.out.println("Horários: : " + getCurso(i).getHorario());
             System.out.println();
             } 
@@ -547,7 +545,7 @@ public class Sistema {
         int escolha = 0; 
         
         do{
-            //try{
+            try{
                 System.out.println();
                 System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Professor\n\n");
                 System.out.println("Bem vindo: " + getProfessor(i).getNome());
@@ -563,7 +561,7 @@ public class Sistema {
                         break;
         
                     case 2:
-                        DadosCursosAluno();
+            
                         break;
         
                     case 3:
@@ -574,10 +572,10 @@ public class Sistema {
                         System.out.print("\nOpção inválida, tente novamente.");
                         break;
                 }
-            //} catch(NumberFormatException numberFormatException){
-                //System.out.print("\nEntrada inválida, tente novamente.");
-               //teclado.nextLine();
-            //}
+            } catch(NumberFormatException numberFormatException){
+                System.out.print("\nEntrada inválida, tente novamente.");
+               teclado.nextLine();
+            }
         }while(escolha != 3);
     }
 }
