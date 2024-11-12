@@ -310,13 +310,12 @@ public class Sistema {
 
     public boolean VerificaCPF(String cpf) {
         for(int i = 0; i < contadorAluno; i++) {
-            
+
             if(VerificaVariaveis(alunos[i].getCPF(), cpf) == true) {
-                return true;
-            } else {
-                return false; 
-            }
+                return false;
+            } 
         }
+        return true; 
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
