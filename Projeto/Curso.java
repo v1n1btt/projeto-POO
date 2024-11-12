@@ -121,8 +121,8 @@ public class Curso {
     }
 
     public void setAlunosMatriculados(Aluno aluno) {
-        for(int i = getQuantidadeAtualAlunos(); i <= getQuantidadeMaximaAlunos(); i++){
-            this.alunosMatriculados[i] = aluno;
+        if( getQuantidadeAtualAlunos() < getQuantidadeMaximaAlunos()) {
+            this.alunosMatriculados[quantidadeAtualAlunos] = aluno;
             setQuantidadeAtualAlunos(getQuantidadeAtualAlunos() + 1);
         }
     }
