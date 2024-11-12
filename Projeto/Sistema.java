@@ -533,6 +533,7 @@ public class Sistema {
         for(int i = 0; i < contadorCurso; i++) {
             if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
                 cursos[i].setStatus(false);
+                cursos[i].getProfessor().setCargaHorariaAtual(cursos[i].getProfessor().getCargaHorariaAtual() - cursos[i].getCargaHorariaCurso()); // retira a carga horaria do professor
                 System.out.println("Curso desabilitado");
                 break;
             }
