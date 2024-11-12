@@ -325,9 +325,10 @@ public class Sistema {
                 System.out.println("Selecione uma opção:");
                 System.out.println("    1. Cadastrar novo curso");
                 System.out.println("    2. Mostrar cursos cadastrados");
-                System.out.println("    3. Cadastrar um novo Administrador");
-                System.out.println("    4. Cadastrar professor");
-                System.out.println("    5. Fazer logout");
+                System.out.println("    3. Desabilitar um curso cadastrado");
+                System.out.println("    4. Cadastrar um novo Administrador");
+                System.out.println("    5. Cadastrar professor");
+                System.out.println("    6. Fazer logout");
                 System.out.print("\nDigite uma opção: ");
                 escolha = Integer.parseInt(teclado.nextLine());
                 switch(escolha) {
@@ -341,14 +342,17 @@ public class Sistema {
                         break;
                     case 3:
                         Menu.limpaTela();
-                        FormularioCadastroAdministrador();
+                        DesabilitarCurso();
                         break;
-
                     case 4:
                         Menu.limpaTela();
                         FormulariocadastroProfessor();
                         break;
                     case 5:
+                        Menu.limpaTela();
+                        FormulariocadastroProfessor();
+                        break;
+                    case 6:
                         Menu.limpaTela();
                         break;
                     default:
@@ -359,7 +363,7 @@ public class Sistema {
                 System.out.print("\nEntrada inválida, tente novamente.");
                 teclado.nextLine();
             }
-        } while(escolha != 5);
+        } while(escolha != 6);
     }
 
     public void FormularioCadastroAdministrador() {
@@ -518,6 +522,22 @@ public class Sistema {
             System.out.println("Status do Curso: " + getCurso(i).getStatus());
             System.out.println();
         }
+    }
+
+    public void DesabilitarCurso() {
+
+        String codigo; 
+
+        System.out.println("Digite o Código do curso: ");
+        codigo = teclado.nextLine(); 
+        for(int i = 0; i < contadorCurso; i++) {
+            if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
+                cursos[i].setStatus(false);
+                System.out.println("Curso desabilitado");
+                break;
+            }
+        }
+
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
