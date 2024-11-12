@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Pessoa {
+public abstract class Pessoa {
     
     private String nome; 
     private int codigoUsuario;
