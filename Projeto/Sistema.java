@@ -26,52 +26,43 @@ public class Sistema {
     }
 
     public void setAluno(Aluno aluno) {
-
         this.alunos[contadorAluno] = aluno;
         contadorAluno++; 
     }
 
     public Aluno getAluno(int i) {
-
         return alunos[i]; 
     }
 
     public void setAdministrador(Administrador administrador) {
-
         this.administradores[contadorAdministrador] = administrador;
         contadorAdministrador++; 
     }
 
     public Administrador getAdministrador(int i) {
-
         return administradores[i]; 
     }
 
     public void setProfessor(Professor professor) {
-
         this.professores[contadorProfessor] = professor;
         contadorProfessor++; 
     }
 
     public Professor getProfessor(int i) {
-
         return professores[i]; 
     }
 
     public void setTurma(Curso curso) {
-
         this.cursos[contadorCurso] = curso;
         contadorCurso++; 
     }
 
     public Curso getCurso(int i) {
-
         return cursos[i]; 
     }
 
     //metodos para fazer os logins
     public void fazerLoginUsuarioAluno(String email, String senha) {
-
         for(int i = 0; i < contadorAluno; i++) {
             if(VerificaVariaveis(getAluno(i).getEmail(), email) == true && VerificaVariaveis(getAluno(i).getSenhaPessoal(), senha) == true && getAluno(i).getNivelAcesso() == 3) {
                 Menu.limpaTela();
@@ -83,7 +74,6 @@ public class Sistema {
     }
 
     public void fazerLoginUsuarioAdministrador(String email, String senha) {
-
         for(int i = 0; i < contadorAdministrador; i++) {
             if(VerificaVariaveis(getAdministrador(i).getEmail(), email) == true && VerificaVariaveis(getAdministrador(i).getSenhaPessoal(), senha) == true && getAdministrador(i).getNivelAcesso() == 1) {
                 MenuAdministrador(i);
@@ -94,7 +84,6 @@ public class Sistema {
     }
 
     public void fazerLoginUsuarioProfessor(String email, String senha) {
-
         for(int i = 0; i < contadorAdministrador; i++) {
             if(VerificaVariaveis(getProfessor(i).getEmail(), email) == true && VerificaVariaveis(getProfessor(i).getSenhaPessoal(), senha) == true && getProfessor(i).getNivelAcesso() == 2) {
                 MenuProfessor(i);
@@ -106,7 +95,6 @@ public class Sistema {
 
     //método que verifica variaveis para ver se são iguais
     public boolean VerificaVariaveis(String variavel1, String variavel2) {
-
         if (variavel1.equals(variavel2)) {
             return true; 
         } else {
@@ -184,7 +172,6 @@ public class Sistema {
                 //teclado.nextLine();
             //}
         //} while(opcao != 1 || opcao != 2 || opcao != 3);
-        
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
@@ -199,6 +186,7 @@ public class Sistema {
         String confirmaSenha;
         boolean controle = false;
         int codigoUsuario; 
+
         System.out.println();
         System.out.println("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("====================\nCADASTRO ALUNO\n====================\n\n");
@@ -233,6 +221,7 @@ public class Sistema {
     public void MenuAluno(int i) {
 
         int escolha = 0; 
+
         do{
             try{
                 System.out.println();
@@ -276,7 +265,6 @@ public class Sistema {
     }
 
     public void DadosAluno(int i) {
-
         System.out.println("Nome: " + getAluno(i).getNome());
         System.out.println("Codigo do Usuário: " + getAluno(i).getCodigoUsuario());
         System.out.println("Email: " + getAluno(i).getEmail());
@@ -284,7 +272,6 @@ public class Sistema {
     }
 
     public void CursosDisponiveis() {
-
         for( int i = 0; i < contadorCurso; i++) {
             if (getCurso(i).getStatus() == true) {
                 System.out.println();
@@ -303,15 +290,14 @@ public class Sistema {
     public void MatricularCurso(int i) {
 
         int codigo;
+
         System.out.println("Digite o código do curso: ");
         codigo = teclado.nextInt();
         //setAlunosMatriculados(alunos);
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
-
     public void CadastrarAdministrador(String nome, String email, String senha) {
-
         int codigoUsuario; 
         codigoUsuario = GerarCodigoUsuario();
         Administrador administrador = new Administrador(nome, codigoUsuario, email, senha);
@@ -322,6 +308,7 @@ public class Sistema {
     public void MenuAdministrador(int i) {
 
         int escolha = 0;
+
         do {
             try{
                 Menu.limpaTela();
@@ -375,6 +362,7 @@ public class Sistema {
         String senha;
         String confirmaSenha;
         boolean controle = false; 
+
         System.out.print("====================\nCADASTRO ADMINISTRADOR\n====================\n\n");
         System.out.print("Nome completo: ");
         nome = teclado.nextLine();
@@ -406,6 +394,7 @@ public class Sistema {
         String confirmaSenha;
         boolean controle = false; 
        //boolean confirma;
+
         System.out.print("====================\nCADASTRO DE PROFESSOR\n====================\n\n");
         System.out.print("Nome do professor: ");
         nome = teclado.nextLine();
@@ -497,7 +486,6 @@ public class Sistema {
     }
 
     public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, String horario, int i) {
-
         Professor professores = getProfessor(i);
         Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, professores, horario);
         setTurma(curso);
@@ -505,7 +493,6 @@ public class Sistema {
     }
 
     public void DadosTurmas() {
-
         for(int i = 0; i < contadorCurso; i++) {
             System.out.println("Nome: " + getCurso(i).getNomeCurso());
             System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
@@ -521,7 +508,6 @@ public class Sistema {
     }
 
     public void DadosCursosAluno() {
-
         for(int i = 0; i < contadorCurso; i++) {
             if(getCurso(i).getStatus() == true) {
             System.out.println("Nome: " + getCurso(i).getNomeCurso());
@@ -542,6 +528,7 @@ public class Sistema {
     public void CadastrarProfessor(String nome, String email, String senha) {
 
         int codigoUsuario = 0; 
+
         codigoUsuario = GerarCodigoUsuario();
         Professor professor = new Professor(nome, codigoUsuario, email, senha);
         setProfessor(professor);
@@ -551,6 +538,7 @@ public class Sistema {
     public void MenuProfessor(int i) {
 
         int escolha = 0; 
+        
         do{
             try{
                 Menu.limpaTela();
