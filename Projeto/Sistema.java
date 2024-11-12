@@ -196,26 +196,30 @@ public class Sistema {
         nome = teclado.nextLine();
         System.out.print("Digite seu Email: ");
         email = teclado.nextLine();
-        do{
-            System.out.print("Senha: ");
-            senha = teclado.nextLine();
-            System.out.print("Confirme a senha: ");
-            confirmaSenha = teclado.nextLine();
-            //verificacao de senha
-            boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-            if(verifica == true) {
-                System.out.println("As senhas são iguais!");
-                controle = true;
-                codigoUsuario = GerarCodigoUsuario();
-                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf);
-                setAluno(aluno);
-                System.out.println("Conta Criada com Sucesso!");
-            }else {
-                System.out.println("A senha não é igual!" + "Tente Novamente!"); 
-                System.out.println();
-            }
-
-        } while(controle != true);
+        if(VerificaCPF(cpf) == true) {
+            do{
+                System.out.print("Senha: ");
+                senha = teclado.nextLine();
+                System.out.print("Confirme a senha: ");
+                confirmaSenha = teclado.nextLine();
+                //verificacao de senha
+                boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                if(verifica == true) {
+                    controle = true;
+                    codigoUsuario = GerarCodigoUsuario();
+                    Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf);
+                    setAluno(aluno);
+                    System.out.println("Conta Criada com Sucesso!");
+                }else {
+                    System.out.println("A senha não é igual!" + "Tente Novamente!"); 
+                    System.out.println();
+                }
+        
+                
+            } while(controle != true);
+        } else {
+            System.out.println("Já existe um usuário cadastrado com esse CPF!");
+        } 
     }
 
     public void MenuAluno(int i) {
@@ -301,6 +305,17 @@ public class Sistema {
                 System.out.println("Matricula feita com sucesso!");
                 break;
             } 
+        }
+    }
+
+    public boolean VerificaCPF(String cpf) {
+        for(int i = 0; i < contadorAluno; i++) {
+            
+            if(VerificaVariaveis(alunos[i].getCPF(), cpf) == true) {
+                return true;
+            } else {
+                return false; 
+            }
         }
     }
 
