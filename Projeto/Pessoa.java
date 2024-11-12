@@ -61,7 +61,6 @@ public class Pessoa {
     }
     
     public String salvaPessoa(){
-
         try {
             FileWriter fw = new FileWriter("Pessoa.txt");
             PrintWriter pw = new PrintWriter("fw");
@@ -73,7 +72,6 @@ public class Pessoa {
             pw.flush();
             pw.close();
             fw.close();
-
         } catch (IOException ex){
             Logger.getLogger(Pessoa.class.getName()).log(Level.SEVERE, null, ex);
         }

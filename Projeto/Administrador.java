@@ -6,5 +6,4 @@ public class Administrador extends Pessoa {
         super(nome, codigoUsuario, email, senhaPessoal);
         setNivelAcesso(1);
     }
-
 }

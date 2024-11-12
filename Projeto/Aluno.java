@@ -24,7 +24,6 @@ public class Aluno extends Pessoa {
     }
     
     public String salvaAluno() {
-
         try {
             FileWriter fw = new FileWriter("Aluno.txt");
             PrintWriter pw = new PrintWriter("fw");
@@ -32,7 +31,6 @@ public class Aluno extends Pessoa {
             pw.flush();
             pw.close();
             fw.close();
-
         } catch (IOException ex){
             Logger.getLogger(Pessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
