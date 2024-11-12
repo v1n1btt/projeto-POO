@@ -242,10 +242,12 @@ public class Sistema {
                         DadosAluno(i);
                         break;
                     case 2:
-                        CursosDisponiveis();
+                        Menu.limpaTela();
+                        CursosDisponiveisAluno();
                         break;
                     case 3:
-                        
+                        Menu.limpaTela();
+                        MatricularCurso(i);
                         break;
                     case 4:
 
@@ -271,7 +273,7 @@ public class Sistema {
         System.out.println("CPF: " + getAluno(i).getCPF());
     }
 
-    public void CursosDisponiveis() {
+    public void CursosDisponiveisAluno() {
         for( int i = 0; i < contadorCurso; i++) {
             if (getCurso(i).getStatus() == true) {
                 System.out.println();
@@ -281,13 +283,13 @@ public class Sistema {
                 System.out.println("Ementa do curso: " + getCurso(i).getEmenta());
                 System.out.println("Data Inicial do curso: " + getCurso(i).getDataInicio());
                 System.out.println("Data Final do curso: " + getCurso(i).getDataFim());
-                System.out.println("Professor do curso: " + getCurso(i).getProfessor());
+                System.out.println("Professor do curso: " + getCurso(i).getProfessor().getNome());
                 System.out.println();
             }
         }
     }
 
-    /*public void MatricularCurso(int i) {
+    public void MatricularCurso(int i) {
 
         String codigo;
 
@@ -295,11 +297,12 @@ public class Sistema {
         codigo = teclado.nextLine();
         for(int j = 0; j < contadorCurso; j++) {
             if(VerificaVariaveis(getCurso(j).getCodigoCurso(), codigo) == true) {
-                
-            }
+                cursos[j].setAlunosMatriculados(alunos[i]); 
+                System.out.println("Matricula feita com sucesso!");
+                break;
+            } 
         }
-        //setAlunosMatriculados(alunos);
-    }*/
+    }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
     public void CadastrarAdministrador(String nome, String email, String senha) {
@@ -334,7 +337,7 @@ public class Sistema {
                         break;
                     case 2:
                         Menu.limpaTela();
-                        DadosCurso();
+                        DadosCursoAdministrativo();
                         break;
                     case 3:
                         Menu.limpaTela();
@@ -442,11 +445,11 @@ public class Sistema {
         String dataFim;
         String horario; 
         int escolhaProfessor; 
-        boolean exception = false;
+        //boolean exception = false;
         //boolean confirma;
         // Formulario de cadastro de curso
-        do{
-            try{
+        //do{
+            //try{
                 System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
                 System.out.print("Nome do curso: ");
                 nome = teclado.nextLine();
@@ -472,12 +475,12 @@ public class Sistema {
                 escolhaProfessor = teclado.nextInt();
                 teclado.nextLine();
                 CadastrarCurso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, escolhaProfessor);
-            } catch(NumberFormatException numberFormatException){
-                exception = true;
-                System.out.print("\nEntrada inválida, tente novamente.");
-                teclado.nextLine();
-            }
-        } while(exception = true);
+            //} catch(NumberFormatException numberFormatException){
+                //exception = true;
+                //System.out.print("\nEntrada inválida, tente novamente.");
+                //teclado.nextLine();
+            //}
+        //} while(exception = true);
 
         /*System.out.print("\nConfirma o cadastro do curso? Digite 1 para confirmar, e 0 para cancelar: ");
         confirma = Boolean.parseBoolean(teclado.nextLine());
@@ -491,12 +494,17 @@ public class Sistema {
     }
 
     public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, String horario, int escolhaProfessor) {
-        Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, professores[escolhaProfessor]);
-        setCurso(curso);
-        System.out.println("Curso Criado com Sucesso!");
+        if(veficaCargaProfessor(escolhaProfessor,cargaHoraria) == true) {
+            Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, professores[escolhaProfessor]);
+            setCurso(curso);
+            professores[escolhaProfessor].setCargaHorariaAtual(professores[escolhaProfessor].getCargaHorariaAtual() + cargaHoraria);
+            System.out.println("Curso Criado com Sucesso!");
+        } else {
+            System.out.println("Esse professor não pode mais receber disciplinas!");
+        }
     }
 
-    public void DadosCurso() {
+    public void DadosCursoAdministrativo() {
         for(int i = 0; i < contadorCurso; i++) {
             System.out.println("Nome: " + getCurso(i).getNomeCurso());
             System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
@@ -512,23 +520,6 @@ public class Sistema {
         }
     }
 
-    public void DadosCursosAluno() {
-        for(int i = 0; i < contadorCurso; i++) {
-            if(getCurso(i).getStatus() == true) {
-            System.out.println("Nome: " + getCurso(i).getNomeCurso());
-            System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
-            System.out.println("Carga Horária: " + getCurso(i).getCargaHorariaCurso());
-            System.out.println("Ementa: " + getCurso(i).getEmenta());
-            System.out.println("Data Inicio: " + getCurso(i).getDataInicio());
-            System.out.println("Data Fim: " + getCurso(i).getDataFim());
-            System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
-            System.out.println("Professor do curso: " + getCurso(i).getProfessor().getNome());
-            System.out.println("Horários: : " + getCurso(i).getHorario());
-            System.out.println();
-            } 
-        }
-    }
-
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
     public void CadastrarProfessor(String nome, String email, String senha) {
 
@@ -538,6 +529,13 @@ public class Sistema {
         Professor professor = new Professor(nome, codigoUsuario, email, senha);
         setProfessor(professor);
         System.out.println("Conta Criada com Sucesso!");
+    }
+
+    public void DadosProfessor(int i) {
+        System.out.println("Nome: " + getProfessor(i).getNome());
+        System.out.println("Codigo do Usuário: " + getProfessor(i).getCodigoUsuario());
+        System.out.println("Email: " + getProfessor(i).getEmail());
+        System.out.println("Carga Horário Atual: " + getProfessor(i).getCargaHorariaAtual());
     }
 
     public void MenuProfessor(int i) {
@@ -550,16 +548,16 @@ public class Sistema {
                 System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Professor\n\n");
                 System.out.println("Bem vindo: " + getProfessor(i).getNome());
                 System.out.println("1 - Consultar seus Dados. ");
-                System.out.println("2 - Consultar Cursos disponíveis. ");
+                System.out.println("2 - Consultar seus Cursos. ");
                 System.out.println("3 - Sair. ");
 
                 escolha = Integer.parseInt(teclado.nextLine());
 
                 switch(escolha) {
                     case 1:
-                        
+                        Menu.limpaTela();
+                        DadosProfessor(i);
                         break;
-        
                     case 2:
             
                         break;
@@ -577,5 +575,14 @@ public class Sistema {
                teclado.nextLine();
             }
         }while(escolha != 3);
+    }
+
+    //método que verifica se o professor pode receber a carga horaria
+    public boolean veficaCargaProfessor(int i, int cargaHoraria) {
+        if(professores[i].getCargaHorariaAtual() + cargaHoraria <= professores[i].getCargaHorariaMaxima()) {
+            return true; 
+        } else {
+            return false; 
+        }
     }
 }
