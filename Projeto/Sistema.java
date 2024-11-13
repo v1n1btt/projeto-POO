@@ -720,13 +720,13 @@ public class Sistema {
         double nota; 
 
         CursosDisponiveisAluno();
-        System.out.println("Digite o Código do curso: ");
+        System.out.print("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
         for(int j = 0; j < contadorCurso; j++) {
             if(VerificaVariaveis(getCurso(j).getCodigoCurso(), codigo) == true) {
                 for(int k = 0; k < getCurso(j).getQuantidadeAtualAlunos(); k++) {
                     System.out.println("Nome: " + getCurso(j).getAlunosMatriculados(k).getNome());
-                    System.out.println("Digite a nota do Aluno acima: ");
+                    System.out.print("Digite a nota do Aluno acima: ");
                     //nota = teclado.nextDouble();
                     //setAluno(null);
 
