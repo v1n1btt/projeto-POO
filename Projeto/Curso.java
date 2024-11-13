@@ -17,7 +17,7 @@ public class Curso {
     private String horario;
     protected Professor professor; 
     private int quantidadeAtualAlunos;
-    private final int quantidadeMaximaAlunos = 1;
+    private final int quantidadeMaximaAlunos = 40;
     private boolean status;
     private Aluno[] alunosMatriculados;
 

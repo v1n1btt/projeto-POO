@@ -282,7 +282,7 @@ public class Sistema {
     //gera os cursos que estão disponíveis para a matrícula 
     public void CursosDisponiveisAluno() {
         for( int i = 0; i < contadorCurso; i++) {
-            if (getCurso(i).getStatus() == true) {
+            if (getCurso(i).getStatus() == true && VerificaQuantidadeAlunosMatriculados(i) == true) {
                 System.out.println();
                 System.out.println("Nome do curso: " + getCurso(i).getNomeCurso());
                 System.out.println("Código do curso: " + getCurso(i).getCodigoCurso());
@@ -304,12 +304,12 @@ public class Sistema {
         codigo = teclado.nextLine();
         for(int j = 0; j < contadorCurso; j++) {
             if(VerificaVariaveis(getCurso(j).getCodigoCurso(), codigo) == true) {
-                if(VerificaQuantidadeAlunosMatriculados(j) == true) {
+                if(getCurso(i).getStatus() == true && VerificaQuantidadeAlunosMatriculados(j) == true) {
                     cursos[j].setAlunosMatriculados(alunos[i]); 
                     System.out.println("Matricula feita com sucesso!");
                     break;
                 } else {
-                    System.out.println("Esse curso está lotado, não foi possível se matrícular!");
+                    System.out.println("Esse curso está lotado ou não está disponível, não foi possível se matrícular!");
                     break;
                 }
             } 
@@ -489,7 +489,7 @@ public class Sistema {
         // Formulario de cadastro de curso
         //do{
             //try{
-                if(professores[0] != null) {
+                if(getProfessor(0) != null) {
                     System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
                     System.out.print("Nome do curso: ");
                     nome = teclado.nextLine();
@@ -590,9 +590,9 @@ public class Sistema {
         codigo = teclado.nextLine(); 
         for(int i = 0; i < contadorCurso; i++) {
             if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
-                if(cursos[i].getStatus() == true) {
-                    cursos[i].setStatus(false);
-                    cursos[i].getProfessor().setCargaHorariaAtual(cursos[i].getProfessor().getCargaHorariaAtual() - cursos[i].getCargaHorariaCurso()); // retira a carga horaria do professor
+                if(getCurso(i).getStatus() == true) {
+                    getCurso(i).setStatus(false);
+                    getCurso(i).getProfessor().setCargaHorariaAtual(getCurso(i).getProfessor().getCargaHorariaAtual() - getCurso(i).getCargaHorariaCurso());// retira a carga horaria do professor
                     System.out.println("Curso desabilitado");
                 break;
                 } else {
@@ -689,7 +689,7 @@ public class Sistema {
 
     //método que verifica se o professor pode receber a carga horaria
     public boolean veficaCargaProfessor(int i, int cargaHoraria) {
-        if(professores[i].getCargaHorariaAtual() + cargaHoraria <= professores[i].getCargaHorariaMaxima()) {
+        if(getProfessor(i).getCargaHorariaAtual() + cargaHoraria <= getProfessor(i).getCargaHorariaMaxima()) {
             return true; 
         } else {
             return false; 
