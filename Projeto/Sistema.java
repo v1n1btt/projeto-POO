@@ -570,7 +570,9 @@ public class Sistema {
             System.out.println();
         }
     }
+
     public void HabilitarCurso() {
+
         String codigo; 
 
         System.out.println("Digite o Código do curso: ");
@@ -589,6 +591,7 @@ public class Sistema {
             }
         }
     }
+
     public void DesabilitarCurso() {
 
         String codigo; 
@@ -607,6 +610,43 @@ public class Sistema {
                 }
             }
         }
+    }
+
+    public void EditarCurso() {
+
+        String codigo;
+        int opcao; 
+
+        System.out.println("Digite o Código do curso: ");
+        codigo = teclado.nextLine(); 
+        for(int i = 0; i < contadorCurso; i++) {
+            if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
+                System.out.println("Nome: " + getCurso(i).getNomeCurso());
+                System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
+                System.out.println("Carga Horária: " + getCurso(i).getCargaHorariaCurso());
+                System.out.println("Ementa: " + getCurso(i).getEmenta());
+                System.out.println("Data Inicio: " + getCurso(i).getDataInicio());
+                System.out.println("Data Fim: " + getCurso(i).getDataFim());
+                System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
+                System.out.println("Horários: : " + getCurso(i).getHorario());
+                System.out.println("Professor do curso: " + getCurso(i).getProfessor().getNome());
+                System.out.println("Status do Curso: " + getCurso(i).getStatus());
+                System.out.println();
+                System.out.println("Escolha uma opção para editar: ");
+                opcao = teclado.nextInt(); 
+                switch (opcao) {
+                    case 1:
+                        System.out.println("Digite o novo nome do curso: "); 
+                        break;
+                
+                    default:
+                        break;
+                }
+
+                break;
+            }
+        }
+               
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
