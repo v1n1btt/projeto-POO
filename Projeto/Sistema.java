@@ -20,7 +20,6 @@ public class Sistema {
     Scanner teclado = new Scanner(System.in);
 
     public Sistema() {
-
         Administrador administrador = new Administrador("Admin", 99999, "admin", "admin");
         setAdministrador(administrador);
     }
@@ -65,7 +64,6 @@ public class Sistema {
     public void fazerLoginUsuarioAluno(String email, String senha) {
         for(int i = 0; i < contadorAluno; i++) {
             if(VerificaVariaveis(getAluno(i).getEmail(), email) == true && VerificaVariaveis(getAluno(i).getSenhaPessoal(), senha) == true && getAluno(i).getNivelAcesso() == 3) {
-                Menu.limpaTela();
                 MenuAluno(i);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
