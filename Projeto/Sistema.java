@@ -144,7 +144,7 @@ public class Sistema {
                         case 2:
                             Menu.limpaTela();
                             System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
-                            System.out.print("\n Insira seu email: ");
+                            System.out.print("\nInsira seu email: ");
                             email = teclado.nextLine();
                             System.out.print("\nInsira sua Senha: ");
                             senha = teclado.nextLine();
@@ -153,7 +153,7 @@ public class Sistema {
                         case 3:
                             Menu.limpaTela();
                             System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
-                            System.out.print("\n Insira seu email: ");
+                            System.out.print("\nInsira seu email: ");
                             email = teclado.nextLine();
                             System.out.print("\nInsira sua Senha:");
                             senha = teclado.nextLine();
@@ -385,7 +385,7 @@ public class Sistema {
                         break;
                     case 8:
                         Menu.limpaTela();
-                        break;
+                        return;
                     default:
                         System.out.print("\nOpção inválida, tente novamente.");
                         break;
@@ -442,7 +442,6 @@ public class Sistema {
         String senha;
         String confirmaSenha;
         boolean controle = false; 
-       //boolean confirma;
 
         System.out.print("====================\nCADASTRO DE PROFESSOR\n====================\n\n");
         System.out.print("Nome do professor: ");
@@ -464,16 +463,6 @@ public class Sistema {
                 System.out.println();
             }
         } while(controle != true);
-
-        /*System.out.print("\nConfirma o cadastro do professor? Digite 1 para confirmar, e 0 para cancelar: ");
-        confirma = Boolean.parseBoolean(teclado.nextLine());
-
-        if(confirma == true){
-
-        }
-        else
-            return;
-        */
     }
 
     public void CadastrarProfessor(String nome, String email, String senha) {
@@ -497,51 +486,44 @@ public class Sistema {
         String horario; 
         int escolhaProfessor; 
         //boolean exception = false;
-        //boolean confirma;
         // Formulario de cadastro de curso
         //do{
             //try{
-                System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
-                System.out.print("Nome do curso: ");
-                nome = teclado.nextLine();
-                System.out.print("Código do curso: ");
-                codigo = teclado.nextLine();
-                System.out.print("Ementa do curso: ");
-                ementa = teclado.nextLine();
-                System.out.print("Data de inicio curso: ");
-                dataInicio = teclado.nextLine();
-                System.out.print("Data de inicio curso: ");
-                dataFim = teclado.nextLine();
-                System.out.print("horario: ");
-                horario = teclado.nextLine();
-                System.out.print("Carga horária do curso: ");
-                cargaHoraria = teclado.nextInt();
-                teclado.nextLine();
-                System.out.println("Escolha um professor:");
-                System.out.println("Indice do Professor: " + " " + "Nome: " );  
-                for(int i = 0; i < contadorProfessor; i++) {
-                    System.out.println(i + " " + getProfessor(i).getNome());
+                if(professores[0] != null) {
+                    System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
+                    System.out.print("Nome do curso: ");
+                    nome = teclado.nextLine();
+                    System.out.print("Código do curso: ");
+                    codigo = teclado.nextLine();
+                    System.out.print("Ementa do curso: ");
+                    ementa = teclado.nextLine();
+                    System.out.print("Data de inicio do curso: ");
+                    dataInicio = teclado.nextLine();
+                    System.out.print("Data final do curso: ");
+                    dataFim = teclado.nextLine();
+                    System.out.print("Horarios e dias: ");
+                    horario = teclado.nextLine();
+                    System.out.print("Carga horária do curso: ");
+                    cargaHoraria = teclado.nextInt();
+                    teclado.nextLine();
+                    System.out.println("Escolha um professor:");
+                    System.out.println("Indice do Professor: " + "  " + "Nome: " );  
+                    for(int i = 0; i < contadorProfessor; i++) {
+                        System.out.println(i + " " + getProfessor(i).getNome());
+                    }
+                    System.out.print("Digite o número do professor acima: "); 
+                    escolhaProfessor = teclado.nextInt();
+                    teclado.nextLine();
+                    CadastrarCurso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, escolhaProfessor);
+                } else {
+                    System.out.println("Não há professores cadastrados!");
                 }
-                System.out.println("Digite o número do professor acima: "); 
-                escolhaProfessor = teclado.nextInt();
-                teclado.nextLine();
-                CadastrarCurso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, escolhaProfessor);
             //} catch(NumberFormatException numberFormatException){
                 //exception = true;
                 //System.out.print("\nEntrada inválida, tente novamente.");
                 //teclado.nextLine();
             //}
         //} while(exception = true);
-
-        /*System.out.print("\nConfirma o cadastro do curso? Digite 1 para confirmar, e 0 para cancelar: ");
-        confirma = Boolean.parseBoolean(teclado.nextLine());
-
-        if(confirma == true){
-
-        }
-        else
-            return;
-        */
     }
 
     public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, String horario, int escolhaProfessor) {
@@ -566,7 +548,11 @@ public class Sistema {
             System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
             System.out.println("Horários: : " + getCurso(i).getHorario());
             System.out.println("Professor do curso: " + getCurso(i).getProfessor().getNome());
-            System.out.println("Status do Curso: " + getCurso(i).getStatus());
+            if(getCurso(i).getStatus() == true) {
+                System.out.println("Status do Curso: " + "Ativo");
+            } else {
+                System.out.println("Status do Curso: " + "Desativado");
+            }
             System.out.println();
         }
     }
@@ -575,13 +561,14 @@ public class Sistema {
 
         String codigo; 
 
+        DadosCursoAdministrativo();
         System.out.println("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
         for(int i = 0; i < contadorCurso; i++) {
             if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
-                if(cursos[i].getStatus() == false) {
-                    cursos[i].setStatus(true);
-                    cursos[i].getProfessor().setCargaHorariaAtual(cursos[i].getProfessor().getCargaHorariaAtual() + cursos[i].getCargaHorariaCurso()); // Adiciona a carga horaria do professor
+                if(getCurso(i).getStatus() == false) {
+                    getCurso(i).setStatus(true);
+                    getCurso(i).getProfessor().setCargaHorariaAtual(getCurso(i).getProfessor().getCargaHorariaAtual() + getCurso(i).getCargaHorariaCurso()); // Adiciona a carga horaria do professor
                     System.out.println("Curso habilitado");
                     break;
                 } else {
@@ -593,9 +580,10 @@ public class Sistema {
     }
 
     public void DesabilitarCurso() {
-
+       
         String codigo; 
 
+        DadosCursoAdministrativo();
         System.out.println("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
         for(int i = 0; i < contadorCurso; i++) {
