@@ -304,7 +304,7 @@ public class Sistema {
         codigo = teclado.nextLine();
         for(int j = 0; j < contadorCurso; j++) {
             if(VerificaVariaveis(getCurso(j).getCodigoCurso(), codigo) == true) {
-                if(VerificaQuantidadeAluno(j) == true) {
+                if(VerificaQuantidadeAlunosMatriculados(j) == true) {
                     cursos[j].setAlunosMatriculados(alunos[i]); 
                     System.out.println("Matricula feita com sucesso!");
                     break;
@@ -316,7 +316,7 @@ public class Sistema {
         }
     }
 
-    public boolean VerificaQuantidadeAluno(int j) {
+    public boolean VerificaQuantidadeAlunosMatriculados(int j) {
         if(cursos[j].getQuantidadeAtualAlunos() < cursos[j].getQuantidadeMaximaAlunos()) {
             return true; 
         }
@@ -334,14 +334,6 @@ public class Sistema {
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
-    public void CadastrarAdministrador(String nome, String email, String senha) {
-        int codigoUsuario; 
-        codigoUsuario = GerarCodigoUsuario();
-        Administrador administrador = new Administrador(nome, codigoUsuario, email, senha);
-        setAdministrador(administrador);
-        System.out.println("Conta Criada com Sucesso!");
-    }
-
     public void MenuAdministrador(int i) {
 
         int escolha = 0;
@@ -416,7 +408,6 @@ public class Sistema {
             //verificacao de senha
             boolean verifica = VerificaVariaveis(senha, confirmaSenha);
             if(verifica == true) {
-                System.out.println("As senhas são iguais!");
                 controle = true;
                 CadastrarAdministrador(nome, email, confirmaSenha);
             }else {
@@ -424,6 +415,14 @@ public class Sistema {
                 System.out.println();
             }
         } while(controle != true);
+    }
+
+    public void CadastrarAdministrador(String nome, String email, String senha) {
+        int codigoUsuario; 
+        codigoUsuario = GerarCodigoUsuario();
+        Administrador administrador = new Administrador(nome, codigoUsuario, email, senha);
+        setAdministrador(administrador);
+        System.out.println("Conta Criada com Sucesso!");
     }
 
     public void FormulariocadastroProfessor() {
@@ -448,7 +447,6 @@ public class Sistema {
             //verificacao de senha
             boolean verifica = VerificaVariaveis(senha, confirmaSenha);
             if(verifica == true) {
-                System.out.println("As senhas são iguais!");
                 controle = true;
                 CadastrarProfessor(nome, email, confirmaSenha);
             }else {
@@ -466,6 +464,16 @@ public class Sistema {
         else
             return;
         */
+    }
+
+    public void CadastrarProfessor(String nome, String email, String senha) {
+
+        int codigoUsuario = 0; 
+
+        codigoUsuario = GerarCodigoUsuario();
+        Professor professor = new Professor(nome, codigoUsuario, email, senha);
+        setProfessor(professor);
+        System.out.println("Conta Criada com Sucesso!");
     }
 
     public void FormulariocadastrarCurso() {
@@ -570,22 +578,6 @@ public class Sistema {
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
-    public void CadastrarProfessor(String nome, String email, String senha) {
-
-        int codigoUsuario = 0; 
-
-        codigoUsuario = GerarCodigoUsuario();
-        Professor professor = new Professor(nome, codigoUsuario, email, senha);
-        setProfessor(professor);
-        System.out.println("Conta Criada com Sucesso!");
-    }
-
-    public void DadosProfessor(int i) {
-        System.out.println("Nome: " + getProfessor(i).getNome());
-        System.out.println("Codigo do Usuário: " + getProfessor(i).getCodigoUsuario());
-        System.out.println("Email: " + getProfessor(i).getEmail());
-        System.out.println("Carga Horário Atual: " + getProfessor(i).getCargaHorariaAtual());
-    }
 
     public void MenuProfessor(int i) {
 
@@ -624,6 +616,13 @@ public class Sistema {
                teclado.nextLine();
             }
         }while(escolha != 3);
+    }
+
+    public void DadosProfessor(int i) {
+        System.out.println("Nome: " + getProfessor(i).getNome());
+        System.out.println("Codigo do Usuário: " + getProfessor(i).getCodigoUsuario());
+        System.out.println("Email: " + getProfessor(i).getEmail());
+        System.out.println("Carga Horário Atual: " + getProfessor(i).getCargaHorariaAtual());
     }
 
     //método que verifica se o professor pode receber a carga horaria
