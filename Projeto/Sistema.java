@@ -650,6 +650,7 @@ public class Sistema {
                 System.out.println("Bem vindo: " + getProfessor(i).getNome());
                 System.out.println("1 - Consultar seus Dados. ");
                 System.out.println("2 - Consultar seus Cursos. ");
+                System.out.println("3 - Adicionar notas de alunos de um curso "); 
                 System.out.println("3 - Sair. ");
 
                 escolha = Integer.parseInt(teclado.nextLine());
@@ -662,11 +663,12 @@ public class Sistema {
                     case 2:
             
                         break;
-        
                     case 3:
+            
+                        break;
+                    case 4:
                         Menu.limpaTela();
                         return;
-
                     default:
                         System.out.print("\nOpção inválida, tente novamente.");
                         break;
@@ -675,7 +677,7 @@ public class Sistema {
                 System.out.print("\nEntrada inválida, tente novamente.");
                teclado.nextLine();
             }
-        }while(escolha != 3);
+        } while(escolha != 3);
     }
 
     public void DadosProfessor(int i) {
@@ -693,4 +695,35 @@ public class Sistema {
             return false; 
         }
     }
+
+    public void CursosProfessor(int i) {
+        for(int j = 0; j < contadorCurso; j++) {
+            if(getCurso(j).getProfessor() == getProfessor(i)) {
+                System.out.println();
+                System.out.println("Nome: " + getCurso(i).getNomeCurso());
+                System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
+                System.out.println("Carga Horária: " + getCurso(i).getCargaHorariaCurso());
+                System.out.println("Ementa: " + getCurso(i).getEmenta());
+                System.out.println("Data Inicio: " + getCurso(i).getDataInicio());
+                System.out.println("Data Fim: " + getCurso(i).getDataFim());
+                System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
+                System.out.println("Horários: : " + getCurso(i).getHorario());
+                System.out.println("Status do Curso: " + getCurso(i).getStatus());
+                System.out.println();
+            }
+        }
+    }
+
+    public void AdicionarNotas(int i) {
+
+        String codigo;
+
+        System.out.println("Digite o Código do curso: ");
+        codigo = teclado.nextLine(); 
+        for(int j = 0; j < contadorCurso; j++) {
+            if(VerificaVariaveis(getCurso(j).getCodigoCurso(), codigo) == true) {
+                //getCurso(i).getAlunosMatriculados(i)
+            }
+        }
+    }   
 }
