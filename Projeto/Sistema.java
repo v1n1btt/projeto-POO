@@ -346,10 +346,12 @@ public class Sistema {
                 System.out.println("Selecione uma opção:");
                 System.out.println("    1. Cadastrar novo curso");
                 System.out.println("    2. Mostrar cursos cadastrados");
-                System.out.println("    3. Desabilitar um curso cadastrado");
-                System.out.println("    4. Cadastrar um novo Administrador");
-                System.out.println("    5. Cadastrar professor");
-                System.out.println("    6. Fazer logout");
+                System.out.println("    3. Editar um curso cadastrado");
+                System.out.println("    4. Habilitar um curso cadastrado");
+                System.out.println("    5. Desabilitar um curso cadastrado");
+                System.out.println("    6. Cadastrar um novo Administrador");
+                System.out.println("    7. Cadastrar professor");
+                System.out.println("    8. Fazer logout");
                 System.out.print("\nDigite uma opção: ");
                 escolha = Integer.parseInt(teclado.nextLine());
                 switch(escolha) {
@@ -363,17 +365,25 @@ public class Sistema {
                         break;
                     case 3:
                         Menu.limpaTela();
-                        DesabilitarCurso();
+                        
                         break;
                     case 4:
                         Menu.limpaTela();
-                        FormulariocadastroProfessor();
+                        HabilitarCurso();
                         break;
                     case 5:
                         Menu.limpaTela();
-                        FormulariocadastroProfessor();
+                        DesabilitarCurso();
                         break;
                     case 6:
+                        Menu.limpaTela();
+                        FormularioCadastroAdministrador();
+                        break;
+                    case 7:
+                        Menu.limpaTela();
+                        FormulariocadastroProfessor();
+                        break;
+                    case 8:
                         Menu.limpaTela();
                         break;
                     default:
@@ -560,7 +570,25 @@ public class Sistema {
             System.out.println();
         }
     }
+    public void HabilitarCurso() {
+        String codigo; 
 
+        System.out.println("Digite o Código do curso: ");
+        codigo = teclado.nextLine(); 
+        for(int i = 0; i < contadorCurso; i++) {
+            if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
+                if(cursos[i].getStatus() == false) {
+                    cursos[i].setStatus(true);
+                    cursos[i].getProfessor().setCargaHorariaAtual(cursos[i].getProfessor().getCargaHorariaAtual() + cursos[i].getCargaHorariaCurso()); // Adiciona a carga horaria do professor
+                    System.out.println("Curso habilitado");
+                    break;
+                } else {
+                    System.out.println("Esse curso já está habilitado!");
+                    break;
+                }
+            }
+        }
+    }
     public void DesabilitarCurso() {
 
         String codigo; 
@@ -569,10 +597,14 @@ public class Sistema {
         codigo = teclado.nextLine(); 
         for(int i = 0; i < contadorCurso; i++) {
             if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
-                cursos[i].setStatus(false);
-                cursos[i].getProfessor().setCargaHorariaAtual(cursos[i].getProfessor().getCargaHorariaAtual() - cursos[i].getCargaHorariaCurso()); // retira a carga horaria do professor
-                System.out.println("Curso desabilitado");
+                if(cursos[i].getStatus() == true) {
+                    cursos[i].setStatus(false);
+                    cursos[i].getProfessor().setCargaHorariaAtual(cursos[i].getProfessor().getCargaHorariaAtual() - cursos[i].getCargaHorariaCurso()); // retira a carga horaria do professor
+                    System.out.println("Curso desabilitado");
                 break;
+                } else {
+                    System.out.println("Esse curso já está desabilitado!");
+                }
             }
         }
     }
