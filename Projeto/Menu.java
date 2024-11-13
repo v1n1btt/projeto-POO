@@ -49,9 +49,9 @@ public class Menu {
         System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("SEJA BEM VINDO!!!!\n\n");
         System.out.print("Selecione uma opção:\n");
-        System.out.println("1. Fazer cadastro para ser o nosso Aluno!");
-        System.out.println("2. Fazer login");
-        System.out.println("3. Sair");
+        System.out.println("    1. Fazer cadastro para ser o nosso Aluno!");
+        System.out.println("    2. Fazer login");
+        System.out.println("    3. Sair");
         System.out.print("\nDigite sua escolha: ");
     }
 

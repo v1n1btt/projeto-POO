@@ -121,10 +121,10 @@ public class Sistema {
                     Menu.limpaTela();
                     System.out.print("======================\nSISTEMA DE GESTÃO DE CURSOS\n=====================\n\n");
                     System.out.println("Opções para Login: \n");
-                    System.out.println("1 - Aluno");
-                    System.out.println("2 - Administrador");
-                    System.out.println("3 - Professor");
-                    System.out.println("4 - Voltar");
+                    System.out.println("    1 - Aluno");
+                    System.out.println("    2 - Administrador");
+                    System.out.println("    3 - Professor");
+                    System.out.println("    4 - Voltar");
                     System.out.print("\nEscolha uma opção: ");
                     opcao = teclado.nextInt();
                     teclado.nextLine();
@@ -231,11 +231,11 @@ public class Sistema {
                 System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Aluno\n\n");
                 System.out.print("Bem vindo: " + getAluno(i).getNome());
                 System.out.print("Selecione uma opção:\n\n");
-                System.out.println("1 - Consultar seus Dados. ");
-                System.out.println("2 - Consultar Cursos disponíveis. ");
-                System.out.println("3 - Se matricular em Cursos disponíveis. ");
-                System.out.println("4 - Cancelar matricula em um curso. ");
-                System.out.println("5 - Sair. ");
+                System.out.println("    1 - Consultar seus Dados. ");
+                System.out.println("    2 - Consultar Cursos disponíveis. ");
+                System.out.println("    3 - Se matricular em Cursos disponíveis. ");
+                System.out.println("    4 - Cancelar matricula em um curso. ");
+                System.out.println("    5 - Sair. ");
 
                 escolha = Integer.parseInt(teclado.nextLine());
 
@@ -647,11 +647,11 @@ public class Sistema {
             try{
                 System.out.println();
                 System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Professor\n\n");
-                System.out.println("Bem vindo: " + getProfessor(i).getNome());
-                System.out.println("1 - Consultar seus Dados. ");
-                System.out.println("2 - Consultar seus Cursos. ");
-                System.out.println("3 - Adicionar notas de alunos de um curso "); 
-                System.out.println("4 - Sair. ");
+                System.out.println("Bem vindo: " + " " + getProfessor(i).getNome());
+                System.out.println("    1 - Consultar seus Dados.");
+                System.out.println("    2 - Consultar seus Cursos.");
+                System.out.println("    3 - Adicionar notas de alunos de um curso."); 
+                System.out.println("    4 - Sair.");
 
                 escolha = Integer.parseInt(teclado.nextLine());
 
