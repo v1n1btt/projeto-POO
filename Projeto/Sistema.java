@@ -509,7 +509,9 @@ public class Sistema {
                     System.out.println("Escolha um professor:");
                     System.out.println("Indice do Professor: " + "  " + "Nome: " );  
                     for(int i = 0; i < contadorProfessor; i++) {
-                        System.out.println(i + " " + getProfessor(i).getNome());
+                        if(getProfessor(i).getCargaHorariaAtual() != getProfessor(i).getCargaHorariaMaxima()) {
+                            System.out.println(i + " " + getProfessor(i).getNome());
+                        }
                     }
                     System.out.print("Digite o número do professor acima: "); 
                     escolhaProfessor = teclado.nextInt();
