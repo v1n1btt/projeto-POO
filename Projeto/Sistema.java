@@ -222,6 +222,7 @@ public class Sistema {
         } 
     }
 
+    //Gera o menu que o aluno vê 
     public void MenuAluno(int i) {
 
         int escolha = 0; 
@@ -270,6 +271,7 @@ public class Sistema {
         }while(escolha != 5);
     }
 
+    //gera os dados do aluno 
     public void DadosAluno(int i) {
         System.out.println("Nome: " + getAluno(i).getNome());
         System.out.println("Codigo do Usuário: " + getAluno(i).getCodigoUsuario());
@@ -277,6 +279,7 @@ public class Sistema {
         System.out.println("CPF: " + getAluno(i).getCPF());
     }
 
+    //gera os cursos que estão disponíveis para a matrícula 
     public void CursosDisponiveisAluno() {
         for( int i = 0; i < contadorCurso; i++) {
             if (getCurso(i).getStatus() == true) {
@@ -301,11 +304,23 @@ public class Sistema {
         codigo = teclado.nextLine();
         for(int j = 0; j < contadorCurso; j++) {
             if(VerificaVariaveis(getCurso(j).getCodigoCurso(), codigo) == true) {
-                cursos[j].setAlunosMatriculados(alunos[i]); 
-                System.out.println("Matricula feita com sucesso!");
-                break;
+                if(VerificaQuantidadeAluno(j) == true) {
+                    cursos[j].setAlunosMatriculados(alunos[i]); 
+                    System.out.println("Matricula feita com sucesso!");
+                    break;
+                } else {
+                    System.out.println("Esse curso está lotado, não foi possível se matrícular!");
+                    break;
+                }
             } 
         }
+    }
+
+    public boolean VerificaQuantidadeAluno(int j) {
+        if(cursos[j].getQuantidadeAtualAlunos() < cursos[j].getQuantidadeMaximaAlunos()) {
+            return true; 
+        }
+        return false; 
     }
 
     public boolean VerificaCPF(String cpf) {

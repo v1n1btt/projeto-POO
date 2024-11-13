@@ -17,7 +17,7 @@ public class Curso {
     private String horario;
     protected Professor professor; 
     private int quantidadeAtualAlunos;
-    private final int quantidadeMaximaAlunos = 50;
+    private final int quantidadeMaximaAlunos = 1;
     private boolean status;
     private Aluno[] alunosMatriculados;
 
@@ -121,10 +121,8 @@ public class Curso {
     }
 
     public void setAlunosMatriculados(Aluno aluno) {
-        if( getQuantidadeAtualAlunos() < getQuantidadeMaximaAlunos()) {
-            this.alunosMatriculados[quantidadeAtualAlunos] = aluno;
-            setQuantidadeAtualAlunos(getQuantidadeAtualAlunos() + 1);
-        }
+        this.alunosMatriculados[quantidadeAtualAlunos] = aluno;
+        setQuantidadeAtualAlunos(getQuantidadeAtualAlunos() + 1);
     }
 
     public Aluno getAlunosMatriculados(int i) {
