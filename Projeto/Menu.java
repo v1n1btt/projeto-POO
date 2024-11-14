@@ -69,7 +69,6 @@ public class Menu
             {
                 do 
                 {
-                    Menu.limpaTela();
                     System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
                     System.out.println("Opções para Login:\n");
                     System.out.println("    1 - Aluno");
@@ -79,7 +78,6 @@ public class Menu
                     System.out.print("\nEscolha uma opção: ");
                     opcao = teclado.nextInt();
                     teclado.nextLine();
-
                     switch (opcao) 
                     {
                         case 1:

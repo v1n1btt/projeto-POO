@@ -263,7 +263,7 @@ public class Sistema
     {
 
         String codigo;
-
+        CursosDisponiveisAluno();
         System.out.println("Digite o código do curso: ");
         codigo = teclado.nextLine();
         for(int j = 0; j < contadorCurso; j++) {
