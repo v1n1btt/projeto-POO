@@ -25,7 +25,7 @@ public class Sistema
         Aluno aluno = new Aluno("Joao", 99997, "joao", "joao", "44412345810");
         Administrador administrador = new Administrador("Admin", 99999, "admin", "admin");
         Professor professor = new Professor("Mario", 99998, "mario", "mario");
-        Curso curso = new Curso( "Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quart e sexta", professor);
+        Curso curso = new Curso( "Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quarta e sexta", professor);
         setAdministrador(administrador);
         setAluno(aluno);
         setProfessor(professor);
@@ -249,11 +249,12 @@ public class Sistema
                 System.out.println();
                 System.out.println("Nome do curso: " + getCurso(i).getNomeCurso());
                 System.out.println("Código do curso: " + getCurso(i).getCodigoCurso());
-                System.out.println("Carga Horária do curso: " + getCurso(i).getCargaHorariaCurso() + "horas");
+                System.out.println("Carga Horária do curso: " + getCurso(i).getCargaHorariaCurso() + " Horas");
                 System.out.println("Ementa do curso: " + getCurso(i).getEmenta());
                 System.out.println("Data Inicial do curso: " + getCurso(i).getDataInicio());
                 System.out.println("Data Final do curso: " + getCurso(i).getDataFim());
                 System.out.println("Professor do curso: " + getCurso(i).getProfessor().getNome());
+                System.out.println("Horários e dias do curso: " + getCurso(i).getHorario());
                 System.out.println();
             }
         }
@@ -645,6 +646,7 @@ public class Sistema
             
                         break;
                     case 3:
+                        Menu.limpaTela();
                         AdicionarNotas(i);
                         break;
                     case 4:
@@ -707,10 +709,12 @@ public class Sistema
         CursosDisponiveisAluno();
         System.out.print("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
+        System.out.println();
         for(int j = 0; j < contadorCurso; j++) {
             if(VerificaVariaveis(getCurso(j).getCodigoCurso(), codigo) == true) {
                 for(int k = 0; k < getCurso(j).getQuantidadeAtualAlunos(); k++) {
                     System.out.println("Nome: " + getCurso(j).getAlunosMatriculados(k).getNome());
+                    System.out.println("Código Usuário: " + getCurso(j).getAlunosMatriculados(k).getCodigoUsuario());
                     System.out.print("Digite a nota do Aluno acima: ");
                     //nota = teclado.nextDouble();
                     //setAluno(null);

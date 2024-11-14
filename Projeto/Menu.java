@@ -69,6 +69,7 @@ public class Menu
             {
                 do 
                 {
+                    System.out.println();
                     System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
                     System.out.println("Opções para Login:\n");
                     System.out.println("    1 - Aluno");
@@ -82,8 +83,8 @@ public class Menu
                     {
                         case 1:
                             Menu.limpaTela();
-                            System.out.println("================\nLOGIN NO SISTEMA\n================\n\n");
-                            System.out.print("\nInsira seu email: ");
+                            System.out.println("================\nLOGIN NO SISTEMA\n================\n");
+                            System.out.print("Insira seu email: ");
                             email = teclado.nextLine();
                             System.out.print("\nInsira sua Senha: ");
                             senha = teclado.nextLine();
@@ -91,8 +92,8 @@ public class Menu
                             break;
                         case 2:
                             Menu.limpaTela();
-                            System.out.println("================\nLOGIN NO SISTEMA\n================\n\n");
-                            System.out.print("\nInsira seu email: ");
+                            System.out.println("================\nLOGIN NO SISTEMA\n================\n");
+                            System.out.print("Insira seu email: ");
                             email = teclado.nextLine();
                             System.out.print("\nInsira sua Senha: ");
                             senha = teclado.nextLine();
@@ -100,8 +101,8 @@ public class Menu
                             break;
                         case 3:
                             Menu.limpaTela();
-                            System.out.println("================\nLOGIN NO SISTEMA\n================\n\n");
-                            System.out.print("\nInsira seu email: ");
+                            System.out.println("================\nLOGIN NO SISTEMA\n================\n");
+                            System.out.print("Insira seu email: ");
                             email = teclado.nextLine();
                             System.out.print("\nInsira sua Senha: ");
                             senha = teclado.nextLine();
