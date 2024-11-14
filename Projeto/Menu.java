@@ -17,10 +17,11 @@ public class Menu
         do {
             try 
             {
+                limpaTela();
                 System.out.println();
-                System.out.print("SISTEMA DE GESTÃO DE CURSOS\n\n");
-                System.out.print("SEJA BEM VINDO!!!!\n\n");
-                System.out.print("Selecione uma opção:\n");
+                System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
+                System.out.println("SEJA BEM VINDO!!!!\n\n");
+                System.out.println("Selecione uma opção:\n");
                 System.out.println("    1. Fazer cadastro para ser o nosso Aluno!");
                 System.out.println("    2. Fazer login");
                 System.out.println("    3. Sair");
@@ -69,8 +70,8 @@ public class Menu
                 do 
                 {
                     Menu.limpaTela();
-                    System.out.print("======================\nSISTEMA DE GESTÃO DE CURSOS\n=====================\n\n");
-                    System.out.println("Opções para Login: \n");
+                    System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
+                    System.out.println("Opções para Login:\n");
                     System.out.println("    1 - Aluno");
                     System.out.println("    2 - Administrador");
                     System.out.println("    3 - Professor");
@@ -83,7 +84,7 @@ public class Menu
                     {
                         case 1:
                             Menu.limpaTela();
-                            System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
+                            System.out.println("================\nLOGIN NO SISTEMA\n================\n\n");
                             System.out.print("\nInsira seu email: ");
                             email = teclado.nextLine();
                             System.out.print("\nInsira sua Senha: ");
@@ -92,7 +93,7 @@ public class Menu
                             break;
                         case 2:
                             Menu.limpaTela();
-                            System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
+                            System.out.println("================\nLOGIN NO SISTEMA\n================\n\n");
                             System.out.print("\nInsira seu email: ");
                             email = teclado.nextLine();
                             System.out.print("\nInsira sua Senha: ");
@@ -101,10 +102,10 @@ public class Menu
                             break;
                         case 3:
                             Menu.limpaTela();
-                            System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
+                            System.out.println("================\nLOGIN NO SISTEMA\n================\n\n");
                             System.out.print("\nInsira seu email: ");
                             email = teclado.nextLine();
-                            System.out.print("\nInsira sua Senha:");
+                            System.out.print("\nInsira sua Senha: ");
                             senha = teclado.nextLine();
                             sistema.fazerLoginUsuarioProfessor(email, senha);
                             break;

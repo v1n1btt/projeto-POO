@@ -25,9 +25,11 @@ public class Sistema
         Aluno aluno = new Aluno("Joao", 99997, "joao", "joao", "44412345810");
         Administrador administrador = new Administrador("Admin", 99999, "admin", "admin");
         Professor professor = new Professor("Mario", 99998, "mario", "mario");
+        Curso curso = new Curso( "Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quart e sexta", professor);
         setAdministrador(administrador);
         setAluno(aluno);
         setProfessor(professor);
+        setCurso(curso);
     }
 
     public void setAluno(Aluno aluno) 
@@ -186,15 +188,17 @@ public class Sistema
 
         do{
             try{
+                
                 System.out.println();
-                System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Aluno\n\n");
-                System.out.print("Bem vindo: " + getAluno(i).getNome());
-                System.out.print("Selecione uma opção:\n\n");
-                System.out.println("    1 - Consultar seus Dados. ");
-                System.out.println("    2 - Consultar Cursos disponíveis. ");
-                System.out.println("    3 - Se matricular em Cursos disponíveis. ");
-                System.out.println("    4 - Cancelar matricula em um curso. ");
-                System.out.println("    5 - Sair. ");
+                System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
+                System.out.println("MENU DO ALUNO\n");
+                System.out.println("Bem vindo: " + " " + getAluno(i).getNome() + "\n");
+                System.out.println("    1 - Consultar seus Dados.");
+                System.out.println("    2 - Consultar Cursos disponíveis.");
+                System.out.println("    3 - Se matricular em Cursos disponíveis.");
+                System.out.println("    4 - Cancelar matricula em um curso.");
+                System.out.println("    5 - Sair.");
+                System.out.print("\nSelecione uma opção: ");
 
                 escolha = Integer.parseInt(teclado.nextLine());
 
@@ -303,19 +307,20 @@ public class Sistema
 
         do {
             try{
+                
                 System.out.println();
-                System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como administrador\n\n");
-                System.out.println("BEM VINDO: " + getAdministrador(i).getNome() + "\n");
-                System.out.println("Selecione uma opção:");
-                System.out.println("    1. Cadastrar novo curso");
-                System.out.println("    2. Mostrar cursos cadastrados");
-                System.out.println("    3. Editar um curso cadastrado");
-                System.out.println("    4. Habilitar um curso cadastrado");
-                System.out.println("    5. Desabilitar um curso cadastrado");
-                System.out.println("    6. Cadastrar um novo Administrador");
-                System.out.println("    7. Cadastrar professor");
-                System.out.println("    8. Fazer logout");
-                System.out.print("\nDigite uma opção: ");
+                System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
+                System.out.println("MENU DO ADMINISTRADOR\n");
+                System.out.println("Bem vindo: " + " " + getAdministrador(i).getNome() + "\n");
+                System.out.println("    1 - Cadastrar novo curso");
+                System.out.println("    2 - Mostrar cursos cadastrados");
+                System.out.println("    3 - Editar um curso cadastrado");
+                System.out.println("    4 - Habilitar um curso cadastrado");
+                System.out.println("    5 - Desabilitar um curso cadastrado");
+                System.out.println("    6 - Cadastrar um novo Administrador");
+                System.out.println("    7 - Cadastrar professor");
+                System.out.println("    8 - Fazer logout");
+                System.out.print("\nSelecione uma opção: ");
                 escolha = Integer.parseInt(teclado.nextLine());
                 switch(escolha) {
                     case 1:
