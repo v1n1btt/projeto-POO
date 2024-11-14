@@ -187,8 +187,8 @@ public class Sistema
         int escolha = 0; 
 
         do{
-            try{
-                
+            try
+            {
                 System.out.println();
                 System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
                 System.out.println("MENU DO ALUNO\n");
@@ -202,7 +202,8 @@ public class Sistema
 
                 escolha = Integer.parseInt(teclado.nextLine());
 
-                switch(escolha) {
+                switch(escolha) 
+                {
                     case 1:
                         Menu.limpaTela();
                         DadosAluno(i);
