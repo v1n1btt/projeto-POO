@@ -34,7 +34,7 @@ public class Menu
                         break;
                     case 2:
                         limpaTela();
-                        sistema.fazerLoginMenu();
+                        fazerLoginMenu(teclado, sistema);
                         break;
                     case 3:
                         System.out.println("Saindo...");
@@ -50,6 +50,78 @@ public class Menu
         } while(escolha != 3);
         
         teclado.close();
+    }
+
+    //metodo estático para coletar os dados do login
+    public static void fazerLoginMenu(Scanner teclado, Sistema sistema)
+    {
+
+        // Dados do usuário
+        String email;
+        String senha;
+        int opcao = 0;
+
+        // Menu de login
+        do
+        {
+            try
+            {
+                do 
+                {
+                    Menu.limpaTela();
+                    System.out.print("======================\nSISTEMA DE GESTÃO DE CURSOS\n=====================\n\n");
+                    System.out.println("Opções para Login: \n");
+                    System.out.println("    1 - Aluno");
+                    System.out.println("    2 - Administrador");
+                    System.out.println("    3 - Professor");
+                    System.out.println("    4 - Voltar");
+                    System.out.print("\nEscolha uma opção: ");
+                    opcao = teclado.nextInt();
+                    teclado.nextLine();
+
+                    switch (opcao) 
+                    {
+                        case 1:
+                            Menu.limpaTela();
+                            System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
+                            System.out.print("\nInsira seu email: ");
+                            email = teclado.nextLine();
+                            System.out.print("\nInsira sua Senha: ");
+                            senha = teclado.nextLine();
+                            sistema.fazerLoginUsuarioAluno(email, senha);
+                            break;
+                        case 2:
+                            Menu.limpaTela();
+                            System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
+                            System.out.print("\nInsira seu email: ");
+                            email = teclado.nextLine();
+                            System.out.print("\nInsira sua Senha: ");
+                            senha = teclado.nextLine();
+                            sistema.fazerLoginUsuarioAdministrador(email, senha);
+                            break;
+                        case 3:
+                            Menu.limpaTela();
+                            System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
+                            System.out.print("\nInsira seu email: ");
+                            email = teclado.nextLine();
+                            System.out.print("\nInsira sua Senha:");
+                            senha = teclado.nextLine();
+                            sistema.fazerLoginUsuarioProfessor(email, senha);
+                            break;
+                        case 4:
+                            Menu.limpaTela();
+                            return;
+                        default:
+                            System.out.print("\nOpção inválida, tente novamente.");
+                            break;
+                    }
+                } while(opcao != 4); 
+            } catch(NumberFormatException numberFormatException)
+            {
+                System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
+            }
+        } while(opcao != 1 || opcao != 2 || opcao != 3);
     }
 
     //método para limpar a tela

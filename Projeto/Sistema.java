@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.lang.InterruptedException;
 import java.lang.NumberFormatException;
 
-public class Sistema {
+public class Sistema 
+{
 
     private static int codigoUsuario = 1000;
     private static int contadorAluno = 0;
@@ -19,50 +20,65 @@ public class Sistema {
 
     Scanner teclado = new Scanner(System.in);
 
-    public Sistema() {
+    public Sistema() 
+    {
+        Aluno aluno = new Aluno("Joao", 99997, "joao", "joao", "44412345810");
         Administrador administrador = new Administrador("Admin", 99999, "admin", "admin");
+        Professor professor = new Professor("Mario", 99998, "mario", "mario");
         setAdministrador(administrador);
+        setAluno(aluno);
+        setProfessor(professor);
     }
 
-    public void setAluno(Aluno aluno) {
+    public void setAluno(Aluno aluno) 
+    {
         this.alunos[contadorAluno] = aluno;
         contadorAluno++; 
     }
 
-    public Aluno getAluno(int i) {
+    public Aluno getAluno(int i) 
+    {
         return alunos[i]; 
     }
 
-    public void setAdministrador(Administrador administrador) {
+    public void setAdministrador(Administrador administrador) 
+    {
         this.administradores[contadorAdministrador] = administrador;
         contadorAdministrador++; 
     }
 
-    public Administrador getAdministrador(int i) {
+    public Administrador getAdministrador(int i) 
+    {
         return administradores[i]; 
     }
 
-    public void setProfessor(Professor professor) {
+    public void setProfessor(Professor professor) 
+    {
         this.professores[contadorProfessor] = professor;
         contadorProfessor++; 
     }
 
-    public Professor getProfessor(int i) {
+    public Professor getProfessor(int i) 
+    {
         return professores[i]; 
     }
 
-    public void setCurso(Curso curso) {
+    public void setCurso(Curso curso) 
+    {
         this.cursos[contadorCurso] = curso;
         contadorCurso++; 
     }
 
-    public Curso getCurso(int i) {
+    public Curso getCurso(int i) 
+    {
         return cursos[i]; 
     }
 
     //metodos para fazer os logins
-    public void fazerLoginUsuarioAluno(String email, String senha) {
-        for(int i = 0; i < contadorAluno; i++) {
+    public void fazerLoginUsuarioAluno(String email, String senha) 
+    {
+        for(int i = 0; i < contadorAluno; i++) 
+        {
             if(VerificaVariaveis(getAluno(i).getEmail(), email) == true && VerificaVariaveis(getAluno(i).getSenhaPessoal(), senha) == true && getAluno(i).getNivelAcesso() == 3) {
                 MenuAluno(i);
             } else {
@@ -71,8 +87,10 @@ public class Sistema {
         }   
     }
 
-    public void fazerLoginUsuarioAdministrador(String email, String senha) {
-        for(int i = 0; i < contadorAdministrador; i++) {
+    public void fazerLoginUsuarioAdministrador(String email, String senha) 
+    {
+        for(int i = 0; i < contadorAdministrador; i++) 
+        {
             if(VerificaVariaveis(getAdministrador(i).getEmail(), email) == true && VerificaVariaveis(getAdministrador(i).getSenhaPessoal(), senha) == true && getAdministrador(i).getNivelAcesso() == 1) {
                 MenuAdministrador(i);
             } else {
@@ -81,8 +99,10 @@ public class Sistema {
         }   
     }
 
-    public void fazerLoginUsuarioProfessor(String email, String senha) {
-        for(int i = 0; i < contadorProfessor; i++) {
+    public void fazerLoginUsuarioProfessor(String email, String senha) 
+    {
+        for(int i = 0; i < contadorProfessor; i++) 
+        {
             if(VerificaVariaveis(getProfessor(i).getEmail(), email) == true && VerificaVariaveis(getProfessor(i).getSenhaPessoal(), senha) == true && getProfessor(i).getNivelAcesso() == 2) {
                 MenuProfessor(i);
             } else {
@@ -92,8 +112,10 @@ public class Sistema {
     }
 
     //método que verifica variaveis para ver se são iguais
-    public boolean VerificaVariaveis(String variavel1, String variavel2) {
-        if (variavel1.equals(variavel2)) {
+    public boolean VerificaVariaveis(String variavel1, String variavel2) 
+    {
+        if (variavel1.equals(variavel2)) 
+        {
             return true; 
         } else {
             return false; 
@@ -101,81 +123,17 @@ public class Sistema {
     }
 
     //metodo que gera um codigo para os usuarios
-    public int GerarCodigoUsuario() {
+    public int GerarCodigoUsuario() 
+    {
         codigoUsuario += 1;  
         return codigoUsuario; 
-    }
-
-    //metodo para coletar os dados do login
-    public void fazerLoginMenu(){
-
-        // Dados do usuário
-        String email;
-        String senha;
-        int opcao = 0;
-
-        // Menu de login
-        do{
-            try{
-                do {
-                    Menu.limpaTela();
-                    System.out.print("======================\nSISTEMA DE GESTÃO DE CURSOS\n=====================\n\n");
-                    System.out.println("Opções para Login: \n");
-                    System.out.println("    1 - Aluno");
-                    System.out.println("    2 - Administrador");
-                    System.out.println("    3 - Professor");
-                    System.out.println("    4 - Voltar");
-                    System.out.print("\nEscolha uma opção: ");
-                    opcao = teclado.nextInt();
-                    teclado.nextLine();
-
-                    switch (opcao) {
-                        case 1:
-                            Menu.limpaTela();
-                            System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
-                            System.out.print("\nInsira seu email: ");
-                            email = teclado.nextLine();
-                            System.out.print("\nInsira sua Senha: ");
-                            senha = teclado.nextLine();
-                            fazerLoginUsuarioAluno(email, senha);
-                            break;
-                        case 2:
-                            Menu.limpaTela();
-                            System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
-                            System.out.print("\nInsira seu email: ");
-                            email = teclado.nextLine();
-                            System.out.print("\nInsira sua Senha: ");
-                            senha = teclado.nextLine();
-                            fazerLoginUsuarioAdministrador(email, senha);
-                            break;
-                        case 3:
-                            Menu.limpaTela();
-                            System.out.print("====================\nLOGIN NO SISTEMA\n====================\n\n");
-                            System.out.print("\nInsira seu email: ");
-                            email = teclado.nextLine();
-                            System.out.print("\nInsira sua Senha:");
-                            senha = teclado.nextLine();
-                            fazerLoginUsuarioProfessor(email, senha);
-                            break;
-                        case 4:
-                            Menu.limpaTela();
-                            return;
-                        default:
-                            System.out.print("\nOpção inválida, tente novamente.");
-                            break;
-                    }
-                } while(opcao != 4); 
-            } catch(NumberFormatException numberFormatException){
-                System.out.print("\nEntrada inválida, tente novamente.");
-                teclado.nextLine();
-            }
-        } while(opcao != 1 || opcao != 2 || opcao != 3);
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
 
     //método que cria a conta do aluno
-    public void criarContaAluno() {
+    public void criarContaAluno() 
+    {
        
         String nome;
         String cpf;
@@ -221,7 +179,8 @@ public class Sistema {
     }
 
     //Gera o menu que o aluno vê 
-    public void MenuAluno(int i) {
+    public void MenuAluno(int i) 
+    {
 
         int escolha = 0; 
 
@@ -270,7 +229,8 @@ public class Sistema {
     }
 
     //gera os dados do aluno 
-    public void DadosAluno(int i) {
+    public void DadosAluno(int i) 
+    {
         System.out.println("Nome: " + getAluno(i).getNome());
         System.out.println("Codigo do Usuário: " + getAluno(i).getCodigoUsuario());
         System.out.println("Email: " + getAluno(i).getEmail());
@@ -278,7 +238,8 @@ public class Sistema {
     }
 
     //gera os cursos que estão disponíveis para a matrícula 
-    public void CursosDisponiveisAluno() {
+    public void CursosDisponiveisAluno() 
+    {
         for( int i = 0; i < contadorCurso; i++) {
             if (getCurso(i).getStatus() == true && VerificaQuantidadeAlunosMatriculados(i) == true) {
                 System.out.println();
@@ -294,7 +255,8 @@ public class Sistema {
         }
     }
 
-    public void MatricularCurso(int i) {
+    public void MatricularCurso(int i) 
+    {
 
         String codigo;
 
@@ -314,14 +276,16 @@ public class Sistema {
         }
     }
 
-    public boolean VerificaQuantidadeAlunosMatriculados(int j) {
+    public boolean VerificaQuantidadeAlunosMatriculados(int j) 
+    {
         if(cursos[j].getQuantidadeAtualAlunos() < cursos[j].getQuantidadeMaximaAlunos()) {
             return true; 
         }
         return false; 
     }
 
-    public boolean VerificaCPF(String cpf) {
+    public boolean VerificaCPF(String cpf) 
+    {
         for(int i = 0; i < contadorAluno; i++) {
 
             if(VerificaVariaveis(alunos[i].getCPF(), cpf) == true) {
@@ -332,7 +296,8 @@ public class Sistema {
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
-    public void MenuAdministrador(int i) {
+    public void MenuAdministrador(int i) 
+    {
 
         int escolha = 0;
 
@@ -395,7 +360,8 @@ public class Sistema {
         } while(escolha != 6);
     }
 
-    public void FormularioCadastroAdministrador() {
+    public void FormularioCadastroAdministrador() 
+    {
         
         String nome;
         String email;
@@ -425,7 +391,8 @@ public class Sistema {
         } while(controle != true);
     }
 
-    public void CadastrarAdministrador(String nome, String email, String senha) {
+    public void CadastrarAdministrador(String nome, String email, String senha) 
+    {
         int codigoUsuario; 
         codigoUsuario = GerarCodigoUsuario();
         Administrador administrador = new Administrador(nome, codigoUsuario, email, senha);
@@ -433,7 +400,8 @@ public class Sistema {
         System.out.println("Conta Criada com Sucesso!");
     }
 
-    public void FormulariocadastroProfessor() {
+    public void FormulariocadastroProfessor() 
+    {
 
         String nome; 
         String email; 
@@ -463,7 +431,8 @@ public class Sistema {
         } while(controle != true);
     }
 
-    public void CadastrarProfessor(String nome, String email, String senha) {
+    public void CadastrarProfessor(String nome, String email, String senha) 
+    {
 
         int codigoUsuario = 0; 
 
@@ -473,7 +442,8 @@ public class Sistema {
         System.out.println("Conta Criada com Sucesso!");
     }
 
-    public void FormulariocadastrarCurso() {
+    public void FormulariocadastrarCurso() 
+    {
 
         String nome;
         String codigo;
@@ -526,7 +496,8 @@ public class Sistema {
         //} while(exception = true);
     }
 
-    public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, String horario, int escolhaProfessor) {
+    public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, String horario, int escolhaProfessor) 
+    {
         if(veficaCargaProfessor(escolhaProfessor,cargaHoraria) == true) {
             Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, professores[escolhaProfessor]);
             setCurso(curso);
@@ -537,7 +508,8 @@ public class Sistema {
         }
     }
 
-    public void DadosCursoAdministrativo() {
+    public void DadosCursoAdministrativo() 
+    {
         for(int i = 0; i < contadorCurso; i++) {
             System.out.println("Nome: " + getCurso(i).getNomeCurso());
             System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
@@ -557,7 +529,8 @@ public class Sistema {
         }
     }
 
-    public void HabilitarCurso() {
+    public void HabilitarCurso() 
+    {
 
         String codigo; 
 
@@ -579,7 +552,8 @@ public class Sistema {
         }
     }
 
-    public void DesabilitarCurso() {
+    public void DesabilitarCurso() 
+    {
        
         String codigo; 
 
@@ -600,7 +574,8 @@ public class Sistema {
         }
     }
 
-    public void EditarCurso() {
+    public void EditarCurso() 
+    {
 
         String codigo;
         int opcao; 
@@ -639,7 +614,8 @@ public class Sistema {
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
 
-    public void MenuProfessor(int i) {
+    public void MenuProfessor(int i) 
+    {
 
         int escolha = 0; 
         
@@ -680,7 +656,8 @@ public class Sistema {
         } while(escolha != 4);
     }
 
-    public void DadosProfessor(int i) {
+    public void DadosProfessor(int i) 
+    {
         System.out.println("Nome: " + getProfessor(i).getNome());
         System.out.println("Codigo do Usuário: " + getProfessor(i).getCodigoUsuario());
         System.out.println("Email: " + getProfessor(i).getEmail());
@@ -688,7 +665,8 @@ public class Sistema {
     }
 
     //método que verifica se o professor pode receber a carga horaria
-    public boolean veficaCargaProfessor(int i, int cargaHoraria) {
+    public boolean veficaCargaProfessor(int i, int cargaHoraria) 
+    {
         if(getProfessor(i).getCargaHorariaAtual() + cargaHoraria <= getProfessor(i).getCargaHorariaMaxima()) {
             return true; 
         } else {
@@ -696,7 +674,8 @@ public class Sistema {
         }
     }
 
-    public void CursosProfessor(int i) {
+    public void CursosProfessor(int i) 
+    {
         for(int j = 0; j < contadorCurso; j++) {
             if(getCurso(j).getProfessor() == getProfessor(i)) {
                 System.out.println();
@@ -714,7 +693,8 @@ public class Sistema {
         }
     }
 
-    public void AdicionarNotas(int i) {
+    public void AdicionarNotas(int i) 
+    {
 
         String codigo;
         double nota; 
