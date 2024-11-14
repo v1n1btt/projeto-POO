@@ -306,8 +306,8 @@ public class Sistema
         int escolha = 0;
 
         do {
-            try{
-                
+            try
+            {
                 System.out.println();
                 System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
                 System.out.println("MENU DO ADMINISTRADOR\n");
@@ -627,15 +627,15 @@ public class Sistema
         do{
             try{
                 System.out.println();
-                System.out.print("SISTEMA DE GESTÃO DE CURSOS\nLogado como Professor\n\n");
-                System.out.println("Bem vindo: " + " " + getProfessor(i).getNome());
+                System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
+                System.out.print("MENU DO PROFESSOR\n");
+                System.out.println("Bem vindo: " + " " + getProfessor(i).getNome() + "\n");
                 System.out.println("    1 - Consultar seus Dados.");
                 System.out.println("    2 - Consultar seus Cursos.");
                 System.out.println("    3 - Adicionar notas de alunos de um curso."); 
                 System.out.println("    4 - Sair.");
-
+                System.out.print("\nSelecione uma opção: ");
                 escolha = Integer.parseInt(teclado.nextLine());
-
                 switch(escolha) {
                     case 1:
                         Menu.limpaTela();
