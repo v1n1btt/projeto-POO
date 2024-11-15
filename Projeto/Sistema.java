@@ -646,7 +646,7 @@ public class Sistema
                 System.out.print("MENU DO PROFESSOR\n");
                 System.out.println("Bem vindo: " + " " + getProfessor(i).getNome() + "\n");
                 System.out.println("    1 - Consultar seus Dados.");
-                System.out.println("    2 - Consultar seus Cursos.");
+                System.out.println("    2 - Consultar os Cursos em que você é o responsável.");
                 System.out.println("    3 - Adicionar notas de alunos de um curso e encerra o curso."); 
                 System.out.println("    4 - Sair.");
                 System.out.print("\nSelecione uma opção: ");
