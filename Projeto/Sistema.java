@@ -177,8 +177,10 @@ public class Sistema
                 System.out.println("Já existe um usuário cadastrado com esse CPF!");
             }
         }
-        System.out.println("Formato do CPF inválido, tente novamente.");
-        teclado.nextLine();
+        else{
+            System.out.println("Formato do CPF inválido, tente novamente.");
+            teclado.nextLine();
+        }
     }
 
     //Gera o menu que o aluno vê 
