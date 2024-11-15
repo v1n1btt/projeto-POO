@@ -1,9 +1,6 @@
 package Projeto;
 
 import java.util.Scanner;
-import java.io.IOException;
-import java.lang.InterruptedException;
-import java.lang.NumberFormatException;
 
 public class Sistema 
 {
@@ -148,36 +145,40 @@ public class Sistema
         System.out.println();
         System.out.println("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("====================\nCADASTRO ALUNO\n====================\n\n");
-        System.out.print("CPF: ");
+        System.out.print("CPF (apenas números): ");
         cpf = teclado.nextLine();
-        System.out.print("Nome completo: ");
-        nome = teclado.nextLine();
-        System.out.print("Digite seu Email: ");
-        email = teclado.nextLine();
-        if(VerificaCPF(cpf) == true) {
-            do{
-                System.out.print("Senha: ");
-                senha = teclado.nextLine();
-                System.out.print("Confirme a senha: ");
-                confirmaSenha = teclado.nextLine();
-                //verificacao de senha
-                boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-                if(verifica == true) {
-                    controle = true;
-                    codigoUsuario = GerarCodigoUsuario();
-                    Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf);
-                    setAluno(aluno);
-                    System.out.println("Conta Criada com Sucesso!");
-                }else {
-                    System.out.println("A senha não é igual!" + "Tente Novamente!"); 
-                    System.out.println();
-                }
-        
-                
-            } while(controle != true);
-        } else {
-            System.out.println("Já existe um usuário cadastrado com esse CPF!");
-        } 
+        if(cpf.matches("[0-9]+") && cpf.length() == 11){
+            System.out.print("Nome completo: ");
+            nome = teclado.nextLine();
+            System.out.print("Digite seu Email: ");
+            email = teclado.nextLine();
+            if(VerificaCPF(cpf) == true) {
+                do{
+                    System.out.print("Senha: ");
+                    senha = teclado.nextLine();
+                    System.out.print("Confirme a senha: ");
+                    confirmaSenha = teclado.nextLine();
+                    //verificacao de senha
+                    boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                    if(verifica == true) {
+                        controle = true;
+                        codigoUsuario = GerarCodigoUsuario();
+                        Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf);
+                        setAluno(aluno);
+                        System.out.println("Conta Criada com Sucesso!");
+                    }else {
+                        System.out.println("A senha não é igual!" + "Tente Novamente!"); 
+                        System.out.println();
+                    }
+            
+                    
+                } while(controle != true);
+            } else {
+                System.out.println("Já existe um usuário cadastrado com esse CPF!");
+            }
+        }
+        System.out.println("Formato do CPF inválido, tente novamente.");
+        teclado.nextLine();
     }
 
     //Gera o menu que o aluno vê 
