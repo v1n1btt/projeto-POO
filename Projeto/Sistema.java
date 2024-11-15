@@ -22,7 +22,7 @@ public class Sistema
     {
         Aluno aluno = new Aluno("Joao", 99997, "joao@.com", "joao", "44412345810");
         Administrador administrador = new Administrador("Admin", 99999, "admin@.com", "admin");
-        Professor professor = new Professor("Mario", 99998, "mario", "mario@.com");
+        Professor professor = new Professor("Mario", 99998, "mario@.com", "mario");
         Curso curso = new Curso( "Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quarta e sexta", professor);
         setAdministrador(administrador);
         setAluno(aluno);
@@ -731,9 +731,9 @@ public class Sistema
                     System.out.println("Nome: " + getCurso(j).getAlunosMatriculados(k).getNome());
                     System.out.println("Código Usuário: " + getCurso(j).getAlunosMatriculados(k).getCodigoUsuario());
                     System.out.print("Digite a nota do Aluno acima: ");
-                    //nota = teclado.nextDouble();
-                    //setAluno(null);
-
+                    nota = teclado.nextDouble();
+                    cursos[j].setNota(nota);
+                    System.out.println("A nota do aluno acima é: " + " " + getCurso(j).getNota(k));
                 }
             }
         }

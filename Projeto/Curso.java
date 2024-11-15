@@ -20,6 +20,8 @@ public class Curso {
     private final int quantidadeMaximaAlunos = 40;
     private boolean status;
     private Aluno[] alunosMatriculados;
+    private double[] notas;
+    private static int indiceNotas = 0;
 
 
     public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dateInicio, String dateFim, String horario, Professor professor) {
@@ -127,6 +129,17 @@ public class Curso {
 
     public Aluno getAlunosMatriculados(int i) {
         return alunosMatriculados[i];
+    }
+
+    public void setNota(double nota) {
+        if(nota >= 0.0) {
+            this.notas[indiceNotas] = nota;
+            indiceNotas++; 
+        }
+    }
+
+    public double getNota(int indiceNotas) {
+        return notas[indiceNotas];
     }
 
     public String salvaAluno() {

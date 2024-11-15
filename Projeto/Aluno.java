@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 public class Aluno extends Pessoa {
 
     private String cpf;
-    private float nota; 
 
     public Aluno(String nome, int codigoUsuario, String email, String senhaPessoal, String cpf) {
         super(nome, codigoUsuario, email, senhaPessoal);
@@ -22,16 +21,6 @@ public class Aluno extends Pessoa {
 
     public String getCPF() {
         return cpf;
-    }
-
-    public void setNota(float nota) {
-        if(nota >= 0.0) {
-            this.nota = nota;
-        }
-    }
-
-    public float getNota() {
-        return nota;
     }
     
     public String salvaAluno() {
