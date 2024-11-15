@@ -647,7 +647,7 @@ public class Sistema
                 System.out.println("Bem vindo: " + " " + getProfessor(i).getNome() + "\n");
                 System.out.println("    1 - Consultar seus Dados.");
                 System.out.println("    2 - Consultar seus Cursos.");
-                System.out.println("    3 - Adicionar notas de alunos de um curso."); 
+                System.out.println("    3 - Adicionar notas de alunos de um curso e encerra o curso."); 
                 System.out.println("    4 - Sair.");
                 System.out.print("\nSelecione uma opção: ");
                 escolha = Integer.parseInt(teclado.nextLine());
@@ -736,6 +736,9 @@ public class Sistema
                         System.out.println("A nota do aluno acima é: " + " " + getCurso(indiceCursos).getNota(indiceAlunos));
                     }
                 }
+                getCurso(indiceCursos).setStatus(false);
+                System.out.println("Todas as notas de todos os alunos foram cadastradas!");
+                System.out.println("O curso foi encerrado!");
             }
         }
     }   
