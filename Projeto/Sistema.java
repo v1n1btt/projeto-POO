@@ -732,7 +732,7 @@ public class Sistema
                     System.out.println("Código Usuário: " + getCurso(j).getAlunosMatriculados(k).getCodigoUsuario());
                     System.out.print("Digite a nota do Aluno acima: ");
                     nota = teclado.nextDouble();
-                    cursos[j].setNota(nota);
+                    getCurso(j).setNota(nota);
                     System.out.println("A nota do aluno acima é: " + " " + getCurso(j).getNota(k));
                 }
             }

@@ -36,6 +36,7 @@ public class Curso {
         setQuantidadeAtualAlunos(0);
         setStatus(true);
         alunosMatriculados = new Aluno[getQuantidadeMaximaAlunos()];
+        notas = new double[getQuantidadeMaximaAlunos()];
     }
 
     public void setNomeCurso(String nomeCurso) {
