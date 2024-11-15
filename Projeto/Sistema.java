@@ -20,9 +20,9 @@ public class Sistema
 
     public Sistema() 
     {
-        Aluno aluno = new Aluno("Joao", 99997, "joao", "joao", "44412345810");
-        Administrador administrador = new Administrador("Admin", 99999, "admin", "admin");
-        Professor professor = new Professor("Mario", 99998, "mario", "mario");
+        Aluno aluno = new Aluno("Joao", 99997, "joao@.com", "joao", "44412345810");
+        Administrador administrador = new Administrador("Admin", 99999, "admin@.com", "admin");
+        Professor professor = new Professor("Mario", 99998, "mario", "mario@.com");
         Curso curso = new Curso( "Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quarta e sexta", professor);
         setAdministrador(administrador);
         setAluno(aluno);
