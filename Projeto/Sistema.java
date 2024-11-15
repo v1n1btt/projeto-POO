@@ -1,5 +1,6 @@
 package Projeto;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Sistema 
@@ -470,10 +471,12 @@ public class Sistema
         String dateFim;
         String horario; 
         int escolhaProfessor; 
-        //boolean exception = false;
+        boolean exception;
         // Formulario de cadastro de curso
-        //do{
-            //try{
+        do{
+            try{
+                exception = false;
+                Menu.limpaTela();
                 if(getProfessor(0) != null) {
                     System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
                     System.out.print("Nome do curso: ");
@@ -505,12 +508,13 @@ public class Sistema
                 } else {
                     System.out.println("Não há professores cadastrados!");
                 }
-            //} catch(NumberFormatException numberFormatException){
-                //exception = true;
-                //System.out.print("\nEntrada inválida, tente novamente.");
-                //teclado.nextLine();
-            //}
-        //} while(exception = true);
+            } catch(InputMismatchException inputMismatchException){
+                exception = true;
+                System.out.print("\nEntrada inválida, tente novamente.\n");
+                teclado.nextLine();
+                teclado.nextLine();
+            }
+        } while(exception = true);
     }
 
     public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dateInicio, String dateFim, String horario, int escolhaProfessor) 

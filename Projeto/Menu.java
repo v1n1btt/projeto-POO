@@ -1,9 +1,7 @@
 package Projeto;
 
-import java.util.Scanner;
 import java.io.IOException;
-import java.lang.InterruptedException;
-import java.lang.NumberFormatException;
+import java.util.Scanner;
 
 public class Menu 
 {
