@@ -605,16 +605,15 @@ public class Sistema
         codigo = teclado.nextLine(); 
         for(int i = 0; i < contadorCurso; i++) {
             if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
-                System.out.println("Nome: " + getCurso(i).getNomeCurso());
-                System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
-                System.out.println("Carga Horária: " + getCurso(i).getCargaHorariaCurso());
-                System.out.println("Ementa: " + getCurso(i).getEmenta());
-                System.out.println("Data Inicio: " + getCurso(i).getDateInicio());
-                System.out.println("Data Fim: " + getCurso(i).getDateFim());
-                System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
-                System.out.println("Horários: : " + getCurso(i).getHorario());
-                System.out.println("Professor do curso: " + getCurso(i).getProfessor().getNome());
-                System.out.println("Status do Curso: " + getCurso(i).getStatus());
+                System.out.println("1 - Nome: " + getCurso(i).getNomeCurso());
+                System.out.println("2 - Código Curso: " + getCurso(i).getCodigoCurso());
+                System.out.println("3 - Carga Horária: " + getCurso(i).getCargaHorariaCurso());
+                System.out.println("4 - Ementa: " + getCurso(i).getEmenta());
+                System.out.println("5 - Data Inicio: " + getCurso(i).getDateInicio());
+                System.out.println("6 - Data Fim: " + getCurso(i).getDateFim());
+                System.out.println("7 - Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
+                System.out.println("8 - Horários: : " + getCurso(i).getHorario());
+                System.out.println("9 - Professor do curso: " + getCurso(i).getProfessor().getNome());
                 System.out.println();
                 System.out.println("Escolha uma opção para editar: ");
                 opcao = teclado.nextInt(); 
@@ -725,15 +724,17 @@ public class Sistema
         System.out.print("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
         System.out.println();
-        for(int j = 0; j < contadorCurso; j++) {
-            if(VerificaVariaveis(getCurso(j).getCodigoCurso(), codigo) == true) {
-                for(int k = 0; k < getCurso(j).getQuantidadeAtualAlunos(); k++) {
-                    System.out.println("Nome: " + getCurso(j).getAlunosMatriculados(k).getNome());
-                    System.out.println("Código Usuário: " + getCurso(j).getAlunosMatriculados(k).getCodigoUsuario());
-                    System.out.print("Digite a nota do Aluno acima: ");
-                    nota = teclado.nextDouble();
-                    getCurso(j).setNota(nota);
-                    System.out.println("A nota do aluno acima é: " + " " + getCurso(j).getNota(k));
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
+            if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) {
+                for(int indiceAlunos = 0; indiceAlunos < getCurso(indiceCursos).getQuantidadeAtualAlunos(); indiceAlunos++) {
+                    if(getCurso(indiceCursos).getNota(indiceAlunos) == 0){
+                        System.out.println("Nome: " + getCurso(indiceCursos).getAlunosMatriculados(indiceAlunos).getNome());
+                        System.out.println("Código Usuário: " + getCurso(indiceCursos).getAlunosMatriculados(indiceAlunos).getCodigoUsuario());
+                        System.out.print("Digite a nota do Aluno acima: ");
+                        nota = teclado.nextDouble();
+                        getCurso(indiceAlunos).setNota(nota);
+                        System.out.println("A nota do aluno acima é: " + " " + getCurso(indiceCursos).getNota(indiceAlunos));
+                    }
                 }
             }
         }
