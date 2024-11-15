@@ -108,7 +108,7 @@ public class GeraArquivo {
 
     public void gerarDisciplina(String nomeArquivoDisciplina) {
         Scanner sc = new Scanner(System.in);
-        String nomeCurso, codigoCurso, ementa, dataInicio, dataFim, horario;
+        String nomeCurso, codigoCurso, ementa, dateInicio, dateFim, horario;
         int cargaHorariaCurso;
         Professor professor; // Supondo que você tenha uma classe Professor
         Aluno[] alunosMatriculados = new Aluno[50]; // Supondo que você tenha uma classe Aluno
@@ -129,10 +129,10 @@ public class GeraArquivo {
         ementa = sc.nextLine();
 
         System.out.print("Entre com a data de início: ");
-        dataInicio = sc.nextLine();
+        dateInicio = sc.nextLine();
 
         System.out.print("Entre com a data de fim: ");
-        dataFim = sc.nextLine();
+        dateFim = sc.nextLine();
 
         System.out.print("Entre com o horário: ");
         horario = sc.nextLine();
@@ -145,8 +145,8 @@ public class GeraArquivo {
             writer.println("Código do Curso: " + codigoCurso);
             writer.println("Carga Horária: " + cargaHorariaCurso);
             writer.println("Ementa: " + ementa);
-            writer.println("Data de Início: " + dataInicio);
-            writer.println("Data de Fim: " + dataFim);
+            writer.println("Data de Início: " + dateInicio);
+            writer.println("Data de Fim: " + dateFim);
             writer.println("Horário: " + horario);
             // Adicione mais informações conforme necessário
         } catch (FileNotFoundException fnfe) {

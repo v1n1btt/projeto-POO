@@ -12,8 +12,8 @@ public class Curso {
     private String codigoCurso;
     private int cargaHorariaCurso;
     private String ementa;
-    private String dataInicio; 
-    private String dataFim; 
+    private String dateInicio; 
+    private String dateFim; 
     private String horario;
     protected Professor professor; 
     private int quantidadeAtualAlunos;
@@ -22,13 +22,13 @@ public class Curso {
     private Aluno[] alunosMatriculados;
 
 
-    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dataInicio, String dataFim, String horario, Professor professor) {
+    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dateInicio, String dateFim, String horario, Professor professor) {
         setNomeCurso(nomeCurso);
         setCodigoCurso(codigoCurso);
         setCargaHorariaCurso(cargaHorariaCurso);
         setEmenta(ementa);
-        setDataInicio(dataInicio);
-        setDataFim(dataFim);
+        setDateInicio(dateInicio);
+        setDateFim(dateFim);
         setHorario(horario);
         setProfessor(professor);
         setQuantidadeAtualAlunos(0);
@@ -68,20 +68,20 @@ public class Curso {
         return ementa;
     }
 
-    public void setDataInicio(String dataInicio) {
-        this.dataInicio = dataInicio;
+    public void setDateInicio(String dateInicio) {
+        this.dateInicio = dateInicio;
     }
 
-    public String getDataInicio() {
-        return dataInicio;
+    public String getDateInicio() {
+        return dateInicio;
     } 
 
-    public void setDataFim(String dataFim) {
-        this.dataFim = dataFim;
+    public void setDateFim(String dateFim) {
+        this.dateFim = dateFim;
     }
 
-    public String getDataFim() {
-        return dataFim;
+    public String getDateFim() {
+        return dateFim;
     }
 
     public void setQuantidadeAtualAlunos(int quantidadeAtualAlunos) {
@@ -138,8 +138,8 @@ public class Curso {
             pw.println("Codigo do curso: "+this.codigoCurso);
             pw.println("Status: "+this.status);
             pw.println("Quantidade máxima de alunos: "+this.quantidadeMaximaAlunos);
-            pw.println("Finalização do curso: "+this.dataFim);
-            pw.println("Início do Curso: "+this.dataInicio);
+            pw.println("Finalização do curso: "+this.dateFim);
+            pw.println("Início do Curso: "+this.dateInicio);
             pw.println("Carga horária: "+this.cargaHorariaCurso);
             pw.flush();
             pw.close();

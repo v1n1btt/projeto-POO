@@ -262,8 +262,8 @@ public class Sistema
                 System.out.println("Código do curso: " + getCurso(i).getCodigoCurso());
                 System.out.println("Carga Horária do curso: " + getCurso(i).getCargaHorariaCurso() + " Horas");
                 System.out.println("Ementa do curso: " + getCurso(i).getEmenta());
-                System.out.println("Data Inicial do curso: " + getCurso(i).getDataInicio());
-                System.out.println("Data Final do curso: " + getCurso(i).getDataFim());
+                System.out.println("Data Inicial do curso: " + getCurso(i).getDateInicio());
+                System.out.println("Data Final do curso: " + getCurso(i).getDateFim());
                 System.out.println("Professor do curso: " + getCurso(i).getProfessor().getNome());
                 System.out.println("Horários e dias do curso: " + getCurso(i).getHorario());
                 System.out.println();
@@ -466,8 +466,8 @@ public class Sistema
         String codigo;
         int cargaHoraria;
         String ementa;
-        String dataInicio;
-        String dataFim;
+        String dateInicio;
+        String dateFim;
         String horario; 
         int escolhaProfessor; 
         //boolean exception = false;
@@ -483,9 +483,9 @@ public class Sistema
                     System.out.print("Ementa do curso: ");
                     ementa = teclado.nextLine();
                     System.out.print("Data de inicio do curso: ");
-                    dataInicio = teclado.nextLine();
+                    dateInicio = teclado.nextLine();
                     System.out.print("Data final do curso: ");
-                    dataFim = teclado.nextLine();
+                    dateFim = teclado.nextLine();
                     System.out.print("Horarios e dias: ");
                     horario = teclado.nextLine();
                     System.out.print("Carga horária do curso: ");
@@ -501,7 +501,7 @@ public class Sistema
                     System.out.print("Digite o número do professor acima: "); 
                     escolhaProfessor = teclado.nextInt();
                     teclado.nextLine();
-                    CadastrarCurso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, escolhaProfessor);
+                    CadastrarCurso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, escolhaProfessor);
                 } else {
                     System.out.println("Não há professores cadastrados!");
                 }
@@ -513,10 +513,10 @@ public class Sistema
         //} while(exception = true);
     }
 
-    public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dataInicio, String dataFim, String horario, int escolhaProfessor) 
+    public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dateInicio, String dateFim, String horario, int escolhaProfessor) 
     {
         if(veficaCargaProfessor(escolhaProfessor,cargaHoraria) == true) {
-            Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dataInicio, dataFim, horario, professores[escolhaProfessor]);
+            Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professores[escolhaProfessor]);
             setCurso(curso);
             professores[escolhaProfessor].setCargaHorariaAtual(professores[escolhaProfessor].getCargaHorariaAtual() + cargaHoraria);
             System.out.println("Curso Criado com Sucesso!");
@@ -532,8 +532,8 @@ public class Sistema
             System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
             System.out.println("Carga Horária: " + getCurso(i).getCargaHorariaCurso());
             System.out.println("Ementa: " + getCurso(i).getEmenta());
-            System.out.println("Data Inicio: " + getCurso(i).getDataInicio());
-            System.out.println("Data Fim: " + getCurso(i).getDataFim());
+            System.out.println("Data Inicio: " + getCurso(i).getDateInicio());
+            System.out.println("Data Fim: " + getCurso(i).getDateFim());
             System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
             System.out.println("Horários: : " + getCurso(i).getHorario());
             System.out.println("Professor do curso: " + getCurso(i).getProfessor().getNome());
@@ -605,8 +605,8 @@ public class Sistema
                 System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
                 System.out.println("Carga Horária: " + getCurso(i).getCargaHorariaCurso());
                 System.out.println("Ementa: " + getCurso(i).getEmenta());
-                System.out.println("Data Inicio: " + getCurso(i).getDataInicio());
-                System.out.println("Data Fim: " + getCurso(i).getDataFim());
+                System.out.println("Data Inicio: " + getCurso(i).getDateInicio());
+                System.out.println("Data Fim: " + getCurso(i).getDateFim());
                 System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
                 System.out.println("Horários: : " + getCurso(i).getHorario());
                 System.out.println("Professor do curso: " + getCurso(i).getProfessor().getNome());
@@ -701,8 +701,8 @@ public class Sistema
                 System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
                 System.out.println("Carga Horária: " + getCurso(i).getCargaHorariaCurso());
                 System.out.println("Ementa: " + getCurso(i).getEmenta());
-                System.out.println("Data Inicio: " + getCurso(i).getDataInicio());
-                System.out.println("Data Fim: " + getCurso(i).getDataFim());
+                System.out.println("Data Inicio: " + getCurso(i).getDateInicio());
+                System.out.println("Data Fim: " + getCurso(i).getDateFim());
                 System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
                 System.out.println("Horários: : " + getCurso(i).getHorario());
                 System.out.println("Status do Curso: " + getCurso(i).getStatus());
