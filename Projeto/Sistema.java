@@ -152,29 +152,36 @@ public class Sistema
             nome = teclado.nextLine();
             System.out.print("Digite seu Email: ");
             email = teclado.nextLine();
-            if(VerificaCPF(cpf) == true) {
-                do{
-                    System.out.print("Senha: ");
-                    senha = teclado.nextLine();
-                    System.out.print("Confirme a senha: ");
-                    confirmaSenha = teclado.nextLine();
-                    //verificacao de senha
-                    boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-                    if(verifica == true) {
-                        controle = true;
-                        codigoUsuario = GerarCodigoUsuario();
-                        Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf);
-                        setAluno(aluno);
-                        System.out.println("Conta Criada com Sucesso!");
-                    }else {
-                        System.out.println("A senha não é igual!" + "Tente Novamente!"); 
-                        System.out.println();
-                    }
-            
-                    
-                } while(controle != true);
-            } else {
-                System.out.println("Já existe um usuário cadastrado com esse CPF!");
+            if(email.matches("(.*)@(.*).com")){
+                if(VerificaCPF(cpf) == true) {
+                    do{
+                        System.out.print("Senha: ");
+                        senha = teclado.nextLine();
+                        System.out.print("Confirme a senha: ");
+                        confirmaSenha = teclado.nextLine();
+                        //verificacao de senha
+                        boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                        if(verifica == true) {
+                            controle = true;
+                            codigoUsuario = GerarCodigoUsuario();
+                            Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf);
+                            setAluno(aluno);
+                            System.out.println("Conta Criada com Sucesso!");
+                            teclado.nextLine();
+                        }else {
+                            System.out.println("A senha não é igual!" + "Tente Novamente!"); 
+                            System.out.println();
+                        }
+                
+                        
+                    } while(controle != true);
+                } else {
+                    System.out.println("Já existe um usuário cadastrado com esse CPF!");
+                }
+            }
+            else{
+                System.out.println("Formato do email inválido, tente novamente.");
+                teclado.nextLine();
             }
         }
         else{
