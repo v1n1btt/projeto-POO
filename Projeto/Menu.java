@@ -1,6 +1,7 @@
 package Projeto;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu 
@@ -40,6 +41,7 @@ public class Menu
                         return;
                     default:
                         System.out.print("\nOpção inválida, tente novamente.");
+                        teclado.nextLine();
                         break;
                 }
             } catch(NumberFormatException numberFormatException) {
@@ -111,12 +113,14 @@ public class Menu
                             return;
                         default:
                             System.out.print("\nOpção inválida, tente novamente.");
+                            teclado.nextLine();
                             break;
                     }
                 } while(opcao != 4); 
-            } catch(NumberFormatException numberFormatException)
+            } catch(InputMismatchException inputMismatchException)
             {
                 System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
                 teclado.nextLine();
             }
         } while(opcao != 1 || opcao != 2 || opcao != 3);
