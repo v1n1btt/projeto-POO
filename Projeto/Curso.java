@@ -133,7 +133,9 @@ public class Curso {
     }
 
     public void setNota(double nota) {
-        if(nota >= 0.0) {
+        if(nota < 0.0) {
+            throw new IllegalArgumentException("A nota não pode ser menor que zero!");
+        } else {
             this.notas[indiceNotas] = nota;
             indiceNotas++; 
         }
