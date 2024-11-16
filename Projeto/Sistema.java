@@ -695,20 +695,20 @@ public class Sistema
         }
     }
 
-    public void CursosProfessor(int i) 
+    public void CursosProfessor(int idProfessor) 
     {
-        for(int j = 0; j < contadorCurso; j++) {
-            if(getCurso(j).getProfessor() == getProfessor(i)) {
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
+            if(getCurso(indiceCursos).getProfessor() == getProfessor(idProfessor)) {
                 System.out.println();
-                System.out.println("Nome: " + getCurso(i).getNomeCurso());
-                System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
-                System.out.println("Carga Horária: " + getCurso(i).getCargaHorariaCurso());
-                System.out.println("Ementa: " + getCurso(i).getEmenta());
-                System.out.println("Data Inicio: " + getCurso(i).getDateInicio());
-                System.out.println("Data Fim: " + getCurso(i).getDateFim());
-                System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
-                System.out.println("Horários: : " + getCurso(i).getHorario());
-                System.out.println("Status do Curso: " + getCurso(i).getStatus());
+                System.out.println("Nome: " + getCurso(idProfessor).getNomeCurso());
+                System.out.println("Código Curso: " + getCurso(idProfessor).getCodigoCurso());
+                System.out.println("Carga Horária: " + getCurso(idProfessor).getCargaHorariaCurso());
+                System.out.println("Ementa: " + getCurso(idProfessor).getEmenta());
+                System.out.println("Data Inicio: " + getCurso(idProfessor).getDateInicio());
+                System.out.println("Data Fim: " + getCurso(idProfessor).getDateFim());
+                System.out.println("Quantidade de Alunos Matriculados: " + getCurso(idProfessor).getQuantidadeAtualAlunos());
+                System.out.println("Horários: : " + getCurso(idProfessor).getHorario());
+                System.out.println("Status do Curso: " + getCurso(idProfessor).getStatus());
                 System.out.println();
             }
         }
