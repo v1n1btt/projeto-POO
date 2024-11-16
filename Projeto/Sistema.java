@@ -77,10 +77,10 @@ public class Sistema
     //metodos para fazer os logins
     public void fazerLoginUsuarioAluno(String email, String senha) 
     {
-        for(int i = 0; i < contadorAluno; i++) 
+        for(int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
         {
-            if(VerificaVariaveis(getAluno(i).getEmail(), email) == true && VerificaVariaveis(getAluno(i).getSenhaPessoal(), senha) == true && getAluno(i).getNivelAcesso() == 3) {
-                MenuAluno(i);
+            if(VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true && VerificaVariaveis(getAluno(i).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) {
+                MenuAluno(indiceAlunos);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
             }
@@ -89,10 +89,10 @@ public class Sistema
 
     public void fazerLoginUsuarioAdministrador(String email, String senha) 
     {
-        for(int i = 0; i < contadorAdministrador; i++) 
+        for(int indiceAdministradores = 0; indiceAdministradores < indiceAdministradores; indiceAdministradores++) 
         {
-            if(VerificaVariaveis(getAdministrador(i).getEmail(), email) == true && VerificaVariaveis(getAdministrador(i).getSenhaPessoal(), senha) == true && getAdministrador(i).getNivelAcesso() == 1) {
-                MenuAdministrador(i);
+            if(VerificaVariaveis(getAdministrador(indiceAdministradores).getEmail(), email) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getNivelAcesso(), "administrador") == true) {
+                MenuAdministrador(indiceAdministradores);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
             }
@@ -101,10 +101,10 @@ public class Sistema
 
     public void fazerLoginUsuarioProfessor(String email, String senha) 
     {
-        for(int i = 0; i < contadorProfessor; i++) 
+        for(int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) 
         {
-            if(VerificaVariaveis(getProfessor(i).getEmail(), email) == true && VerificaVariaveis(getProfessor(i).getSenhaPessoal(), senha) == true && getProfessor(i).getNivelAcesso() == 2) {
-                MenuProfessor(i);
+            if(VerificaVariaveis(getProfessor(indiceProfessores).getEmail(), email) == true && VerificaVariaveis(getProfessor(indiceProfessores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getProfessor(indiceProfessores).getNivelAcesso(), "professor") == true) {
+                MenuProfessor(indiceProfessores);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
             }

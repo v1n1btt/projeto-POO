@@ -12,7 +12,7 @@ public class Aluno extends Pessoa {
     public Aluno(String nome, int codigoUsuario, String email, String senhaPessoal, String cpf) {
         super(nome, codigoUsuario, email, senhaPessoal);
         setCPF(cpf);
-        setNivelAcesso(3);
+        setNivelAcesso("aluno");
     }
 
     public void setCPF(String cpf) {
