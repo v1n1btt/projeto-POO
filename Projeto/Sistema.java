@@ -79,7 +79,7 @@ public class Sistema
     {
         for(int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
         {
-            if(VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true && VerificaVariaveis(getAluno(i).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) {
+            if(VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true && VerificaVariaveis(getAluno(indiceAlunos).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) {
                 MenuAluno(indiceAlunos);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
