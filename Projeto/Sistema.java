@@ -211,7 +211,8 @@ public class Sistema
                 System.out.println("    2 - Consultar Cursos disponíveis.");
                 System.out.println("    3 - Se matricular em Cursos disponíveis.");
                 System.out.println("    4 - Cancelar matricula em um curso.");
-                System.out.println("    5 - Sair.");
+                System.out.println("    5 - Obter o certificado de conclusão de um curso");
+                System.out.println("    6 - Sair.");
                 System.out.print("\nSelecione uma opção: ");
 
                 escolha = Integer.parseInt(teclado.nextLine());
@@ -234,6 +235,9 @@ public class Sistema
 
                         break;
                     case 5:
+                        Menu.limpaTela();
+                        break;
+                    case 6:
                         Menu.limpaTela();
                         break;
                     default:
@@ -599,7 +603,6 @@ public class Sistema
 
     public void EditarCurso() 
     {
-
         String codigo;
         int opcao; 
 
@@ -630,6 +633,10 @@ public class Sistema
                         System.out.println("Modificado com sucesso!");
                         return;
                     case 2:
+                        System.out.println("Digite o novo Código do curso: ");
+                        String novoCodigo = teclado.nextLine();
+                        getCurso(indiceCursos).setCodigoCurso(novoCodigo);
+                        System.out.println("Modificado com sucesso!");
                         return;
                     case 3:
                         System.out.println("Digite a nova Carga Horária do curso: ");
@@ -667,15 +674,13 @@ public class Sistema
                     default:
                         break;
                 }
-                break;
             }
         }
-               
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
 
-    public void MenuProfessor(int i) 
+    public void MenuProfessor(int idProfessor) 
     {
 
         int escolha = 0; 
@@ -685,7 +690,7 @@ public class Sistema
                 System.out.println();
                 System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
                 System.out.print("MENU DO PROFESSOR\n");
-                System.out.println("Bem vindo: " + " " + getProfessor(i).getNome() + "\n");
+                System.out.println("Bem vindo: " + " " + getProfessor(idProfessor).getNome() + "\n");
                 System.out.println("    1 - Consultar seus Dados.");
                 System.out.println("    2 - Consultar os Cursos em que você é o responsável.");
                 System.out.println("    3 - Adicionar notas de alunos de um curso e encerra o curso."); 
@@ -695,15 +700,15 @@ public class Sistema
                 switch(escolha) {
                     case 1:
                         Menu.limpaTela();
-                        DadosProfessor(i);
+                        DadosProfessor(idProfessor);
                         break;
                     case 2:
                         Menu.limpaTela();
-                        CursosProfessor(i);
+                        CursosProfessor(idProfessor);
                         break;
                     case 3:
                         Menu.limpaTela();
-                        AdicionarNotas(i);
+                        AdicionarNotas(idProfessor);
                         break;
                     case 4:
                         Menu.limpaTela();
@@ -719,18 +724,18 @@ public class Sistema
         } while(escolha != 4);
     }
 
-    public void DadosProfessor(int i) 
+    public void DadosProfessor(int idProfessor) 
     {
-        System.out.println("Nome: " + getProfessor(i).getNome());
-        System.out.println("Codigo do Usuário: " + getProfessor(i).getCodigoUsuario());
-        System.out.println("Email: " + getProfessor(i).getEmail());
-        System.out.println("Carga Horário Atual: " + getProfessor(i).getCargaHorariaAtual());
+        System.out.println("Nome: " + getProfessor(idProfessor).getNome());
+        System.out.println("Codigo do Usuário: " + getProfessor(idProfessor).getCodigoUsuario());
+        System.out.println("Email: " + getProfessor(idProfessor).getEmail());
+        System.out.println("Carga Horário Atual: " + getProfessor(idProfessor).getCargaHorariaAtual());
     }
 
     //método que verifica se o professor pode receber a carga horaria
-    public boolean veficaCargaProfessor(int i, int cargaHoraria) 
+    public boolean veficaCargaProfessor(int idProfessor, int cargaHoraria) 
     {
-        if(getProfessor(i).getCargaHorariaAtual() + cargaHoraria <= getProfessor(i).getCargaHorariaMaxima()) {
+        if(getProfessor(idProfessor).getCargaHorariaAtual() + cargaHoraria <= getProfessor(idProfessor).getCargaHorariaMaxima()) {
             return true; 
         } else {
             return false; 
@@ -756,13 +761,13 @@ public class Sistema
         }
     }
 
-    public void AdicionarNotas(int i) 
+    public void AdicionarNotas(int idProfessor) 
     {
 
         String codigo;
         double nota; 
 
-        CursosDisponiveisAluno();
+        CursosProfessor(idProfessor);
         System.out.print("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
         System.out.println();
