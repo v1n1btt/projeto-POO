@@ -615,19 +615,54 @@ public class Sistema
                 System.out.println("4 - Ementa: " + getCurso(indiceCursos).getEmenta());
                 System.out.println("5 - Data Inicio: " + getCurso(indiceCursos).getDateInicio());
                 System.out.println("6 - Data Fim: " + getCurso(indiceCursos).getDateFim());
-                System.out.println("7 - Quantidade de Alunos Matriculados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
-                System.out.println("8 - Horários: : " + getCurso(indiceCursos).getHorario());
-                System.out.println("9 - Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
-                System.out.println("10 - Sair ");
+                System.out.println("7 - Horários: : " + getCurso(indiceCursos).getHorario());
+                System.out.println("8 - Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
+                System.out.println();
                 System.out.println("Escolha uma opção para editar: ");
-                opcao = teclado.nextInt(); 
+                opcao = teclado.nextInt();
+                teclado.nextLine();
                 switch (opcao) 
                 {
                     case 1:
                         System.out.println("Digite o novo nome do curso: ");
                         String novoNome = teclado.nextLine();
                         getCurso(indiceCursos).setNomeCurso(novoNome);
-                        System.out.println("Nome modificado com sucesso!");
+                        System.out.println("Modificado com sucesso!");
+                        return;
+                    case 2:
+                        return;
+                    case 3:
+                        System.out.println("Digite a nova Carga Horária do curso: ");
+                        int novaCargaHoraria = teclado.nextInt();
+                        teclado.nextInt();
+                        getCurso(indiceCursos).setCargaHorariaCurso(novaCargaHoraria);
+                        System.out.println("Modificado com sucesso!");
+                        return;
+                    case 4:
+                        System.out.println("Digite a nova Ementa do curso: ");
+                        String novaEmenta = teclado.nextLine();
+                        getCurso(indiceCursos).setEmenta(novaEmenta);
+                        System.out.println("Modificado com sucesso!");
+                        return;
+                    case 5:
+                        System.out.println("Digite a nova Data de Inicio do curso: ");
+                        String novaDataInicio = teclado.nextLine();
+                        getCurso(indiceCursos).setDateInicio(novaDataInicio);;
+                        System.out.println("Modificado com sucesso!");
+                        return;
+                    case 6:
+                        System.out.println("Digite a nova Data de finalização do curso: ");
+                        String novaDataFim = teclado.nextLine();
+                        getCurso(indiceCursos).setDateFim(novaDataFim);
+                        System.out.println("Modificado com sucesso!");
+                        return;
+                    case 7:
+                        System.out.println("Digite os novos Horários do curso: ");
+                        String novosHorarios = teclado.nextLine();
+                        getCurso(indiceCursos).setHorario(novosHorarios);
+                        System.out.println("Modificado com sucesso!");
+                        return;
+                    case 8:
                         return;
                     default:
                         break;
