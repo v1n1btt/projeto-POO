@@ -510,7 +510,8 @@ public class Sistema
                     System.out.print("Digite o número do professor acima: "); 
                     escolhaProfessor = teclado.nextInt();
                     teclado.nextLine();
-                    CadastrarCurso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, escolhaProfessor);
+                    
+                    CadastrarCurso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, getProfessor(escolhaProfessor), escolhaProfessor);
                 } else {
                     System.out.println("Não há professores cadastrados!");
                 }
@@ -523,12 +524,12 @@ public class Sistema
         } while(exception = true);
     }
 
-    public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dateInicio, String dateFim, String horario, int escolhaProfessor) 
+    public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dateInicio, String dateFim, String horario, Professor professor, int idProfessor) 
     {
-        if(veficaCargaProfessor(escolhaProfessor,cargaHoraria) == true) {
-            Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professores[escolhaProfessor]);
+        if(veficaCargaProfessor(idProfessor,cargaHoraria) == true) {
+            Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor);
             setCurso(curso);
-            professores[escolhaProfessor].setCargaHorariaAtual(professores[escolhaProfessor].getCargaHorariaAtual() + cargaHoraria);
+            AdicionaCargaHorariaProfessor(contadorCurso);
             System.out.println("Curso Criado com Sucesso!");
         } else {
             System.out.println("Esse professor não pode mais receber disciplinas!");
@@ -568,7 +569,7 @@ public class Sistema
             if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
                 if(getCurso(i).getStatus() == false) {
                     getCurso(i).setStatus(true);
-                    getCurso(i).getProfessor().setCargaHorariaAtual(getCurso(i).getProfessor().getCargaHorariaAtual() + getCurso(i).getCargaHorariaCurso()); // Adiciona a carga horaria do professor
+                    AdicionaCargaHorariaProfessor(i);
                     System.out.println("Curso habilitado");
                     break;
                 } else {
@@ -591,7 +592,7 @@ public class Sistema
             if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
                 if(getCurso(i).getStatus() == true) {
                     getCurso(i).setStatus(false);
-                    getCurso(i).getProfessor().setCargaHorariaAtual(getCurso(i).getProfessor().getCargaHorariaAtual() - getCurso(i).getCargaHorariaCurso());// retira a carga horaria do professor
+                    RetiraCargaHorariaProfessor(i);
                     System.out.println("Curso desabilitado");
                 break;
                 } else {
@@ -670,6 +671,20 @@ public class Sistema
                         System.out.println("Modificado com sucesso!");
                         return;
                     case 8:
+                        System.out.println("Escolha um professor abaixo: ");
+                        System.out.println("Indice do Professor: " + "  " + "Nome: " );  
+                        for(int indiceProfessor = 0; indiceProfessor < contadorProfessor; indiceProfessor++) 
+                        {
+                            if(getProfessor(indiceProfessor).getCargaHorariaAtual() != getProfessor(indiceProfessor).getCargaHorariaMaxima()) 
+                            {
+                                System.out.println(indiceProfessor + " " + getProfessor(indiceProfessor).getNome());
+                            }
+                        }
+                        System.out.print("Digite o número do professor acima: "); 
+                        int escolhaProfessor = teclado.nextInt();
+                        teclado.nextLine();
+                        //professores[escolhaProfessor].setCargaHorariaAtual(professores[escolhaProfessor].getCargaHorariaAtual() + cargaHoraria);
+                        RetiraCargaHorariaProfessor(indiceCursos);
                         return;
                     default:
                         break;
@@ -740,6 +755,16 @@ public class Sistema
         } else {
             return false; 
         }
+    }
+
+    public void RetiraCargaHorariaProfessor(int idCursos) 
+    {
+        getCurso(idCursos).getProfessor().setCargaHorariaAtual(getCurso(idCursos).getProfessor().getCargaHorariaAtual() - getCurso(idCursos).getCargaHorariaCurso());// retira a carga horaria do professor
+    }
+
+    public void AdicionaCargaHorariaProfessor(int idCursos) 
+    {
+        getCurso(idCursos).getProfessor().setCargaHorariaAtual(getCurso(idCursos).getProfessor().getCargaHorariaAtual() + getCurso(idCursos).getCargaHorariaCurso()); // Adiciona a carga horaria do professor
     }
 
     public void CursosProfessor(int idProfessor) 
