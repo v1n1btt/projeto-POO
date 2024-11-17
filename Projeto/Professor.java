@@ -5,11 +5,10 @@ public class Professor extends Pessoa
     private int cargaHorariaAtual;
     private final int cargaHorariaMaxima = 80; 
 
-    public Professor(String nome, int codigoUsuario, String email, String senhaPessoal) 
+    public Professor(String nome, int codigoUsuario, String email, String senhaPessoal, String nivelAcesso) 
     {
-        super(nome, codigoUsuario, email, senhaPessoal); 
+        super(nome, codigoUsuario, email, senhaPessoal, nivelAcesso); 
         this.cargaHorariaAtual = 0;
-        setNivelAcesso("professor");
     }
 
     public void setCargaHorariaAtual(int cargaHorariaAtual) 

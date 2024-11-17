@@ -20,9 +20,9 @@ public class Sistema
 
     public Sistema() 
     {
-        Aluno aluno = new Aluno("Joao", 99997, "joao@.com", "joao", "44412345810");
-        Administrador administrador = new Administrador("Admin", 99999, "admin@.com", "admin");
-        Professor professor = new Professor("Mario", 99998, "mario@.com", "mario");
+        Aluno aluno = new Aluno("Joao", 99997, "joao@.com", "joao", "aluno", "44412345810");
+        Administrador administrador = new Administrador("Admin", 99999, "admin@.com", "admin", "administrador");
+    Professor professor = new Professor("Mario", 99998, "mario@.com", "mario", "professor");
         Curso curso = new Curso( "Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quarta e sexta", professor);
         setAdministrador(administrador);
         setAluno(aluno);
@@ -165,7 +165,7 @@ public class Sistema
                         if(verifica == true) {
                             controle = true;
                             codigoUsuario = GerarCodigoUsuario();
-                            Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, cpf);
+                            Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
                             setAluno(aluno);
                             System.out.println("Conta Criada com Sucesso!");
                             teclado.nextLine();
@@ -413,7 +413,7 @@ public class Sistema
     {
         int codigoUsuario; 
         codigoUsuario = GerarCodigoUsuario();
-        Administrador administrador = new Administrador(nome, codigoUsuario, email, senha);
+        Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
         setAdministrador(administrador);
         System.out.println("Conta Criada com Sucesso!");
     }
@@ -455,7 +455,7 @@ public class Sistema
         int codigoUsuario = 0; 
 
         codigoUsuario = GerarCodigoUsuario();
-        Professor professor = new Professor(nome, codigoUsuario, email, senha);
+        Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
         setProfessor(professor);
         System.out.println("Conta Criada com Sucesso!");
     }

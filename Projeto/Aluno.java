@@ -9,11 +9,10 @@ public class Aluno extends Pessoa
 {
     private String cpf;
 
-    public Aluno(String nome, int codigoUsuario, String email, String senhaPessoal, String cpf) 
+    public Aluno(String nome, int codigoUsuario, String email, String senhaPessoal, String nivelAcesso, String cpf) 
     {
-        super(nome, codigoUsuario, email, senhaPessoal);
+        super(nome, codigoUsuario, email, senhaPessoal, nivelAcesso);
         this.cpf = cpf;
-        setNivelAcesso("aluno");
     }
 
     public void setCPF(String cpf) 

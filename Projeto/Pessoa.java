@@ -13,11 +13,12 @@ public abstract class Pessoa
     private String senhaPessoal;
     private String nivelAcesso;
 
-    public Pessoa(String nome, int codigoUsuario, String email, String senhaPessoal) {
+    public Pessoa(String nome, int codigoUsuario, String email, String senhaPessoal, String nivelAcesso) {
         this.nome = nome;
         this.codigoUsuario = codigoUsuario;
         this.email = email;
         this.senhaPessoal = senhaPessoal;
+        this.nivelAcesso = nivelAcesso;
     }
 
     public void setNome(String nome) 
