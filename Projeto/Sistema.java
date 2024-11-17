@@ -22,7 +22,7 @@ public class Sistema
     {
         Aluno aluno = new Aluno("Joao", 99997, "joao@.com", "joao", "aluno", "44412345810");
         Administrador administrador = new Administrador("Admin", 99999, "admin@.com", "admin", "administrador");
-    Professor professor = new Professor("Mario", 99998, "mario@.com", "mario", "professor");
+        Professor professor = new Professor("Mario", 99998, "mario@.com", "mario", "professor");
         Curso curso = new Curso( "Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quarta e sexta", professor);
         setAdministrador(administrador);
         setAluno(aluno);
@@ -79,7 +79,8 @@ public class Sistema
     {
         for(int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
         {
-            if(VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true && VerificaVariaveis(getAluno(indiceAlunos).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) {
+            if(VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true && VerificaVariaveis(getAluno(indiceAlunos).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) 
+            {
                 MenuAluno(indiceAlunos);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
@@ -89,9 +90,10 @@ public class Sistema
 
     public void fazerLoginUsuarioAdministrador(String email, String senha) 
     {
-        for(int indiceAdministradores = 0; indiceAdministradores < indiceAdministradores; indiceAdministradores++) 
+        for(int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) 
         {
-            if(VerificaVariaveis(getAdministrador(indiceAdministradores).getEmail(), email) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getNivelAcesso(), "administrador") == true) {
+            if(VerificaVariaveis(getAdministrador(indiceAdministradores).getEmail(), email) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getNivelAcesso(), "administrador") == true) 
+            {
                 MenuAdministrador(indiceAdministradores);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
@@ -103,7 +105,8 @@ public class Sistema
     {
         for(int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) 
         {
-            if(VerificaVariaveis(getProfessor(indiceProfessores).getEmail(), email) == true && VerificaVariaveis(getProfessor(indiceProfessores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getProfessor(indiceProfessores).getNivelAcesso(), "professor") == true) {
+            if(VerificaVariaveis(getProfessor(indiceProfessores).getEmail(), email) == true && VerificaVariaveis(getProfessor(indiceProfessores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getProfessor(indiceProfessores).getNivelAcesso(), "professor") == true) 
+            {
                 MenuProfessor(indiceProfessores);
             } else {
                 System.out.println("Email ou senha Incorretos!"); 
@@ -315,7 +318,6 @@ public class Sistema
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
     public void MenuAdministrador(int i) 
     {
-
         int escolha = 0;
 
         do {
@@ -346,7 +348,7 @@ public class Sistema
                         break;
                     case 3:
                         Menu.limpaTela();
-                        
+                        EditarCurso();
                         break;
                     case 4:
                         Menu.limpaTela();
@@ -603,29 +605,33 @@ public class Sistema
 
         System.out.println("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
-        for(int i = 0; i < contadorCurso; i++) {
-            if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
-                System.out.println("1 - Nome: " + getCurso(i).getNomeCurso());
-                System.out.println("2 - Código Curso: " + getCurso(i).getCodigoCurso());
-                System.out.println("3 - Carga Horária: " + getCurso(i).getCargaHorariaCurso());
-                System.out.println("4 - Ementa: " + getCurso(i).getEmenta());
-                System.out.println("5 - Data Inicio: " + getCurso(i).getDateInicio());
-                System.out.println("6 - Data Fim: " + getCurso(i).getDateFim());
-                System.out.println("7 - Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
-                System.out.println("8 - Horários: : " + getCurso(i).getHorario());
-                System.out.println("9 - Professor do curso: " + getCurso(i).getProfessor().getNome());
-                System.out.println();
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        {
+            if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
+            {
+                System.out.println("1 - Nome: " + getCurso(indiceCursos).getNomeCurso());
+                System.out.println("2 - Código Curso: " + getCurso(indiceCursos).getCodigoCurso());
+                System.out.println("3 - Carga Horária: " + getCurso(indiceCursos).getCargaHorariaCurso());
+                System.out.println("4 - Ementa: " + getCurso(indiceCursos).getEmenta());
+                System.out.println("5 - Data Inicio: " + getCurso(indiceCursos).getDateInicio());
+                System.out.println("6 - Data Fim: " + getCurso(indiceCursos).getDateFim());
+                System.out.println("7 - Quantidade de Alunos Matriculados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
+                System.out.println("8 - Horários: : " + getCurso(indiceCursos).getHorario());
+                System.out.println("9 - Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
+                System.out.println("10 - Sair ");
                 System.out.println("Escolha uma opção para editar: ");
                 opcao = teclado.nextInt(); 
-                switch (opcao) {
+                switch (opcao) 
+                {
                     case 1:
-                        System.out.println("Digite o novo nome do curso: "); 
-                        break;
-                
+                        System.out.println("Digite o novo nome do curso: ");
+                        String novoNome = teclado.nextLine();
+                        getCurso(indiceCursos).setNomeCurso(novoNome);
+                        System.out.println("Nome modificado com sucesso!");
+                        return;
                     default:
                         break;
                 }
-
                 break;
             }
         }
@@ -657,7 +663,8 @@ public class Sistema
                         DadosProfessor(i);
                         break;
                     case 2:
-            
+                        Menu.limpaTela();
+                        CursosProfessor(i);
                         break;
                     case 3:
                         Menu.limpaTela();
