@@ -5,8 +5,8 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class Pessoa {
-    
+public abstract class Pessoa 
+{
     private String nome; 
     private int codigoUsuario;
     private String email; 
@@ -14,54 +14,66 @@ public abstract class Pessoa {
     private String nivelAcesso;
 
     public Pessoa(String nome, int codigoUsuario, String email, String senhaPessoal) {
-        setNome(nome);
-        setCodigoUsuario(codigoUsuario);
-        setEmail(email);
-        setSenhaPessoal(senhaPessoal);
-    }
-
-    public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setCodigoUsuario(int codigoUsuario) {
         this.codigoUsuario = codigoUsuario;
-    }
-
-    public int getCodigoUsuario() {
-        return codigoUsuario;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setSenhaPessoal(String senhaPessoal) {
         this.senhaPessoal = senhaPessoal;
     }
 
-    public String getSenhaPessoal() {
+    public void setNome(String nome) 
+    {
+        this.nome = nome;
+    }
+
+    public String getNome() 
+    {
+        return nome;
+    }
+
+    public void setCodigoUsuario(int codigoUsuario) 
+    {
+        this.codigoUsuario = codigoUsuario;
+    }
+
+    public int getCodigoUsuario() 
+    {
+        return codigoUsuario;
+    }
+
+    public void setEmail(String email) 
+    {
+        this.email = email;
+    }
+
+    public String getEmail() 
+    {
+        return email;
+    }
+
+    public void setSenhaPessoal(String senhaPessoal) 
+    {
+        this.senhaPessoal = senhaPessoal;
+    }
+
+    public String getSenhaPessoal() 
+    {
         return senhaPessoal;
     }
 
-    public void setNivelAcesso(String nivelAcesso) {
+    public void setNivelAcesso(String nivelAcesso) 
+    {
         this.nivelAcesso = nivelAcesso; 
     }
 
-    public String getNivelAcesso() {
+    public String getNivelAcesso() 
+    {
         return nivelAcesso; 
     }
     
-    public String salvaPessoa(){
-        try {
+    public String salvaPessoa()
+    {
+        try 
+        {
             FileWriter fw = new FileWriter("Pessoa.txt");
             PrintWriter pw = new PrintWriter("fw");
             pw.println("Nome: "+this.nome);
@@ -72,7 +84,8 @@ public abstract class Pessoa {
             pw.flush();
             pw.close();
             fw.close();
-        } catch (IOException ex){
+        } catch (IOException ex)
+        {
             Logger.getLogger(Pessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
