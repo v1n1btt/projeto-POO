@@ -870,17 +870,20 @@ public class Sistema
                 {
                     if(getCurso(indiceCursos).getNota(indiceAlunos) == 0)
                     {
+                        System.out.println();
                         System.out.println("Nome: " + getCurso(indiceCursos).getAlunosMatriculados(indiceAlunos).getNome());
                         System.out.println("Código Usuário: " + getCurso(indiceCursos).getAlunosMatriculados(indiceAlunos).getCodigoUsuario());
                         System.out.print("Digite a nota do Aluno acima: ");
-                        teclado.nextLine();
                         nota = teclado.nextDouble();
                         getCurso(indiceAlunos).setNota(nota);
+                        System.out.println();
                         System.out.println("A nota do aluno acima é: " + " " + getCurso(indiceCursos).getNota(indiceAlunos));
+                        System.out.println();
                     }
                 }
                 //getCurso(indiceCursos).setStatus(false);
                 System.out.println("Todas as notas de todos os alunos foram cadastradas!");
+                break;
                 //System.out.println("O curso foi encerrado!");
             }
         }
