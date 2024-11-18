@@ -317,6 +317,7 @@ public class Sistema
                 System.out.println("Data Final do curso: " + getCurso(indiceCursos).getDateFim());
                 System.out.println("Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
                 System.out.println("Horários e dias do curso: " + getCurso(indiceCursos).getHorario());
+                System.out.println("Quantidade de alunos matrículados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
                 System.out.println();
             }
         }
@@ -328,7 +329,7 @@ public class Sistema
 
         CursosDisponiveisAluno();
 
-        System.out.println("Digite o código do curso: ");
+        System.out.print("Digite o código do curso: ");
         codigo = teclado.nextLine();
 
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
