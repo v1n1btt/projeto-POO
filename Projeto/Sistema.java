@@ -25,13 +25,12 @@ public class Sistema
         Administrador administrador = new Administrador("Admin", 99999, "admin@.com", "admin", "administrador");
         Professor professor = new Professor("Mario", 99998, "mario@.com", "mario", "professor");
         Professor professor2 = new Professor("Mario", 99991, "mauro@.com", "mauro", "professor");
-        Curso curso = new Curso( "Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quarta e sexta", professor);
+        CadastrarCurso("Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quarta e sexta", professor, contadorProfessor);
         setAdministrador(administrador);
         setAluno(aluno);
         setAluno(aluno2);
         setProfessoresSistema(professor);
         setProfessoresSistema(professor2);
-        setCurso(curso);
     }
 
     public void setAluno(Aluno aluno) 
@@ -69,7 +68,6 @@ public class Sistema
 
     public void setCurso(Curso curso) 
     {   
-        AdicionaCargaHorariaProfessor(contadorCurso);
         this.cursos[contadorCurso] = curso;
         contadorCurso++; 
     }
@@ -545,6 +543,7 @@ public class Sistema
         if(veficaCargaProfessor(idProfessor,cargaHoraria) == true) 
         {
             Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor);
+            AdicionaCargaHorariaProfessor(contadorCurso);
             setCurso(curso);
             System.out.println("Curso Criado com Sucesso!");
         } else {
