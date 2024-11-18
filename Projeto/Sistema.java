@@ -24,13 +24,15 @@ public class Sistema
         Aluno aluno2 = new Aluno("Pedro", 99992, "pedro@.com", "pedro", "aluno", "44412145810");
         Administrador administrador = new Administrador("Admin", 99999, "admin@.com", "admin", "administrador");
         Professor professor = new Professor("Mario", 99998, "mario@.com", "mario", "professor");
-        Professor professor2 = new Professor("Mario", 99991, "mauro@.com", "mauro", "professor");
-        CadastrarCurso("Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quarta e sexta", professor, contadorProfessor);
+        Professor professor2 = new Professor("Mauro", 99991, "mauro@.com", "mauro", "professor");
+        Curso curso = new Curso("Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quarta e sexta", professor);
         setAdministrador(administrador);
         setAluno(aluno);
         setAluno(aluno2);
         setProfessoresSistema(professor);
         setProfessoresSistema(professor2);
+        setCurso(curso);
+        AdicionaCargaHorariaProfessor(0);
     }
 
     public void setAluno(Aluno aluno) 
