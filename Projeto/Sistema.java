@@ -18,7 +18,7 @@ public class Sistema
 
     Scanner teclado = new Scanner(System.in);
 
-    public void GerarAdministrador(String nome, String email, String senha) {
+   /*  public void GerarAdministrador(String nome, String email, String senha) {
         int codigoUsuario; 
              codigoUsuario = GerarCodigoUsuario();
                Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
@@ -52,7 +52,7 @@ public class Sistema
                 } else {
                     System.out.println("Esse professor não pode mais receber disciplinas!");
                 }
-            }
+            }*/
 
     public Sistema() 
     {
@@ -591,17 +591,17 @@ public class Sistema
 
     public void DadosCursoAdministrativo() 
     {
-        for(int i = 0; i < contadorCurso; i++) {
-            System.out.println("Nome: " + getCurso(i).getNomeCurso());
-            System.out.println("Código Curso: " + getCurso(i).getCodigoCurso());
-            System.out.println("Carga Horária: " + getCurso(i).getCargaHorariaCurso());
-            System.out.println("Ementa: " + getCurso(i).getEmenta());
-            System.out.println("Data Inicio: " + getCurso(i).getDateInicio());
-            System.out.println("Data Fim: " + getCurso(i).getDateFim());
-            System.out.println("Quantidade de Alunos Matriculados: " + getCurso(i).getQuantidadeAtualAlunos());
-            System.out.println("Horários: : " + getCurso(i).getHorario());
-            System.out.println("Professor do curso: " + getCurso(i).getProfessor().getNome());
-            if(getCurso(i).getStatus() == true) {
+        for(int indiceCurso = 0; indiceCurso < contadorCurso; indiceCurso++) {
+            System.out.println("Nome: " + getCurso(indiceCurso).getNomeCurso());
+            System.out.println("Código Curso: " + getCurso(indiceCurso).getCodigoCurso());
+            System.out.println("Carga Horária: " + getCurso(indiceCurso).getCargaHorariaCurso());
+            System.out.println("Ementa: " + getCurso(indiceCurso).getEmenta());
+            System.out.println("Data Inicio: " + getCurso(indiceCurso).getDateInicio());
+            System.out.println("Data Fim: " + getCurso(indiceCurso).getDateFim());
+            System.out.println("Quantidade de Alunos Matriculados: " + getCurso(indiceCurso).getQuantidadeAtualAlunos());
+            System.out.println("Horários: : " + getCurso(indiceCurso).getHorario());
+            System.out.println("Professor do curso: " + getCurso(indiceCurso).getProfessor().getNome());
+            if(getCurso(indiceCurso).getStatus() == true) {
                 System.out.println("Status do Curso: " + "Ativo");
             } else {
                 System.out.println("Status do Curso: " + "Desativado");
@@ -618,13 +618,13 @@ public class Sistema
         DadosCursoAdministrativo();
         System.out.println("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
-        for(int i = 0; i < contadorCurso; i++) {
-            if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) 
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
+            if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
             {
-                if(getCurso(i).getStatus() == false) 
+                if(getCurso(indiceCursos).getStatus() == false) 
                 {
-                    getCurso(i).setStatus(true);
-                    AdicionaCargaHorariaProfessor(i);
+                    getCurso(indiceCursos).setStatus(true);
+                    AdicionaCargaHorariaProfessor(indiceCursos);
                     System.out.println("Curso habilitado");
                     break;
                 } else {
@@ -643,13 +643,13 @@ public class Sistema
         DadosCursoAdministrativo();
         System.out.println("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
-        for(int i = 0; i < contadorCurso; i++) {
-            if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) 
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
+            if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
             {
-                if(getCurso(i).getStatus() == true) 
+                if(getCurso(indiceCursos).getStatus() == true) 
                 {
-                    getCurso(i).setStatus(false);
-                    RetiraCargaHorariaProfessor(i);
+                    getCurso(indiceCursos).setStatus(false);
+                    RetiraCargaHorariaProfessor(indiceCursos);
                     System.out.println("Curso desabilitado");
                 break;
                 } else {
@@ -810,17 +810,12 @@ public class Sistema
     //método que verifica se o professor pode receber a carga horaria
     public boolean veficaCargaProfessor(int idProfessor, int cargaHoraria) 
     {
-        if(getProfessoresSistema(idProfessor).getCargaHorariaAtual() + cargaHoraria <= getProfessoresSistema(idProfessor).getCargaHorariaMaxima()) {
+        if(getProfessoresSistema(idProfessor).getCargaHorariaAtual() + cargaHoraria <= getProfessoresSistema(idProfessor).getCargaHorariaMaxima()) 
+        {
             return true; 
         } else {
             return false; 
         }
-    }
-
-    // retira a carga horaria do professor
-    public void RetiraCargaHorariaProfessor(int idCurso) 
-    {
-        getCurso(idCurso).getProfessor().setCargaHorariaAtual(getCurso(idCurso).getProfessor().getCargaHorariaAtual() - getCurso(idCurso).getCargaHorariaCurso());
     }
 
     // Adiciona a carga horaria do professor
@@ -829,10 +824,18 @@ public class Sistema
         getCurso(idCurso).getProfessor().setCargaHorariaAtual(getCurso(idCurso).getProfessor().getCargaHorariaAtual() + getCurso(idCurso).getCargaHorariaCurso()); 
     }
 
+    // retira a carga horaria do professor
+    public void RetiraCargaHorariaProfessor(int idCurso) 
+    {
+        getCurso(idCurso).getProfessor().setCargaHorariaAtual(getCurso(idCurso).getProfessor().getCargaHorariaAtual() - getCurso(idCurso).getCargaHorariaCurso());
+    }
+
     public void CursosProfessor(int idProfessor) 
     {
-        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
-            if(getCurso(indiceCursos).getProfessor() == getProfessoresSistema(idProfessor)) {
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        {
+            if(getCurso(indiceCursos).getProfessor() == getProfessoresSistema(idProfessor)) 
+            {
                 System.out.println();
                 System.out.println("Nome: " + getCurso(idProfessor).getNomeCurso());
                 System.out.println("Código Curso: " + getCurso(idProfessor).getCodigoCurso());
@@ -856,23 +859,28 @@ public class Sistema
 
         CursosProfessor(idProfessor);
         System.out.print("Digite o Código do curso: ");
-        codigo = teclado.nextLine(); 
+        codigo = teclado.nextLine();
         System.out.println();
-        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
-            if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) {
-                for(int indiceAlunos = 0; indiceAlunos < getCurso(indiceCursos).getQuantidadeAtualAlunos(); indiceAlunos++) {
-                    if(getCurso(indiceCursos).getNota(indiceAlunos) == 0){
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        {
+            if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true && getCurso(indiceCursos).getProfessor() == getProfessoresSistema(idProfessor)) 
+            {
+                for(int indiceAlunos = 0; indiceAlunos < getCurso(indiceCursos).getQuantidadeAtualAlunos(); indiceAlunos++) 
+                {
+                    if(getCurso(indiceCursos).getNota(indiceAlunos) == 0)
+                    {
                         System.out.println("Nome: " + getCurso(indiceCursos).getAlunosMatriculados(indiceAlunos).getNome());
                         System.out.println("Código Usuário: " + getCurso(indiceCursos).getAlunosMatriculados(indiceAlunos).getCodigoUsuario());
                         System.out.print("Digite a nota do Aluno acima: ");
+                        teclado.nextLine();
                         nota = teclado.nextDouble();
                         getCurso(indiceAlunos).setNota(nota);
                         System.out.println("A nota do aluno acima é: " + " " + getCurso(indiceCursos).getNota(indiceAlunos));
                     }
                 }
-                getCurso(indiceCursos).setStatus(false);
+                //getCurso(indiceCursos).setStatus(false);
                 System.out.println("Todas as notas de todos os alunos foram cadastradas!");
-                System.out.println("O curso foi encerrado!");
+                //System.out.println("O curso foi encerrado!");
             }
         }
     }   
