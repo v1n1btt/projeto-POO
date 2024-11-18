@@ -15,7 +15,7 @@ public class Curso
     private String dateInicio; 
     private String dateFim; 
     private String horario;
-    protected Professor professor; 
+    private Professor professor; 
     private int quantidadeAtualAlunos;
     private boolean status;
     private Aluno[] alunosMatriculados;

@@ -13,7 +13,7 @@ public class Sistema
     private static int contadorCurso = 0; 
     private Aluno[] alunos = new Aluno[1000];
     private Administrador[] administradores = new Administrador[100]; 
-    private Professor[] professores = new Professor[100];
+    private Professor[] professoresSistema = new Professor[100];
     private Curso[] cursos = new Curso[100]; 
 
     Scanner teclado = new Scanner(System.in);
@@ -21,12 +21,16 @@ public class Sistema
     public Sistema() 
     {
         Aluno aluno = new Aluno("Joao", 99997, "joao@.com", "joao", "aluno", "44412345810");
+        Aluno aluno2 = new Aluno("Pedro", 99992, "pedro@.com", "pedro", "aluno", "44412145810");
         Administrador administrador = new Administrador("Admin", 99999, "admin@.com", "admin", "administrador");
         Professor professor = new Professor("Mario", 99998, "mario@.com", "mario", "professor");
+        Professor professor2 = new Professor("Mario", 99991, "mauro@.com", "mauro", "professor");
         Curso curso = new Curso( "Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quarta e sexta", professor);
         setAdministrador(administrador);
         setAluno(aluno);
-        setProfessor(professor);
+        setAluno(aluno2);
+        setProfessoresSistema(professor);
+        setProfessoresSistema(professor2);
         setCurso(curso);
     }
 
@@ -52,15 +56,15 @@ public class Sistema
         return administradores[i]; 
     }
 
-    public void setProfessor(Professor professor) 
+    public void setProfessoresSistema(Professor professor) 
     {
-        this.professores[contadorProfessor] = professor;
+        this.professoresSistema[contadorProfessor] = professor;
         contadorProfessor++; 
     }
 
-    public Professor getProfessor(int i) 
+    public Professor getProfessoresSistema(int i) 
     {
-        return professores[i]; 
+        return professoresSistema[i]; 
     }
 
     public void setCurso(Curso curso) 
@@ -82,10 +86,9 @@ public class Sistema
             if(VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true && VerificaVariaveis(getAluno(indiceAlunos).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) 
             {
                 MenuAluno(indiceAlunos);
-            } else {
-                System.out.println("Email ou senha Incorretos!"); 
-            }
+            } 
         }   
+        System.out.println("Email ou senha Incorretos!"); 
     }
 
     public void fazerLoginUsuarioAdministrador(String email, String senha) 
@@ -95,23 +98,21 @@ public class Sistema
             if(VerificaVariaveis(getAdministrador(indiceAdministradores).getEmail(), email) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getNivelAcesso(), "administrador") == true) 
             {
                 MenuAdministrador(indiceAdministradores);
-            } else {
-                System.out.println("Email ou senha Incorretos!"); 
-            }
-        }   
+            } 
+        } 
+        System.out.println("Email ou senha Incorretos!"); 
     }
 
     public void fazerLoginUsuarioProfessor(String email, String senha) 
     {
         for(int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) 
         {
-            if(VerificaVariaveis(getProfessor(indiceProfessores).getEmail(), email) == true && VerificaVariaveis(getProfessor(indiceProfessores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getProfessor(indiceProfessores).getNivelAcesso(), "professor") == true) 
+            if(VerificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email) == true && VerificaVariaveis(getProfessoresSistema(indiceProfessores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getProfessoresSistema(indiceProfessores).getNivelAcesso(), "professor") == true) 
             {
                 MenuProfessor(indiceProfessores);
-            } else {
-                System.out.println("Email ou senha Incorretos!"); 
-            }
-        }   
+            } 
+        }  
+        System.out.println("Email ou senha Incorretos!");
     }
 
     //método que verifica variaveis para ver se são iguais
@@ -239,7 +240,7 @@ public class Sistema
                         break;
                     case 6:
                         Menu.limpaTela();
-                        break;
+                        return;
                     default:
                         System.out.print("\nOpção inválida, tente novamente.");
                         break;
@@ -286,7 +287,7 @@ public class Sistema
         CursosDisponiveisAluno();
         System.out.println("Digite o código do curso: ");
         codigo = teclado.nextLine();
-        for(int j = 0; j < contadorCurso; j++) {
+        for(int j = 0; j <= contadorCurso; j++) {
             if(VerificaVariaveis(getCurso(j).getCodigoCurso(), codigo) == true) {
                 if(getCurso(i).getStatus() == true && VerificaQuantidadeAlunosMatriculados(j) == true) {
                     cursos[j].setAlunosMatriculados(alunos[i]); 
@@ -462,7 +463,7 @@ public class Sistema
 
         codigoUsuario = GerarCodigoUsuario();
         Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
-        setProfessor(professor);
+        setProfessoresSistema(professor);
         System.out.println("Conta Criada com Sucesso!");
     }
 
@@ -483,7 +484,7 @@ public class Sistema
             try{
                 exception = false;
                 Menu.limpaTela();
-                if(getProfessor(0) != null) {
+                if(getProfessoresSistema(0) != null) {
                     System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
                     System.out.print("Nome do curso: ");
                     nome = teclado.nextLine();
@@ -503,15 +504,15 @@ public class Sistema
                     System.out.println("Escolha um professor:");
                     System.out.println("Indice do Professor: " + "  " + "Nome: " );  
                     for(int i = 0; i < contadorProfessor; i++) {
-                        if(getProfessor(i).getCargaHorariaAtual() != getProfessor(i).getCargaHorariaMaxima()) {
-                            System.out.println(i + " " + getProfessor(i).getNome());
+                        if(getProfessoresSistema(i).getCargaHorariaAtual() != getProfessoresSistema(i).getCargaHorariaMaxima()) {
+                            System.out.println(i + " " + getProfessoresSistema(i).getNome());
                         }
                     }
                     System.out.print("Digite o número do professor acima: "); 
                     escolhaProfessor = teclado.nextInt();
                     teclado.nextLine();
                     
-                    CadastrarCurso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, getProfessor(escolhaProfessor), escolhaProfessor);
+                    CadastrarCurso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, getProfessoresSistema(escolhaProfessor), escolhaProfessor);
                 } else {
                     System.out.println("Não há professores cadastrados!");
                 }
@@ -605,8 +606,9 @@ public class Sistema
     public void EditarCurso() 
     {
         String codigo;
-        int opcao; 
+        int opcao;
 
+        DadosCursoAdministrativo();
         System.out.println("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
@@ -625,6 +627,7 @@ public class Sistema
                 System.out.println("Escolha uma opção para editar: ");
                 opcao = teclado.nextInt();
                 teclado.nextLine();
+                Menu.limpaTela();
                 switch (opcao) 
                 {
                     case 1:
@@ -675,15 +678,16 @@ public class Sistema
                         System.out.println("Indice do Professor: " + "  " + "Nome: " );  
                         for(int indiceProfessor = 0; indiceProfessor < contadorProfessor; indiceProfessor++) 
                         {
-                            if(getProfessor(indiceProfessor).getCargaHorariaAtual() != getProfessor(indiceProfessor).getCargaHorariaMaxima()) 
+                            if(getProfessoresSistema(indiceProfessor).getCargaHorariaAtual() != getProfessoresSistema(indiceProfessor).getCargaHorariaMaxima()) 
                             {
-                                System.out.println(indiceProfessor + " " + getProfessor(indiceProfessor).getNome());
+                                System.out.println(indiceProfessor + " " + getProfessoresSistema(indiceProfessor).getNome());
                             }
                         }
                         System.out.print("Digite o número do professor acima: "); 
                         int escolhaProfessor = teclado.nextInt();
                         teclado.nextLine();
-                        //professores[escolhaProfessor].setCargaHorariaAtual(professores[escolhaProfessor].getCargaHorariaAtual() + cargaHoraria);
+                        getCurso(indiceCursos).setProfessor(getProfessoresSistema(escolhaProfessor));
+                        AdicionaCargaHorariaProfessor(indiceCursos);
                         RetiraCargaHorariaProfessor(indiceCursos);
                         return;
                     default:
@@ -705,7 +709,7 @@ public class Sistema
                 System.out.println();
                 System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
                 System.out.print("MENU DO PROFESSOR\n");
-                System.out.println("Bem vindo: " + " " + getProfessor(idProfessor).getNome() + "\n");
+                System.out.println("Bem vindo: " + " " + getProfessoresSistema(idProfessor).getNome() + "\n");
                 System.out.println("    1 - Consultar seus Dados.");
                 System.out.println("    2 - Consultar os Cursos em que você é o responsável.");
                 System.out.println("    3 - Adicionar notas de alunos de um curso e encerra o curso."); 
@@ -741,36 +745,38 @@ public class Sistema
 
     public void DadosProfessor(int idProfessor) 
     {
-        System.out.println("Nome: " + getProfessor(idProfessor).getNome());
-        System.out.println("Codigo do Usuário: " + getProfessor(idProfessor).getCodigoUsuario());
-        System.out.println("Email: " + getProfessor(idProfessor).getEmail());
-        System.out.println("Carga Horário Atual: " + getProfessor(idProfessor).getCargaHorariaAtual());
+        System.out.println("Nome: " + getProfessoresSistema(idProfessor).getNome());
+        System.out.println("Codigo do Usuário: " + getProfessoresSistema(idProfessor).getCodigoUsuario());
+        System.out.println("Email: " + getProfessoresSistema(idProfessor).getEmail());
+        System.out.println("Carga Horário Atual: " + getProfessoresSistema(idProfessor).getCargaHorariaAtual());
     }
 
     //método que verifica se o professor pode receber a carga horaria
     public boolean veficaCargaProfessor(int idProfessor, int cargaHoraria) 
     {
-        if(getProfessor(idProfessor).getCargaHorariaAtual() + cargaHoraria <= getProfessor(idProfessor).getCargaHorariaMaxima()) {
+        if(getProfessoresSistema(idProfessor).getCargaHorariaAtual() + cargaHoraria <= getProfessoresSistema(idProfessor).getCargaHorariaMaxima()) {
             return true; 
         } else {
             return false; 
         }
     }
 
+    // retira a carga horaria do professor
     public void RetiraCargaHorariaProfessor(int idCursos) 
     {
-        getCurso(idCursos).getProfessor().setCargaHorariaAtual(getCurso(idCursos).getProfessor().getCargaHorariaAtual() - getCurso(idCursos).getCargaHorariaCurso());// retira a carga horaria do professor
+        getCurso(idCursos).getProfessor().setCargaHorariaAtual(getCurso(idCursos).getProfessor().getCargaHorariaAtual() - getCurso(idCursos).getCargaHorariaCurso());
     }
 
+    // Adiciona a carga horaria do professor
     public void AdicionaCargaHorariaProfessor(int idCursos) 
     {
-        getCurso(idCursos).getProfessor().setCargaHorariaAtual(getCurso(idCursos).getProfessor().getCargaHorariaAtual() + getCurso(idCursos).getCargaHorariaCurso()); // Adiciona a carga horaria do professor
+        getCurso(idCursos).getProfessor().setCargaHorariaAtual(getCurso(idCursos).getProfessor().getCargaHorariaAtual() + getCurso(idCursos).getCargaHorariaCurso()); 
     }
 
     public void CursosProfessor(int idProfessor) 
     {
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
-            if(getCurso(indiceCursos).getProfessor() == getProfessor(idProfessor)) {
+            if(getCurso(indiceCursos).getProfessor() == getProfessoresSistema(idProfessor)) {
                 System.out.println();
                 System.out.println("Nome: " + getCurso(idProfessor).getNomeCurso());
                 System.out.println("Código Curso: " + getCurso(idProfessor).getCodigoCurso());
