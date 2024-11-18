@@ -18,6 +18,42 @@ public class Sistema
 
     Scanner teclado = new Scanner(System.in);
 
+    public void GerarAdministrador(String nome, String email, String senha) {
+        int codigoUsuario; 
+             codigoUsuario = GerarCodigoUsuario();
+               Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
+               setAdministrador(administrador);
+                System.out.println("Conta Criada com Sucesso!");
+        
+                // Criar arquivo para o administrador
+                GeraArquivo.criarArquivoUsuario(administrador);
+            }
+        
+            public void GerarProfessor(String nome, String email, String senha) {
+                int codigoUsuario = 0; 
+               codigoUsuario = GerarCodigoUsuario();
+                Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
+                setProfessoresSistema(professor);
+                System.out.println("Conta Criada com Sucesso!");
+        
+                // Criar arquivo para o professor
+                GeraArquivo.criarArquivoUsuario(professor);
+            }
+        
+            public void GerarCurso(nomeCurso, codigoCurso, cargaHoraria, ementa, dateInicio, dateFim, horario, professor, idProfessor) {
+                if (veficaCargaProfessor(idProfessor, cargaHoraria) == true) {
+                    Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor);
+                    setCurso(curso);
+                    AdicionaCargaHorariaProfessor(contadorCurso);
+                    System.out.println("Curso Criado com Sucesso!");
+        
+                    // Criar arquivo para o curso
+                    GeraArquivo.criarArquivoCurso(nome, codigo, ementa, dateInicio, dateFim, horario, cargaHoraria, professor, curso.getAlunosMatriculados(), curso.getQuantidadeAtualAlunos());
+                } else {
+                    System.out.println("Esse professor não pode mais receber disciplinas!");
+                }
+            }
+
     public Sistema() 
     {
         Aluno aluno = new Aluno("Joao", 99997, "joao@.com", "joao", "aluno", "44412345810");
