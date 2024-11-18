@@ -68,7 +68,8 @@ public class Sistema
     }
 
     public void setCurso(Curso curso) 
-    {
+    {   
+        AdicionaCargaHorariaProfessor(contadorCurso);
         this.cursos[contadorCurso] = curso;
         contadorCurso++; 
     }
@@ -152,21 +153,26 @@ public class Sistema
         System.out.print("====================\nCADASTRO ALUNO\n====================\n\n");
         System.out.print("CPF (apenas números): ");
         cpf = teclado.nextLine();
-        if(cpf.matches("[0-9]+") && cpf.length() == 11){
+        if(cpf.matches("[0-9]+") && cpf.length() == 11)
+        {
             System.out.print("Nome completo: ");
             nome = teclado.nextLine();
             System.out.print("Digite seu Email: ");
             email = teclado.nextLine();
-            if(email.matches("(.*)@(.*).com")){
-                if(VerificaCPF(cpf) == true) {
-                    do{
+            if(email.matches("(.*)@(.*).com"))
+            {
+                if(VerificaCPF(cpf) == true) 
+                {
+                    do
+                    {
                         System.out.print("Senha: ");
                         senha = teclado.nextLine();
                         System.out.print("Confirme a senha: ");
                         confirmaSenha = teclado.nextLine();
                         //verificacao de senha
                         boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-                        if(verifica == true) {
+                        if(verifica == true) 
+                        {
                             controle = true;
                             codigoUsuario = GerarCodigoUsuario();
                             Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
@@ -184,7 +190,7 @@ public class Sistema
                     System.out.println("Já existe um usuário cadastrado com esse CPF!");
                 }
             }
-            else{
+            else {
                 System.out.println("Formato do email inválido, tente novamente.");
                 teclado.nextLine();
             }
@@ -196,7 +202,7 @@ public class Sistema
     }
 
     //Gera o menu que o aluno vê 
-    public void MenuAluno(int i) 
+    public void MenuAluno(int idAluno) 
     {
 
         int escolha = 0; 
@@ -207,7 +213,7 @@ public class Sistema
                 System.out.println();
                 System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
                 System.out.println("MENU DO ALUNO\n");
-                System.out.println("Bem vindo: " + " " + getAluno(i).getNome() + "\n");
+                System.out.println("Bem vindo: " + " " + getAluno(idAluno).getNome() + "\n");
                 System.out.println("    1 - Consultar seus Dados.");
                 System.out.println("    2 - Consultar Cursos disponíveis.");
                 System.out.println("    3 - Se matricular em Cursos disponíveis.");
@@ -222,7 +228,7 @@ public class Sistema
                 {
                     case 1:
                         Menu.limpaTela();
-                        DadosAluno(i);
+                        DadosAluno(idAluno);
                         break;
                     case 2:
                         Menu.limpaTela();
@@ -230,7 +236,7 @@ public class Sistema
                         break;
                     case 3:
                         Menu.limpaTela();
-                        MatricularCurso(i);
+                        MatricularCurso(idAluno);
                         break;
                     case 4:
 
@@ -253,44 +259,49 @@ public class Sistema
     }
 
     //gera os dados do aluno 
-    public void DadosAluno(int i) 
+    public void DadosAluno(int idAluno) 
     {
-        System.out.println("Nome: " + getAluno(i).getNome());
-        System.out.println("Codigo do Usuário: " + getAluno(i).getCodigoUsuario());
-        System.out.println("Email: " + getAluno(i).getEmail());
-        System.out.println("CPF: " + getAluno(i).getCPF());
+        System.out.println("Nome: " + getAluno(idAluno).getNome());
+        System.out.println("Codigo do Usuário: " + getAluno(idAluno).getCodigoUsuario());
+        System.out.println("Email: " + getAluno(idAluno).getEmail());
+        System.out.println("CPF: " + getAluno(idAluno).getCPF());
     }
 
     //gera os cursos que estão disponíveis para a matrícula 
     public void CursosDisponiveisAluno() 
     {
-        for( int i = 0; i < contadorCurso; i++) {
-            if (getCurso(i).getStatus() == true && VerificaQuantidadeAlunosMatriculados(i) == true) {
+        for( int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
+            if (getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) {
                 System.out.println();
-                System.out.println("Nome do curso: " + getCurso(i).getNomeCurso());
-                System.out.println("Código do curso: " + getCurso(i).getCodigoCurso());
-                System.out.println("Carga Horária do curso: " + getCurso(i).getCargaHorariaCurso() + " Horas");
-                System.out.println("Ementa do curso: " + getCurso(i).getEmenta());
-                System.out.println("Data Inicial do curso: " + getCurso(i).getDateInicio());
-                System.out.println("Data Final do curso: " + getCurso(i).getDateFim());
-                System.out.println("Professor do curso: " + getCurso(i).getProfessor().getNome());
-                System.out.println("Horários e dias do curso: " + getCurso(i).getHorario());
+                System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
+                System.out.println("Código do curso: " + getCurso(indiceCursos).getCodigoCurso());
+                System.out.println("Carga Horária do curso: " + getCurso(indiceCursos).getCargaHorariaCurso() + " Horas");
+                System.out.println("Ementa do curso: " + getCurso(indiceCursos).getEmenta());
+                System.out.println("Data Inicial do curso: " + getCurso(indiceCursos).getDateInicio());
+                System.out.println("Data Final do curso: " + getCurso(indiceCursos).getDateFim());
+                System.out.println("Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
+                System.out.println("Horários e dias do curso: " + getCurso(indiceCursos).getHorario());
                 System.out.println();
             }
         }
     }
 
-    public void MatricularCurso(int i) 
+    public void MatricularCurso(int idAluno) 
     {
-
         String codigo;
+
         CursosDisponiveisAluno();
+
         System.out.println("Digite o código do curso: ");
         codigo = teclado.nextLine();
-        for(int j = 0; j <= contadorCurso; j++) {
-            if(VerificaVariaveis(getCurso(j).getCodigoCurso(), codigo) == true) {
-                if(getCurso(i).getStatus() == true && VerificaQuantidadeAlunosMatriculados(j) == true) {
-                    cursos[j].setAlunosMatriculados(alunos[i]); 
+
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        {
+            if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
+            {
+                if(getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) 
+                {
+                   getCurso(indiceCursos).setAlunosMatriculados(getAluno(idAluno)); 
                     System.out.println("Matricula feita com sucesso!");
                     break;
                 } else {
@@ -301,9 +312,10 @@ public class Sistema
         }
     }
 
-    public boolean VerificaQuantidadeAlunosMatriculados(int j) 
+    public boolean VerificaQuantidadeAlunosMatriculados(int indiceCurso) 
     {
-        if(cursos[j].getQuantidadeAtualAlunos() < cursos[j].getQuantidadeMaximaAlunos()) {
+        if(getCurso(indiceCurso).getQuantidadeAtualAlunos() <= getCurso(indiceCurso).getQuantidadeMaximaAlunos()) 
+        {
             return true; 
         }
         return false; 
@@ -311,9 +323,10 @@ public class Sistema
 
     public boolean VerificaCPF(String cpf) 
     {
-        for(int i = 0; i < contadorAluno; i++) {
-
-            if(VerificaVariaveis(alunos[i].getCPF(), cpf) == true) {
+        for(int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
+        {
+            if(VerificaVariaveis(getAluno(indiceAlunos).getCPF(), cpf) == true) 
+            {
                 return false;
             } 
         }
@@ -503,20 +516,22 @@ public class Sistema
                     teclado.nextLine();
                     System.out.println("Escolha um professor:");
                     System.out.println("Indice do Professor: " + "  " + "Nome: " );  
-                    for(int i = 0; i < contadorProfessor; i++) {
-                        if(getProfessoresSistema(i).getCargaHorariaAtual() != getProfessoresSistema(i).getCargaHorariaMaxima()) {
-                            System.out.println(i + " " + getProfessoresSistema(i).getNome());
+                    for(int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) 
+                    {
+                        if(getProfessoresSistema(indiceProfessores).getCargaHorariaAtual() != getProfessoresSistema(indiceProfessores).getCargaHorariaMaxima()) 
+                        {
+                            System.out.println(indiceProfessores + " " + getProfessoresSistema(indiceProfessores).getNome());
                         }
                     }
                     System.out.print("Digite o número do professor acima: "); 
                     escolhaProfessor = teclado.nextInt();
                     teclado.nextLine();
-                    
                     CadastrarCurso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, getProfessoresSistema(escolhaProfessor), escolhaProfessor);
                 } else {
                     System.out.println("Não há professores cadastrados!");
                 }
-            } catch(InputMismatchException inputMismatchException){
+            } catch(InputMismatchException inputMismatchException)
+            {
                 exception = true;
                 System.out.print("\nEntrada inválida, tente novamente.\n");
                 teclado.nextLine();
@@ -527,10 +542,10 @@ public class Sistema
 
     public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dateInicio, String dateFim, String horario, Professor professor, int idProfessor) 
     {
-        if(veficaCargaProfessor(idProfessor,cargaHoraria) == true) {
+        if(veficaCargaProfessor(idProfessor,cargaHoraria) == true) 
+        {
             Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor);
             setCurso(curso);
-            AdicionaCargaHorariaProfessor(contadorCurso);
             System.out.println("Curso Criado com Sucesso!");
         } else {
             System.out.println("Esse professor não pode mais receber disciplinas!");
@@ -567,8 +582,10 @@ public class Sistema
         System.out.println("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
         for(int i = 0; i < contadorCurso; i++) {
-            if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
-                if(getCurso(i).getStatus() == false) {
+            if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) 
+            {
+                if(getCurso(i).getStatus() == false) 
+                {
                     getCurso(i).setStatus(true);
                     AdicionaCargaHorariaProfessor(i);
                     System.out.println("Curso habilitado");
@@ -590,8 +607,10 @@ public class Sistema
         System.out.println("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
         for(int i = 0; i < contadorCurso; i++) {
-            if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) {
-                if(getCurso(i).getStatus() == true) {
+            if(VerificaVariaveis(getCurso(i).getCodigoCurso(), codigo) == true) 
+            {
+                if(getCurso(i).getStatus() == true) 
+                {
                     getCurso(i).setStatus(false);
                     RetiraCargaHorariaProfessor(i);
                     System.out.println("Curso desabilitado");
@@ -762,15 +781,15 @@ public class Sistema
     }
 
     // retira a carga horaria do professor
-    public void RetiraCargaHorariaProfessor(int idCursos) 
+    public void RetiraCargaHorariaProfessor(int idCurso) 
     {
-        getCurso(idCursos).getProfessor().setCargaHorariaAtual(getCurso(idCursos).getProfessor().getCargaHorariaAtual() - getCurso(idCursos).getCargaHorariaCurso());
+        getCurso(idCurso).getProfessor().setCargaHorariaAtual(getCurso(idCurso).getProfessor().getCargaHorariaAtual() - getCurso(idCurso).getCargaHorariaCurso());
     }
 
     // Adiciona a carga horaria do professor
-    public void AdicionaCargaHorariaProfessor(int idCursos) 
+    public void AdicionaCargaHorariaProfessor(int idCurso) 
     {
-        getCurso(idCursos).getProfessor().setCargaHorariaAtual(getCurso(idCursos).getProfessor().getCargaHorariaAtual() + getCurso(idCursos).getCargaHorariaCurso()); 
+        getCurso(idCurso).getProfessor().setCargaHorariaAtual(getCurso(idCurso).getProfessor().getCargaHorariaAtual() + getCurso(idCurso).getCargaHorariaCurso()); 
     }
 
     public void CursosProfessor(int idProfessor) 
