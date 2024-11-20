@@ -18,41 +18,43 @@ public class Sistema
 
     Scanner teclado = new Scanner(System.in);
 
-   /*  public void GerarAdministrador(String nome, String email, String senha) {
+    /*public void GerarAdministrador(String nome, String email, String senha) 
+    {
         int codigoUsuario; 
-             codigoUsuario = GerarCodigoUsuario();
-               Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
-               setAdministrador(administrador);
-                System.out.println("Conta Criada com Sucesso!");
+        codigoUsuario = GerarCodigoUsuario();
+        Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
+        setAdministrador(administrador);
+        System.out.println("Conta Criada com Sucesso!");
+        // Criar arquivo para o administrador
+        GeraArquivo.criarArquivoUsuario(administrador);
+    }
         
-                // Criar arquivo para o administrador
-                GeraArquivo.criarArquivoUsuario(administrador);
-            }
+    public void GerarProfessor(String nome, String email, String senha) 
+    {
+        int codigoUsuario = 0; 
+        codigoUsuario = GerarCodigoUsuario();
+        Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
+        setProfessoresSistema(professor);
+        System.out.println("Conta Criada com Sucesso!");
+        // Criar arquivo para o professor
+        GeraArquivo.criarArquivoUsuario(professor);
+    }
         
-            public void GerarProfessor(String nome, String email, String senha) {
-                int codigoUsuario = 0; 
-               codigoUsuario = GerarCodigoUsuario();
-                Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
-                setProfessoresSistema(professor);
-                System.out.println("Conta Criada com Sucesso!");
-        
-                // Criar arquivo para o professor
-                GeraArquivo.criarArquivoUsuario(professor);
-            }
-        
-            public void GerarCurso(nomeCurso, codigoCurso, cargaHoraria, ementa, dateInicio, dateFim, horario, professor, idProfessor) {
-                if (veficaCargaProfessor(idProfessor, cargaHoraria) == true) {
-                    Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor);
-                    setCurso(curso);
-                    AdicionaCargaHorariaProfessor(contadorCurso);
-                    System.out.println("Curso Criado com Sucesso!");
-        
-                    // Criar arquivo para o curso
-                    GeraArquivo.criarArquivoCurso(nome, codigo, ementa, dateInicio, dateFim, horario, cargaHoraria, professor, curso.getAlunosMatriculados(), curso.getQuantidadeAtualAlunos());
-                } else {
-                    System.out.println("Esse professor não pode mais receber disciplinas!");
-                }
-            }*/
+    public void GerarCurso(nomeCurso, codigoCurso, cargaHoraria, ementa, dateInicio, dateFim, horario, professor, idProfessor) 
+    {
+        if (veficaCargaProfessor(idProfessor, cargaHoraria) == true) 
+        {
+            Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor);
+            setCurso(curso);
+            AdicionaCargaHorariaProfessor(contadorCurso);
+            System.out.println("Curso Criado com Sucesso!");
+            // Criar arquivo para o curso
+            GeraArquivo.criarArquivoCurso(nome, codigo, ementa, dateInicio, dateFim, horario, cargaHoraria, professor, curso.getAlunosMatriculados(), curso.getQuantidadeAtualAlunos());
+        } else 
+        {
+            System.out.println("Esse professor não pode mais receber disciplinas!");
+        }
+    }*/
 
     public Sistema() 
     {
@@ -287,11 +289,12 @@ public class Sistema
                         System.out.print("\nOpção inválida, tente novamente.");
                         break;
                 }
-            } catch(NumberFormatException numberFormatException){
+            } catch(NumberFormatException numberFormatException)
+            {
                 System.out.print("\nEntrada inválida, tente novamente.");
                 teclado.nextLine();
             }
-        }while(escolha != 5);
+        } while(escolha != 5);
     }
 
     //gera os dados do aluno 
@@ -306,8 +309,10 @@ public class Sistema
     //gera os cursos que estão disponíveis para a matrícula 
     public void CursosDisponiveisAluno() 
     {
-        for( int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
-            if (getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) {
+        for( int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        {
+            if (getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) 
+            {
                 System.out.println();
                 System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
                 System.out.println("Código do curso: " + getCurso(indiceCursos).getCodigoCurso());
@@ -456,10 +461,11 @@ public class Sistema
             confirmaSenha = teclado.nextLine();
             //verificacao de senha
             boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-            if(verifica == true) {
+            if(verifica == true) 
+            {
                 controle = true;
                 CadastrarAdministrador(nome, email, confirmaSenha);
-            }else {
+            } else {
                 System.out.println("A senha não é igual!" + "Tente Novamente!"); 
                 System.out.println();
             }
@@ -489,17 +495,19 @@ public class Sistema
         nome = teclado.nextLine();
         System.out.print("Endereço de email do professor: ");
         email = teclado.nextLine();
-        do{
+        do
+        {
             System.out.print("Senha: ");
             senha = teclado.nextLine();
             System.out.print("Confirme a senha: ");
             confirmaSenha = teclado.nextLine();
             //verificacao de senha
             boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-            if(verifica == true) {
+            if(verifica == true) 
+            {
                 controle = true;
                 CadastrarProfessor(nome, email, confirmaSenha);
-            }else {
+            } else {
                 System.out.println("As senhas não são iguais!" + "Tente Novamente!"); 
                 System.out.println();
             }
@@ -534,7 +542,8 @@ public class Sistema
             try{
                 exception = false;
                 Menu.limpaTela();
-                if(getProfessoresSistema(0) != null) {
+                if(getProfessoresSistema(0) != null) 
+                {
                     System.out.print("====================\nCADASTRO DE CURSO\n====================\n\n");
                     System.out.print("Nome do curso: ");
                     nome = teclado.nextLine();
@@ -592,7 +601,8 @@ public class Sistema
 
     public void DadosCursoAdministrativo() 
     {
-        for(int indiceCurso = 0; indiceCurso < contadorCurso; indiceCurso++) {
+        for(int indiceCurso = 0; indiceCurso < contadorCurso; indiceCurso++) 
+        {
             System.out.println("Nome: " + getCurso(indiceCurso).getNomeCurso());
             System.out.println("Código Curso: " + getCurso(indiceCurso).getCodigoCurso());
             System.out.println("Carga Horária: " + getCurso(indiceCurso).getCargaHorariaCurso());
@@ -602,7 +612,8 @@ public class Sistema
             System.out.println("Quantidade de Alunos Matriculados: " + getCurso(indiceCurso).getQuantidadeAtualAlunos());
             System.out.println("Horários: : " + getCurso(indiceCurso).getHorario());
             System.out.println("Professor do curso: " + getCurso(indiceCurso).getProfessor().getNome());
-            if(getCurso(indiceCurso).getStatus() == true) {
+            if(getCurso(indiceCurso).getStatus() == true) 
+            {
                 System.out.println("Status do Curso: " + "Ativo");
             } else {
                 System.out.println("Status do Curso: " + "Desativado");
@@ -619,7 +630,8 @@ public class Sistema
         DadosCursoAdministrativo();
         System.out.println("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
-        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        {
             if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
             {
                 if(getCurso(indiceCursos).getStatus() == false) 
@@ -761,8 +773,10 @@ public class Sistema
 
         int escolha = 0; 
         
-        do{
-            try{
+        do 
+        {
+            try
+            {
                 System.out.println();
                 System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
                 System.out.print("MENU DO PROFESSOR\n");
@@ -793,7 +807,8 @@ public class Sistema
                         System.out.print("\nOpção inválida, tente novamente.");
                         break;
                 }
-            } catch(NumberFormatException numberFormatException){
+            } catch(NumberFormatException numberFormatException)
+            {
                 System.out.print("\nEntrada inválida, tente novamente.");
                teclado.nextLine();
             }
