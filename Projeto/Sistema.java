@@ -12,8 +12,8 @@ public class Sistema
     private static int contadorProfessor = 0; 
     private static int contadorCurso = 0; 
     private Aluno[] alunos = new Aluno[1000];
-    private Administrador[] administradores = new Administrador[100]; 
-    private Professor[] professoresSistema = new Professor[100];
+    private Administrador[] administradores = new Administrador[10]; 
+    private Professor[] professoresSistema = new Professor[50];
     private Curso[] cursos = new Curso[100]; 
 
     Scanner teclado = new Scanner(System.in);
@@ -79,9 +79,9 @@ public class Sistema
         contadorAluno++; 
     }
 
-    public Aluno getAluno(int i) 
+    public Aluno getAluno(int indiceAluno) 
     {
-        return alunos[i]; 
+        return alunos[indiceAluno]; 
     }
 
     public void setAdministrador(Administrador administrador) 
@@ -90,9 +90,9 @@ public class Sistema
         contadorAdministrador++; 
     }
 
-    public Administrador getAdministrador(int i) 
+    public Administrador getAdministrador(int indiceAdministrador) 
     {
-        return administradores[i]; 
+        return administradores[indiceAdministrador]; 
     }
 
     public void setProfessoresSistema(Professor professor) 
@@ -101,9 +101,9 @@ public class Sistema
         contadorProfessor++; 
     }
 
-    public Professor getProfessoresSistema(int i) 
+    public Professor getProfessoresSistema(int indiceProfessor) 
     {
-        return professoresSistema[i]; 
+        return professoresSistema[indiceProfessor]; 
     }
 
     public void setCurso(Curso curso) 
@@ -112,9 +112,9 @@ public class Sistema
         contadorCurso++; 
     }
 
-    public Curso getCurso(int i) 
+    public Curso getCurso(int indiceCurso) 
     {
-        return cursos[i]; 
+        return cursos[indiceCurso]; 
     }
 
     //metodos para fazer os logins
@@ -341,14 +341,30 @@ public class Sistema
         {
             if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
             {
-                if(getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) 
+                if(VerificaAlunoMatriculado(idAluno, indiceCursos) == false)
                 {
-                   getCurso(indiceCursos).setAlunosMatriculados(getAluno(idAluno)); 
-                    System.out.println("Matricula feita com sucesso!");
-                    break;
-                } else {
-                    System.out.println("Esse curso está lotado ou não está disponível, não foi possível se matrícular!");
-                    break;
+                    if(getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) 
+                    {
+                    getCurso(indiceCursos).setAlunosMatriculados(getAluno(idAluno));
+                        Menu.limpaTela();
+                        System.out.println();
+                        System.out.println("Matricula feita com sucesso!");
+                        System.out.println();
+                        break;
+                    } else 
+                    {
+                        Menu.limpaTela();
+                        System.out.println();
+                        System.out.println("Esse curso está lotado ou não está disponível, não foi possível se matrícular!");
+                        System.out.println();
+                        break;
+                    }
+                } else 
+                {
+                    Menu.limpaTela();
+                    System.out.println();
+                    System.out.println("ERRO! Você já está matriculado nesse curso! Não é possível se matrícular novamente");
+                    System.out.println();
                 }
             } 
         }
@@ -373,6 +389,18 @@ public class Sistema
             } 
         }
         return true; 
+    }
+
+    public boolean VerificaAlunoMatriculado(int idAluno, int indiceCurso) 
+    {
+        for(int indiceAlunos = 0; indiceAlunos < getCurso(indiceCurso).getQuantidadeAtualAlunos(); indiceAlunos++)
+        {
+            if(getCurso(indiceCurso).getAlunosMatriculados(indiceAlunos) == getAluno(idAluno))
+            {
+                return true; 
+            }
+        }
+        return false;
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!

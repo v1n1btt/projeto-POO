@@ -148,9 +148,9 @@ public class Curso
         setQuantidadeAtualAlunos(getQuantidadeAtualAlunos() + 1);
     }
 
-    public Aluno getAlunosMatriculados(int i) 
+    public Aluno getAlunosMatriculados(int indiceAluno) 
     {
-        return alunosMatriculados[i];
+        return alunosMatriculados[indiceAluno];
     }
 
     public void setNota(double nota)
