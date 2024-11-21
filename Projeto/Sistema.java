@@ -155,7 +155,9 @@ public class Sistema
                 MenuProfessor(indiceProfessores);
             } 
         }  
-        System.out.println("Email ou senha Incorretos!");
+        System.out.println("\nEmail ou senha Incorretos!");
+        teclado.nextLine();
+        Menu.limpaTela();
     }
 
     //método que verifica variaveis para ver se são iguais
