@@ -42,7 +42,7 @@ public class Sistema
         
     public void GerarCurso(nomeCurso, codigoCurso, cargaHoraria, ementa, dateInicio, dateFim, horario, professor, idProfessor) 
     {
-        if (veficaCargaProfessor(idProfessor, cargaHoraria) == true) 
+        if (verificaCargaProfessor(idProfessor, cargaHoraria) == true) 
         {
             Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor);
             setCurso(curso);
@@ -216,27 +216,26 @@ public class Sistema
                                 codigoUsuario = GerarCodigoUsuario();
                                 Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
                                 setAluno(aluno);
-                                System.out.println("Conta Criada com Sucesso!");
+                                System.out.print("Conta Criada com Sucesso!");
                                 teclado.nextLine();
                             }else {
-                                System.out.println("A senha não é igual!" + "Tente Novamente!"); 
-                                System.out.println();
+                                System.out.println("A senha não é igual, tente Novamente.\n"); 
                             }
                         } else{
-                            System.out.println("A senha não pode estar em branco, tente novamente.");
+                            System.out.println("A senha não pode estar em branco, tente novamente.\n");
                         }
                     } while(controle != true);
                 } else {
-                    System.out.println("Já existe um usuário cadastrado com esse CPF!");
+                    System.out.println("Já existe um usuário cadastrado com esse CPF!\n");
                 }
             }
             else {
-                System.out.println("Formato do email inválido, tente novamente.");
+                System.out.println("Formato do email inválido, tente novamente.\n");
                 teclado.nextLine();
             }
         }
         else{
-            System.out.println("Formato do CPF inválido, tente novamente.");
+            System.out.println("Formato do CPF inválido, tente novamente.\n");
             teclado.nextLine();
         }
     }
@@ -636,7 +635,7 @@ public class Sistema
 
     public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dateInicio, String dateFim, String horario, Professor professor, int idProfessor) 
     {
-        if(veficaCargaProfessor(idProfessor,cargaHoraria) == true) 
+        if(verificaCargaProfessor(idProfessor,cargaHoraria) == true) 
         {
             Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor);
             AdicionaCargaHorariaProfessor(contadorCurso);
@@ -712,7 +711,7 @@ public class Sistema
                     getCurso(indiceCursos).setStatus(false);
                     RetiraCargaHorariaProfessor(indiceCursos);
                     System.out.println("Curso desabilitado");
-                break;
+                    break;
                 } else {
                     System.out.println("Esse curso já está desabilitado!");
                 }
@@ -872,7 +871,7 @@ public class Sistema
     }
 
     //método que verifica se o professor pode receber a carga horaria
-    public boolean veficaCargaProfessor(int idProfessor, int cargaHoraria) 
+    public boolean verificaCargaProfessor(int idProfessor, int cargaHoraria) 
     {
         if(getProfessoresSistema(idProfessor).getCargaHorariaAtual() + cargaHoraria <= getProfessoresSistema(idProfessor).getCargaHorariaMaxima()) 
         {
