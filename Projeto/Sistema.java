@@ -205,24 +205,26 @@ public class Sistema
                     {
                         System.out.print("Senha: ");
                         senha = teclado.nextLine();
-                        System.out.print("Confirme a senha: ");
-                        confirmaSenha = teclado.nextLine();
-                        //verificacao de senha
-                        boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-                        if(verifica == true) 
-                        {
-                            controle = true;
-                            codigoUsuario = GerarCodigoUsuario();
-                            Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
-                            setAluno(aluno);
-                            System.out.println("Conta Criada com Sucesso!");
-                            teclado.nextLine();
-                        }else {
-                            System.out.println("A senha não é igual!" + "Tente Novamente!"); 
-                            System.out.println();
+                        if(!senha.isEmpty()){
+                            System.out.print("Confirme a senha: ");
+                            confirmaSenha = teclado.nextLine();
+                            //verificacao de senha
+                            boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                            if(verifica == true) 
+                            {
+                                controle = true;
+                                codigoUsuario = GerarCodigoUsuario();
+                                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
+                                setAluno(aluno);
+                                System.out.println("Conta Criada com Sucesso!");
+                                teclado.nextLine();
+                            }else {
+                                System.out.println("A senha não é igual!" + "Tente Novamente!"); 
+                                System.out.println();
+                            }
+                        } else{
+                            System.out.println("A senha não pode estar em branco, tente novamente.");
                         }
-                
-                        
                     } while(controle != true);
                 } else {
                     System.out.println("Já existe um usuário cadastrado com esse CPF!");
@@ -486,17 +488,21 @@ public class Sistema
             do{
                 System.out.print("Senha: ");
                 senha = teclado.nextLine();
-                System.out.print("Confirme a senha: ");
-                confirmaSenha = teclado.nextLine();
-                //verificacao de senha
-                boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-                if(verifica == true) 
-                {
-                    controle = true;
-                    CadastrarAdministrador(nome, email, confirmaSenha);
-                } else {
-                    System.out.println("A senha não é igual!" + "Tente Novamente!"); 
-                    System.out.println();
+                if(!senha.isEmpty()){
+                    System.out.print("Confirme a senha: ");
+                    confirmaSenha = teclado.nextLine();
+                    //verificacao de senha
+                    boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                    if(verifica == true) 
+                    {
+                        controle = true;
+                        CadastrarAdministrador(nome, email, confirmaSenha);
+                    } else {
+                        System.out.println("A senha não é igual!" + "Tente Novamente!"); 
+                        System.out.println();
+                    }
+                } else{
+                    System.out.println("A senha não pode estar em branco, tente novamente.");
                 }
             } while(controle != true);
         } else {
@@ -533,17 +539,21 @@ public class Sistema
             {
                 System.out.print("Senha: ");
                 senha = teclado.nextLine();
-                System.out.print("Confirme a senha: ");
-                confirmaSenha = teclado.nextLine();
-                //verificacao de senha
-                boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-                if(verifica == true) 
-                {
-                    controle = true;
-                    CadastrarProfessor(nome, email, confirmaSenha);
-                } else {
-                    System.out.println("As senhas não são iguais!" + "Tente Novamente!"); 
-                    System.out.println();
+                if(!senha.isEmpty()){
+                    System.out.print("Confirme a senha: ");
+                    confirmaSenha = teclado.nextLine();
+                    //verificacao de senha
+                    boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                    if(verifica == true) 
+                    {
+                        controle = true;
+                        CadastrarProfessor(nome, email, confirmaSenha);
+                    } else {
+                        System.out.println("As senhas não são iguais!" + "Tente Novamente!"); 
+                        System.out.println();
+                    }
+                } else{
+                    System.out.println("A senha não pode estar em branco, tente novamente.");
                 }
             } while(controle != true);
         } else {
