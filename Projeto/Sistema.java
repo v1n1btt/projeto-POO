@@ -127,7 +127,9 @@ public class Sistema
                 MenuAluno(indiceAlunos);
             } 
         }   
-        System.out.println("Email ou senha Incorretos!"); 
+        System.out.println("\nEmail ou senha Incorretos!"); 
+        teclado.nextLine();
+        Menu.limpaTela();
     }
 
     public void fazerLoginUsuarioAdministrador(String email, String senha) 
@@ -139,7 +141,9 @@ public class Sistema
                 MenuAdministrador(indiceAdministradores);
             } 
         } 
-        System.out.println("Email ou senha Incorretos!"); 
+        System.out.println("\nEmail ou senha Incorretos!");
+        teclado.nextLine();
+        Menu.limpaTela();
     }
 
     public void fazerLoginUsuarioProfessor(String email, String senha) 
