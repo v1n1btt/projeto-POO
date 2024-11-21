@@ -197,7 +197,7 @@ public class Sistema
             nome = teclado.nextLine();
             System.out.print("Digite seu Email: ");
             email = teclado.nextLine();
-            if(email.matches("(.*)@(.*).com"))
+            if(email.matches("(.*)@(.*).(.*)") && !email.substring(0, email.indexOf("@")).isEmpty() && !email.substring(email.indexOf("@") + 1, email.indexOf(".")).isEmpty() && !email.substring(email.indexOf(".") + 1).isEmpty())
             {
                 if(VerificaCPF(cpf) == true) 
                 {
@@ -482,22 +482,27 @@ public class Sistema
         nome = teclado.nextLine();
         System.out.print("Digite seu Email: ");
         email = teclado.nextLine();
-        do{
-            System.out.print("Senha: ");
-            senha = teclado.nextLine();
-            System.out.print("Confirme a senha: ");
-            confirmaSenha = teclado.nextLine();
-            //verificacao de senha
-            boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-            if(verifica == true) 
-            {
-                controle = true;
-                CadastrarAdministrador(nome, email, confirmaSenha);
-            } else {
-                System.out.println("A senha não é igual!" + "Tente Novamente!"); 
-                System.out.println();
-            }
-        } while(controle != true);
+        if(email.matches("(.*)@(.*).(.*)") && !email.substring(0, email.indexOf("@")).isEmpty() && !email.substring(email.indexOf("@") + 1, email.indexOf(".")).isEmpty() && !email.substring(email.indexOf(".") + 1).isEmpty()){
+            do{
+                System.out.print("Senha: ");
+                senha = teclado.nextLine();
+                System.out.print("Confirme a senha: ");
+                confirmaSenha = teclado.nextLine();
+                //verificacao de senha
+                boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                if(verifica == true) 
+                {
+                    controle = true;
+                    CadastrarAdministrador(nome, email, confirmaSenha);
+                } else {
+                    System.out.println("A senha não é igual!" + "Tente Novamente!"); 
+                    System.out.println();
+                }
+            } while(controle != true);
+        } else {
+            System.out.println("Formato do email inválido, tente novamente.");
+            teclado.nextLine();
+        }
     }
 
     public void CadastrarAdministrador(String nome, String email, String senha) 
@@ -523,23 +528,28 @@ public class Sistema
         nome = teclado.nextLine();
         System.out.print("Endereço de email do professor: ");
         email = teclado.nextLine();
-        do
-        {
-            System.out.print("Senha: ");
-            senha = teclado.nextLine();
-            System.out.print("Confirme a senha: ");
-            confirmaSenha = teclado.nextLine();
-            //verificacao de senha
-            boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-            if(verifica == true) 
+        if(email.matches("(.*)@(.*).(.*)") && !email.substring(0, email.indexOf("@")).isEmpty() && !email.substring(email.indexOf("@") + 1, email.indexOf(".")).isEmpty() && !email.substring(email.indexOf(".") + 1).isEmpty()){
+            do
             {
-                controle = true;
-                CadastrarProfessor(nome, email, confirmaSenha);
-            } else {
-                System.out.println("As senhas não são iguais!" + "Tente Novamente!"); 
-                System.out.println();
-            }
-        } while(controle != true);
+                System.out.print("Senha: ");
+                senha = teclado.nextLine();
+                System.out.print("Confirme a senha: ");
+                confirmaSenha = teclado.nextLine();
+                //verificacao de senha
+                boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                if(verifica == true) 
+                {
+                    controle = true;
+                    CadastrarProfessor(nome, email, confirmaSenha);
+                } else {
+                    System.out.println("As senhas não são iguais!" + "Tente Novamente!"); 
+                    System.out.println();
+                }
+            } while(controle != true);
+        } else {
+            System.out.println("Formato do email inválido, tente novamente.");
+            teclado.nextLine();
+        }
     }
 
     public void CadastrarProfessor(String nome, String email, String senha) 
