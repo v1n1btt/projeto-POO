@@ -70,7 +70,6 @@ public class Sistema
         setProfessoresSistema(professor);
         setProfessoresSistema(professor2);
         setCurso(curso);
-        //AdicionaCargaHorariaProfessor(40);
     }
 
     public void setAluno(Aluno aluno) 
@@ -422,6 +421,49 @@ public class Sistema
             }
         }
         return false;
+    }
+
+    public void GeraCertificadoAluno(int idAluno) 
+    {
+        String codigo;
+       
+        //CursosProfessor(idProfessor);
+        System.out.print("Digite o Código do curso: ");
+        codigo = teclado.nextLine();
+        System.out.println();
+        Curso cursoProcurado = buscaCurso(codigo);
+        if(cursoProcurado == null) 
+        {
+            System.out.println("Curso não Encontrado! Tente Novamente.");
+            return;
+        }
+        if(cursoProcurado.getNota(idAluno) >= 5.0) 
+        {
+            System.out.println("Certificamos que o aluno: " + getAluno(idAluno).getNome());
+            System.out.println("Concluiu o curso: " + cursoProcurado.getNomeCurso());
+            System.out.println("E obteve nota: " + cursoProcurado.getNota(idAluno));
+            System.out.println();
+        }
+        /*for(int indiceAlunos = 0; indiceAlunos < cursoProcurado.getQuantidadeAtualAlunos(); indiceAlunos++) 
+        {
+            System.out.println();
+            System.out.println("Nome: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getNome());
+            System.out.println("Código Usuário: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getCodigoUsuario());
+            System.out.print("Digite a nota do Aluno acima: ");
+            nota = teclado.nextDouble();
+            cursoProcurado.setNota(nota);
+            System.out.println();
+            System.out.println("A nota do aluno acima é: " + " " + cursoProcurado.getNota(indiceAlunos));
+            System.out.println();
+        }
+
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++)
+        {
+            if(VerificaAlunoMatriculado(idAluno, indiceCursos) == true && )
+            {
+
+            }
+        }*/
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
