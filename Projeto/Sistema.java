@@ -70,7 +70,7 @@ public class Sistema
         setProfessoresSistema(professor);
         setProfessoresSistema(professor2);
         setCurso(curso);
-        AdicionaCargaHorariaProfessor(0);
+        //AdicionaCargaHorariaProfessor(40);
     }
 
     public void setAluno(Aluno aluno) 
@@ -176,6 +176,20 @@ public class Sistema
     {
         codigoUsuario += 1;  
         return codigoUsuario; 
+    }
+
+    //Busca um curso no vetor cursos cadastrados
+    public Curso buscaCurso(String codigo) 
+    {
+        int indiceCurso = 0;
+        Curso CursoProcurado; 
+
+        while(indiceCurso < contadorCurso && VerificaVariaveis(getCurso(indiceCurso).getCodigoCurso(), codigo) == false)
+        {
+            indiceCurso = indiceCurso + 1;    
+        }
+        CursoProcurado = getCurso(indiceCurso);
+        return CursoProcurado;
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
@@ -930,30 +944,47 @@ public class Sistema
         System.out.print("Digite o Código do curso: ");
         codigo = teclado.nextLine();
         System.out.println();
-        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        Curso cursoProcurado = buscaCurso(codigo);
+        if(cursoProcurado == null) 
         {
-            if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true && getCurso(indiceCursos).getProfessor() == getProfessoresSistema(idProfessor)) 
-            {
-                for(int indiceAlunos = 0; indiceAlunos < getCurso(indiceCursos).getQuantidadeAtualAlunos(); indiceAlunos++) 
+            System.out.println("Curso não Encontrado! Tente Novamente.");
+            return;
+        }
+            //if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true && getCurso(indiceCursos).getProfessor() == getProfessoresSistema(idProfessor)) 
+            //{
+                for(int indiceAlunos = 0; indiceAlunos < cursoProcurado.getQuantidadeAtualAlunos(); indiceAlunos++) 
                 {
-                    if(getCurso(indiceCursos).getNota(indiceAlunos) == 0)
-                    {
+                    //if(getCurso(indiceCursos).getNota(indiceAlunos) == 0)
+                    //{
                         System.out.println();
-                        System.out.println("Nome: " + getCurso(indiceCursos).getAlunosMatriculados(indiceAlunos).getNome());
-                        System.out.println("Código Usuário: " + getCurso(indiceCursos).getAlunosMatriculados(indiceAlunos).getCodigoUsuario());
-                        System.out.print("Digite a nota do Aluno acima: ");
+                        System.out.println("Nome: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getNome());
+                        System.out.println("Código Usuário: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getCodigoUsuario());
+                        /*System.out.print("Digite a nota do Aluno acima: ");
                         nota = teclado.nextDouble();
                         getCurso(indiceAlunos).setNota(nota);
                         System.out.println();
-                        System.out.println("A nota do aluno acima é: " + " " + getCurso(indiceCursos).getNota(indiceAlunos));
+                        System.out.println("A nota do aluno acima é: " + " " + cursoProcurado.getNota(indiceAlunos));*/
                         System.out.println();
-                    }
+                    //}
                 }
                 //getCurso(indiceCursos).setStatus(false);
-                System.out.println("Todas as notas de todos os alunos foram cadastradas!");
-                break;
+                //System.out.println("Todas as notas de todos os alunos foram cadastradas!");
                 //System.out.println("O curso foi encerrado!");
-            }
+            //}
+    }  
+
+    /*public Aluno buscaAluno() 
+    {
+        return alunoProcurado; 
+    }
+
+    public boolean VerificaVariaveis(String variavel1, String variavel2) 
+    {
+        if (variavel1.equals(variavel2)) 
+        {
+            return true; 
+        } else {
+            return false; 
         }
-    }   
+    }*/
 }
