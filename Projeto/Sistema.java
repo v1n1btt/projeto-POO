@@ -959,11 +959,11 @@ public class Sistema
                         System.out.println();
                         System.out.println("Nome: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getNome());
                         System.out.println("Código Usuário: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getCodigoUsuario());
-                        /*System.out.print("Digite a nota do Aluno acima: ");
+                        System.out.print("Digite a nota do Aluno acima: ");
                         nota = teclado.nextDouble();
-                        getCurso(indiceAlunos).setNota(nota);
+                        cursoProcurado.setNota(nota);
                         System.out.println();
-                        System.out.println("A nota do aluno acima é: " + " " + cursoProcurado.getNota(indiceAlunos));*/
+                        System.out.println("A nota do aluno acima é: " + " " + cursoProcurado.getNota(indiceAlunos));
                         System.out.println();
                     //}
                 }
