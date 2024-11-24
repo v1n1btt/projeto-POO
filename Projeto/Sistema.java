@@ -921,7 +921,7 @@ public class Sistema
     {
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
         {
-            if(getCurso(indiceCursos).getProfessor() == getProfessoresSistema(idProfessor)) 
+            if(VerificaProfessorResponsavel(idProfessor, getCurso(indiceCursos)) == true) 
             {
                 System.out.println();
                 System.out.println("Nome: " + getCurso(idProfessor).getNomeCurso());
@@ -957,6 +957,11 @@ public class Sistema
             System.out.println("Não há alunos matriculados nesse curso!");
             return;
         }
+        if(VerificaProfessorResponsavel(idProfessor, cursoProcurado) == false) 
+        {
+            System.out.println("Você não é o professor responsável por essa turma!");
+            return;
+        }
         for(int indiceAlunos = 0; indiceAlunos < cursoProcurado.getQuantidadeAtualAlunos(); indiceAlunos++) 
         {
             System.out.println();
@@ -987,6 +992,11 @@ public class Sistema
             System.out.println("Não há alunos matriculados nesse curso!");
             return;
         }
+        if(VerificaProfessorResponsavel(idProfessor, cursoProcurado) == false) 
+        {
+            System.out.println("Você não é o professor responsável por essa turma!");
+            return;
+        }
         for(int indiceAlunos = 0; indiceAlunos < cursoProcurado.getQuantidadeAtualAlunos(); indiceAlunos++) 
         {
             System.out.println();
@@ -1000,4 +1010,13 @@ public class Sistema
             System.out.println();
         }
     }  
+
+    public boolean VerificaProfessorResponsavel(int idProfessor, Curso cursoProcurado)
+    {
+        if(cursoProcurado.getProfessor() == getProfessoresSistema(idProfessor))
+        {
+            return true;
+        }
+        return false;
+    }
 }
