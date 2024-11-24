@@ -837,7 +837,6 @@ public class Sistema
 
     public void MenuProfessor(int idProfessor) 
     {
-
         int escolha = 0; 
         
         do 
@@ -850,8 +849,9 @@ public class Sistema
                 System.out.println("Bem vindo: " + " " + getProfessoresSistema(idProfessor).getNome() + "\n");
                 System.out.println("    1 - Consultar seus Dados.");
                 System.out.println("    2 - Consultar os Cursos em que você é o responsável.");
-                System.out.println("    3 - Adicionar notas de alunos de um curso."); 
-                System.out.println("    4 - Sair.");
+                System.out.println("    3 - Ver as notas dos alunos de um curso."); 
+                System.out.println("    4 - Adicionar notas de alunos de um curso."); 
+                System.out.println("    5 - Sair.");
                 System.out.print("\nSelecione uma opção: ");
                 escolha = Integer.parseInt(teclado.nextLine());
                 switch(escolha) {
@@ -865,9 +865,13 @@ public class Sistema
                         break;
                     case 3:
                         Menu.limpaTela();
-                        AdicionarNotas(idProfessor);
+                        VerNotasAlunos(idProfessor);
                         break;
                     case 4:
+                        Menu.limpaTela();
+                        AdicionarNotas(idProfessor);
+                        break;
+                    case 5:
                         Menu.limpaTela();
                         return;
                     default:
@@ -879,7 +883,7 @@ public class Sistema
                 System.out.print("\nEntrada inválida, tente novamente.");
                teclado.nextLine();
             }
-        } while(escolha != 4);
+        } while(escolha != 5);
     }
 
     public void DadosProfessor(int idProfessor) 
@@ -934,9 +938,37 @@ public class Sistema
         }
     }
 
+    public void VerNotasAlunos(int idProfessor) 
+    {
+        String codigo;
+
+        CursosProfessor(idProfessor);
+        System.out.print("Digite o Código do curso: ");
+        codigo = teclado.nextLine();
+        System.out.println();
+        Curso cursoProcurado = buscaCurso(codigo);
+        if(cursoProcurado == null) 
+        {
+            System.out.println("Curso não Encontrado! Tente Novamente.");
+            return;
+        }
+        if(cursoProcurado.getQuantidadeAtualAlunos() == 0) 
+        {
+            System.out.println("Não há alunos matriculados nesse curso!");
+            return;
+        }
+        for(int indiceAlunos = 0; indiceAlunos < cursoProcurado.getQuantidadeAtualAlunos(); indiceAlunos++) 
+        {
+            System.out.println();
+            System.out.println("Nome: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getNome());
+            System.out.println("Código Usuário: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getCodigoUsuario());
+            System.out.println("A nota do aluno acima é: " + " " + cursoProcurado.getNota(indiceAlunos));
+            System.out.println();
+        }
+    }  
+
     public void AdicionarNotas(int idProfessor) 
     {
-
         String codigo;
         double nota; 
 
@@ -950,41 +982,22 @@ public class Sistema
             System.out.println("Curso não Encontrado! Tente Novamente.");
             return;
         }
-            //if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true && getCurso(indiceCursos).getProfessor() == getProfessoresSistema(idProfessor)) 
-            //{
-                for(int indiceAlunos = 0; indiceAlunos < cursoProcurado.getQuantidadeAtualAlunos(); indiceAlunos++) 
-                {
-                    //if(getCurso(indiceCursos).getNota(indiceAlunos) == 0)
-                    //{
-                        System.out.println();
-                        System.out.println("Nome: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getNome());
-                        System.out.println("Código Usuário: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getCodigoUsuario());
-                        System.out.print("Digite a nota do Aluno acima: ");
-                        nota = teclado.nextDouble();
-                        cursoProcurado.setNota(nota);
-                        System.out.println();
-                        System.out.println("A nota do aluno acima é: " + " " + cursoProcurado.getNota(indiceAlunos));
-                        System.out.println();
-                    //}
-                }
-                //getCurso(indiceCursos).setStatus(false);
-                //System.out.println("Todas as notas de todos os alunos foram cadastradas!");
-                //System.out.println("O curso foi encerrado!");
-            //}
-    }  
-
-    /*public Aluno buscaAluno() 
-    {
-        return alunoProcurado; 
-    }
-
-    public boolean VerificaVariaveis(String variavel1, String variavel2) 
-    {
-        if (variavel1.equals(variavel2)) 
+        if(cursoProcurado.getQuantidadeAtualAlunos() == 0) 
         {
-            return true; 
-        } else {
-            return false; 
+            System.out.println("Não há alunos matriculados nesse curso!");
+            return;
         }
-    }*/
+        for(int indiceAlunos = 0; indiceAlunos < cursoProcurado.getQuantidadeAtualAlunos(); indiceAlunos++) 
+        {
+            System.out.println();
+            System.out.println("Nome: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getNome());
+            System.out.println("Código Usuário: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getCodigoUsuario());
+            System.out.print("Digite a nota do Aluno acima: ");
+            nota = teclado.nextDouble();
+            cursoProcurado.setNota(nota);
+            System.out.println();
+            System.out.println("A nota do aluno acima é: " + " " + cursoProcurado.getNota(indiceAlunos));
+            System.out.println();
+        }
+    }  
 }
