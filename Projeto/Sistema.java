@@ -514,6 +514,8 @@ public class Sistema
                     case 2:
                         Menu.limpaTela();
                         DadosCursoAdministrativo();
+                        System.out.print("\nPressione ENTER para continuar...");
+                        teclado.nextLine();
                         break;
                     case 3:
                         Menu.limpaTela();
@@ -750,8 +752,6 @@ public class Sistema
             } else {
                 System.out.println("Status do Curso: " + "Desativado");
             }
-            System.out.print("\nPressione ENTER para continuar...");
-            teclado.nextLine();
         }
     }
 
@@ -810,7 +810,7 @@ public class Sistema
         int opcao;
 
         DadosCursoAdministrativo();
-        System.out.println("Digite o Código do curso: ");
+        System.out.print("\nDigite o Código do curso: ");
         codigo = teclado.nextLine(); 
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
         {
@@ -959,7 +959,7 @@ public class Sistema
         System.out.println("Nome: " + getProfessoresSistema(idProfessor).getNome());
         System.out.println("Codigo do Usuário: " + getProfessoresSistema(idProfessor).getCodigoUsuario());
         System.out.println("Email: " + getProfessoresSistema(idProfessor).getEmail());
-        System.out.println("Carga Horário Atual: " + getProfessoresSistema(idProfessor).getCargaHorariaAtual());
+        System.out.println("Carga Horária Atual: " + getProfessoresSistema(idProfessor).getCargaHorariaAtual());
     }
 
     //método que verifica se o professor pode receber a carga horaria
