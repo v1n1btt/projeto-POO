@@ -683,7 +683,7 @@ public class Sistema
                             System.out.println(indiceProfessores + " " + getProfessoresSistema(indiceProfessores).getNome());
                         }
                     }
-                    System.out.print("Digite o número do professor acima: "); 
+                    System.out.print("Digite o número correspondente ao professor que deseja escolher: ");
                     escolhaProfessor = teclado.nextInt();
                     teclado.nextLine();
                     CadastrarCurso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, getProfessoresSistema(escolhaProfessor), escolhaProfessor);
@@ -695,6 +695,10 @@ public class Sistema
                 exception = true;
                 System.out.print("\nEntrada inválida, tente novamente.\n");
                 teclado.nextLine();
+                teclado.nextLine();
+            } catch(NullPointerException nullPointerException){
+                exception = true;
+                System.out.print("\nProfessor não encontrado, tente novamente.\n");
                 teclado.nextLine();
             }
         } while(exception = true);
@@ -856,7 +860,7 @@ public class Sistema
                         System.out.println("Modificado com sucesso!");
                         return;
                     case 8:
-                        System.out.println("Escolha um professor abaixo: ");
+                        System.out.println("Escolha um professor:");
                         System.out.println("Indice do Professor: " + "  " + "Nome: " );  
                         for(int indiceProfessor = 0; indiceProfessor < contadorProfessor; indiceProfessor++) 
                         {
@@ -865,7 +869,7 @@ public class Sistema
                                 System.out.println(indiceProfessor + " " + getProfessoresSistema(indiceProfessor).getNome());
                             }
                         }
-                        System.out.print("Digite o número do professor acima: "); 
+                        System.out.print("Digite o número correspondente ao professor que deseja escolher: "); 
                         int escolhaProfessor = teclado.nextInt();
                         teclado.nextLine();
                         getCurso(indiceCursos).setProfessor(getProfessoresSistema(escolhaProfessor));
