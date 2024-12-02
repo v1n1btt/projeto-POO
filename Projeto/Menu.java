@@ -67,6 +67,7 @@ public class Menu
         {
             try
             {
+                Menu.limpaTela();
                 System.out.println();
                 System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
                 System.out.println("Opções para Login:\n");
@@ -107,12 +108,11 @@ public class Menu
                         sistema.fazerLoginUsuarioProfessor(email, senha);
                         break;
                     case 4:
-                        Menu.limpaTela();
+                        limpaTela();
                         return;
                     default:
                         System.out.print("\nOpção inválida, tente novamente.");
                         teclado.nextLine();
-                        Menu.limpaTela();
                         break;
                 }
             } catch(InputMismatchException inputMismatchException)
@@ -120,9 +120,8 @@ public class Menu
                 System.out.print("\nEntrada inválida, tente novamente.");
                 teclado.nextLine();
                 teclado.nextLine();
-                Menu.limpaTela();
             }
-        } while(opcao != 1 || opcao != 2 || opcao != 3);
+        } while(opcao != 4);
     }
 
     //método para limpar a tela

@@ -280,6 +280,7 @@ public class Sistema
         do{
             try
             {
+                Menu.limpaTela();
                 System.out.println();
                 System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
                 System.out.println("MENU DO ALUNO\n");
@@ -491,6 +492,7 @@ public class Sistema
         do {
             try
             {
+                Menu.limpaTela();
                 System.out.println();
                 System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
                 System.out.println("MENU DO ADMINISTRADOR\n");
@@ -507,7 +509,6 @@ public class Sistema
                 escolha = Integer.parseInt(teclado.nextLine());
                 switch(escolha) {
                     case 1:
-                        Menu.limpaTela();
                         FormulariocadastrarCurso();
                         break;
                     case 2:
@@ -539,13 +540,14 @@ public class Sistema
                         return;
                     default:
                         System.out.print("\nOpção inválida, tente novamente.");
+                        teclado.nextLine();
                         break;
                 }
             } catch(NumberFormatException numberFormatException){
                 System.out.print("\nEntrada inválida, tente novamente.");
                 teclado.nextLine();
             }
-        } while(escolha != 6);
+        } while(escolha != 8);
     }
 
     public void FormularioCadastroAdministrador() 
@@ -748,7 +750,8 @@ public class Sistema
             } else {
                 System.out.println("Status do Curso: " + "Desativado");
             }
-            System.out.println();
+            System.out.print("\nPressione ENTER para continuar...");
+            teclado.nextLine();
         }
     }
 
@@ -905,6 +908,7 @@ public class Sistema
         {
             try
             {
+                Menu.limpaTela();
                 System.out.println();
                 System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
                 System.out.print("MENU DO PROFESSOR\n");
@@ -938,6 +942,7 @@ public class Sistema
                         return;
                     default:
                         System.out.print("\nOpção inválida, tente novamente.");
+                        teclado.nextLine();
                         break;
                 }
             } catch(NumberFormatException numberFormatException)
