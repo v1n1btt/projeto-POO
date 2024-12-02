@@ -119,44 +119,56 @@ public class Sistema
     //metodos para fazer os logins
     public void fazerLoginUsuarioAluno(String email, String senha) 
     {
+        boolean sucesso = false;
         for(int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
         {
             if(VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true && VerificaVariaveis(getAluno(indiceAlunos).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) 
             {
+                sucesso = true;
                 MenuAluno(indiceAlunos);
             } 
         }   
-        System.out.println("\nEmail ou senha Incorretos!"); 
-        teclado.nextLine();
-        Menu.limpaTela();
+        if(sucesso == false){
+            System.out.println("\nEmail ou senha Incorretos!");
+            teclado.nextLine();
+            Menu.limpaTela();
+        }
     }
 
     public void fazerLoginUsuarioAdministrador(String email, String senha) 
     {
+        boolean sucesso = false;
         for(int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) 
         {
             if(VerificaVariaveis(getAdministrador(indiceAdministradores).getEmail(), email) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getNivelAcesso(), "administrador") == true) 
             {
+                sucesso = true;
                 MenuAdministrador(indiceAdministradores);
             } 
         } 
-        System.out.println("\nEmail ou senha Incorretos!");
-        teclado.nextLine();
-        Menu.limpaTela();
+        if(sucesso == false){
+            System.out.println("\nEmail ou senha Incorretos!");
+            teclado.nextLine();
+            Menu.limpaTela();
+        }
     }
 
     public void fazerLoginUsuarioProfessor(String email, String senha) 
     {
+        boolean sucesso = false;
         for(int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) 
         {
             if(VerificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email) == true && VerificaVariaveis(getProfessoresSistema(indiceProfessores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getProfessoresSistema(indiceProfessores).getNivelAcesso(), "professor") == true) 
             {
+                sucesso = true;
                 MenuProfessor(indiceProfessores);
             } 
-        }  
-        System.out.println("\nEmail ou senha Incorretos!");
-        teclado.nextLine();
-        Menu.limpaTela();
+        }
+        if(sucesso == false){
+            System.out.println("\nEmail ou senha Incorretos!");
+            teclado.nextLine();
+            Menu.limpaTela();
+        }
     }
 
     //método que verifica variaveis para ver se são iguais
