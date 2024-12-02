@@ -348,12 +348,12 @@ public class Sistema
         }
     }
 
+    //Método para o aluno se matricular em um curso disponível
     public void MatricularCurso(int idAluno) 
     {
         String codigo;
 
-        CursosDisponiveisAluno();
-
+        CursosDisponiveisAluno(); //imprime os cursos disponíveis 
         System.out.print("Digite o código do curso: ");
         codigo = teclado.nextLine();
 
@@ -388,6 +388,11 @@ public class Sistema
                 }
             } 
         }
+    }
+    
+    //Método para que o aluno cancele a matrícula em um curso
+    public void CancelarMatriculaCurso() {
+
     }
 
     public boolean VerificaQuantidadeAlunosMatriculados(int indiceCurso) 
