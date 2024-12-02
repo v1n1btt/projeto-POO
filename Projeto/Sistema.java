@@ -326,7 +326,7 @@ public class Sistema
                 System.out.print("\nEntrada inválida, tente novamente.");
                 teclado.nextLine();
             }
-        } while(escolha != 5);
+        } while(escolha != 6);
     }
 
     //gera os dados do aluno 
