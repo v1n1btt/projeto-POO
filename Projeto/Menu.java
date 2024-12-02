@@ -67,61 +67,60 @@ public class Menu
         {
             try
             {
-                do 
+                System.out.println();
+                System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
+                System.out.println("Opções para Login:\n");
+                System.out.println("    1 - Aluno");
+                System.out.println("    2 - Administrador");
+                System.out.println("    3 - Professor");
+                System.out.println("    4 - Voltar");
+                System.out.print("\nEscolha uma opção: ");
+                opcao = teclado.nextInt();
+                teclado.nextLine();
+                switch (opcao) 
                 {
-                    System.out.println();
-                    System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
-                    System.out.println("Opções para Login:\n");
-                    System.out.println("    1 - Aluno");
-                    System.out.println("    2 - Administrador");
-                    System.out.println("    3 - Professor");
-                    System.out.println("    4 - Voltar");
-                    System.out.print("\nEscolha uma opção: ");
-                    opcao = teclado.nextInt();
-                    teclado.nextLine();
-                    switch (opcao) 
-                    {
-                        case 1:
-                            Menu.limpaTela();
-                            System.out.println("================\nLOGIN NO SISTEMA\n================\n");
-                            System.out.print("Insira seu email: ");
-                            email = teclado.nextLine();
-                            System.out.print("\nInsira sua Senha: ");
-                            senha = teclado.nextLine();
-                            sistema.fazerLoginUsuarioAluno(email, senha);
-                            break;
-                        case 2:
-                            Menu.limpaTela();
-                            System.out.println("================\nLOGIN NO SISTEMA\n================\n");
-                            System.out.print("Insira seu email: ");
-                            email = teclado.nextLine();
-                            System.out.print("\nInsira sua Senha: ");
-                            senha = teclado.nextLine();
-                            sistema.fazerLoginUsuarioAdministrador(email, senha);
-                            break;
-                        case 3:
-                            Menu.limpaTela();
-                            System.out.println("================\nLOGIN NO SISTEMA\n================\n");
-                            System.out.print("Insira seu email: ");
-                            email = teclado.nextLine();
-                            System.out.print("\nInsira sua Senha: ");
-                            senha = teclado.nextLine();
-                            sistema.fazerLoginUsuarioProfessor(email, senha);
-                            break;
-                        case 4:
-                            Menu.limpaTela();
-                            return;
-                        default:
-                            System.out.print("\nOpção inválida, tente novamente.");
-                            teclado.nextLine();
-                            break;
-                    }
-                } while(opcao != 4); 
+                    case 1:
+                        Menu.limpaTela();
+                        System.out.println("================\nLOGIN NO SISTEMA\n================\n");
+                        System.out.print("Insira seu email: ");
+                        email = teclado.nextLine();
+                        System.out.print("\nInsira sua Senha: ");
+                        senha = teclado.nextLine();
+                        sistema.fazerLoginUsuarioAluno(email, senha);
+                        break;
+                    case 2:
+                        Menu.limpaTela();
+                        System.out.println("================\nLOGIN NO SISTEMA\n================\n");
+                        System.out.print("Insira seu email: ");
+                        email = teclado.nextLine();
+                        System.out.print("\nInsira sua Senha: ");
+                        senha = teclado.nextLine();
+                        sistema.fazerLoginUsuarioAdministrador(email, senha);
+                        break;
+                    case 3:
+                        Menu.limpaTela();
+                        System.out.println("================\nLOGIN NO SISTEMA\n================\n");
+                        System.out.print("Insira seu email: ");
+                        email = teclado.nextLine();
+                        System.out.print("\nInsira sua Senha: ");
+                        senha = teclado.nextLine();
+                        sistema.fazerLoginUsuarioProfessor(email, senha);
+                        break;
+                    case 4:
+                        Menu.limpaTela();
+                        return;
+                    default:
+                        System.out.print("\nOpção inválida, tente novamente.");
+                        teclado.nextLine();
+                        Menu.limpaTela();
+                        break;
+                }
             } catch(InputMismatchException inputMismatchException)
             {
                 System.out.print("\nEntrada inválida, tente novamente.");
                 teclado.nextLine();
                 teclado.nextLine();
+                Menu.limpaTela();
             }
         } while(opcao != 1 || opcao != 2 || opcao != 3);
     }
