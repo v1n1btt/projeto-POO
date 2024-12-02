@@ -759,7 +759,6 @@ public class Sistema
 
     public void DesabilitarCurso() 
     {
-       
         String codigo; 
 
         DadosCursoAdministrativo();
@@ -876,7 +875,7 @@ public class Sistema
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
-
+    //Menu que o professor pode ver depois do login
     public void MenuProfessor(int idProfessor) 
     {
         int escolha = 0; 
@@ -928,6 +927,7 @@ public class Sistema
         } while(escolha != 5);
     }
 
+    //metodo que imprime os dados do professor
     public void DadosProfessor(int idProfessor) 
     {
         System.out.println("Nome: " + getProfessoresSistema(idProfessor).getNome());
@@ -959,6 +959,7 @@ public class Sistema
         getCurso(idCurso).getProfessor().setCargaHorariaAtual(getCurso(idCurso).getProfessor().getCargaHorariaAtual() - getCurso(idCurso).getCargaHorariaCurso());
     }
 
+    //Lista todos os cursos onde um professor aparece como responsável
     public void CursosProfessor(int idProfessor) 
     {
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
@@ -980,6 +981,7 @@ public class Sistema
         }
     }
 
+    //imprimia as notas de cada aluno de um curso 
     public void VerNotasAlunos(int idProfessor) 
     {
         String codigo;
@@ -1014,6 +1016,7 @@ public class Sistema
         }
     }  
 
+    //premite que um professor adicione a nota dos alunos de um curso
     public void AdicionarNotas(int idProfessor) 
     {
         String codigo;
@@ -1053,6 +1056,7 @@ public class Sistema
         }
     }  
 
+    //Verifica se o professor é o responsável pela turma
     public boolean VerificaProfessorResponsavel(int idProfessor, Curso cursoProcurado)
     {
         if(cursoProcurado.getProfessor() == getProfessoresSistema(idProfessor))
