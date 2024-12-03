@@ -117,7 +117,7 @@ public class Sistema
         String linha;
         File path = new File(System.getProperty("user.dir"));
         path = path.getParentFile();
-        String filepath = path.toString() + "\\alunos.csv";
+        String filepath = path.toString() + "\\Projeto\\alunos.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             br.readLine();
             br.readLine();

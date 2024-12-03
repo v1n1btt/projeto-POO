@@ -52,6 +52,16 @@ public class Menu
         
         teclado.close();
     }
+    // Carregar todos os arquivos .csv ao iniciar o menu
+    static {
+        Sistema sistema = new Sistema();
+        sistema.carregarAlunos();
+        sistema.carregarCursos();
+        sistema.carregarAdministradores();
+        sistema.carregarCursos();
+        sistema.carregarMatriculas();
+        sistema.carregarCursosProfessor(0); 
+    }
 
     //metodo estático para coletar os dados do login
     public static void fazerLoginMenu(Scanner teclado, Sistema sistema)
