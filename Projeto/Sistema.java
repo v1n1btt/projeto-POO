@@ -123,24 +123,6 @@ public class Sistema
     }
 
     //metodos para fazer os logins
-    public void carregarAlunos() {
-        String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("alunos.csv"))) {
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(",");
-                String nome = dados[0];
-                int codigoUsuario = Integer.parseInt(dados[1]);
-                String email = dados[2];
-                String senha = dados[3];
-                String cpf = dados[4];
-                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
-                setAluno(aluno);
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
-        }
-    }
-
     public void fazerLoginUsuarioAluno(String email, String senha) {
         carregarAlunos();
         boolean sucesso = false;
@@ -159,7 +141,23 @@ public class Sistema
             Menu.limpaTela();
         }
     }
-
+    public void carregarAlunos() {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("alunos.csv"))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nome = dados[0];
+                int codigoUsuario = Integer.parseInt(dados[1]);
+                String email = dados[2];
+                String senha = dados[3];
+                String cpf = dados[4];
+                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
+                setAluno(aluno);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
+        }
+    }
        public void fazerLoginUsuarioAdministrador(String email, String senha) 
     {
         carregarAdministradores();

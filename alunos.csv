@@ -1,11 +1,18 @@
 Nome,CPF,Código do Usuário,Email,Senha,Nível de Acesso
 
-Luiz Miguel,12312312312,1001,luizmiguel@usp.br,123,aluno
-Luiz Miguel,1001,luizmiguel@usp.br,123,12312312312
-Luiz Miguel,12312312312,1001,luizmiguel@usp.br,1123,aluno
-Luiz Miguel,1001,luizmiguel@usp.br,1123,12312312312
-Luiz Miguel,12312312312,1001,luizmiguel@usp.br,1123,aluno
-Luiz Miguel,1001,luizmiguel@usp.br,1123,12312312312
-Lucas Kael,12312312332,1001,lucas@usp.br,123,aluno
-Lucas Kael,1001,lucas@usp.br,123,12312312332
-Luiz Teste,12312312312,1001,luizmiguel@usp.br,123,aluno
+Savio,12312312312,1001,savio@gmail.com,123,aluno
+João Silva,12345678901,1002,joao.silva@usp.br,senha123,aluno
+Maria Oliveira,23456789012,1003,maria.oliveira@usp.br,senha123,aluno
+Pedro Santos,34567890123,1004,pedro.santos@usp.br,senha123,aluno
+Ana Costa,45678901234,1005,ana.costa@usp.br,senha123,aluno
+Carlos Pereira,56789012345,1006,carlos.pereira@usp.br,senha123,aluno
+Fernanda Lima,67890123456,1007,fernanda.lima@usp.br,senha123,aluno
+Rafael Almeida,78901234567,1008,rafael.almeida@usp.br,senha123,aluno
+Juliana Souza,89012345678,1009,juliana.souza@usp.br,senha123,aluno
+Bruno Rocha,90123456789,1010,bruno.rocha@usp.br,senha123,aluno
+Patricia Mendes,01234567890,1011,patricia.mendes@usp.br,senha123,aluno
+Gabriel Ferreira,12309845678,1012,gabriel.ferreira@usp.br,senha123,aluno
+Mariana Barbosa,23410956789,1013,mariana.barbosa@usp.br,senha123,aluno
+Rodrigo Azevedo,34521067890,1014,rodrigo.azevedo@usp.br,senha123,aluno
+Camila Martins,45632178901,1015,camila.martins@usp.br,senha123,aluno
+Thiago Gomes,56743289012,1016,thiago.gomes@usp.br,senha123,aluno
