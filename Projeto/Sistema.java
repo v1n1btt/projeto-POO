@@ -154,9 +154,7 @@ public class Sistema
             Menu.limpaTela();
         }
     }
-
-       public void fazerLoginUsuarioAdministrador(String email, String senha) 
-    {
+    public void fazerLoginUsuarioAdministrador(String email, String senha) {
         carregarAdministradores();
         boolean loginSucesso = false;
         for(int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) 
