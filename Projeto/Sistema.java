@@ -26,18 +26,8 @@ public class Sistema
 
     public Sistema() 
     {
-        Aluno aluno = new Aluno("Joao", 99997, "joao@.com", "joao", "aluno", "44412345810");
-        Aluno aluno2 = new Aluno("Pedro", 99992, "pedro@.com", "pedro", "aluno", "44412145810");
         Administrador administrador = new Administrador("Admin", 99999, "admin@.com", "admin", "administrador");
-        Professor professor = new Professor("Mario", 99998, "mario@.com", "mario", "professor");
-        Professor professor2 = new Professor("Mauro", 99991, "mauro@.com", "mauro", "professor");
-        Curso curso = new Curso("Matemática Básica", "MAT", 40,"...", "01/01/2024", "01/11/2024", "14h - 16h, quarta e sexta", professor);
         setAdministrador(administrador);
-        setAluno(aluno);
-        setAluno(aluno2);
-        setProfessoresSistema(professor);
-        setProfessoresSistema(professor2);
-        setCurso(curso);
     }
 
     public void GerarAluno(String nome, String email, String senha, String cpf){
@@ -125,14 +115,19 @@ public class Sistema
     //metodos para fazer os logins
     public void carregarAlunos() {
         String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("alunos.csv"))) {
+        File path = new File(System.getProperty("user.dir"));
+        path = path.getParentFile();
+        String filepath = path.toString() + "\\alunos.csv";
+        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+            br.readLine();
+            br.readLine();
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
                 String nome = dados[0];
-                int codigoUsuario = Integer.parseInt(dados[1]);
-                String email = dados[2];
-                String senha = dados[3];
-                String cpf = dados[4];
+                String cpf = dados[1];
+                int codigoUsuario = Integer.parseInt(dados[2]);
+                String email = dados[3];
+                String senha = dados[4];
                 Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
                 setAluno(aluno);
             }
@@ -340,6 +335,8 @@ public class Sistema
                 System.out.print("\nSelecione uma opção: ");
 
                 escolha = Integer.parseInt(teclado.nextLine());
+                System.out.print("Entrada: " + escolha);
+                teclado.nextLine();
 
                 switch(escolha) 
                 {
@@ -370,6 +367,7 @@ public class Sistema
                         return;
                     default:
                         System.out.print("\nOpção inválida, tente novamente.");
+                        teclado.nextLine();
                         break;
                 }
             } catch(NumberFormatException numberFormatException)
@@ -387,6 +385,8 @@ public class Sistema
         System.out.println("Codigo do Usuário: " + getAluno(idAluno).getCodigoUsuario());
         System.out.println("Email: " + getAluno(idAluno).getEmail());
         System.out.println("CPF: " + getAluno(idAluno).getCPF());
+        System.out.print("\nPressione ENTER para continuar...");
+        teclado.nextLine();
     }
     public void MostrarDadosAlunos() {
         carregarAlunos();
