@@ -288,9 +288,10 @@ public class Sistema
                 System.out.println("    1 - Consultar seus Dados.");
                 System.out.println("    2 - Consultar Cursos disponíveis.");
                 System.out.println("    3 - Se matricular em Cursos disponíveis.");
-                System.out.println("    4 - Cancelar matricula em um curso.");
-                System.out.println("    5 - Obter o certificado de conclusão de um curso");
-                System.out.println("    6 - Sair.");
+                System.out.println("    4 - Consultar os cursos que você está matriculado.");
+                System.out.println("    5 - Cancelar matricula em um curso.");
+                System.out.println("    6 - Obter o certificado de conclusão de um curso");
+                System.out.println("    7 - Sair.");
                 System.out.print("\nSelecione uma opção: ");
 
                 escolha = Integer.parseInt(teclado.nextLine());
@@ -310,12 +311,16 @@ public class Sistema
                         MatricularCurso(idAluno);
                         break;
                     case 4:
-
+                        Menu.limpaTela();
+                        CursosMatriculadosAluno(idAluno);
                         break;
                     case 5:
                         Menu.limpaTela();
                         break;
                     case 6:
+                        Menu.limpaTela();
+                        break;
+                    case 7:
                         Menu.limpaTela();
                         return;
                     default:
@@ -327,7 +332,7 @@ public class Sistema
                 System.out.print("\nEntrada inválida, tente novamente.");
                 teclado.nextLine();
             }
-        } while(escolha != 6);
+        } while(escolha != 7);
     }
 
     //gera os dados do aluno 
