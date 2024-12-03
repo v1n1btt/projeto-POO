@@ -60,6 +60,7 @@ public class Menu
         sistema.carregarAdministradores();
         sistema.carregarCursos();
         sistema.carregarMatriculas();
+        sistema.carregarProfessores();
         sistema.carregarCursosProfessor(0); 
     }
 
