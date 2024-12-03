@@ -333,8 +333,6 @@ public class Sistema
                 System.out.print("\nSelecione uma opção: ");
 
                 escolha = Integer.parseInt(teclado.nextLine());
-                System.out.print("Entrada: " + escolha);
-                teclado.nextLine();
 
                 switch(escolha) 
                 {
