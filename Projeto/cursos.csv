@@ -1,21 +1,6 @@
-Nome,Código do Curso,Descrição,Professor Responsável
-Matemática,101,Curso de Matemática Básica,Prof. João Silva
-Física,102,Curso de Física Clássica,Prof. Maria Oliveira
-Química,103,Curso de Química Orgânica,Prof. Carlos Souza
-Biologia,104,Curso de Biologia Celular,Prof. Ana Lima
-História,105,Curso de História Moderna,Prof. Pedro Santos
-Geografia,106,Curso de Geografia Humana,Prof. Fernanda Costa
-Literatura,107,Curso de Literatura Brasileira,Prof. Ricardo Alves
-Filosofia,108,Curso de Filosofia Antiga,Prof. Helena Martins
-Sociologia,109,Curso de Sociologia Contemporânea,Prof. Paulo Mendes
-Artes,110,Curso de Artes Plásticas,Prof. Juliana Ferreira
-Educação Física,111,Curso de Educação Física Escolar,Prof. Roberto Lima
-Informática,112,Curso de Introdução à Informática,Prof. Daniela Rocha
-Engenharia,113,Curso de Engenharia Civil,Prof. Gustavo Pereira
-Medicina,114,Curso de Medicina Geral,Prof. Laura Nunes
-Direito,115,Curso de Direito Constitucional,Prof. André Barbosa
-Administração,116,Curso de Administração de Empresas,Prof. Patrícia Souza
-Economia,117,Curso de Economia Internacional,Prof. Marcelo Costa
-Psicologia,118,Curso de Psicologia Clínica,Prof. Renata Gomes
-Enfermagem,119,Curso de Enfermagem Pediátrica,Prof. Bruno Almeida
-Arquitetura,120,Curso de Arquitetura e Urbanismo,Prof. Camila Ribeiro
+Nome,Código do Curso,Carga Horária,Ementa,Data Início,Data Fim,Horário,Professor Responsável
+Introdução à Programação,CS101,40,"Conceitos básicos de programação e lógica",2024-01-15,2024-06-15,09:00-12:00,30,0
+Matemática para Computação,MT202,45,"Álgebra linear, cálculo e estatística aplicados à computação",2024-02-01,2024-07-01,14:00-17:00,25,1
+Engenharia de Software,SW303,60,"Princípios e práticas de engenharia de software",2024-03-01,2024-09-01,18:00-21:00,20,2
+Banco de Dados,DB404,50,"Modelagem, implementação e gerenciamento de bancos de dados",2024-01-20,2024-06-20,10:00-13:00,40,3
+Redes de Computadores,NT505,40,"Fundamentos e protocolos de redes de computadores",2024-03-10,2024-09-10,08:00-11:00,35,4

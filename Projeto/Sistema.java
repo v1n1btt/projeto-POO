@@ -1336,15 +1336,15 @@ public class Sistema
         try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
+                String nomeCurso = dados[0];
                 String codigoCurso = dados[1];
+                String ementa = dados[3];
+                String dataInicio = dados[4];
+                String dataFim = dados[5];
+                String horario = dados[6];
+                int capacidade = Integer.parseInt(dados[7]);
                 int codigoProfessor = Integer.parseInt(dados[8]);
                 if (codigoProfessor == getProfessoresSistema(idProfessor).getCodigoUsuario()) {
-                    String nomeCurso = dados[0];
-                    String ementa = dados[3];
-                    String dataInicio = dados[4];
-                    String dataFim = dados[5];
-                    String horario = dados[6];
-                    int capacidade = Integer.parseInt(dados[7]);
                     Professor professor = getProfessoresSistema(idProfessor);
                     Curso curso = new Curso(nomeCurso, codigoCurso, capacidade, ementa, dataInicio, dataFim, horario, professor);
                     setCurso(curso);

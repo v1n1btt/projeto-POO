@@ -11,30 +11,29 @@ public class GeraArquivo {
     
     public static void salvarCurso(Curso curso) {
         try {
-            File arquivo = new File("cursos.csv");
+            File arquivo = new File("Projeto\\cursos.csv");
             boolean arquivoNovo = !arquivo.exists();
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
                 // Adiciona cabeçalho se o arquivo for novo
                 if (arquivoNovo) {
-                    writer.write("Nome,Código do Curso,Descrição,Professor Responsável");
+                    writer.write("Nome,Código do Curso,Carga Horária,Ementa,Data Início,Data Fim,Horário,Professor Responsável");
                     writer.newLine();
                 }
                 // Escreve os dados do curso
                 writer.write(curso.getNomeCurso() + "," +
                              curso.getCodigoCurso() + "," +
                              curso.getCargaHorariaCurso() + "," +
-                             curso.getDateFim() + "," +
-                             curso.getDateInicio() + "," +
                              curso.getEmenta() + "," +
-                                         curso.getHorario() + ",");
-            
-                            if (curso.getProfessor() != null) {
-                                writer.write(curso.getProfessor().getNome());
-                            } else {
-                                // Trate o caso onde o professor é nulo
-                                System.out.println("O curso não possui um professor atribuído.");
-                            }
+                             curso.getDateInicio() + "," +
+                             curso.getDateFim() + "," +
+                             curso.getHorario() + ",");
+
+                if (curso.getProfessor() != null) {
+                    writer.write(curso.getProfessor().getNome());
+                } else {
+                    writer.write("Sem Professor");
+                }
 
                 writer.newLine();
             }
