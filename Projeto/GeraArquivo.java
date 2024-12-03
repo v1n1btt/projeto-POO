@@ -1,44 +1,135 @@
-package Projeto; 
-import java.io.BufferedWriter; 
-import java.io.FileWriter; 
-import java.io.IOException; 
+package Projeto;
 
-public class GeraArquivo { 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
-    // Método para criar um arquivo .csv com as informações do curso 
-    public static void criarArquivoCurso(String nomeCurso, String codigoCurso, String ementa, 
-                                          String dateInicio, String dateFim, String horario, 
-                                          int cargaHorariaCurso, Professor professor, Aluno[] alunosMatriculados, 
-                                          int quantidadeAtualAlunos) { 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeCurso + ".csv"))) { 
-            // Cabeçalho do CSV
-            writer.write("Nome do Curso,Código do Curso,Ementa,Data de Início,Data de Fim,Horário,Carga Horária,Professor,Quantidade de Alunos Matriculados,Lista de Alunos");
-            writer.newLine(); 
-            // Dados do curso
-            writer.write(nomeCurso + "," + codigoCurso + "," + ementa + "," + dateInicio + "," + dateFim + "," + horario + "," + cargaHorariaCurso + "," + professor.getNome() + "," + quantidadeAtualAlunos + ",");
-            for (int i = 0; i < quantidadeAtualAlunos; i++) { 
-                writer.write(alunosMatriculados[i].getNome());
-                if (i < quantidadeAtualAlunos - 1) {
-                    writer.write("; "); // Separador entre os nomes dos alunos
+public class GeraArquivo {
+
+    //Método para salvar um curso no arquivo cursos.csv
+    
+    public static void salvarCurso(Curso curso) {
+        try {
+            File arquivo = new File("cursos.csv");
+            boolean arquivoNovo = !arquivo.exists();
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
+                // Adiciona cabeçalho se o arquivo for novo
+                if (arquivoNovo) {
+                    writer.write("Nome,Código do Curso,Descrição,Professor Responsável");
+                    writer.newLine();
                 }
-            }
-            writer.newLine(); 
-        } catch (IOException e) { 
-            System.out.println("Erro ao criar arquivo do curso: " + e.getMessage()); 
-        } 
-    } 
+                // Escreve os dados do curso
+                writer.write(curso.getNomeCurso() + "," +
+                             curso.getCodigoCurso() + "," +
+                             curso.getCargaHorariaCurso() + "," +
+                             curso.getDateFim() + "," +
+                             curso.getDateInicio() + "," +
+                             curso.getEmenta() + "," +
+                                         curso.getHorario() + ",");
+            
+                            if (curso.getProfessor() != null) {
+                                writer.write(curso.getProfessor().getNome());
+                            } else {
+                                // Trate o caso onde o professor é nulo
+                                System.out.println("O curso não possui um professor atribuído.");
+                            }
 
-    // Método para criar um arquivo .csv com as informações do usuário 
-    public static void criarArquivoUsuario(Pessoa usuario) { 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(usuario.getNome() + "_usuario.csv"))) { 
-            // Cabeçalho do CSV
-            writer.write("Nome,Código do Usuário,Email,Senha Pessoal,Nível de Acesso");
-            writer.newLine(); 
-            // Dados do usuário
-            writer.write(usuario.getNome() + "," + usuario.getCodigoUsuario() + "," + usuario.getEmail() + "," + usuario.getSenhaPessoal() + "," + usuario.getNivelAcesso()); 
-            writer.newLine(); 
-        } catch (IOException e) { 
-            System.out.println("Erro ao criar arquivo do usuário: " + e.getMessage()); 
-        } 
-    } 
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar curso: " + e.getMessage());
+        }
+    }
+
+    // Método para salvar um aluno no arquivo alunos.csv
+    public static void salvarAluno(Aluno aluno) {
+        try {
+            File arquivo = new File("alunos.csv");
+            boolean arquivoNovo = !arquivo.exists();
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
+                // Adiciona cabeçalho se o arquivo for novo
+                if (arquivoNovo) {
+                    writer.write("Nome,CPF,Código do Usuário,Email,Senha,Nível de Acesso");
+                    writer.newLine();
+                }
+                // Escreve os dados do aluno
+                writer.write(aluno.getNome() + "," +
+                             aluno.getCPF() + "," +
+                             aluno.getCodigoUsuario() + "," +
+                             aluno.getEmail() + "," +
+                             aluno.getSenhaPessoal() + "," +
+                             aluno.getNivelAcesso());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar aluno: " + e.getMessage());
+        }
+    }
+
+    // Método para salvar um administrador no arquivo administradores.csv
+    public static void salvarAdministrador(Administrador administrador) {
+        try {
+            File arquivo = new File("administradores.csv");
+            boolean arquivoNovo = !arquivo.exists();
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
+                // Adiciona cabeçalho se o arquivo for novo
+                if (arquivoNovo) {
+                    writer.write("Nome,Código do Usuário,Email,Senha,Nível de Acesso");
+                    writer.newLine();
+                }
+                // Escreve os dados do administrador
+                writer.write(administrador.getNome() + "," +
+                             administrador.getCodigoUsuario() + "," +
+                             administrador.getEmail() + "," +
+                             administrador.getSenhaPessoal() + "," +
+                             administrador.getNivelAcesso());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar administrador: " + e.getMessage());
+        }
+    }
+
+    // Método para salvar um professor no arquivo professores.csv
+    public static void salvarProfessor(Professor professor) {
+        try {
+            File arquivo = new File("professores.csv");
+            boolean arquivoNovo = !arquivo.exists();
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
+                // Adiciona cabeçalho se o arquivo for novo
+                if (arquivoNovo) {
+                    writer.write("Nome,Código do Usuário,Email,Senha,Nível de Acesso");
+                    writer.newLine();
+                }
+                // Escreve os dados do professor
+                writer.write(professor.getNome() + "," +
+                             professor.getCodigoUsuario() + "," +
+                             professor.getEmail() + "," +
+                             professor.getSenhaPessoal() + "," +
+                             professor.getNivelAcesso());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar professor: " + e.getMessage());
+        }
+    }
+
+    public static void salvarCurso(String nomeCurso, String codigoCurso, String ementa, String dateInicio,
+            String dateFim, String horario, int cargaHorariaCurso, Professor professor, Aluno[] alunosMatriculados,
+            int quantidadeAtualAlunos) {
+                if (professor != null) {
+                    @SuppressWarnings("unused")
+                    String nomeProfessor = professor.getNome();
+                    // Continue com o processamento
+                } else {
+                    // Trate o caso onde o professor é nulo
+                    System.out.println("O curso não possui um professor atribuído.");
+                }
+        throw new UnsupportedOperationException("Unimplemented method 'salvarCurso'");
+    }
 }
