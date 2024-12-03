@@ -120,6 +120,7 @@ public class Sistema
     public void fazerLoginUsuarioAluno(String email, String senha) 
     {
         boolean sucesso = false;
+
         for(int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
         {
             if(VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true && VerificaVariaveis(getAluno(indiceAlunos).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) 
@@ -138,6 +139,7 @@ public class Sistema
     public void fazerLoginUsuarioAdministrador(String email, String senha) 
     {
         boolean sucesso = false;
+
         for(int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) 
         {
             if(VerificaVariaveis(getAdministrador(indiceAdministradores).getEmail(), email) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getNivelAcesso(), "administrador") == true) 
@@ -156,6 +158,7 @@ public class Sistema
     public void fazerLoginUsuarioProfessor(String email, String senha) 
     {
         boolean sucesso = false;
+
         for(int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) 
         {
             if(VerificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email) == true && VerificaVariaveis(getProfessoresSistema(indiceProfessores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getProfessoresSistema(indiceProfessores).getNivelAcesso(), "professor") == true) 
@@ -204,11 +207,9 @@ public class Sistema
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
-
     //método que cria a conta do aluno
     public void criarContaAluno() 
     {
-       
         String nome;
         String cpf;
         String email;
@@ -274,7 +275,6 @@ public class Sistema
     //Gera o menu que o aluno vê 
     public void MenuAluno(int idAluno) 
     {
-
         int escolha = 0; 
 
         do{
@@ -303,7 +303,7 @@ public class Sistema
                         break;
                     case 2:
                         Menu.limpaTela();
-                        CursosDisponiveisAluno();
+                        CursosDisponiveisAluno(idAluno);
                         break;
                     case 3:
                         Menu.limpaTela();
@@ -340,11 +340,11 @@ public class Sistema
     }
 
     //gera os cursos que estão disponíveis para a matrícula 
-    public void CursosDisponiveisAluno() 
+    public void CursosDisponiveisAluno(int idAluno) 
     {
-        for( int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
         {
-            if (getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) 
+            if (getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true && VerificaAlunoMatriculado(idAluno, indiceCursos) == false) 
             {
                 System.out.println();
                 System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
@@ -366,7 +366,7 @@ public class Sistema
     {
         String codigo;
 
-        CursosDisponiveisAluno(); //imprime os cursos disponíveis 
+        CursosDisponiveisAluno(idAluno); //imprime os cursos disponíveis 
         System.out.print("Digite o código do curso: ");
         codigo = teclado.nextLine();
 
@@ -378,7 +378,7 @@ public class Sistema
                 {
                     if(getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) 
                     {
-                    getCurso(indiceCursos).setAlunosMatriculados(getAluno(idAluno));
+                        getCurso(indiceCursos).setAlunosMatriculados(getAluno(idAluno));
                         Menu.limpaTela();
                         System.out.println();
                         System.out.println("Matricula feita com sucesso!");
