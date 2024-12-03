@@ -132,4 +132,9 @@ public class GeraArquivo {
                 }
         throw new UnsupportedOperationException("Unimplemented method 'salvarCurso'");
     }
+
+    public static void salvarMatricula(Curso curso, Aluno aluno) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'salvarMatricula'");
+    }
 }

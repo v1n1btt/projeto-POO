@@ -1,5 +1,11 @@
 package Projeto;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -18,44 +24,6 @@ public class Sistema
 
     Scanner teclado = new Scanner(System.in);
 
-    /*public void GerarAdministrador(String nome, String email, String senha) 
-    {
-        int codigoUsuario; 
-        codigoUsuario = GerarCodigoUsuario();
-        Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
-        setAdministrador(administrador);
-        System.out.println("Conta Criada com Sucesso!");
-        // Criar arquivo para o administrador
-        GeraArquivo.criarArquivoUsuario(administrador);
-    }
-        
-    public void GerarProfessor(String nome, String email, String senha) 
-    {
-        int codigoUsuario = 0; 
-        codigoUsuario = GerarCodigoUsuario();
-        Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
-        setProfessoresSistema(professor);
-        System.out.println("Conta Criada com Sucesso!");
-        // Criar arquivo para o professor
-        GeraArquivo.criarArquivoUsuario(professor);
-    }
-        
-    public void GerarCurso(nomeCurso, codigoCurso, cargaHoraria, ementa, dateInicio, dateFim, horario, professor, idProfessor) 
-    {
-        if (verificaCargaProfessor(idProfessor, cargaHoraria) == true) 
-        {
-            Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor);
-            setCurso(curso);
-            AdicionaCargaHorariaProfessor(contadorCurso);
-            System.out.println("Curso Criado com Sucesso!");
-            // Criar arquivo para o curso
-            GeraArquivo.criarArquivoCurso(nome, codigo, ementa, dateInicio, dateFim, horario, cargaHoraria, professor, curso.getAlunosMatriculados(), curso.getQuantidadeAtualAlunos());
-        } else 
-        {
-            System.out.println("Esse professor não pode mais receber disciplinas!");
-        }
-    }*/
-
     public Sistema() 
     {
         Aluno aluno = new Aluno("Joao", 99997, "joao@.com", "joao", "aluno", "44412345810");
@@ -71,6 +39,44 @@ public class Sistema
         setProfessoresSistema(professor2);
         setCurso(curso);
     }
+
+    public void GerarAluno(String nome, String email, String senha, String cpf){
+        int codigoUsuario;
+        codigoUsuario = GerarCodigoUsuario();
+        Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
+        setAluno(aluno);
+        System.out.println("Conta Criada com Sucesso!");
+        GeraArquivo.salvarAluno(aluno);
+    }
+
+    public void GerarCurso(String nomeCurso, String codigoCurso, String cargaHoraria, String ementa, String dataInicio, 
+                           String dataFim, int quantidadeAtualAlunos, Professor professor, Aluno[] alunos, int capacidade) {
+        Curso curso = new Curso(nomeCurso, codigoCurso, capacidade, cargaHoraria, ementa, dataInicio, dataFim, professor);
+        setCurso(curso);
+        GeraArquivo.salvarCurso(curso);
+    }
+
+    public void GerarAdministrador(String nome, String email, String senha) 
+    {
+        int codigoUsuario; 
+        codigoUsuario = GerarCodigoUsuario();
+        Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
+        setAdministrador(administrador);
+        System.out.println("Conta Criada com Sucesso!");
+        GeraArquivo.salvarAdministrador(administrador);
+    }
+        
+    public void GerarProfessor(String nome, String email, String senha, String cpf) 
+    {
+        int codigoUsuario = 0; 
+        codigoUsuario = GerarCodigoUsuario();
+        Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
+        setProfessoresSistema(professor);
+        System.out.println("Conta Criada com Sucesso!");
+        // Criar arquivo para o professor
+        GeraArquivo.salvarProfessor(professor);
+    }
+        
 
     public void setAluno(Aluno aluno) 
     {
@@ -117,57 +123,95 @@ public class Sistema
     }
 
     //metodos para fazer os logins
-    public void fazerLoginUsuarioAluno(String email, String senha) 
-    {
+    public void carregarAlunos() {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("alunos.csv"))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nome = dados[0];
+                int codigoUsuario = Integer.parseInt(dados[1]);
+                String email = dados[2];
+                String senha = dados[3];
+                String cpf = dados[4];
+                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
+                setAluno(aluno);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
+        }
+    }
+
+    public void fazerLoginUsuarioAluno(String email, String senha) {
+        carregarAlunos();
         boolean sucesso = false;
 
-        for(int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
-        {
-            if(VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true && VerificaVariaveis(getAluno(indiceAlunos).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) 
-            {
+        for (int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) {
+            if (VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true &&
+                VerificaVariaveis(getAluno(indiceAlunos).getSenhaPessoal(), senha) == true &&
+                VerificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) {
                 sucesso = true;
                 MenuAluno(indiceAlunos);
-            } 
-        }   
-        if(sucesso == false){
+            }
+        }
+        if (sucesso == false) {
             System.out.println("\nEmail ou senha Incorretos!");
             teclado.nextLine();
             Menu.limpaTela();
         }
     }
 
-    public void fazerLoginUsuarioAdministrador(String email, String senha) 
+       public void fazerLoginUsuarioAdministrador(String email, String senha) 
     {
-        boolean sucesso = false;
-
+        carregarAdministradores();
+        boolean loginSucesso = false;
         for(int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) 
         {
-            if(VerificaVariaveis(getAdministrador(indiceAdministradores).getEmail(), email) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getAdministrador(indiceAdministradores).getNivelAcesso(), "administrador") == true) 
+            Administrador administrador = getAdministrador(indiceAdministradores);
+            if (administrador != null && VerificaVariaveis(administrador.getEmail(), email) == true && VerificaVariaveis(administrador.getSenhaPessoal(), senha) == true && VerificaVariaveis(administrador.getNivelAcesso(), "administrador") == true) 
             {
-                sucesso = true;
                 MenuAdministrador(indiceAdministradores);
+                loginSucesso = true;
+                break;
             } 
-        } 
-        if(sucesso == false){
-            System.out.println("\nEmail ou senha Incorretos!");
+        }   
+        if (!loginSucesso) {
+            System.out.println("\nEmail ou senha Incorretos!"); 
             teclado.nextLine();
             Menu.limpaTela();
         }
     }
 
-    public void fazerLoginUsuarioProfessor(String email, String senha) 
-    {
+
+    public void carregarProfessores() {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nome = dados[0];
+                int codigoUsuario = Integer.parseInt(dados[1]);
+                String email = dados[2];
+                String senha = dados[3];
+                Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
+                setProfessoresSistema(professor);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar professores do arquivo professores.csv: " + e.getMessage());
+        }
+    }
+
+    public void fazerLoginUsuarioProfessor(String email, String senha) {
+        carregarProfessores();
         boolean sucesso = false;
 
-        for(int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) 
-        {
-            if(VerificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email) == true && VerificaVariaveis(getProfessoresSistema(indiceProfessores).getSenhaPessoal(), senha) == true && VerificaVariaveis(getProfessoresSistema(indiceProfessores).getNivelAcesso(), "professor") == true) 
-            {
+        for (int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) {
+            if (VerificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email) == true &&
+                VerificaVariaveis(getProfessoresSistema(indiceProfessores).getSenhaPessoal(), senha) == true &&
+                VerificaVariaveis(getProfessoresSistema(indiceProfessores).getNivelAcesso(), "professor") == true) {
                 sucesso = true;
                 MenuProfessor(indiceProfessores);
-            } 
+            }
         }
-        if(sucesso == false){
+        if (sucesso == false) {
             System.out.println("\nEmail ou senha Incorretos!");
             teclado.nextLine();
             Menu.limpaTela();
@@ -208,68 +252,69 @@ public class Sistema
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
     //método que cria a conta do aluno
-    public void criarContaAluno() 
-    {
+    public void criarContaAluno() {
         String nome;
         String cpf;
         String email;
         String senha;
         String confirmaSenha;
         boolean controle = false;
-        int codigoUsuario; 
+        int codigoUsuario;
 
         System.out.println();
         System.out.println("SISTEMA DE GESTÃO DE CURSOS\n\n");
         System.out.print("====================\nCADASTRO ALUNO\n====================\n\n");
         System.out.print("CPF (apenas números): ");
         cpf = teclado.nextLine();
-        if(cpf.matches("[0-9]+") && cpf.length() == 11)
-        {
+        if (cpf.matches("[0-9]+") && cpf.length() == 11) {
             System.out.print("Nome completo: ");
             nome = teclado.nextLine();
             System.out.print("Digite seu Email: ");
             email = teclado.nextLine();
-            if(email.matches("(.*)@(.*).(.*)") && !email.substring(0, email.indexOf("@")).isEmpty() && !email.substring(email.indexOf("@") + 1, email.indexOf(".")).isEmpty() && !email.substring(email.indexOf(".") + 1).isEmpty())
-            {
-                if(VerificaCPF(cpf) == true) 
-                {
-                    do
-                    {
+            if (email.matches("(.*)@(.*).(.*)") && !email.substring(0, email.indexOf("@")).isEmpty() && !email.substring(email.indexOf("@") + 1, email.indexOf(".")).isEmpty() && !email.substring(email.indexOf(".") + 1).isEmpty()) {
+                if (VerificaCPF(cpf) == true && VerificaEmail(email) == true) {
+                    do {
                         System.out.print("Senha: ");
                         senha = teclado.nextLine();
-                        if(!senha.isEmpty()){
+                        if (!senha.isEmpty()) {
                             System.out.print("Confirme a senha: ");
                             confirmaSenha = teclado.nextLine();
-                            //verificacao de senha
                             boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-                            if(verifica == true) 
-                            {
+                            if (verifica == true) {
                                 controle = true;
                                 codigoUsuario = GerarCodigoUsuario();
                                 Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
                                 setAluno(aluno);
                                 System.out.print("Conta Criada com Sucesso!");
+                                GeraArquivo.salvarAluno(aluno);
                                 teclado.nextLine();
-                            }else {
-                                System.out.println("A senha não é igual, tente Novamente.\n"); 
+                            } else {
+                                System.out.println("A senha não é igual, tente Novamente.\n");
                             }
-                        } else{
+                        } else {
                             System.out.println("A senha não pode estar em branco, tente novamente.\n");
                         }
-                    } while(controle != true);
+                    } while (controle != true);
                 } else {
-                    System.out.println("Já existe um usuário cadastrado com esse CPF!\n");
+                    System.out.println("Já existe um usuário cadastrado com esse CPF ou Email!\n");
                 }
-            }
-            else {
+            } else {
                 System.out.println("Formato do email inválido, tente novamente.\n");
                 teclado.nextLine();
             }
-        }
-        else{
+        } else {
             System.out.println("Formato do CPF inválido, tente novamente.\n");
             teclado.nextLine();
         }
+    }
+
+    public boolean VerificaEmail(String email) {
+        for (int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) {
+            if (VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true) {
+                return false;
+            }
+        }
+        return true;
     }
 
     //Gera o menu que o aluno vê 
@@ -343,7 +388,16 @@ public class Sistema
         System.out.println("Email: " + getAluno(idAluno).getEmail());
         System.out.println("CPF: " + getAluno(idAluno).getCPF());
     }
-
+    public void MostrarDadosAlunos() {
+        carregarAlunos();
+        for (int i = 0; i < contadorAluno; i++) {
+            System.out.println("Nome: " + alunos[i].getNome());
+            System.out.println("Código do Usuário: " + alunos[i].getCodigoUsuario());
+            System.out.println("Email: " + alunos[i].getEmail());
+            System.out.println("CPF: " + alunos[i].getCPF());
+            System.out.println();
+        }
+    }
     //gera os cursos que estão disponíveis para a matrícula 
     public void CursosDisponiveisAluno(int idAluno) 
     {
@@ -365,6 +419,27 @@ public class Sistema
             }
         }
     }
+    public void carregarCursos() {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nomeCurso = dados[0];
+                String codigoCurso = dados[1];
+                String ementa = dados[3];
+                String dataInicio = dados[4];
+                String dataFim = dados[5];
+                String horario = dados[6];
+                int capacidade = Integer.parseInt(dados[7]);
+                int professorIndex = Integer.parseInt(dados[8]);
+                Professor professor = getProfessoresSistema(professorIndex);
+                Curso curso = new Curso(nomeCurso, codigoCurso, capacidade, ementa, dataInicio, dataFim, horario, professor);
+                setCurso(curso);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar cursos do arquivo cursos.csv: " + e.getMessage());
+        }
+    }
 
     //Metodo que imprime todos os cursos que um aluno está matriculado
     public void CursosMatriculadosAluno(int idAluno) 
@@ -377,7 +452,7 @@ public class Sistema
                 System.out.println();
                 System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
                 System.out.println("Código do curso: " + getCurso(indiceCursos).getCodigoCurso());
-                System.out.println("Carga Horária do curso: " + getCurso(indiceCursos).getCargaHorariaCurso() + " Horas");
+                System.out.println("Carga iHorária do curso: " + getCurso(indiceCursos).getCargaHorariaCurso() + " Horas");
                 System.out.println("Ementa do curso: " + getCurso(indiceCursos).getEmenta());
                 System.out.println("Data Inicial do curso: " + getCurso(indiceCursos).getDateInicio());
                 System.out.println("Data Final do curso: " + getCurso(indiceCursos).getDateFim());
@@ -389,10 +464,52 @@ public class Sistema
             }
         }
     }
+    public void carregarMatriculas() {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("matriculas.csv"))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String codigoCurso = dados[0];
+                int codigoAluno = Integer.parseInt(dados[1]);
+                Curso curso = buscaCurso(codigoCurso);
+                Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
+                if (curso != null && aluno != null) {
+                    curso.setAlunosMatriculados(aluno);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar matrículas do arquivo matriculas.csv: " + e.getMessage());
+        }
+    }
+
+    public Aluno buscaAlunoPorCodigo(int codigo) {
+        for (int i = 0; i < contadorAluno; i++) {
+            if (alunos[i].getCodigoUsuario() == codigo) {
+                return alunos[i];
+            }
+        }
+        return null;
+    }
+
+    public void mostrarCursosEProfessores() {
+        carregarCursos();
+        carregarProfessores();
+        carregarMatriculas();
+        for (int i = 0; i < contadorCurso; i++) {
+            Curso curso = cursos[i];
+            System.out.println("Curso: " + curso.getNomeCurso());
+            System.out.println("Código: " + curso.getCodigoCurso());
+            System.out.println("Professor: " + curso.getProfessor().getNome());
+            System.out.println("Quantidade de alunos matriculados: " + curso.getQuantidadeAtualAlunos());
+            System.out.println();
+        }
+    }
 
     //Método para o aluno se matricular em um curso disponível
     public void MatricularCurso(int idAluno) 
     {
+        carregarCursos();
+        carregarMatriculas();
         String codigo;
 
         CursosDisponiveisAluno(idAluno); //imprime os cursos disponíveis 
@@ -408,6 +525,7 @@ public class Sistema
                     if(getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) 
                     {
                         getCurso(indiceCursos).setAlunosMatriculados(getAluno(idAluno));
+                        GeraArquivo.salvarMatricula(getCurso(indiceCursos), getAluno(idAluno));
                         Menu.limpaTela();
                         System.out.println();
                         System.out.println("Matricula feita com sucesso!");
@@ -433,8 +551,32 @@ public class Sistema
     }
     
     //Método para que o aluno cancele a matrícula em um curso
-    public void CancelarMatriculaCurso() {
+    public void CancelarMatriculaCurso(int idAluno) {
+        carregarCursos();
+        carregarMatriculas();
+        String codigo;
 
+        System.out.print("Digite o código do curso que deseja cancelar a matrícula: ");
+        codigo = teclado.nextLine();
+
+        for (int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
+            if (VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) {
+                if (VerificaAlunoMatriculado(idAluno, indiceCursos) == true) {
+                    getCurso(indiceCursos).removerAlunoMatriculado(getAluno(idAluno));
+                    GeraArquivo.salvarMatricula(getCurso(indiceCursos), getAluno(idAluno));
+                    Menu.limpaTela();
+                    System.out.println();
+                    System.out.println("Matrícula cancelada com sucesso!");
+                    System.out.println();
+                    break;
+                } else {
+                    Menu.limpaTela();
+                    System.out.println();
+                    System.out.println("ERRO! Você não está matriculado nesse curso!");
+                    System.out.println();
+                }
+            }
+        }
     }
     
     //Método que retorna true se um curso não estiver lotado e false se estiver
@@ -445,6 +587,10 @@ public class Sistema
             return true; 
         }
         return false; 
+    }
+    // Método que retorna a quantidade de alunos matriculados em um curso
+    public int getQuantidadeAlunosMatriculados(int indiceCurso) {
+        return getCurso(indiceCurso).getQuantidadeAtualAlunos();
     }
 
     //Método que verifica o CPF do aluno para não repetir
@@ -477,7 +623,6 @@ public class Sistema
     {
         String codigo;
        
-        //CursosProfessor(idProfessor);
         System.out.print("Digite o Código do curso: ");
         codigo = teclado.nextLine();
         System.out.println();
@@ -493,29 +638,44 @@ public class Sistema
             System.out.println("Concluiu o curso: " + cursoProcurado.getNomeCurso());
             System.out.println("E obteve nota: " + cursoProcurado.getNota(idAluno));
             System.out.println();
+        } else {
+            System.out.println("O aluno não atingiu a nota mínima para obter o certificado.");
         }
-        /*for(int indiceAlunos = 0; indiceAlunos < cursoProcurado.getQuantidadeAtualAlunos(); indiceAlunos++) 
-        {
-            System.out.println();
-            System.out.println("Nome: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getNome());
-            System.out.println("Código Usuário: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getCodigoUsuario());
-            System.out.print("Digite a nota do Aluno acima: ");
-            nota = teclado.nextDouble();
-            cursoProcurado.setNota(nota);
-            System.out.println();
-            System.out.println("A nota do aluno acima é: " + " " + cursoProcurado.getNota(indiceAlunos));
-            System.out.println();
-        }
-
-        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++)
-        {
-            if(VerificaAlunoMatriculado(idAluno, indiceCursos) == true && )
-            {
-
+    }
+    public void carregarNotas() {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("notas.csv"))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String codigoCurso = dados[0];
+                int codigoAluno = Integer.parseInt(dados[1]);
+                double nota = Double.parseDouble(dados[2]);
+                Curso curso = buscaCurso(codigoCurso);
+                Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
+                if (curso != null && aluno != null) {
+                    curso.setNota(aluno, nota);
+                }
             }
-        }*/
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar notas do arquivo notas.csv: " + e.getMessage());
+        }
     }
 
+    public void salvarNotas() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("notas.csv"))) {
+            for (int i = 0; i < contadorCurso; i++) {
+                Curso curso = cursos[i];
+                for (int j = 0; j < curso.getQuantidadeAtualAlunos(); j++) {
+                    Aluno aluno = curso.getAlunosMatriculados(j);
+                    double nota = curso.getNota(j);
+                    bw.write(curso.getCodigoCurso() + "," + aluno.getCodigoUsuario() + "," + nota);
+                    bw.newLine();
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar notas no arquivo notas.csv: " + e.getMessage());
+        }
+    }
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
     public void MenuAdministrador(int i) 
     {
@@ -584,41 +744,70 @@ public class Sistema
         } while(escolha != 8);
     }
 
-    public void FormularioCadastroAdministrador() 
-    {
-        
+    public void carregarAdministradores() {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("administradores.csv"))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nome = dados[0];
+                int codigoUsuario = Integer.parseInt(dados[1]);
+                String email = dados[2];
+                String senha = dados[3];
+                Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
+                setAdministrador(administrador);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar administradores do arquivo administradores.csv: " + e.getMessage());
+        }
+    }
+
+    public boolean VerificaEmailAdministrador(String email) {
+        carregarAdministradores();
+        for (int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) {
+            if (VerificaVariaveis(getAdministrador(indiceAdministradores).getEmail(), email)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void FormularioCadastroAdministrador() {
+        carregarAdministradores();
         String nome;
         String email;
         String senha;
         String confirmaSenha;
-        boolean controle = false; 
+        boolean controle = false;
 
         System.out.print("====================\nCADASTRO ADMINISTRADOR\n====================\n\n");
         System.out.print("Nome completo: ");
         nome = teclado.nextLine();
         System.out.print("Digite seu Email: ");
         email = teclado.nextLine();
-        if(email.matches("(.*)@(.*).(.*)") && !email.substring(0, email.indexOf("@")).isEmpty() && !email.substring(email.indexOf("@") + 1, email.indexOf(".")).isEmpty() && !email.substring(email.indexOf(".") + 1).isEmpty()){
-            do{
-                System.out.print("Senha: ");
-                senha = teclado.nextLine();
-                if(!senha.isEmpty()){
-                    System.out.print("Confirme a senha: ");
-                    confirmaSenha = teclado.nextLine();
-                    //verificacao de senha
-                    boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-                    if(verifica == true) 
-                    {
-                        controle = true;
-                        CadastrarAdministrador(nome, email, confirmaSenha);
+        if (email.matches("(.*)@(.*).(.*)") && !email.substring(0, email.indexOf("@")).isEmpty() && !email.substring(email.indexOf("@") + 1, email.indexOf(".")).isEmpty() && !email.substring(email.indexOf(".") + 1).isEmpty()) {
+            if (VerificaEmailAdministrador(email)) {
+                do {
+                    System.out.print("Senha: ");
+                    senha = teclado.nextLine();
+                    if (!senha.isEmpty()) {
+                        System.out.print("Confirme a senha: ");
+                        confirmaSenha = teclado.nextLine();
+                        boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                        if (verifica) {
+                            controle = true;
+                            CadastrarAdministrador(nome, email, confirmaSenha);
+                            GeraArquivo.salvarAdministrador(new Administrador(nome, GerarCodigoUsuario(), email, senha, "administrador"));
+                        } else {
+                            System.out.println("A senha não é igual! Tente Novamente!");
+                            System.out.println();
+                        }
                     } else {
-                        System.out.println("A senha não é igual!" + "Tente Novamente!"); 
-                        System.out.println();
+                        System.out.println("A senha não pode estar em branco, tente novamente.");
                     }
-                } else{
-                    System.out.println("A senha não pode estar em branco, tente novamente.");
-                }
-            } while(controle != true);
+                } while (!controle);
+            } else {
+                System.out.println("Já existe um administrador cadastrado com esse Email!");
+            }
         } else {
             System.out.println("Formato do email inválido, tente novamente.");
             teclado.nextLine();
@@ -633,47 +822,14 @@ public class Sistema
         setAdministrador(administrador);
         System.out.println("Conta Criada com Sucesso!");
     }
-
-    public void FormulariocadastroProfessor() 
-    {
-
-        String nome; 
-        String email; 
-        String senha;
-        String confirmaSenha;
-        boolean controle = false; 
-
-        System.out.print("====================\nCADASTRO DE PROFESSOR\n====================\n\n");
-        System.out.print("Nome do professor: ");
-        nome = teclado.nextLine();
-        System.out.print("Endereço de email do professor: ");
-        email = teclado.nextLine();
-        if(email.matches("(.*)@(.*).(.*)") && !email.substring(0, email.indexOf("@")).isEmpty() && !email.substring(email.indexOf("@") + 1, email.indexOf(".")).isEmpty() && !email.substring(email.indexOf(".") + 1).isEmpty()){
-            do
-            {
-                System.out.print("Senha: ");
-                senha = teclado.nextLine();
-                if(!senha.isEmpty()){
-                    System.out.print("Confirme a senha: ");
-                    confirmaSenha = teclado.nextLine();
-                    //verificacao de senha
-                    boolean verifica = VerificaVariaveis(senha, confirmaSenha);
-                    if(verifica == true) 
-                    {
-                        controle = true;
-                        CadastrarProfessor(nome, email, confirmaSenha);
-                    } else {
-                        System.out.println("As senhas não são iguais!" + "Tente Novamente!"); 
-                        System.out.println();
-                    }
-                } else{
-                    System.out.println("A senha não pode estar em branco, tente novamente.");
-                }
-            } while(controle != true);
-        } else {
-            System.out.println("Formato do email inválido, tente novamente.");
-            teclado.nextLine();
+    public boolean VerificaEmailExistente(String email) {
+        carregarAdministradores();
+        for (int i = 0; i < contadorAdministrador; i++) {
+            if (administradores[i].getEmail().equals(email)) {
+                return true;
+            }
         }
+        return false;
     }
 
     public void CadastrarProfessor(String nome, String email, String senha) 
@@ -686,7 +842,67 @@ public class Sistema
         setProfessoresSistema(professor);
         System.out.println("Conta Criada com Sucesso!");
     }
+    public boolean VerificaEmailProfessor(String email) {
+        carregarProfessores();
+        for (int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) {
+            if (VerificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    public void salvarProfessor(Professor professor) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("professores.csv", true))) {
+            bw.write(professor.getNome() + "," + professor.getCodigoUsuario() + "," + professor.getEmail() + "," + professor.getSenhaPessoal());
+            bw.newLine();
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar professor no arquivo professores.csv: " + e.getMessage());
+        }
+    }
+
+    public void FormulariocadastroProfessor() {
+        carregarProfessores();
+        String nome;
+        String email;
+        String senha;
+        String confirmaSenha;
+        boolean controle = false;
+
+        System.out.print("====================\nCADASTRO DE PROFESSOR\n====================\n\n");
+        System.out.print("Nome do professor: ");
+        nome = teclado.nextLine();
+        System.out.print("Endereço de email do professor: ");
+        email = teclado.nextLine();
+        if (email.matches("(.*)@(.*).(.*)") && !email.substring(0, email.indexOf("@")).isEmpty() && !email.substring(email.indexOf("@") + 1, email.indexOf(".")).isEmpty() && !email.substring(email.indexOf(".") + 1).isEmpty()) {
+            if (VerificaEmailProfessor(email)) {
+                do {
+                    System.out.print("Senha: ");
+                    senha = teclado.nextLine();
+                    if (!senha.isEmpty()) {
+                        System.out.print("Confirme a senha: ");
+                        confirmaSenha = teclado.nextLine();
+                        boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                        if (verifica) {
+                            controle = true;
+                            CadastrarProfessor(nome, email, confirmaSenha);
+                            salvarProfessor(new Professor(nome, GerarCodigoUsuario(), email, senha, "professor"));
+                        } else {
+                            System.out.println("As senhas não são iguais! Tente Novamente!");
+                            System.out.println();
+                        }
+                    } else {
+                        System.out.println("A senha não pode estar em branco, tente novamente.");
+                    }
+                } while (!controle);
+            } else {
+                System.out.println("Já existe um professor cadastrado com esse Email!");
+            }
+        } else {
+            System.out.println("Formato do email inválido, tente novamente.");
+            teclado.nextLine();
+        }
+    }
     public void FormulariocadastrarCurso() 
     {
 
@@ -764,6 +980,34 @@ public class Sistema
             System.out.println("Esse professor não pode mais receber disciplinas!");
         }
     }
+    public void salvarCurso(Curso curso) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("cursos.csv", true))) {
+            bw.write(curso.getNomeCurso() + "," + curso.getCodigoCurso() + "," + curso.getCargaHorariaCurso() + "," + curso.getEmenta() + "," + curso.getDateInicio() + "," + curso.getDateFim() + "," + curso.getHorario() + "," + curso.getQuantidadeMaximaAlunos() + "," + curso.getProfessor().getCodigoUsuario());
+            bw.newLine();
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar curso no arquivo cursos.csv: " + e.getMessage());
+        }
+    }
+
+    public void editarCursoNoArquivo(Curso curso) {
+        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"));
+             BufferedWriter bw = new BufferedWriter(new FileWriter("cursos_temp.csv"))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                if (dados[1].equals(curso.getCodigoCurso())) {
+                    bw.write(curso.getNomeCurso() + "," + curso.getCodigoCurso() + "," + curso.getCargaHorariaCurso() + "," + curso.getEmenta() + "," + curso.getDateInicio() + "," + curso.getDateFim() + "," + curso.getHorario() + "," + curso.getQuantidadeMaximaAlunos() + "," + curso.getProfessor().getCodigoUsuario());
+                } else {
+                    bw.write(linha);
+                }
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao editar curso no arquivo cursos.csv: " + e.getMessage());
+        }
+        new File("cursos.csv").delete();
+        new File("cursos_temp.csv").renameTo(new File("cursos.csv"));
+    }
 
     public void DadosCursoAdministrativo() 
     {
@@ -786,10 +1030,31 @@ public class Sistema
             }
         }
     }
+    public void salvarCursos() {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nomeCurso = dados[0];
+                String codigoCurso = dados[1];
+                String ementa = dados[3];
+                String dataInicio = dados[4];
+                String dataFim = dados[5];
+                String horario = dados[6];
+                int capacidade = Integer.parseInt(dados[7]);
+                int professorIndex = Integer.parseInt(dados[8]);
+                Professor professor = getProfessoresSistema(professorIndex);
+                Curso curso = new Curso(nomeCurso, codigoCurso, capacidade, ementa, dataInicio, dataFim, horario, professor);
+                setCurso(curso);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar cursos do arquivo cursos.csv: " + e.getMessage());
+        }
+    }
 
     public void HabilitarCurso() 
     {
-
+        carregarCursos();
         String codigo; 
 
         DadosCursoAdministrativo();
@@ -803,6 +1068,7 @@ public class Sistema
                 {
                     getCurso(indiceCursos).setStatus(true);
                     AdicionaCargaHorariaProfessor(indiceCursos);
+                    editarCursoNoArquivo(getCurso(indiceCursos));
                     System.out.println("Curso habilitado");
                     break;
                 } else {
@@ -815,6 +1081,7 @@ public class Sistema
 
     public void DesabilitarCurso() 
     {
+        carregarCursos();
         String codigo; 
 
         DadosCursoAdministrativo();
@@ -827,6 +1094,7 @@ public class Sistema
                 {
                     getCurso(indiceCursos).setStatus(false);
                     RetiraCargaHorariaProfessor(indiceCursos);
+                    editarCursoNoArquivo(getCurso(indiceCursos));
                     System.out.println("Curso desabilitado");
                     break;
                 } else {
@@ -868,44 +1136,44 @@ public class Sistema
                         String novoNome = teclado.nextLine();
                         getCurso(indiceCursos).setNomeCurso(novoNome);
                         System.out.println("Modificado com sucesso!");
-                        return;
+                        break;
                     case 2:
                         System.out.println("Digite o novo Código do curso: ");
                         String novoCodigo = teclado.nextLine();
                         getCurso(indiceCursos).setCodigoCurso(novoCodigo);
                         System.out.println("Modificado com sucesso!");
-                        return;
+                        break;
                     case 3:
                         System.out.println("Digite a nova Carga Horária do curso: ");
                         int novaCargaHoraria = teclado.nextInt();
-                        teclado.nextInt();
+                        teclado.nextLine();
                         getCurso(indiceCursos).setCargaHorariaCurso(novaCargaHoraria);
                         System.out.println("Modificado com sucesso!");
-                        return;
+                        break;
                     case 4:
                         System.out.println("Digite a nova Ementa do curso: ");
                         String novaEmenta = teclado.nextLine();
                         getCurso(indiceCursos).setEmenta(novaEmenta);
                         System.out.println("Modificado com sucesso!");
-                        return;
+                        break;
                     case 5:
                         System.out.println("Digite a nova Data de Inicio do curso: ");
                         String novaDataInicio = teclado.nextLine();
-                        getCurso(indiceCursos).setDateInicio(novaDataInicio);;
+                        getCurso(indiceCursos).setDateInicio(novaDataInicio);
                         System.out.println("Modificado com sucesso!");
-                        return;
+                        break;
                     case 6:
                         System.out.println("Digite a nova Data de finalização do curso: ");
                         String novaDataFim = teclado.nextLine();
                         getCurso(indiceCursos).setDateFim(novaDataFim);
                         System.out.println("Modificado com sucesso!");
-                        return;
+                        break;
                     case 7:
                         System.out.println("Digite os novos Horários do curso: ");
                         String novosHorarios = teclado.nextLine();
                         getCurso(indiceCursos).setHorario(novosHorarios);
                         System.out.println("Modificado com sucesso!");
-                        return;
+                        break;
                     case 8:
                         System.out.println("Escolha um professor:");
                         System.out.println("Indice do Professor: " + "  " + "Nome: " );  
@@ -922,10 +1190,11 @@ public class Sistema
                         getCurso(indiceCursos).setProfessor(getProfessoresSistema(escolhaProfessor));
                         AdicionaCargaHorariaProfessor(indiceCursos);
                         RetiraCargaHorariaProfessor(indiceCursos);
-                        return;
+                        break;
                     default:
                         break;
                 }
+                editarCursoNoArquivo(getCurso(indiceCursos));
             }
         }
     }
@@ -955,7 +1224,7 @@ public class Sistema
                 switch(escolha) {
                     case 1:
                         Menu.limpaTela();
-                        DadosProfessor(idProfessor);
+                        MostrarDadosProfessores(idProfessor);
                         break;
                     case 2:
                         Menu.limpaTela();
@@ -986,12 +1255,15 @@ public class Sistema
     }
 
     //metodo que imprime os dados do professor
-    public void DadosProfessor(int idProfessor) 
-    {
-        System.out.println("Nome: " + getProfessoresSistema(idProfessor).getNome());
-        System.out.println("Codigo do Usuário: " + getProfessoresSistema(idProfessor).getCodigoUsuario());
-        System.out.println("Email: " + getProfessoresSistema(idProfessor).getEmail());
-        System.out.println("Carga Horária Atual: " + getProfessoresSistema(idProfessor).getCargaHorariaAtual());
+    public void MostrarDadosProfessores(int idProfessor) {
+        carregarProfessores();
+        for (int i = 0; i < contadorProfessor; i++) {
+            System.out.println("Nome: " + professoresSistema[i].getNome());
+            System.out.println("Código do Usuário: " + professoresSistema[i].getCodigoUsuario());
+            System.out.println("Email: " + professoresSistema[i].getEmail());
+            System.out.println("Carga Horária Atual: " + professoresSistema[i].getCargaHorariaAtual());
+            System.out.println();
+        }
     }
 
     //método que verifica se o professor pode receber a carga horaria
@@ -1008,13 +1280,38 @@ public class Sistema
     // Adiciona a carga horaria do professor
     public void AdicionaCargaHorariaProfessor(int idCurso) 
     {
-        getCurso(idCurso).getProfessor().setCargaHorariaAtual(getCurso(idCurso).getProfessor().getCargaHorariaAtual() + getCurso(idCurso).getCargaHorariaCurso()); 
+        Professor professor = getCurso(idCurso).getProfessor();
+        professor.setCargaHorariaAtual(professor.getCargaHorariaAtual() + getCurso(idCurso).getCargaHorariaCurso());
+        editarProfessorNoArquivo(professor);
     }
 
     // retira a carga horaria do professor
     public void RetiraCargaHorariaProfessor(int idCurso) 
     {
-        getCurso(idCurso).getProfessor().setCargaHorariaAtual(getCurso(idCurso).getProfessor().getCargaHorariaAtual() - getCurso(idCurso).getCargaHorariaCurso());
+        Professor professor = getCurso(idCurso).getProfessor();
+        professor.setCargaHorariaAtual(professor.getCargaHorariaAtual() - getCurso(idCurso).getCargaHorariaCurso());
+        editarProfessorNoArquivo(professor);
+    }
+
+    // Edita o professor no arquivo professores.csv
+    public void editarProfessorNoArquivo(Professor professor) {
+        try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"));
+             BufferedWriter bw = new BufferedWriter(new FileWriter("professores_temp.csv"))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                if (dados[1].equals(String.valueOf(professor.getCodigoUsuario()))) {
+                    bw.write(professor.getNome() + "," + professor.getCodigoUsuario() + "," + professor.getEmail() + "," + professor.getSenhaPessoal() + "," + professor.getCargaHorariaAtual());
+                } else {
+                    bw.write(linha);
+                }
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao editar professor no arquivo professores.csv: " + e.getMessage());
+        }
+        new File("professores.csv").delete();
+        new File("professores_temp.csv").renameTo(new File("professores.csv"));
     }
 
     //Lista todos os cursos onde um professor aparece como responsável
@@ -1038,10 +1335,35 @@ public class Sistema
             }
         }
     }
-
+    public void carregarCursosProfessor(int idProfessor) {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String codigoCurso = dados[1];
+                int codigoProfessor = Integer.parseInt(dados[8]);
+                if (codigoProfessor == getProfessoresSistema(idProfessor).getCodigoUsuario()) {
+                    String nomeCurso = dados[0];
+                    String ementa = dados[3];
+                    String dataInicio = dados[4];
+                    String dataFim = dados[5];
+                    String horario = dados[6];
+                    int capacidade = Integer.parseInt(dados[7]);
+                    Professor professor = getProfessoresSistema(idProfessor);
+                    Curso curso = new Curso(nomeCurso, codigoCurso, capacidade, ementa, dataInicio, dataFim, horario, professor);
+                    setCurso(curso);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar cursos do arquivo cursos.csv: " + e.getMessage());
+        }
+    }
     //imprimia as notas de cada aluno de um curso 
     public void VerNotasAlunos(int idProfessor) 
     {
+        carregarCursos();
+        carregarProfessores();
+        carregarNotas();
         String codigo;
 
         CursosProfessor(idProfessor);
@@ -1107,7 +1429,7 @@ public class Sistema
             System.out.println("Código Usuário: " + cursoProcurado.getAlunosMatriculados(indiceAlunos).getCodigoUsuario());
             System.out.print("Digite a nota do Aluno acima: ");
             nota = teclado.nextDouble();
-            cursoProcurado.setNota(nota);
+            cursoProcurado.getNota((int) nota);
             System.out.println();
             System.out.println("A nota do aluno acima é: " + " " + cursoProcurado.getNota(indiceAlunos));
             System.out.println();

@@ -153,7 +153,7 @@ public class Curso
         return alunosMatriculados[indiceAluno];
     }
 
-    public void setNota(double nota)
+    public void setNota(Aluno aluno, double nota)
      {
         if(nota < 0.0) {
             throw new IllegalArgumentException("A nota não pode ser menor que zero!");
@@ -194,5 +194,10 @@ public class Curso
             Logger.getLogger(Pessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public void removerAlunoMatriculado(Aluno aluno) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removerAlunoMatriculado'");
     }
 }
