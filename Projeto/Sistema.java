@@ -361,6 +361,30 @@ public class Sistema
         }
     }
 
+    //Metodo que imprime todos os cursos que um aluno está matriculado
+    public void CursosMatriculadosAluno(int idAluno) 
+    {
+        System.out.println("Cursos que você está matriculado: ");
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        {   
+            if (getCurso(indiceCursos).getStatus() == true && VerificaAlunoMatriculado(idAluno, indiceCursos) == true) 
+            {
+                System.out.println();
+                System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
+                System.out.println("Código do curso: " + getCurso(indiceCursos).getCodigoCurso());
+                System.out.println("Carga Horária do curso: " + getCurso(indiceCursos).getCargaHorariaCurso() + " Horas");
+                System.out.println("Ementa do curso: " + getCurso(indiceCursos).getEmenta());
+                System.out.println("Data Inicial do curso: " + getCurso(indiceCursos).getDateInicio());
+                System.out.println("Data Final do curso: " + getCurso(indiceCursos).getDateFim());
+                System.out.println("Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
+                System.out.println("Horários e dias do curso: " + getCurso(indiceCursos).getHorario());
+                System.out.println("Quantidade de alunos matrículados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
+                //System.out.println("Sua nota é: " + getCurso(indiceCursos).getNota(indiceCursos));
+                System.out.println();
+            }
+        }
+    }
+
     //Método para o aluno se matricular em um curso disponível
     public void MatricularCurso(int idAluno) 
     {
@@ -407,7 +431,8 @@ public class Sistema
     public void CancelarMatriculaCurso() {
 
     }
-
+    
+    //Método que retorna true se um curso não estiver lotado e false se estiver
     public boolean VerificaQuantidadeAlunosMatriculados(int indiceCurso) 
     {
         if(getCurso(indiceCurso).getQuantidadeAtualAlunos() <= getCurso(indiceCurso).getQuantidadeMaximaAlunos()) 
@@ -417,6 +442,7 @@ public class Sistema
         return false; 
     }
 
+    //Método que verifica o CPF do aluno para não repetir
     public boolean VerificaCPF(String cpf) 
     {
         for(int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
@@ -429,6 +455,7 @@ public class Sistema
         return true; 
     }
 
+    //Métodoque verifica se um aluno está matriculado no curso
     public boolean VerificaAlunoMatriculado(int idAluno, int indiceCurso) 
     {
         for(int indiceAlunos = 0; indiceAlunos < getCurso(indiceCurso).getQuantidadeAtualAlunos(); indiceAlunos++)
