@@ -115,10 +115,7 @@ public class Sistema
     //metodos para fazer os logins
     public void carregarAlunos() {
         String linha;
-        File path = new File(System.getProperty("user.dir"));
-        path = path.getParentFile();
-        String filepath = path.toString() + "\\Projeto\\alunos.csv";
-        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("alunos.csv"))) {
             br.readLine();
             br.readLine();
             while ((linha = br.readLine()) != null) {
