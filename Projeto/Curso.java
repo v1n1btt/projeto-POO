@@ -21,10 +21,7 @@ public class Curso
     private Aluno[] alunosMatriculados;
     private double[] notas;
     private final int quantidadeMaximaAlunos = 40;
-   
-    
     private static int indiceNotas = 0;
-
 
     /**
      * @param nomeCurso
