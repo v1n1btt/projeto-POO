@@ -18,7 +18,7 @@ public class Sistema
     private static int contadorProfessor = 0; 
     private static int contadorCurso = 0; 
     private Aluno[] alunos = new Aluno[1000];
-    private Administrador[] administradores = new Administrador[10]; 
+    private Administrador[] administradores = new Administrador[100]; 
     private Professor[] professoresSistema = new Professor[50];
     private Curso[] cursos = new Curso[100]; 
 
@@ -178,6 +178,8 @@ public class Sistema
     public void carregarProfessores() {
         String linha;
         try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"))) {
+            br.readLine();
+            br.readLine();
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
                 String nome = dados[0];
@@ -418,18 +420,20 @@ public class Sistema
     public void carregarCursos() {
         String linha;
         try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
+            br.readLine();
+            br.readLine();
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
                 String nomeCurso = dados[0];
                 String codigoCurso = dados[1];
+                int cargaHoraria = Integer.parseInt(dados[2]);
                 String ementa = dados[3];
                 String dataInicio = dados[4];
                 String dataFim = dados[5];
                 String horario = dados[6];
-                int capacidade = Integer.parseInt(dados[7]);
-                int professorIndex = Integer.parseInt(dados[8]);
+                int professorIndex = Integer.parseInt(dados[7]);
                 Professor professor = getProfessoresSistema(professorIndex);
-                Curso curso = new Curso(nomeCurso, codigoCurso, capacidade, ementa, dataInicio, dataFim, horario, professor);
+                Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor);
                 setCurso(curso);
             }
         } catch (IOException e) {
@@ -743,6 +747,8 @@ public class Sistema
     public void carregarAdministradores() {
         String linha;
         try (BufferedReader br = new BufferedReader(new FileReader("administradores.csv"))) {
+            br.readLine();
+            br.readLine();
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
                 String nome = dados[0];
