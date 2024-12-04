@@ -134,7 +134,6 @@ public class Sistema
     }
 
     public void fazerLoginUsuarioAluno(String email, String senha) {
-        carregarAlunos();
         boolean sucesso = false;
 
         for (int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) {
@@ -152,7 +151,6 @@ public class Sistema
         }
     }
     public void fazerLoginUsuarioAdministrador(String email, String senha) {
-        carregarAdministradores();
         boolean loginSucesso = false;
         for(int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) 
         {
@@ -192,7 +190,6 @@ public class Sistema
     }
 
     public void fazerLoginUsuarioProfessor(String email, String senha) {
-        carregarProfessores();
         boolean sucesso = false;
 
         for (int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) {
@@ -384,7 +381,6 @@ public class Sistema
         teclado.nextLine();
     }
     public void MostrarDadosAlunos() {
-        carregarAlunos();
         for (int i = 0; i < contadorAluno; i++) {
             System.out.println("Nome: " + alunos[i].getNome());
             System.out.println("Código do Usuário: " + alunos[i].getCodigoUsuario());
@@ -500,9 +496,6 @@ public class Sistema
     }
 
     public void mostrarCursosEProfessores() {
-        carregarCursos();
-        carregarProfessores();
-        carregarMatriculas();
         for (int i = 0; i < contadorCurso; i++) {
             Curso curso = cursos[i];
             System.out.println("Curso: " + curso.getNomeCurso());
@@ -516,8 +509,6 @@ public class Sistema
     //Método para o aluno se matricular em um curso disponível
     public void MatricularCurso(int idAluno) 
     {
-        carregarCursos();
-        carregarMatriculas();
         String codigo;
 
         CursosDisponiveisAluno(idAluno); //imprime os cursos disponíveis 
@@ -560,8 +551,6 @@ public class Sistema
     
     //Método para que o aluno cancele a matrícula em um curso
     public void CancelarMatriculaCurso(int idAluno) {
-        carregarCursos();
-        carregarMatriculas();
         String codigo;
 
         System.out.print("Digite o código do curso que deseja cancelar a matrícula: ");
