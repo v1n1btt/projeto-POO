@@ -13,6 +13,13 @@ public abstract class Pessoa
     private String senhaPessoal;
     private String nivelAcesso;
 
+    /**
+     * @param nome
+     * @param codigoUsuario
+     * @param email
+     * @param senhaPessoal
+     * @param nivelAcesso
+     */
     public Pessoa(String nome, int codigoUsuario, String email, String senhaPessoal, String nivelAcesso) {
         this.nome = nome;
         this.codigoUsuario = codigoUsuario;
@@ -21,56 +28,89 @@ public abstract class Pessoa
         this.nivelAcesso = nivelAcesso;
     }
 
+    /**
+     * @param nome
+     */
     public void setNome(String nome) 
     {
         this.nome = nome;
     }
 
+    /**
+     * @return
+     */
     public String getNome() 
     {
         return nome;
     }
 
+    /**
+     * @param codigoUsuario
+     */
     public void setCodigoUsuario(int codigoUsuario) 
     {
         this.codigoUsuario = codigoUsuario;
     }
 
+    /**
+     * @return
+     */
     public int getCodigoUsuario() 
     {
         return codigoUsuario;
     }
 
+    /**
+     * @param email
+     */
     public void setEmail(String email) 
     {
         this.email = email;
     }
 
+    /**
+     * @return
+     */
     public String getEmail() 
     {
         return email;
     }
 
+    /**
+     * @param senhaPessoal
+     */
     public void setSenhaPessoal(String senhaPessoal) 
     {
         this.senhaPessoal = senhaPessoal;
     }
 
+    /**
+     * @return
+     */
     public String getSenhaPessoal() 
     {
         return senhaPessoal;
     }
 
+    /**
+     * @param nivelAcesso
+     */
     public void setNivelAcesso(String nivelAcesso) 
     {
         this.nivelAcesso = nivelAcesso; 
     }
 
+    /**
+     * @return
+     */
     public String getNivelAcesso() 
     {
         return nivelAcesso; 
     }
     
+    /**
+     * @return
+     */
     public String salvaPessoa()
     {
         try 
