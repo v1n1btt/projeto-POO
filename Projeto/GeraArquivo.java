@@ -14,7 +14,7 @@ public class GeraArquivo {
      */
     public static void salvarCurso(Curso curso) {
         try {
-            File arquivo = new File("cursos.csv");
+            File arquivo = new File("Projeto/cursos.csv");
             boolean arquivoNovo = !arquivo.exists();
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
@@ -51,7 +51,7 @@ public class GeraArquivo {
      */
     public static void salvarAluno(Aluno aluno) {
         try {
-            File arquivo = new File("alunos.csv");
+            File arquivo = new File("Projeto/alunos.csv");
             boolean arquivoNovo = !arquivo.exists();
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
@@ -80,7 +80,7 @@ public class GeraArquivo {
      */
     public static void salvarAdministrador(Administrador administrador) {
         try {
-            File arquivo = new File("administradores.csv");
+            File arquivo = new File("Projeto/administradores.csv");
             boolean arquivoNovo = !arquivo.exists();
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
@@ -108,7 +108,7 @@ public class GeraArquivo {
      */
     public static void salvarProfessor(Professor professor) {
         try {
-            File arquivo = new File("professores.csv");
+            File arquivo = new File("Projeto/professores.csv");
             boolean arquivoNovo = !arquivo.exists();
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {

@@ -223,7 +223,7 @@ public class Sistema
     public void carregarProfessores() 
     {
         String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Projeto/professores.csv"))) {
             br.readLine();
             br.readLine();
             while ((linha = br.readLine()) != null) {
@@ -243,7 +243,7 @@ public class Sistema
     public void carregarAlunos() 
     {
         String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("alunos.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Projeto/alunos.csv"))) {
             br.readLine();
             br.readLine();
             while ((linha = br.readLine()) != null) {
@@ -264,7 +264,7 @@ public class Sistema
     public void carregarAdministradores() 
     {
         String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("administradores.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("/Projeto/administradores.csv"))) {
             br.readLine();
             br.readLine();
             while ((linha = br.readLine()) != null) {
@@ -285,7 +285,7 @@ public class Sistema
     {
         String linha;
 
-        try (BufferedReader br = new BufferedReader(new FileReader("\\Projeto\\cursos.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Projeto/cursos.csv"))) {
             br.readLine();
             br.readLine();
             while ((linha = br.readLine()) != null) {
@@ -309,10 +309,10 @@ public class Sistema
 
     public void carregarMatriculas() {
         String linha1, linha2;
-        try (BufferedReader brCursos = new BufferedReader(new FileReader("cursos.csv"))) {
+        try (BufferedReader brCursos = new BufferedReader(new FileReader("Projeto/cursos.csv"))) {
             brCursos.readLine();
             brCursos.readLine();
-            try (BufferedReader brAlunos = new BufferedReader(new FileReader("alunos.csv"))) {
+            try (BufferedReader brAlunos = new BufferedReader(new FileReader("Projeto/alunos.csv"))) {
                 brAlunos.readLine();
                 brAlunos.readLine();
                 while ((linha1 = brCursos.readLine()) != null && (linha2 = brAlunos.readLine()) != null) {
@@ -339,7 +339,7 @@ public class Sistema
     public void carregarNotas()
     {
         String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("notas.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Projeto/notas.csv"))) {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
                 String codigoCurso = dados[0];
@@ -401,8 +401,8 @@ public class Sistema
     * @param curso
     */
     public void editarCursoNoArquivo(Curso curso) {
-        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"));
-             BufferedWriter bw = new BufferedWriter(new FileWriter("cursos_temp.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Projeto/cursos.csv"));
+             BufferedWriter bw = new BufferedWriter(new FileWriter("Projeto/cursos_temp.csv"))) {
             String linha;
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
@@ -417,7 +417,7 @@ public class Sistema
             System.out.println("Erro ao editar curso no arquivo cursos.csv: " + e.getMessage());
         }
         new File("cursos.csv").delete();
-        new File("cursos_temp.csv").renameTo(new File("cursos.csv"));
+        new File("cursos_temp.csv").renameTo(new File("Projeto/cursos.csv"));
     }
 
     /**
@@ -425,7 +425,7 @@ public class Sistema
     */
     public void carregarCursosProfessor(int idProfessor) {
         String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Projeto/cursos.csv"))) {
             br.readLine();
             br.readLine();
             while ((linha = br.readLine()) != null) {
@@ -454,8 +454,8 @@ public class Sistema
     * @param professor
     */
     public void editarProfessorNoArquivo(Professor professor) {
-        try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"));
-             BufferedWriter bw = new BufferedWriter(new FileWriter("professores_temp.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Projeto/professores.csv"));
+             BufferedWriter bw = new BufferedWriter(new FileWriter("Professores_temp.csv"))) {
             String linha;
             bw.write(br.readLine());
             bw.write("\n\n");
@@ -473,7 +473,7 @@ public class Sistema
             System.out.println("Erro ao editar professor no arquivo professores.csv: " + e.getMessage());
         }
         new File("professores.csv").delete();
-        new File("professores_temp.csv").renameTo(new File("professores.csv"));
+        new File("professores_temp.csv").renameTo(new File("Projeto/professores.csv"));
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
