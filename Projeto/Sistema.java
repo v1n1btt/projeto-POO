@@ -1021,9 +1021,9 @@ public class Sistema
             System.out.println("Professor do curso: " + getCurso(indiceCurso).getProfessor().getNome());
             if(getCurso(indiceCurso).getStatus() == true) 
             {
-                System.out.println("Status do Curso: " + "Ativo");
+                System.out.println("Status do Curso: Ativo\n");
             } else {
-                System.out.println("Status do Curso: " + "Desativado");
+                System.out.println("Status do Curso: Desativado\n");
             }
         }
     }
@@ -1220,10 +1220,14 @@ public class Sistema
                     case 1:
                         Menu.limpaTela();
                         MostrarDadosProfessores(idProfessor);
+                        System.out.println("Pressione ENTER para continuar...");
+                        teclado.nextLine();
                         break;
                     case 2:
                         Menu.limpaTela();
                         CursosProfessor(idProfessor);
+                        System.out.println("Pressione ENTER para continuar...");
+                        teclado.nextLine();
                         break;
                     case 3:
                         Menu.limpaTela();

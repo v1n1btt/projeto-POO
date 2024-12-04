@@ -11,12 +11,12 @@ public class Menu
         Sistema sistema = new Sistema();
         Scanner teclado = new Scanner(System.in);
 
+        sistema.carregarProfessores();
         sistema.carregarAlunos();
         sistema.carregarCursos();
         sistema.carregarAdministradores();
         sistema.carregarCursos();
         sistema.carregarMatriculas();
-        sistema.carregarProfessores();
         sistema.carregarCursosProfessor(0); 
 
         int escolha = 0;
