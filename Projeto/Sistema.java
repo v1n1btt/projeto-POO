@@ -181,6 +181,10 @@ public class Sistema
      * @param variavel2
      * @return
      */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 68e47e5 (Correção dos nomes de métodos)
     public boolean verificaVariaveis(String variavel1, String variavel2) 
     {
         if (variavel1.equals(variavel2)) 
