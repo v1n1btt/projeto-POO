@@ -26,8 +26,7 @@ public class Sistema
 
     public Sistema() 
     {
-        Administrador administrador = new Administrador("Admin", 99999, "admin@.com", "admin", "administrador");
-        setAdministrador(administrador);
+        
     }
 
     public void setAluno(Aluno aluno) 
@@ -543,7 +542,10 @@ public class Sistema
      * @return
      */
     
-    public Aluno buscaAlunoPorCodigo(int codigo) {
+    
+    public Aluno buscaAlunoPorCodigo(int codigo) 
+    {
+    
         for (int i = 0; i < contadorAluno; i++) {
             if (alunos[i].getCodigoUsuario() == codigo) {
                 return alunos[i];
