@@ -18,7 +18,6 @@ public class Menu
         sistema.carregarAlunos();
         sistema.carregarCursos();
         sistema.carregarAdministradores();
-        sistema.carregarCursos();
         sistema.carregarMatriculas();
         sistema.carregarCursosProfessor(0); 
 
