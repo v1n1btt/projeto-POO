@@ -51,10 +51,9 @@ public class Sistema
      * @param alunos
      * @param capacidade
      */
-
-    public void GerarCurso(String nomeCurso, String codigoCurso, String cargaHoraria, String ementa, String dataInicio, 
-                           String dataFim, int quantidadeAtualAlunos, Professor professor, Aluno[] alunos, int capacidade) {
-        Curso curso = new Curso(nomeCurso, codigoCurso, capacidade, cargaHoraria, ementa, dataInicio, dataFim, professor);
+    public void GerarCurso(String nomeCurso, String codigoCurso, int cargaHoraria, String ementa, String dataInicio, 
+                           String dataFim, int quantidadeAtualAlunos, Professor professor, Aluno[] alunos, int capacidade, String horario, boolean status, double[] notas, int quantidadeMaximaAlunos, int indiceNotas) {
+        Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor, alunos, capacidade, status, notas, quantidadeMaximaAlunos, indiceNotas);
         setCurso(curso);
         GeraArquivo.salvarCurso(curso);
     }
@@ -541,7 +540,7 @@ public class Sistema
                 String horario = dados[6];
                 int codigoProfessor = Integer.parseInt(dados[7]);
                 Professor professor = getProfessoresSistema(codigoProfessor);
-                Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor);
+                Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor, alunos, codigoProfessor, false, new double[0], codigoProfessor, 0);
                 setCurso(curso);
             }
         } catch (IOException e) {
@@ -1123,7 +1122,7 @@ public class Sistema
                     cargaHoraria = teclado.nextInt();
                     teclado.nextLine();
                     System.out.println("Escolha um professor:");
-                    System.out.println("Indice do Professor: " + "  " + "Nome: " );
+                    System.out.println("Indice do Professor: " + "  " + "Nome: " );  
                     for(int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) 
                     {
                         if(getProfessoresSistema(indiceProfessores).getCargaHorariaAtual() != getProfessoresSistema(indiceProfessores).getCargaHorariaMaxima()) 
@@ -1134,8 +1133,7 @@ public class Sistema
                     System.out.print("Digite o número correspondente ao professor que deseja escolher: ");
                     escolhaProfessor = teclado.nextInt();
                     teclado.nextLine();
-                    CadastrarCurso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, getProfessoresSistema(escolhaProfessor), escolhaProfessor);
-                    break;
+                    CadastrarCurso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, getProfessoresSistema(escolhaProfessor), escolhaProfessor, escolhaProfessor, true);
                 } else {
                     System.out.println("Não há professores cadastrados!");
                     teclado.nextLine();
@@ -1163,11 +1161,11 @@ public class Sistema
      * @param professor
      * @param idProfessor
      */
-    public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dateInicio, String dateFim, String horario, Professor professor, int idProfessor) 
+    public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dateInicio, String dateFim, String horario, Professor professor, int idProfessor, int quantidadeMaximaAlunos, boolean status) 
     {
         if(verificaCargaProfessor(idProfessor,cargaHoraria) == true) 
         {
-            Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor);
+            Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor, alunos, quantidadeMaximaAlunos, status, null, quantidadeMaximaAlunos, quantidadeMaximaAlunos);
             setCurso(curso);
             AdicionaCargaHorariaProfessor(contadorCurso - 1);
             System.out.println("Curso Criado com Sucesso!");
@@ -1578,7 +1576,7 @@ public class Sistema
                 int codigoProfessor = Integer.parseInt(dados[7]);
                 if (codigoProfessor == getProfessoresSistema(idProfessor).getCodigoUsuario()) {
                     Professor professor = getProfessoresSistema(idProfessor);
-                    Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor);
+                    Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor, alunos, 0, false, new double[0], 0, 0);
                     setCurso(curso);
                 }
             }

@@ -143,7 +143,7 @@ public class GeraArquivo {
      * @param quantidadeAtualAlunos
      */
     public static void salvarCurso(String nomeCurso, String codigoCurso, String ementa, String dateInicio,
-            String dateFim, String horario, int cargaHorariaCurso, Professor professor, Aluno[] alunosMatriculados,
+            String dateFim, String horario, int cargaHorariaCurso, Professor professor, Aluno[] alunosMatriculados, boolean status,
             int quantidadeAtualAlunos) {
                 if (professor != null) {
                     @SuppressWarnings("unused")

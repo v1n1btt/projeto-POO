@@ -35,9 +35,15 @@ public class Curso
      * @param dateFim
      * @param horario
      * @param professor
+     * @param indiceNotas2 
+     * @param quantidadeMaximaAlunos2 
+     * @param notas2 
+     * @param status2 
+     * @param capacidade 
+     * @param alunos 
      */
 
-    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dateInicio, String dateFim, String horario, Professor professor) 
+    public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dateInicio, String dateFim, String horario, Professor professor, Aluno[] alunos, int capacidade, boolean status2, double[] notas2, int quantidadeMaximaAlunos2, int indiceNotas2) 
     {
         this.nomeCurso = nomeCurso;
         this.codigoCurso = codigoCurso; 
