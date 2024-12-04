@@ -30,73 +30,6 @@ public class Sistema
         setAdministrador(administrador);
     }
 
-    public void GerarAluno(String nome, String email, String senha, String cpf){
-        int codigoUsuario;
-        codigoUsuario = GerarCodigoUsuario();
-        Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
-        setAluno(aluno);
-        System.out.println("Conta Criada com Sucesso!");
-        GeraArquivo.salvarAluno(aluno);
-    }
-
-    /**
-     * @param nomeCurso
-     * @param codigoCurso
-     * @param cargaHoraria
-     * @param ementa
-     * @param dataInicio
-     * @param dataFim
-     * @param quantidadeAtualAlunos
-     * @param professor
-     * @param alunos
-     * @param capacidade
-     */
-    public void GerarCurso(String nomeCurso, String codigoCurso, int cargaHoraria, String ementa, String dataInicio, 
-                           String dataFim, int quantidadeAtualAlunos, Professor professor, Aluno[] alunos, int capacidade, String horario, boolean status, double[] notas, int quantidadeMaximaAlunos, int indiceNotas) {
-        Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor, alunos, capacidade, status, notas, quantidadeMaximaAlunos, indiceNotas);
-        setCurso(curso);
-        GeraArquivo.salvarCurso(curso);
-    }
-
-    /**
-     * @param nome
-     * @param email
-     * @param senha
-     */
-
-    public void GerarAdministrador(String nome, String email, String senha) 
-    {
-        int codigoUsuario; 
-        codigoUsuario = GerarCodigoUsuario();
-        Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
-        setAdministrador(administrador);
-        System.out.println("Conta Criada com Sucesso!");
-        GeraArquivo.salvarAdministrador(administrador);
-    }
-        
-    /**
-     * @param nome
-     * @param email
-     * @param senha
-     * @param cpf
-     */
-
-    public void GerarProfessor(String nome, String email, String senha, String cpf) 
-    {
-        int codigoUsuario = 0; 
-        codigoUsuario = GerarCodigoUsuario();
-        Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
-        setProfessoresSistema(professor);
-        System.out.println("Conta Criada com Sucesso!");
-        // Criar arquivo para o professor
-        GeraArquivo.salvarProfessor(professor);
-    }
-        
-
-    /**
-     * @param aluno
-     */
-
     public void setAluno(Aluno aluno) 
     {
         this.alunos[contadorAluno] = aluno;
@@ -526,7 +459,7 @@ public class Sistema
     }
     public void carregarCursos() {
         String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("\\Projeto\\cursos.csv"))) {
             br.readLine();
             br.readLine();
             while ((linha = br.readLine()) != null) {
