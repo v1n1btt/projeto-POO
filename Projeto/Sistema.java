@@ -137,9 +137,9 @@ public class Sistema
         boolean sucesso = false;
 
         for (int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) {
-            if (VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true &&
-                VerificaVariaveis(getAluno(indiceAlunos).getSenhaPessoal(), senha) == true &&
-                VerificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) {
+            if (verificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true &&
+                verificaVariaveis(getAluno(indiceAlunos).getSenhaPessoal(), senha) == true &&
+                verificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) {
                 sucesso = true;
                 MenuAluno(indiceAlunos);
             }
@@ -162,7 +162,7 @@ public class Sistema
         for(int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) 
         {
             Administrador administrador = getAdministrador(indiceAdministradores);
-            if (administrador != null && VerificaVariaveis(administrador.getEmail(), email) == true && VerificaVariaveis(administrador.getSenhaPessoal(), senha) == true && VerificaVariaveis(administrador.getNivelAcesso(), "administrador") == true) 
+            if (administrador != null && verificaVariaveis(administrador.getEmail(), email) == true && verificaVariaveis(administrador.getSenhaPessoal(), senha) == true && verificaVariaveis(administrador.getNivelAcesso(), "administrador") == true) 
             {
                 MenuAdministrador(indiceAdministradores);
                 loginSucesso = true;
@@ -207,9 +207,9 @@ public class Sistema
         boolean sucesso = false;
 
         for (int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) {
-            if (VerificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email) == true &&
-                VerificaVariaveis(getProfessoresSistema(indiceProfessores).getSenhaPessoal(), senha) == true &&
-                VerificaVariaveis(getProfessoresSistema(indiceProfessores).getNivelAcesso(), "professor") == true) {
+            if (verificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email) == true &&
+                verificaVariaveis(getProfessoresSistema(indiceProfessores).getSenhaPessoal(), senha) == true &&
+                verificaVariaveis(getProfessoresSistema(indiceProfessores).getNivelAcesso(), "professor") == true) {
                 sucesso = true;
                 MenuProfessor(indiceProfessores);
             }
@@ -228,7 +228,7 @@ public class Sistema
      * @return
      */
 
-    public boolean VerificaVariaveis(String variavel1, String variavel2) 
+    public boolean verificaVariaveis(String variavel1, String variavel2) 
     {
         if (variavel1.equals(variavel2)) 
         {
@@ -261,7 +261,7 @@ public class Sistema
         int indiceCurso = 0;
         Curso CursoProcurado; 
 
-        while(indiceCurso < contadorCurso && VerificaVariaveis(getCurso(indiceCurso).getCodigoCurso(), codigo) == false)
+        while(indiceCurso < contadorCurso && verificaVariaveis(getCurso(indiceCurso).getCodigoCurso(), codigo) == false)
         {
             indiceCurso = indiceCurso + 1;    
         }
@@ -298,7 +298,7 @@ public class Sistema
                         if (!senha.isEmpty()) {
                             System.out.print("Confirme a senha: ");
                             confirmaSenha = teclado.nextLine();
-                            boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                            boolean verifica = verificaVariaveis(senha, confirmaSenha);
                             if (verifica == true) {
                                 controle = true;
                                 codigoUsuario = GerarCodigoUsuario();
@@ -334,7 +334,7 @@ public class Sistema
 
     public boolean VerificaEmail(String email) {
         for (int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) {
-            if (VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true) {
+            if (verificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true) {
                 return false;
             }
         }
@@ -588,7 +588,7 @@ public class Sistema
 
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
         {
-            if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
+            if(verificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
             {
                 if(VerificaAlunoMatriculado(idAluno, indiceCursos) == false)
                 {
@@ -633,7 +633,7 @@ public class Sistema
         codigo = teclado.nextLine();
 
         for (int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
-            if (VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) {
+            if (verificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) {
                 if (VerificaAlunoMatriculado(idAluno, indiceCursos) == true) {
                     getCurso(indiceCursos).removerAlunoMatriculado(getAluno(idAluno));
                     GeraArquivo.salvarMatricula(getCurso(indiceCursos), getAluno(idAluno));
@@ -689,7 +689,7 @@ public class Sistema
     {
         for(int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
         {
-            if(VerificaVariaveis(getAluno(indiceAlunos).getCPF(), cpf) == true) 
+            if(verificaVariaveis(getAluno(indiceAlunos).getCPF(), cpf) == true) 
             {
                 return false;
             } 
@@ -880,7 +880,7 @@ public class Sistema
     {
         carregarAdministradores();
         for (int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) {
-            if (VerificaVariaveis(getAdministrador(indiceAdministradores).getEmail(), email)) {
+            if (verificaVariaveis(getAdministrador(indiceAdministradores).getEmail(), email)) {
                 return false;
             }
         }
@@ -908,7 +908,7 @@ public class Sistema
                     if (!senha.isEmpty()) {
                         System.out.print("Confirme a senha: ");
                         confirmaSenha = teclado.nextLine();
-                        boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                        boolean verifica = verificaVariaveis(senha, confirmaSenha);
                         if (verifica) {
                             controle = true;
                             CadastrarAdministrador(nome, email, confirmaSenha);
@@ -983,7 +983,7 @@ public class Sistema
     public boolean VerificaEmailProfessor(String email) 
     {
         for (int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) {
-            if (VerificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email)) {
+            if (verificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email)) {
                 return false;
             }
         }
@@ -1023,7 +1023,7 @@ public class Sistema
                     if (!senha.isEmpty()) {
                         System.out.print("Confirme a senha: ");
                         confirmaSenha = teclado.nextLine();
-                        boolean verifica = VerificaVariaveis(senha, confirmaSenha);
+                        boolean verifica = verificaVariaveis(senha, confirmaSenha);
                         if (verifica) {
                             controle = true;
                             CadastrarProfessor(nome, email, confirmaSenha);
@@ -1200,7 +1200,7 @@ public class Sistema
         codigo = teclado.nextLine(); 
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
         {
-            if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
+            if(verificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
             {
                 if(getCurso(indiceCursos).getStatus() == false) 
                 {
@@ -1225,7 +1225,7 @@ public class Sistema
         System.out.println("Digite o Código do curso: ");
         codigo = teclado.nextLine(); 
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
-            if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
+            if(verificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
             {
                 if(getCurso(indiceCursos).getStatus() == true) 
                 {
@@ -1251,7 +1251,7 @@ public class Sistema
         codigo = teclado.nextLine(); 
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
         {
-            if(VerificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
+            if(verificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
             {
                 System.out.println("1 - Nome: " + getCurso(indiceCursos).getNomeCurso());
                 System.out.println("2 - Código Curso: " + getCurso(indiceCursos).getCodigoCurso());
