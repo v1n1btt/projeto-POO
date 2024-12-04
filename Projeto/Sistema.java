@@ -431,8 +431,8 @@ public class Sistema
                 String dataInicio = dados[4];
                 String dataFim = dados[5];
                 String horario = dados[6];
-                int professorIndex = Integer.parseInt(dados[7]);
-                Professor professor = getProfessoresSistema(professorIndex);
+                int codigoProfessor = Integer.parseInt(dados[7]);
+                Professor professor = getProfessoresSistema(codigoProfessor);
                 Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor);
                 setCurso(curso);
             }
@@ -465,26 +465,28 @@ public class Sistema
         }
     }
     public void carregarMatriculas() {
-        String linha;
+        String linha1, linha2;
         try (BufferedReader brCursos = new BufferedReader(new FileReader("cursos.csv"))) {
-            while ((linha = brCursos.readLine()) != null) {
-                String[] dadosCurso = linha.split(",");
-                String codigoCurso = dadosCurso[1];
-                Curso curso = buscaCurso(codigoCurso);
-                if (curso != null) {
-                    try (BufferedReader brAlunos = new BufferedReader(new FileReader("alunos.csv"))) {
-                        while ((linha = brAlunos.readLine()) != null) {
-                            String[] dadosAluno = linha.split(",");
-                            int codigoAluno = Integer.parseInt(dadosAluno[2]);
-                            Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
-                            if (aluno != null) {
-                                curso.setAlunosMatriculados(aluno);
-                            }
+            brCursos.readLine();
+            brCursos.readLine();
+            try (BufferedReader brAlunos = new BufferedReader(new FileReader("alunos.csv"))) {
+                brAlunos.readLine();
+                brAlunos.readLine();
+                while ((linha1 = brCursos.readLine()) != null && (linha2 = brAlunos.readLine()) != null) {
+                    String[] dadosCurso = linha1.split(",");
+                    String codigoCurso = dadosCurso[1];
+                    Curso curso = buscaCurso(codigoCurso);
+                    if (curso != null) {
+                        String[] dadosAluno = linha2.split(",");
+                        int codigoAluno = Integer.parseInt(dadosAluno[2]);
+                        Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
+                        if (aluno != null) {
+                            curso.setAlunosMatriculados(aluno);
                         }
-                    } catch (IOException e) {
-                        System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
                     }
                 }
+            } catch (IOException e) {
+                System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
             }
         } catch (IOException e) {
             System.out.println("Erro ao carregar matrículas do arquivo cursos.csv: " + e.getMessage());
@@ -1350,19 +1352,21 @@ public class Sistema
     public void carregarCursosProfessor(int idProfessor) {
         String linha;
         try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
+            br.readLine();
+            br.readLine();
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
                 String nomeCurso = dados[0];
                 String codigoCurso = dados[1];
+                int cargaHoraria = Integer.parseInt(dados[2]);
                 String ementa = dados[3];
                 String dataInicio = dados[4];
                 String dataFim = dados[5];
                 String horario = dados[6];
-                int capacidade = Integer.parseInt(dados[7]);
-                int codigoProfessor = Integer.parseInt(dados[8]);
+                int codigoProfessor = Integer.parseInt(dados[7]);
                 if (codigoProfessor == getProfessoresSistema(idProfessor).getCodigoUsuario()) {
                     Professor professor = getProfessoresSistema(idProfessor);
-                    Curso curso = new Curso(nomeCurso, codigoCurso, capacidade, ementa, dataInicio, dataFim, horario, professor);
+                    Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor);
                     setCurso(curso);
                 }
             }
