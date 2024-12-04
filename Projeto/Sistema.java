@@ -466,15 +466,24 @@ public class Sistema
     }
     public void carregarMatriculas() {
         String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(",");
-                String codigoCurso = dados[1];
-                int codigoAluno = Integer.parseInt(dados[2]);
+        try (BufferedReader brCursos = new BufferedReader(new FileReader("cursos.csv"))) {
+            while ((linha = brCursos.readLine()) != null) {
+                String[] dadosCurso = linha.split(",");
+                String codigoCurso = dadosCurso[1];
                 Curso curso = buscaCurso(codigoCurso);
-                Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
-                if (curso != null && aluno != null) {
-                    curso.setAlunosMatriculados(aluno);
+                if (curso != null) {
+                    try (BufferedReader brAlunos = new BufferedReader(new FileReader("alunos.csv"))) {
+                        while ((linha = brAlunos.readLine()) != null) {
+                            String[] dadosAluno = linha.split(",");
+                            int codigoAluno = Integer.parseInt(dadosAluno[2]);
+                            Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
+                            if (aluno != null) {
+                                curso.setAlunosMatriculados(aluno);
+                            }
+                        }
+                    } catch (IOException e) {
+                        System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
+                    }
                 }
             }
         } catch (IOException e) {
