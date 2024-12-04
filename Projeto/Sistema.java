@@ -470,7 +470,7 @@ public class Sistema
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
                 String codigoCurso = dados[1];
-                int codigoAluno = Integer.parseInt(dados[1]);
+                int codigoAluno = Integer.parseInt(dados[2]);
                 Curso curso = buscaCurso(codigoCurso);
                 Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
                 if (curso != null && aluno != null) {
