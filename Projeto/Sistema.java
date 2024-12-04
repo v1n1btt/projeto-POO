@@ -264,7 +264,7 @@ public class Sistema
     public void carregarAdministradores() 
     {
         String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("/Projeto/administradores.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Projeto/administradores.csv"))) {
             br.readLine();
             br.readLine();
             while ((linha = br.readLine()) != null) {
@@ -356,9 +356,9 @@ public class Sistema
         }
     }
 
-    public void salvarNotas() 
+/*    public void salvarNotas() 
     {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("notas.csv"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("Projeto/notas.csv"))) {
             for (int i = 0; i < contadorCurso; i++) {
                 Curso curso = cursos[i];
                 for (int j = 0; j < curso.getQuantidadeAtualAlunos(); j++) {
@@ -372,30 +372,7 @@ public class Sistema
             System.out.println("Erro ao salvar notas no arquivo notas.csv: " + e.getMessage());
         }
     }
-
-    /**
-    * @param curso
-    */
-    public void salvarCurso(Curso curso) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("cursos.csv", true))) {
-            bw.write(curso.getNomeCurso() + "," + curso.getCodigoCurso() + "," + curso.getCargaHorariaCurso() + "," + curso.getEmenta() + "," + curso.getDateInicio() + "," + curso.getDateFim() + "," + curso.getHorario() + "," + curso.getQuantidadeMaximaAlunos() + "," + curso.getProfessor().getCodigoUsuario());
-            bw.newLine();
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar curso no arquivo cursos.csv: " + e.getMessage());
-        }
-    }
-    
-    /**
-    * @param professor
-    */
-    public void salvarProfessor(Professor professor) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("professores.csv", true))) {
-            bw.write(professor.getNome() + "," + professor.getCodigoUsuario() + "," + professor.getEmail() + "," + professor.getSenhaPessoal());
-            bw.newLine();
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar professor no arquivo professores.csv: " + e.getMessage());
-        }
-    }
+*/
 
     /**
     * @param curso
@@ -455,7 +432,7 @@ public class Sistema
     */
     public void editarProfessorNoArquivo(Professor professor) {
         try (BufferedReader br = new BufferedReader(new FileReader("Projeto/professores.csv"));
-             BufferedWriter bw = new BufferedWriter(new FileWriter("Professores_temp.csv"))) {
+             BufferedWriter bw = new BufferedWriter(new FileWriter("Projeto/Professores_temp.csv"))) {
             String linha;
             bw.write(br.readLine());
             bw.write("\n\n");
@@ -1004,7 +981,6 @@ public class Sistema
                         if (verifica) {
                             controle = true;
                             CadastrarAdministrador(nome, email, confirmaSenha);
-                            GeraArquivo.salvarAdministrador(new Administrador(nome, GerarCodigoUsuario(), email, senha, "administrador"));
                         } else {
                             System.out.println("A senha não é igual! Tente Novamente!");
                             System.out.println();
@@ -1034,6 +1010,7 @@ public class Sistema
         codigoUsuario = GerarCodigoUsuario();
         Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
         setAdministrador(administrador);
+        GeraArquivo.salvarAdministrador(administrador);
         System.out.println("Conta Criada com Sucesso!");
     }
 
@@ -1065,6 +1042,7 @@ public class Sistema
         codigoUsuario = GerarCodigoUsuario();
         Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
         setProfessoresSistema(professor);
+        GeraArquivo.salvarProfessor(professor);
         System.out.println("Conta Criada com Sucesso!");
     }
 
@@ -1107,7 +1085,6 @@ public class Sistema
                         if (verifica) {
                             controle = true;
                             CadastrarProfessor(nome, email, confirmaSenha);
-                            salvarProfessor(new Professor(nome, GerarCodigoUsuario(), email, senha, "professor"));
                         } else {
                             System.out.println("As senhas não são iguais! Tente Novamente!");
                             System.out.println();
