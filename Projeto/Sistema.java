@@ -1232,27 +1232,6 @@ public class Sistema
             }
         }
     }
-    public void salvarCursos() {
-        String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(",");
-                String nomeCurso = dados[0];
-                String codigoCurso = dados[1];
-                String ementa = dados[3];
-                String dataInicio = dados[4];
-                String dataFim = dados[5];
-                String horario = dados[6];
-                int capacidade = Integer.parseInt(dados[7]);
-                int professorIndex = Integer.parseInt(dados[8]);
-                Professor professor = getProfessoresSistema(professorIndex);
-                Curso curso = new Curso(nomeCurso, codigoCurso, capacidade, ementa, dataInicio, dataFim, horario, professor);
-                setCurso(curso);
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar cursos do arquivo cursos.csv: " + e.getMessage());
-        }
-    }
 
     public void HabilitarCurso() 
     {
