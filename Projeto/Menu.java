@@ -122,7 +122,7 @@ public class Menu
                         limpaTela();
                         return;
                     default:
-                        System.out.print("\nOpção inválida, tente novamente.");
+                        System.out.print("\nOpção inválido, tente novamente.");
                         teclado.nextLine();
                         break;
                 }

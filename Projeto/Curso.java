@@ -197,7 +197,6 @@ public class Curso
     }
 
     public void removerAlunoMatriculado(Aluno aluno) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'removerAlunoMatriculado'");
     }
 }
