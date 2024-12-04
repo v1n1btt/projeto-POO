@@ -1,11 +1,5 @@
 package Projeto;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class Curso 
 {
     private String nomeCurso;
@@ -279,35 +273,6 @@ public class Curso
         return quantidadeMaximaAlunos;
     }
 
-    /**
-     * @return
-     */
-    public String salvaAluno() 
-    {
-        try 
-        {
-            FileWriter fw = new FileWriter("Curso.txt");
-            PrintWriter pw = new PrintWriter("fw");
-            pw.println("Nome do curso: "+this.nomeCurso);
-            pw.println("Codigo do curso: "+this.codigoCurso);
-            pw.println("Status: "+this.status);
-            pw.println("Quantidade máxima de alunos: "+this.quantidadeMaximaAlunos);
-            pw.println("Finalização do curso: "+this.dateFim);
-            pw.println("Início do Curso: "+this.dateInicio);
-            pw.println("Carga horária: "+this.cargaHorariaCurso);
-            pw.flush();
-            pw.close();
-            fw.close();
-
-        } catch (IOException ex) {
-            Logger.getLogger(Pessoa.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    /**
-     * @param aluno
-     */
     public void removerAlunoMatriculado(Aluno aluno) {
         throw new UnsupportedOperationException("Unimplemented method 'removerAlunoMatriculado'");
     }
