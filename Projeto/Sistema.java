@@ -39,12 +39,31 @@ public class Sistema
         GeraArquivo.salvarAluno(aluno);
     }
 
+    /**
+     * @param nomeCurso
+     * @param codigoCurso
+     * @param cargaHoraria
+     * @param ementa
+     * @param dataInicio
+     * @param dataFim
+     * @param quantidadeAtualAlunos
+     * @param professor
+     * @param alunos
+     * @param capacidade
+     */
+
     public void GerarCurso(String nomeCurso, String codigoCurso, String cargaHoraria, String ementa, String dataInicio, 
                            String dataFim, int quantidadeAtualAlunos, Professor professor, Aluno[] alunos, int capacidade) {
         Curso curso = new Curso(nomeCurso, codigoCurso, capacidade, cargaHoraria, ementa, dataInicio, dataFim, professor);
         setCurso(curso);
         GeraArquivo.salvarCurso(curso);
     }
+
+    /**
+     * @param nome
+     * @param email
+     * @param senha
+     */
 
     public void GerarAdministrador(String nome, String email, String senha) 
     {
@@ -56,6 +75,13 @@ public class Sistema
         GeraArquivo.salvarAdministrador(administrador);
     }
         
+    /**
+     * @param nome
+     * @param email
+     * @param senha
+     * @param cpf
+     */
+
     public void GerarProfessor(String nome, String email, String senha, String cpf) 
     {
         int codigoUsuario = 0; 
@@ -68,16 +94,29 @@ public class Sistema
     }
         
 
+    /**
+     * @param aluno
+     */
+
     public void setAluno(Aluno aluno) 
     {
         this.alunos[contadorAluno] = aluno;
         contadorAluno++; 
     }
 
+    /**
+     * @param indiceAluno
+     * @return
+     */
+
     public Aluno getAluno(int indiceAluno) 
     {
         return alunos[indiceAluno]; 
     }
+
+    /**
+     * @param administrador
+     */
 
     public void setAdministrador(Administrador administrador) 
     {
@@ -85,10 +124,19 @@ public class Sistema
         contadorAdministrador++; 
     }
 
+    /**
+     * @param indiceAdministrador
+     * @return
+     */
+
     public Administrador getAdministrador(int indiceAdministrador) 
     {
         return administradores[indiceAdministrador]; 
     }
+
+    /**
+     * @param professor
+     */
 
     public void setProfessoresSistema(Professor professor) 
     {
@@ -96,10 +144,19 @@ public class Sistema
         contadorProfessor++; 
     }
 
+    /**
+     * @param indiceProfessor
+     * @return
+     */
+
     public Professor getProfessoresSistema(int indiceProfessor) 
     {
         return professoresSistema[indiceProfessor]; 
     }
+
+    /**
+     * @param curso
+     */
 
     public void setCurso(Curso curso) 
     {   
@@ -107,6 +164,11 @@ public class Sistema
         contadorCurso++; 
     }
 
+    /**
+     * @param indiceCurso
+     * @return
+     */
+    
     public Curso getCurso(int indiceCurso) 
     {
         return cursos[indiceCurso]; 
@@ -133,6 +195,11 @@ public class Sistema
         }
     }
 
+    /**
+     * @param email
+     * @param senha
+     */
+
     public void fazerLoginUsuarioAluno(String email, String senha) {
         boolean sucesso = false;
 
@@ -150,6 +217,12 @@ public class Sistema
             Menu.limpaTela();
         }
     }
+   
+    /**
+     * @param email
+     * @param senha
+     */
+
     public void fazerLoginUsuarioAdministrador(String email, String senha) {
         boolean loginSucesso = false;
         for(int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) 
@@ -189,6 +262,11 @@ public class Sistema
         }
     }
 
+    /**
+     * @param email
+     * @param senha
+     */
+
     public void fazerLoginUsuarioProfessor(String email, String senha) {
         boolean sucesso = false;
 
@@ -208,6 +286,12 @@ public class Sistema
     }
 
     //método que verifica variaveis para ver se são iguais
+    /**
+     * @param variavel1
+     * @param variavel2
+     * @return
+     */
+
     public boolean VerificaVariaveis(String variavel1, String variavel2) 
     {
         if (variavel1.equals(variavel2)) 
@@ -219,6 +303,10 @@ public class Sistema
     }
 
     //metodo que gera um codigo para os usuarios
+    /**
+     * @return
+     */
+
     public int GerarCodigoUsuario() 
     {
         codigoUsuario += 1;  
@@ -226,6 +314,12 @@ public class Sistema
     }
 
     //Busca um curso no vetor cursos cadastrados
+   
+    /**
+     * @param codigo
+     * @return
+     */
+
     public Curso buscaCurso(String codigo) 
     {
         int indiceCurso = 0;
@@ -297,6 +391,11 @@ public class Sistema
         }
     }
 
+    /**
+     * @param email
+     * @return
+     */
+
     public boolean VerificaEmail(String email) {
         for (int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) {
             if (VerificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true) {
@@ -307,6 +406,11 @@ public class Sistema
     }
 
     //Gera o menu que o aluno vê 
+    
+    /**
+     * @param idAluno
+     */
+
     public void MenuAluno(int idAluno) 
     {
         int escolha = 0; 
@@ -371,6 +475,10 @@ public class Sistema
     }
 
     //gera os dados do aluno 
+    /**
+     * @param idAluno
+     */
+    
     public void DadosAluno(int idAluno) 
     {
         System.out.println("Nome: " + getAluno(idAluno).getNome());
@@ -390,6 +498,11 @@ public class Sistema
         }
     }
     //gera os cursos que estão disponíveis para a matrícula 
+    
+    /**
+     * @param idAluno
+     */
+    
     public void CursosDisponiveisAluno(int idAluno) 
     {
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
@@ -435,6 +548,11 @@ public class Sistema
     }
 
     //Metodo que imprime todos os cursos que um aluno está matriculado
+    
+    /**
+     * @param idAluno
+     */
+
     public void CursosMatriculadosAluno(int idAluno) 
     {
         System.out.println("Cursos que você está matriculado: ");
@@ -486,6 +604,11 @@ public class Sistema
         }
     }
 
+    /**
+     * @param codigo
+     * @return
+     */
+    
     public Aluno buscaAlunoPorCodigo(int codigo) {
         for (int i = 0; i < contadorAluno; i++) {
             if (alunos[i].getCodigoUsuario() == codigo) {
@@ -507,6 +630,10 @@ public class Sistema
     }
 
     //Método para o aluno se matricular em um curso disponível
+    /**
+     * @param idAluno
+     */
+
     public void MatricularCurso(int idAluno) 
     {
         String codigo;
@@ -550,6 +677,11 @@ public class Sistema
     }
     
     //Método para que o aluno cancele a matrícula em um curso
+    
+    /**
+     * @param idAluno
+     */
+
     public void CancelarMatriculaCurso(int idAluno) {
         String codigo;
 
@@ -577,6 +709,11 @@ public class Sistema
     }
     
     //Método que retorna true se um curso não estiver lotado e false se estiver
+    /**
+     * @param indiceCurso
+     * @return
+     */
+
     public boolean VerificaQuantidadeAlunosMatriculados(int indiceCurso) 
     {
         if(getCurso(indiceCurso).getQuantidadeAtualAlunos() <= getCurso(indiceCurso).getQuantidadeMaximaAlunos()) 
@@ -586,11 +723,23 @@ public class Sistema
         return false; 
     }
     // Método que retorna a quantidade de alunos matriculados em um curso
+    
+    /**
+     * @param indiceCurso
+     * @return
+     */
+
     public int getQuantidadeAlunosMatriculados(int indiceCurso) {
         return getCurso(indiceCurso).getQuantidadeAtualAlunos();
     }
 
     //Método que verifica o CPF do aluno para não repetir
+    
+    /**
+     * @param cpf
+     * @return
+     */
+
     public boolean VerificaCPF(String cpf) 
     {
         for(int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
@@ -604,6 +753,11 @@ public class Sistema
     }
 
     //Métodoque verifica se um aluno está matriculado no curso
+    /**
+     * @param idAluno
+     * @param indiceCurso
+     * @return
+     */
     public boolean VerificaAlunoMatriculado(int idAluno, int indiceCurso) 
     {
         for(int indiceAlunos = 0; indiceAlunos < getCurso(indiceCurso).getQuantidadeAtualAlunos(); indiceAlunos++)
@@ -616,6 +770,9 @@ public class Sistema
         return false;
     }
 
+    /**
+     * @param idAluno
+     */
     public void GeraCertificadoAluno(int idAluno) 
     {
         String codigo;
@@ -639,6 +796,9 @@ public class Sistema
             System.out.println("O aluno não atingiu a nota mínima para obter o certificado.");
         }
     }
+    /**
+     * 
+     */
     public void carregarNotas() {
         String linha;
         try (BufferedReader br = new BufferedReader(new FileReader("notas.csv"))) {
@@ -674,6 +834,9 @@ public class Sistema
         }
     }
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
+    /**
+     * @param i
+     */
     public void MenuAdministrador(int i) 
     {
         int escolha = 0;
@@ -760,6 +923,10 @@ public class Sistema
         }
     }
 
+    /**
+     * @param email
+     * @return
+     */
     public boolean VerificaEmailAdministrador(String email) {
         carregarAdministradores();
         for (int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) {
@@ -812,6 +979,11 @@ public class Sistema
         }
     }
 
+    /**
+     * @param nome
+     * @param email
+     * @param senha
+     */
     public void CadastrarAdministrador(String nome, String email, String senha) 
     {
         int codigoUsuario; 
@@ -820,6 +992,10 @@ public class Sistema
         setAdministrador(administrador);
         System.out.println("Conta Criada com Sucesso!");
     }
+    /**
+     * @param email
+     * @return
+     */
     public boolean VerificaEmailExistente(String email) {
         for (int i = 0; i < contadorAdministrador; i++) {
             if (administradores[i].getEmail().equals(email)) {
@@ -829,6 +1005,11 @@ public class Sistema
         return false;
     }
 
+    /**
+     * @param nome
+     * @param email
+     * @param senha
+     */
     public void CadastrarProfessor(String nome, String email, String senha) 
     {
 
@@ -839,6 +1020,10 @@ public class Sistema
         setProfessoresSistema(professor);
         System.out.println("Conta Criada com Sucesso!");
     }
+    /**
+     * @param email
+     * @return
+     */
     public boolean VerificaEmailProfessor(String email) {
         for (int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) {
             if (VerificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email)) {
@@ -848,6 +1033,9 @@ public class Sistema
         return true;
     }
 
+    /**
+     * @param professor
+     */
     public void salvarProfessor(Professor professor) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("professores.csv", true))) {
             bw.write(professor.getNome() + "," + professor.getCodigoUsuario() + "," + professor.getEmail() + "," + professor.getSenhaPessoal());
@@ -964,6 +1152,17 @@ public class Sistema
         } while(exception = true);
     }
 
+    /**
+     * @param nome
+     * @param codigo
+     * @param cargaHoraria
+     * @param ementa
+     * @param dateInicio
+     * @param dateFim
+     * @param horario
+     * @param professor
+     * @param idProfessor
+     */
     public void CadastrarCurso(String nome, String codigo,int cargaHoraria, String ementa, String dateInicio, String dateFim, String horario, Professor professor, int idProfessor) 
     {
         if(verificaCargaProfessor(idProfessor,cargaHoraria) == true) 
@@ -977,6 +1176,9 @@ public class Sistema
         }
     }
     
+    /**
+     * @param curso
+     */
     public void salvarCurso(Curso curso) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("cursos.csv", true))) {
             bw.write(curso.getNomeCurso() + "," + curso.getCodigoCurso() + "," + curso.getCargaHorariaCurso() + "," + curso.getEmenta() + "," + curso.getDateInicio() + "," + curso.getDateFim() + "," + curso.getHorario() + "," + curso.getQuantidadeMaximaAlunos() + "," + curso.getProfessor().getCodigoUsuario());
@@ -986,6 +1188,9 @@ public class Sistema
         }
     }
 
+    /**
+     * @param curso
+     */
     public void editarCursoNoArquivo(Curso curso) {
         try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"));
              BufferedWriter bw = new BufferedWriter(new FileWriter("cursos_temp.csv"))) {
@@ -1196,6 +1401,9 @@ public class Sistema
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O PROFESSOR!!!!
     //Menu que o professor pode ver depois do login
+    /**
+     * @param idProfessor
+     */
     public void MenuProfessor(int idProfessor) 
     {
         int escolha = 0; 
@@ -1254,6 +1462,11 @@ public class Sistema
     }
 
     //metodo que imprime os dados do professor
+    
+    /**
+     * @param idProfessor
+     */
+
     public void MostrarDadosProfessores(int idProfessor) {
         for (int i = 0; i < contadorProfessor; i++) {
             System.out.println("Nome: " + professoresSistema[i].getNome());
@@ -1265,6 +1478,13 @@ public class Sistema
     }
 
     //método que verifica se o professor pode receber a carga horaria
+    
+    /**
+     * @param idProfessor
+     * @param cargaHoraria
+     * @return
+     */
+
     public boolean verificaCargaProfessor(int idProfessor, int cargaHoraria) 
     {
         if(getProfessoresSistema(idProfessor).getCargaHorariaAtual() + cargaHoraria <= getProfessoresSistema(idProfessor).getCargaHorariaMaxima()) 
@@ -1276,6 +1496,11 @@ public class Sistema
     }
 
     // Adiciona a carga horaria do professor
+   
+    /**
+     * @param idCurso
+     */
+
     public void AdicionaCargaHorariaProfessor(int idCurso) 
     {
         Professor professor = getCurso(idCurso).getProfessor();
@@ -1284,6 +1509,11 @@ public class Sistema
     }
 
     // retira a carga horaria do professor
+   
+    /**
+     * @param idCurso
+     */
+
     public void RetiraCargaHorariaProfessor(int idCurso) 
     {
         Professor professor = getCurso(idCurso).getProfessor();
@@ -1292,6 +1522,11 @@ public class Sistema
     }
 
     // Edita o professor no arquivo professores.csv
+   
+    /**
+     * @param professor
+     */
+
     public void editarProfessorNoArquivo(Professor professor) {
         try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"));
              BufferedWriter bw = new BufferedWriter(new FileWriter("professores_temp.csv"))) {
@@ -1313,6 +1548,11 @@ public class Sistema
     }
 
     //Lista todos os cursos onde um professor aparece como responsável
+    
+    /**
+     * @param idProfessor
+     */
+
     public void CursosProfessor(int idProfessor) 
     {
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
@@ -1333,6 +1573,11 @@ public class Sistema
             }
         }
     }
+   
+    /**
+     * @param idProfessor
+     */
+
     public void carregarCursosProfessor(int idProfessor) {
         String linha;
         try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
@@ -1359,6 +1604,11 @@ public class Sistema
         }
     }
     //imprimia as notas de cada aluno de um curso 
+    
+    /**
+     * @param idProfessor
+     */
+
     public void VerNotasAlunos(int idProfessor) 
     {
         String codigo;
@@ -1394,6 +1644,11 @@ public class Sistema
     }  
 
     //premite que um professor adicione a nota dos alunos de um curso
+   
+    /**
+     * @param idProfessor
+     */
+
     public void AdicionarNotas(int idProfessor) 
     {
         String codigo;
@@ -1434,6 +1689,13 @@ public class Sistema
     }  
 
     //Verifica se o professor é o responsável pela turma
+    
+    /**
+     * @param idProfessor
+     * @param cursoProcurado
+     * @return
+     */
+
     public boolean VerificaProfessorResponsavel(int idProfessor, Curso cursoProcurado)
     {
         if(cursoProcurado.getProfessor() == getProfessoresSistema(idProfessor))
