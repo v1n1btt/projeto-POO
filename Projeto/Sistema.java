@@ -1134,6 +1134,7 @@ public class Sistema
                     escolhaProfessor = teclado.nextInt();
                     teclado.nextLine();
                     CadastrarCurso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, getProfessoresSistema(escolhaProfessor), escolhaProfessor, escolhaProfessor, true);
+                    break;
                 } else {
                     System.out.println("Não há professores cadastrados!");
                     teclado.nextLine();
@@ -1168,6 +1169,7 @@ public class Sistema
             Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor, alunos, quantidadeMaximaAlunos, status, null, quantidadeMaximaAlunos, quantidadeMaximaAlunos);
             setCurso(curso);
             AdicionaCargaHorariaProfessor(contadorCurso - 1);
+            GeraArquivo.salvarCurso(curso);
             System.out.println("Curso Criado com Sucesso!");
             teclado.nextLine();
         } else {

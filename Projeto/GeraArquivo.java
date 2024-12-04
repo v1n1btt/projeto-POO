@@ -14,7 +14,7 @@ public class GeraArquivo {
      */
     public static void salvarCurso(Curso curso) {
         try {
-            File arquivo = new File("Projeto\\cursos.csv");
+            File arquivo = new File("cursos.csv");
             boolean arquivoNovo = !arquivo.exists();
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
