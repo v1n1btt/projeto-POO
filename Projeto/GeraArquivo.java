@@ -160,7 +160,13 @@ public class GeraArquivo {
      * @param curso
      * @param aluno
      */
+   
     public static void salvarMatricula(Curso curso, Aluno aluno) {
-        throw new UnsupportedOperationException("Unimplemented method 'salvarMatricula'");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Projeto/matriculas.csv", true))) {
+            writer.write(curso.getCodigoCurso() + "," + aluno.getCodigoUsuario());
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar matrícula: " + e.getMessage());
+        }
     }
 }
