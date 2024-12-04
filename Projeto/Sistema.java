@@ -439,10 +439,14 @@ public class Sistema
                     case 1:
                         Menu.limpaTela();
                         DadosAluno(idAluno);
+                        System.out.print("\nPressione ENTER para continuar...");
+                        teclado.nextLine();
                         break;
                     case 2:
                         Menu.limpaTela();
                         CursosDisponiveisAluno(idAluno);
+                        System.out.print("\nPressione ENTER para continuar...");
+                        teclado.nextLine();
                         break;
                     case 3:
                         Menu.limpaTela();
@@ -485,8 +489,6 @@ public class Sistema
         System.out.println("Codigo do Usuário: " + getAluno(idAluno).getCodigoUsuario());
         System.out.println("Email: " + getAluno(idAluno).getEmail());
         System.out.println("CPF: " + getAluno(idAluno).getCPF());
-        System.out.print("\nPressione ENTER para continuar...");
-        teclado.nextLine();
     }
     public void MostrarDadosAlunos() {
         for (int i = 0; i < contadorAluno; i++) {
@@ -1137,6 +1139,7 @@ public class Sistema
                     CadastrarCurso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, getProfessoresSistema(escolhaProfessor), escolhaProfessor);
                 } else {
                     System.out.println("Não há professores cadastrados!");
+                    teclado.nextLine();
                 }
             } catch(InputMismatchException inputMismatchException)
             {
@@ -1168,9 +1171,10 @@ public class Sistema
         if(verificaCargaProfessor(idProfessor,cargaHoraria) == true) 
         {
             Curso curso = new Curso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, professor);
-            AdicionaCargaHorariaProfessor(contadorCurso);
             setCurso(curso);
+            AdicionaCargaHorariaProfessor(contadorCurso - 1);
             System.out.println("Curso Criado com Sucesso!");
+            teclado.nextLine();
         } else {
             System.out.println("Esse professor não pode mais receber disciplinas!");
         }
@@ -1510,10 +1514,13 @@ public class Sistema
         try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"));
              BufferedWriter bw = new BufferedWriter(new FileWriter("professores_temp.csv"))) {
             String linha;
+            bw.write(br.readLine());
+            bw.write("\n\n");
+            br.readLine();
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
                 if (dados[1].equals(String.valueOf(professor.getCodigoUsuario()))) {
-                    bw.write(professor.getNome() + "," + professor.getCodigoUsuario() + "," + professor.getEmail() + "," + professor.getSenhaPessoal() + "," + professor.getCargaHorariaAtual());
+                    bw.write(professor.getNome() + "," + professor.getCodigoUsuario() + "," + professor.getEmail() + "," + professor.getSenhaPessoal() + ",professor," + professor.getCargaHorariaAtual());
                 } else {
                     bw.write(linha);
                 }
