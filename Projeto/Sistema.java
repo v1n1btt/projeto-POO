@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class Sistema 
 {
-
     private static int codigoUsuario = 1000;
     private static int contadorAluno = 0;
     private static int contadorAdministrador = 0;
@@ -106,32 +105,10 @@ public class Sistema
     }
 
     //metodos para fazer os logins
-    public void carregarAlunos() 
-    {
-        String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("alunos.csv"))) {
-            br.readLine();
-            br.readLine();
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(",");
-                String nome = dados[0];
-                String cpf = dados[1];
-                int codigoUsuario = Integer.parseInt(dados[2]);
-                String email = dados[3];
-                String senha = dados[4];
-                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
-                setAluno(aluno);
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
-        }
-    }
-
     /**
      * @param email
      * @param senha
      */
-
     public void fazerLoginUsuarioAluno(String email, String senha) 
     {
         boolean sucesso = false;
@@ -155,7 +132,6 @@ public class Sistema
      * @param email
      * @param senha
      */
-
     public void fazerLoginUsuarioAdministrador(String email, String senha) 
     {
         boolean loginSucesso = false;
@@ -176,32 +152,10 @@ public class Sistema
         }
     }
 
-
-    public void carregarProfessores() 
-    {
-        String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"))) {
-            br.readLine();
-            br.readLine();
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(",");
-                String nome = dados[0];
-                int codigoUsuario = Integer.parseInt(dados[1]);
-                String email = dados[2];
-                String senha = dados[3];
-                Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
-                setProfessoresSistema(professor);
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar professores do arquivo professores.csv: " + e.getMessage());
-        }
-    }
-
     /**
      * @param email
      * @param senha
      */
-
     public void fazerLoginUsuarioProfessor(String email, String senha) 
     {
         boolean sucesso = false;
@@ -227,7 +181,6 @@ public class Sistema
      * @param variavel2
      * @return
      */
-
     public boolean verificaVariaveis(String variavel1, String variavel2) 
     {
         if (variavel1.equals(variavel2)) 
@@ -242,7 +195,6 @@ public class Sistema
     /**
      * @return
      */
-
     public int GerarCodigoUsuario() 
     {
         codigoUsuario += 1;  
@@ -250,12 +202,10 @@ public class Sistema
     }
 
     //Busca um curso no vetor cursos cadastrados
-   
     /**
      * @param codigo
      * @return
      */
-
     public Curso buscaCurso(String codigo) 
     {
         int indiceCurso = 0;
@@ -267,6 +217,263 @@ public class Sistema
         }
         CursoProcurado = getCurso(indiceCurso);
         return CursoProcurado;
+    }
+
+    //AQUI ESTÃO OS MÉTODOS DOS ARQUIVOS 
+    public void carregarProfessores() 
+    {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"))) {
+            br.readLine();
+            br.readLine();
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nome = dados[0];
+                int codigoUsuario = Integer.parseInt(dados[1]);
+                String email = dados[2];
+                String senha = dados[3];
+                Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
+                setProfessoresSistema(professor);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar professores do arquivo professores.csv: " + e.getMessage());
+        }
+    }
+
+    public void carregarAlunos() 
+    {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("alunos.csv"))) {
+            br.readLine();
+            br.readLine();
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nome = dados[0];
+                String cpf = dados[1];
+                int codigoUsuario = Integer.parseInt(dados[2]);
+                String email = dados[3];
+                String senha = dados[4];
+                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
+                setAluno(aluno);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
+        }
+    }
+
+    public void carregarAdministradores() 
+    {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("administradores.csv"))) {
+            br.readLine();
+            br.readLine();
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nome = dados[0];
+                int codigoUsuario = Integer.parseInt(dados[1]);
+                String email = dados[2];
+                String senha = dados[3];
+                Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
+                setAdministrador(administrador);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar administradores do arquivo administradores.csv: " + e.getMessage());
+        }
+    }
+
+    public void carregarCursos() 
+    {
+        String linha;
+
+        try (BufferedReader br = new BufferedReader(new FileReader("\\Projeto\\cursos.csv"))) {
+            br.readLine();
+            br.readLine();
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nomeCurso = dados[0];
+                String codigoCurso = dados[1];
+                int cargaHoraria = Integer.parseInt(dados[2]);
+                String ementa = dados[3];
+                String dataInicio = dados[4];
+                String dataFim = dados[5];
+                String horario = dados[6];
+                int codigoProfessor = Integer.parseInt(dados[7]);
+                Professor professor = getProfessoresSistema(codigoProfessor);
+                Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor, alunos, codigoProfessor, false, new double[0], codigoProfessor, 0);
+                setCurso(curso);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar cursos do arquivo cursos.csv: " + e.getMessage());
+        }
+    }
+
+    public void carregarMatriculas() {
+        String linha1, linha2;
+        try (BufferedReader brCursos = new BufferedReader(new FileReader("cursos.csv"))) {
+            brCursos.readLine();
+            brCursos.readLine();
+            try (BufferedReader brAlunos = new BufferedReader(new FileReader("alunos.csv"))) {
+                brAlunos.readLine();
+                brAlunos.readLine();
+                while ((linha1 = brCursos.readLine()) != null && (linha2 = brAlunos.readLine()) != null) {
+                    String[] dadosCurso = linha1.split(",");
+                    String codigoCurso = dadosCurso[1];
+                    Curso curso = buscaCurso(codigoCurso);
+                    if (curso != null) {
+                        String[] dadosAluno = linha2.split(",");
+                        int codigoAluno = Integer.parseInt(dadosAluno[2]);
+                        Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
+                        if (aluno != null) {
+                            curso.setAlunosMatriculados(aluno);
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar matrículas do arquivo cursos.csv: " + e.getMessage());
+        }
+    }
+
+    public void carregarNotas()
+    {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("notas.csv"))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String codigoCurso = dados[0];
+                int codigoAluno = Integer.parseInt(dados[1]);
+                double nota = Double.parseDouble(dados[2]);
+                Curso curso = buscaCurso(codigoCurso);
+                Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
+                if (curso != null && aluno != null) {
+                    curso.setNota(aluno, nota);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar notas do arquivo notas.csv: " + e.getMessage());
+        }
+    }
+
+    public void salvarNotas() 
+    {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("notas.csv"))) {
+            for (int i = 0; i < contadorCurso; i++) {
+                Curso curso = cursos[i];
+                for (int j = 0; j < curso.getQuantidadeAtualAlunos(); j++) {
+                    Aluno aluno = curso.getAlunosMatriculados(j);
+                    double nota = curso.getNota(j);
+                    bw.write(curso.getCodigoCurso() + "," + aluno.getCodigoUsuario() + "," + nota);
+                    bw.newLine();
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar notas no arquivo notas.csv: " + e.getMessage());
+        }
+    }
+
+    /**
+    * @param curso
+    */
+    public void salvarCurso(Curso curso) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("cursos.csv", true))) {
+            bw.write(curso.getNomeCurso() + "," + curso.getCodigoCurso() + "," + curso.getCargaHorariaCurso() + "," + curso.getEmenta() + "," + curso.getDateInicio() + "," + curso.getDateFim() + "," + curso.getHorario() + "," + curso.getQuantidadeMaximaAlunos() + "," + curso.getProfessor().getCodigoUsuario());
+            bw.newLine();
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar curso no arquivo cursos.csv: " + e.getMessage());
+        }
+    }
+    
+    /**
+    * @param professor
+    */
+    public void salvarProfessor(Professor professor) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("professores.csv", true))) {
+            bw.write(professor.getNome() + "," + professor.getCodigoUsuario() + "," + professor.getEmail() + "," + professor.getSenhaPessoal());
+            bw.newLine();
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar professor no arquivo professores.csv: " + e.getMessage());
+        }
+    }
+
+    /**
+    * @param curso
+    */
+    public void editarCursoNoArquivo(Curso curso) {
+        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"));
+             BufferedWriter bw = new BufferedWriter(new FileWriter("cursos_temp.csv"))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                if (dados[1].equals(curso.getCodigoCurso())) {
+                    bw.write(curso.getNomeCurso() + "," + curso.getCodigoCurso() + "," + curso.getCargaHorariaCurso() + "," + curso.getEmenta() + "," + curso.getDateInicio() + "," + curso.getDateFim() + "," + curso.getHorario() + "," + curso.getQuantidadeMaximaAlunos() + "," + curso.getProfessor().getCodigoUsuario());
+                } else {
+                    bw.write(linha);
+                }
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao editar curso no arquivo cursos.csv: " + e.getMessage());
+        }
+        new File("cursos.csv").delete();
+        new File("cursos_temp.csv").renameTo(new File("cursos.csv"));
+    }
+
+    /**
+    * @param idProfessor
+    */
+    public void carregarCursosProfessor(int idProfessor) {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
+            br.readLine();
+            br.readLine();
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nomeCurso = dados[0];
+                String codigoCurso = dados[1];
+                int cargaHoraria = Integer.parseInt(dados[2]);
+                String ementa = dados[3];
+                String dataInicio = dados[4];
+                String dataFim = dados[5];
+                String horario = dados[6];
+                int codigoProfessor = Integer.parseInt(dados[7]);
+                if (codigoProfessor == getProfessoresSistema(idProfessor).getCodigoUsuario()) {
+                    Professor professor = getProfessoresSistema(idProfessor);
+                    Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor, alunos, 0, false, new double[0], 0, 0);
+                    setCurso(curso);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar cursos do arquivo cursos.csv: " + e.getMessage());
+        }
+    }
+
+    // Edita o professor no arquivo professores.csv
+    /**
+    * @param professor
+    */
+    public void editarProfessorNoArquivo(Professor professor) {
+        try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"));
+             BufferedWriter bw = new BufferedWriter(new FileWriter("professores_temp.csv"))) {
+            String linha;
+            bw.write(br.readLine());
+            bw.write("\n\n");
+            br.readLine();
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                if (dados[1].equals(String.valueOf(professor.getCodigoUsuario()))) {
+                    bw.write(professor.getNome() + "," + professor.getCodigoUsuario() + "," + professor.getEmail() + "," + professor.getSenhaPessoal() + ",professor," + professor.getCargaHorariaAtual());
+                } else {
+                    bw.write(linha);
+                }
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao editar professor no arquivo professores.csv: " + e.getMessage());
+        }
+        new File("professores.csv").delete();
+        new File("professores_temp.csv").renameTo(new File("professores.csv"));
     }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
@@ -342,7 +549,6 @@ public class Sistema
     }
 
     //Gera o menu que o aluno vê 
-    
     /**
      * @param idAluno
      */
@@ -442,7 +648,6 @@ public class Sistema
     /**
      * @param idAluno
      */
-    
     public void CursosDisponiveisAluno(int idAluno) 
     {
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
@@ -464,32 +669,7 @@ public class Sistema
         }
     }
 
-    public void carregarCursos() {
-        String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("\\Projeto\\cursos.csv"))) {
-            br.readLine();
-            br.readLine();
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(",");
-                String nomeCurso = dados[0];
-                String codigoCurso = dados[1];
-                int cargaHoraria = Integer.parseInt(dados[2]);
-                String ementa = dados[3];
-                String dataInicio = dados[4];
-                String dataFim = dados[5];
-                String horario = dados[6];
-                int codigoProfessor = Integer.parseInt(dados[7]);
-                Professor professor = getProfessoresSistema(codigoProfessor);
-                Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor, alunos, codigoProfessor, false, new double[0], codigoProfessor, 0);
-                setCurso(curso);
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar cursos do arquivo cursos.csv: " + e.getMessage());
-        }
-    }
-
     //Metodo que imprime todos os cursos que um aluno está matriculado
-    
     /**
      * @param idAluno
      */
@@ -514,34 +694,6 @@ public class Sistema
                 //System.out.println("Sua nota é: " + getCurso(indiceCursos).getNota(indiceCursos));
                 System.out.println();
             }
-        }
-    }
-    public void carregarMatriculas() {
-        String linha1, linha2;
-        try (BufferedReader brCursos = new BufferedReader(new FileReader("cursos.csv"))) {
-            brCursos.readLine();
-            brCursos.readLine();
-            try (BufferedReader brAlunos = new BufferedReader(new FileReader("alunos.csv"))) {
-                brAlunos.readLine();
-                brAlunos.readLine();
-                while ((linha1 = brCursos.readLine()) != null && (linha2 = brAlunos.readLine()) != null) {
-                    String[] dadosCurso = linha1.split(",");
-                    String codigoCurso = dadosCurso[1];
-                    Curso curso = buscaCurso(codigoCurso);
-                    if (curso != null) {
-                        String[] dadosAluno = linha2.split(",");
-                        int codigoAluno = Integer.parseInt(dadosAluno[2]);
-                        Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
-                        if (aluno != null) {
-                            curso.setAlunosMatriculados(aluno);
-                        }
-                    }
-                }
-            } catch (IOException e) {
-                System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar matrículas do arquivo cursos.csv: " + e.getMessage());
         }
     }
 
@@ -621,7 +773,6 @@ public class Sistema
     }
     
     //Método para que o aluno cancele a matrícula em um curso
-    
     /**
      * @param idAluno
      */
@@ -657,7 +808,6 @@ public class Sistema
      * @param indiceCurso
      * @return
      */
-
     public boolean VerificaQuantidadeAlunosMatriculados(int indiceCurso) 
     {
         if(getCurso(indiceCurso).getQuantidadeAtualAlunos() <= getCurso(indiceCurso).getQuantidadeMaximaAlunos()) 
@@ -666,8 +816,8 @@ public class Sistema
         }
         return false; 
     }
+
     // Método que retorna a quantidade de alunos matriculados em um curso
-    
     /**
      * @param indiceCurso
      * @return
@@ -679,7 +829,6 @@ public class Sistema
     }
 
     //Método que verifica o CPF do aluno para não repetir
-    
     /**
      * @param cpf
      * @return
@@ -741,45 +890,8 @@ public class Sistema
             System.out.println("O aluno não atingiu a nota mínima para obter o certificado.");
         }
     }
-    /**
-     * 
-     */
-    public void carregarNotas()
-    {
-        String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("notas.csv"))) {
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(",");
-                String codigoCurso = dados[0];
-                int codigoAluno = Integer.parseInt(dados[1]);
-                double nota = Double.parseDouble(dados[2]);
-                Curso curso = buscaCurso(codigoCurso);
-                Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
-                if (curso != null && aluno != null) {
-                    curso.setNota(aluno, nota);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar notas do arquivo notas.csv: " + e.getMessage());
-        }
-    }
-
-    public void salvarNotas() 
-    {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("notas.csv"))) {
-            for (int i = 0; i < contadorCurso; i++) {
-                Curso curso = cursos[i];
-                for (int j = 0; j < curso.getQuantidadeAtualAlunos(); j++) {
-                    Aluno aluno = curso.getAlunosMatriculados(j);
-                    double nota = curso.getNota(j);
-                    bw.write(curso.getCodigoCurso() + "," + aluno.getCodigoUsuario() + "," + nota);
-                    bw.newLine();
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar notas no arquivo notas.csv: " + e.getMessage());
-        }
-    }
+   
+    
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
     /**
@@ -850,26 +962,6 @@ public class Sistema
                 teclado.nextLine();
             }
         } while(escolha != 8);
-    }
-
-    public void carregarAdministradores() 
-    {
-        String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("administradores.csv"))) {
-            br.readLine();
-            br.readLine();
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(",");
-                String nome = dados[0];
-                int codigoUsuario = Integer.parseInt(dados[1]);
-                String email = dados[2];
-                String senha = dados[3];
-                Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
-                setAdministrador(administrador);
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar administradores do arquivo administradores.csv: " + e.getMessage());
-        }
     }
 
     /**
@@ -988,18 +1080,6 @@ public class Sistema
             }
         }
         return true;
-    }
-
-    /**
-     * @param professor
-     */
-    public void salvarProfessor(Professor professor) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("professores.csv", true))) {
-            bw.write(professor.getNome() + "," + professor.getCodigoUsuario() + "," + professor.getEmail() + "," + professor.getSenhaPessoal());
-            bw.newLine();
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar professor no arquivo professores.csv: " + e.getMessage());
-        }
     }
 
     public void FormulariocadastroProfessor() 
@@ -1134,41 +1214,6 @@ public class Sistema
         }
     }
     
-    /**
-     * @param curso
-     */
-    public void salvarCurso(Curso curso) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("cursos.csv", true))) {
-            bw.write(curso.getNomeCurso() + "," + curso.getCodigoCurso() + "," + curso.getCargaHorariaCurso() + "," + curso.getEmenta() + "," + curso.getDateInicio() + "," + curso.getDateFim() + "," + curso.getHorario() + "," + curso.getQuantidadeMaximaAlunos() + "," + curso.getProfessor().getCodigoUsuario());
-            bw.newLine();
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar curso no arquivo cursos.csv: " + e.getMessage());
-        }
-    }
-
-    /**
-     * @param curso
-     */
-    public void editarCursoNoArquivo(Curso curso) {
-        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"));
-             BufferedWriter bw = new BufferedWriter(new FileWriter("cursos_temp.csv"))) {
-            String linha;
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(",");
-                if (dados[1].equals(curso.getCodigoCurso())) {
-                    bw.write(curso.getNomeCurso() + "," + curso.getCodigoCurso() + "," + curso.getCargaHorariaCurso() + "," + curso.getEmenta() + "," + curso.getDateInicio() + "," + curso.getDateFim() + "," + curso.getHorario() + "," + curso.getQuantidadeMaximaAlunos() + "," + curso.getProfessor().getCodigoUsuario());
-                } else {
-                    bw.write(linha);
-                }
-                bw.newLine();
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao editar curso no arquivo cursos.csv: " + e.getMessage());
-        }
-        new File("cursos.csv").delete();
-        new File("cursos_temp.csv").renameTo(new File("cursos.csv"));
-    }
-
     public void DadosCursoAdministrativo() 
     {
         for(int indiceCurso = 0; indiceCurso < contadorCurso; indiceCurso++) 
@@ -1460,37 +1505,7 @@ public class Sistema
         editarProfessorNoArquivo(professor);
     }
 
-    // Edita o professor no arquivo professores.csv
-   
-    /**
-     * @param professor
-     */
-
-    public void editarProfessorNoArquivo(Professor professor) {
-        try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"));
-             BufferedWriter bw = new BufferedWriter(new FileWriter("professores_temp.csv"))) {
-            String linha;
-            bw.write(br.readLine());
-            bw.write("\n\n");
-            br.readLine();
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(",");
-                if (dados[1].equals(String.valueOf(professor.getCodigoUsuario()))) {
-                    bw.write(professor.getNome() + "," + professor.getCodigoUsuario() + "," + professor.getEmail() + "," + professor.getSenhaPessoal() + ",professor," + professor.getCargaHorariaAtual());
-                } else {
-                    bw.write(linha);
-                }
-                bw.newLine();
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao editar professor no arquivo professores.csv: " + e.getMessage());
-        }
-        new File("professores.csv").delete();
-        new File("professores_temp.csv").renameTo(new File("professores.csv"));
-    }
-
     //Lista todos os cursos onde um professor aparece como responsável
-    
     /**
      * @param idProfessor
      */
@@ -1515,38 +1530,8 @@ public class Sistema
             }
         }
     }
-   
-    /**
-     * @param idProfessor
-     */
 
-    public void carregarCursosProfessor(int idProfessor) {
-        String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
-            br.readLine();
-            br.readLine();
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(",");
-                String nomeCurso = dados[0];
-                String codigoCurso = dados[1];
-                int cargaHoraria = Integer.parseInt(dados[2]);
-                String ementa = dados[3];
-                String dataInicio = dados[4];
-                String dataFim = dados[5];
-                String horario = dados[6];
-                int codigoProfessor = Integer.parseInt(dados[7]);
-                if (codigoProfessor == getProfessoresSistema(idProfessor).getCodigoUsuario()) {
-                    Professor professor = getProfessoresSistema(idProfessor);
-                    Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor, alunos, 0, false, new double[0], 0, 0);
-                    setCurso(curso);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar cursos do arquivo cursos.csv: " + e.getMessage());
-        }
-    }
     //imprimia as notas de cada aluno de um curso 
-    
     /**
      * @param idProfessor
      */
