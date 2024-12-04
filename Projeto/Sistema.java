@@ -462,7 +462,7 @@ public class Sistema
     }
     public void carregarMatriculas() {
         String linha;
-        try (BufferedReader br = new BufferedReader(new FileReader("matriculas.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("cursos.csv"))) {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
                 String codigoCurso = dados[0];
@@ -474,7 +474,7 @@ public class Sistema
                 }
             }
         } catch (IOException e) {
-            System.out.println("Erro ao carregar matrículas do arquivo matriculas.csv: " + e.getMessage());
+            System.out.println("Erro ao carregar matrículas do arquivo cursos.csv: " + e.getMessage());
         }
     }
 
@@ -910,6 +910,7 @@ public class Sistema
         String dateFim;
         String horario; 
         int escolhaProfessor; 
+        @SuppressWarnings("unused")
         boolean exception;
         // Formulario de cadastro de curso
         do{
