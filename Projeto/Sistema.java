@@ -723,7 +723,7 @@ public class Sistema
     {
         String codigo;
 
-        CursosDisponiveisAluno(idAluno); //imprime os cursos disponíveis 
+        cursosDisponiveisAluno(idAluno); //imprime os cursos disponíveis 
         System.out.print("Digite o código do curso: ");
         codigo = teclado.nextLine();
 
