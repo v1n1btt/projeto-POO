@@ -1098,13 +1098,11 @@ public class Sistema
         String dateInicio;
         String dateFim;
         String horario; 
-        int escolhaProfessor; 
-        @SuppressWarnings("unused")
-        boolean exception;
+        int escolhaProfessor;
+
         // Formulario de cadastro de curso
         do{
             try{
-                exception = false;
                 Menu.limpaTela();
                 if(getProfessoresSistema(0) != null) 
                 {
@@ -1125,7 +1123,7 @@ public class Sistema
                     cargaHoraria = teclado.nextInt();
                     teclado.nextLine();
                     System.out.println("Escolha um professor:");
-                    System.out.println("Indice do Professor: " + "  " + "Nome: " );  
+                    System.out.println("Indice do Professor: " + "  " + "Nome: " );
                     for(int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) 
                     {
                         if(getProfessoresSistema(indiceProfessores).getCargaHorariaAtual() != getProfessoresSistema(indiceProfessores).getCargaHorariaMaxima()) 
@@ -1137,22 +1135,21 @@ public class Sistema
                     escolhaProfessor = teclado.nextInt();
                     teclado.nextLine();
                     CadastrarCurso(nome, codigo, cargaHoraria, ementa, dateInicio, dateFim, horario, getProfessoresSistema(escolhaProfessor), escolhaProfessor);
+                    break;
                 } else {
                     System.out.println("Não há professores cadastrados!");
                     teclado.nextLine();
                 }
             } catch(InputMismatchException inputMismatchException)
             {
-                exception = true;
                 System.out.print("\nEntrada inválida, tente novamente.\n");
                 teclado.nextLine();
                 teclado.nextLine();
             } catch(NullPointerException nullPointerException){
-                exception = true;
                 System.out.print("\nProfessor não encontrado, tente novamente.\n");
                 teclado.nextLine();
             }
-        } while(exception = true);
+        } while(true);
     }
 
     /**
