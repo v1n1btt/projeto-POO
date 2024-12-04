@@ -1,8 +1,15 @@
 Nome,Código do Curso,Carga Horária,Ementa,Data Início,Data Fim,Horário,Professor Responsável,Status
 
-Introdução à Programação,CS101,40,"Conceitos básicos de programação e lógica",2024-01-15,2024-06-15,09:00-12:00,0,false
-Matemática para Computação,MT202,45,"Álgebra linear cálculo e estatística aplicados à computação",2024-02-01,2024-07-01,14:00-17:00,1,true
-Engenharia de Software,SW303,60,"Princípios e práticas de engenharia de software",2024-03-01,2024-09-01,18:00-21:00,2,false
-Banco de Dados,DB404,50,"Modelagem implementação e gerenciamento de bancos de dados",2024-01-20,2024-06-20,10:00-13:00,3,true
-Redes de Computadores,NT505,40,"Fundamentos e protocolos de redes de computadores",2024-03-10,2024-09-10,08:00-11:00,4,false
+Curso de Python,001,40,Introdução à Programação com Python,2023-01-10,2023-02-10,18:00-20:00,1,Ativo
+Curso de Java,002,50,Programação Orientada a Objetos com Java,2023-02-15,2023-03-30,19:00-21:00,2,Ativo
+Curso de C++,003,45,Desenvolvimento de Software com C++,2023-03-05,2023-04-20,17:00-19:00,3,Ativo
+Curso de JavaScript,004,35,Desenvolvimento Web com JavaScript,2023-04-10,2023-05-15,18:00-20:00,4,Ativo
+Curso de HTML e CSS,005,30,Desenvolvimento Web com HTML e CSS,2023-05-20,2023-06-25,19:00-21:00,5,Ativo
+Curso de SQL,006,25,Bancos de Dados com SQL,2023-06-05,2023-07-10,17:00-19:00,6,Ativo
+Curso de Ruby,007,40,Programação com Ruby,2023-07-15,2023-08-20,18:00-20:00,7,Ativo
+Curso de PHP,008,35,Desenvolvimento Web com PHP,2023-08-25,2023-09-30,19:00-21:00,8,Ativo
+Curso de Swift,009,50,Desenvolvimento para iOS com Swift,2023-09-05,2023-10-20,17:00-19:00,9,Ativo
+Curso de Kotlin,010,45,Desenvolvimento para Android com Kotlin,2023-10-25,2023-12-10,18:00-20:00,10,Ativo
+
+
 

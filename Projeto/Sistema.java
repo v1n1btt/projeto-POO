@@ -286,10 +286,9 @@ public class Sistema
 
     try (BufferedReader br = new BufferedReader(new FileReader("Projeto/cursos.csv"))) {
         br.readLine(); // Ignora o cabeçalho
-        br.readLine(); // Ignora o cabeçalho
         while ((linha = br.readLine()) != null) {
             String[] dados = linha.split(",");
-            if (dados.length >= 8) { // Verifica se a linha tem pelo menos 8 colunas
+            if (dados.length >= 9) { // Verifica se a linha tem pelo menos 9 colunas
                 String nomeCurso = dados[0];
                 String codigoCurso = dados[1];
                 int cargaHoraria = Integer.parseInt(dados[2]);
@@ -297,9 +296,10 @@ public class Sistema
                 String dataInicio = dados[4];
                 String dataFim = dados[5];
                 String horario = dados[6];
-                int codigoProfessor = Integer.parseInt(dados[7]);
-                Professor professor = getProfessoresSistema(codigoProfessor);
-                Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor, alunos, codigoProfessor, false, new double[0], codigoProfessor, 0);
+                String codigoProfessor = dados[7];
+                boolean status = Boolean.parseBoolean(dados[8]);
+                Professor professor = getProfessoresSistema(Integer.parseInt(codigoProfessor));
+                Curso curso = new Curso(nomeCurso, codigoCurso, cargaHoraria, ementa, dataInicio, dataFim, horario, professor, alunos, 0, status, new double[0], 0, 0);
                 setCurso(curso);
             } else {
                 System.out.println("Linha inválida: " + linha);
@@ -309,39 +309,39 @@ public class Sistema
         System.out.println("Erro ao carregar cursos do arquivo cursos.csv: " + e.getMessage());
     }
 }
-
-    public void carregarMatriculas() {
-        String linha1, linha2;
-        try (BufferedReader brCursos = new BufferedReader(new FileReader("Projeto/cursos.csv"))) {
-            brCursos.readLine();
-            brCursos.readLine();
-            try (BufferedReader brAlunos = new BufferedReader(new FileReader("Projeto/alunos.csv"))) {
-                brAlunos.readLine();
-                brAlunos.readLine();
-                while ((linha1 = brCursos.readLine()) != null && (linha2 = brAlunos.readLine()) != null) {
-                    String[] dadosCurso = linha1.split(",");
-                    if (dadosCurso.length > 1) {
-                        String codigoCurso = dadosCurso[1];
-                        Curso curso = buscaCurso(codigoCurso);
-                        if (curso != null) {
-                            String[] dadosAluno = linha2.split(",");
-                            if (dadosAluno.length > 2) {
-                                int codigoAluno = Integer.parseInt(dadosAluno[2]);
-                                Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
-                                if (aluno != null) {
-                                    curso.setAlunosMatriculados(aluno);
+        public void carregarMatriculas() {
+            String linha1, linha2;
+            try (BufferedReader brCursos = new BufferedReader(new FileReader("Projeto/cursos.csv"))) {
+                brCursos.readLine();
+                brCursos.readLine();
+                try (BufferedReader brAlunos = new BufferedReader(new FileReader("Projeto/alunos.csv"))) {
+                    brAlunos.readLine();
+                    brAlunos.readLine();
+                    while ((linha1 = brCursos.readLine()) != null && (linha2 = brAlunos.readLine()) != null) {
+                        String[] dadosCurso = linha1.split(",");
+                        if (dadosCurso.length > 1) {
+                            String codigoCurso = dadosCurso[1];
+                            Curso curso = buscaCurso(codigoCurso);
+                            if (curso != null) {
+                                String[] dadosAluno = linha2.split(",");
+                                if (dadosAluno.length > 2) {
+                                    int codigoAluno = Integer.parseInt(dadosAluno[2]);
+                                    Aluno aluno = buscaAlunoPorCodigo(codigoAluno);
+                                    if (aluno != null) {
+                                        curso.setAlunosMatriculados(aluno);
+                                    }
                                 }
                             }
                         }
                     }
+                } catch (IOException e) {
+                    System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
                 }
             } catch (IOException e) {
-                System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
+                System.out.println("Erro ao carregar matrículas do arquivo cursos.csv: " + e.getMessage());
             }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar matrículas do arquivo cursos.csv: " + e.getMessage());
         }
-    }
+    
 
     public void carregarNotas()
     {
