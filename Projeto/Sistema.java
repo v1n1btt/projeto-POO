@@ -568,13 +568,13 @@ public class Sistema
                 {
                     case 1:
                         Menu.limpaTela();
-                        DadosAluno(idAluno);
+                        dadosAluno(idAluno);
                         System.out.print("\nPressione ENTER para continuar...");
                         teclado.nextLine();
                         break;
                     case 2:
                         Menu.limpaTela();
-                        CursosDisponiveisAluno(idAluno);
+                        cursosDisponiveisAluno(idAluno);
                         System.out.print("\nPressione ENTER para continuar...");
                         teclado.nextLine();
                         break;
@@ -614,7 +614,7 @@ public class Sistema
      * @param idAluno
      */
     
-    public void DadosAluno(int idAluno) 
+    public void dadosAluno(int idAluno) 
     {
         System.out.println("Nome: " + getAluno(idAluno).getNome());
         System.out.println("Codigo do Usuário: " + getAluno(idAluno).getCodigoUsuario());
@@ -622,7 +622,7 @@ public class Sistema
         System.out.println("CPF: " + getAluno(idAluno).getCPF());
     }
 
-    public void MostrarDadosAlunos() 
+    public void mostrarDadosAlunos() 
     {
         for (int i = 0; i < contadorAluno; i++) {
             System.out.println("Nome: " + alunos[i].getNome());
@@ -637,7 +637,7 @@ public class Sistema
     /**
      * @param idAluno
      */
-    public void CursosDisponiveisAluno(int idAluno) 
+    public void cursosDisponiveisAluno(int idAluno) 
     {
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
         {
