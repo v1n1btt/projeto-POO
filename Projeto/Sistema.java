@@ -382,7 +382,7 @@ public class Sistema
             String linha;
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
-                if (dados.length > 1 && dados[1].equals(curso.getCodigoCurso())) {
+                if(dados[1].equals(curso.getCodigoCurso()))  {
                     bw.write(curso.getNomeCurso() + "," + curso.getCodigoCurso() + "," + curso.getCargaHorariaCurso() + "," + curso.getEmenta() + "," + curso.getDateInicio() + "," + curso.getDateFim() + "," + curso.getHorario() + "," + curso.getQuantidadeMaximaAlunos() + "," + curso.getProfessor().getCodigoUsuario());
                 } else {
                     bw.write(linha);
@@ -392,8 +392,8 @@ public class Sistema
         } catch (IOException e) {
             System.out.println("Erro ao editar curso no arquivo cursos.csv: " + e.getMessage());
         }
-        new File("Projeto/cursos.csv").delete();
-        new File("Projeto/cursos_temp.csv").renameTo(new File("Projeto/cursos.csv"));
+        new File("cursos.csv").delete();
+        new File("cursos_temp.csv").renameTo(new File("Projeto/cursos.csv"));
     }
 
     /**
