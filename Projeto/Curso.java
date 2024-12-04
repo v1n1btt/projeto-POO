@@ -26,6 +26,17 @@ public class Curso
     private static int indiceNotas = 0;
 
 
+    /**
+     * @param nomeCurso
+     * @param codigoCurso
+     * @param cargaHorariaCurso
+     * @param ementa
+     * @param dateInicio
+     * @param dateFim
+     * @param horario
+     * @param professor
+     */
+
     public Curso(String nomeCurso, String codigoCurso, int cargaHorariaCurso, String ementa, String dateInicio, String dateFim, String horario, Professor professor) 
     {
         this.nomeCurso = nomeCurso;
@@ -42,117 +53,199 @@ public class Curso
         notas = new double[getQuantidadeMaximaAlunos()];
     }
 
+    /**
+     * @param nomeCurso
+     */
+
     public void setNomeCurso(String nomeCurso) 
     {
         this.nomeCurso = nomeCurso;
     }
 
+    /**
+     * @return
+     */
+    
     public String getNomeCurso() 
     {
         return nomeCurso;
     }
+
+    /**
+     * @param codigoCurso
+     */
 
     public void setCodigoCurso(String codigoCurso) 
     {
         this.codigoCurso = codigoCurso;
     }
 
+    /**
+     * @return
+     */
+
     public String getCodigoCurso() 
     {
         return codigoCurso;
     }
 
+    /**
+     * @param cargaHorariaCurso
+     */
+    
     public void setCargaHorariaCurso(int cargaHorariaCurso) 
     {
         this.cargaHorariaCurso = cargaHorariaCurso;
     }
+
+    /**
+     * @return
+     */
 
     public int getCargaHorariaCurso() 
     {
         return cargaHorariaCurso;
     }
 
+    /**
+     * @param ementa
+     */
+
     public void setEmenta(String ementa) 
     {
         this.ementa = ementa;
     }
 
+    /**
+     * @return
+     */
+    
     public String getEmenta() 
     {
         return ementa;
     }
+
+    /**
+     * @param dateInicio
+     */
 
     public void setDateInicio(String dateInicio) 
     {
         this.dateInicio = dateInicio;
     }
 
+    /**
+     * @return
+     */
+
     public String getDateInicio() 
     {
         return dateInicio;
     } 
+
+    /**
+     * @param dateFim
+     */
 
     public void setDateFim(String dateFim) 
     {
         this.dateFim = dateFim;
     }
 
+    /**
+     * @return
+     */
     public String getDateFim() 
     {
         return dateFim;
     }
 
+    /**
+     * @param horario
+     */
     public void setHorario(String horario) 
     {
         this.horario = horario;
     }
 
+    /**
+     * @return
+     */
     public String getHorario() 
     {
         return horario;
     }
 
+    /**
+     * @param professor
+     */
     public void setProfessor(Professor professor) 
     {
         this.professor = professor;
     }
 
+    /**
+     * @return
+     */
     public Professor getProfessor() 
     {
         return professor;
     }
 
+    /**
+     * @param status
+     */
     public void setStatus(boolean status) 
     {
         this.status = status;
     }
 
+    /**
+     * @return
+     */
     public boolean getStatus() 
     {
         return status;
     }
 
+    /**
+     * @param quantidadeAtualAlunos
+     */
     public void setQuantidadeAtualAlunos(int quantidadeAtualAlunos) 
     {
         this.quantidadeAtualAlunos = quantidadeAtualAlunos;
     }
 
+    /**
+     * @return
+     */
     public int getQuantidadeAtualAlunos() 
     {
         return quantidadeAtualAlunos;
     }
 
+    /**
+     * @param aluno
+     */
     public void setAlunosMatriculados(Aluno aluno) 
     {
         this.alunosMatriculados[quantidadeAtualAlunos] = aluno;
         setQuantidadeAtualAlunos(getQuantidadeAtualAlunos() + 1);
     }
 
+    /**
+     * @param indiceAluno
+     * @return
+     */
     public Aluno getAlunosMatriculados(int indiceAluno) 
     {
         return alunosMatriculados[indiceAluno];
     }
 
+    /**
+     * @param aluno
+     * @param nota
+     */
     public void setNota(Aluno aluno, double nota)
      {
         if(nota < 0.0) {
@@ -163,16 +256,26 @@ public class Curso
         }
     }
 
+    /**
+     * @param indiceNotas
+     * @return
+     */
     public double getNota(int indiceNotas) 
     {
         return notas[indiceNotas];
     }
 
+    /**
+     * @return
+     */
     public int getQuantidadeMaximaAlunos() 
     {
         return quantidadeMaximaAlunos;
     }
 
+    /**
+     * @return
+     */
     public String salvaAluno() 
     {
         try 
@@ -196,6 +299,9 @@ public class Curso
         return null;
     }
 
+    /**
+     * @param aluno
+     */
     public void removerAlunoMatriculado(Aluno aluno) {
         throw new UnsupportedOperationException("Unimplemented method 'removerAlunoMatriculado'");
     }

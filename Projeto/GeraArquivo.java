@@ -9,6 +9,9 @@ public class GeraArquivo {
 
     //Método para salvar um curso no arquivo cursos.csv
     
+    /**
+     * @param curso
+     */
     public static void salvarCurso(Curso curso) {
         try {
             File arquivo = new File("Projeto\\cursos.csv");
@@ -43,6 +46,9 @@ public class GeraArquivo {
     }
 
     // Método para salvar um aluno no arquivo alunos.csv
+    /**
+     * @param aluno
+     */
     public static void salvarAluno(Aluno aluno) {
         try {
             File arquivo = new File("alunos.csv");
@@ -69,6 +75,9 @@ public class GeraArquivo {
     }
 
     // Método para salvar um administrador no arquivo administradores.csv
+    /**
+     * @param administrador
+     */
     public static void salvarAdministrador(Administrador administrador) {
         try {
             File arquivo = new File("administradores.csv");
@@ -94,6 +103,9 @@ public class GeraArquivo {
     }
 
     // Método para salvar um professor no arquivo professores.csv
+    /**
+     * @param professor
+     */
     public static void salvarProfessor(Professor professor) {
         try {
             File arquivo = new File("professores.csv");
@@ -118,6 +130,18 @@ public class GeraArquivo {
         }
     }
 
+    /**
+     * @param nomeCurso
+     * @param codigoCurso
+     * @param ementa
+     * @param dateInicio
+     * @param dateFim
+     * @param horario
+     * @param cargaHorariaCurso
+     * @param professor
+     * @param alunosMatriculados
+     * @param quantidadeAtualAlunos
+     */
     public static void salvarCurso(String nomeCurso, String codigoCurso, String ementa, String dateInicio,
             String dateFim, String horario, int cargaHorariaCurso, Professor professor, Aluno[] alunosMatriculados,
             int quantidadeAtualAlunos) {
@@ -132,6 +156,10 @@ public class GeraArquivo {
         throw new UnsupportedOperationException("Unimplemented method 'salvarCurso'");
     }
 
+    /**
+     * @param curso
+     * @param aluno
+     */
     public static void salvarMatricula(Curso curso, Aluno aluno) {
         throw new UnsupportedOperationException("Unimplemented method 'salvarMatricula'");
     }

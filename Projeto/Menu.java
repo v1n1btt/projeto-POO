@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class Menu 
 {
+    /**
+     * @param args
+     */
     public static void main(String args[]) 
     {
         Sistema sistema = new Sistema();
@@ -61,6 +64,10 @@ public class Menu
     }
 
     //metodo estático para coletar os dados do login
+    /**
+     * @param teclado
+     * @param sistema
+     */
     public static void fazerLoginMenu(Scanner teclado, Sistema sistema)
     {
 
