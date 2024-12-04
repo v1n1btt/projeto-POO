@@ -106,7 +106,8 @@ public class Sistema
     }
 
     //metodos para fazer os logins
-    public void carregarAlunos() {
+    public void carregarAlunos() 
+    {
         String linha;
         try (BufferedReader br = new BufferedReader(new FileReader("alunos.csv"))) {
             br.readLine();
@@ -131,7 +132,8 @@ public class Sistema
      * @param senha
      */
 
-    public void fazerLoginUsuarioAluno(String email, String senha) {
+    public void fazerLoginUsuarioAluno(String email, String senha) 
+    {
         boolean sucesso = false;
 
         for (int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) {
@@ -154,7 +156,8 @@ public class Sistema
      * @param senha
      */
 
-    public void fazerLoginUsuarioAdministrador(String email, String senha) {
+    public void fazerLoginUsuarioAdministrador(String email, String senha) 
+    {
         boolean loginSucesso = false;
         for(int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) 
         {
@@ -174,7 +177,8 @@ public class Sistema
     }
 
 
-    public void carregarProfessores() {
+    public void carregarProfessores() 
+    {
         String linha;
         try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"))) {
             br.readLine();
@@ -198,7 +202,8 @@ public class Sistema
      * @param senha
      */
 
-    public void fazerLoginUsuarioProfessor(String email, String senha) {
+    public void fazerLoginUsuarioProfessor(String email, String senha) 
+    {
         boolean sucesso = false;
 
         for (int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) {
@@ -421,7 +426,9 @@ public class Sistema
         System.out.println("Email: " + getAluno(idAluno).getEmail());
         System.out.println("CPF: " + getAluno(idAluno).getCPF());
     }
-    public void MostrarDadosAlunos() {
+
+    public void MostrarDadosAlunos() 
+    {
         for (int i = 0; i < contadorAluno; i++) {
             System.out.println("Nome: " + alunos[i].getNome());
             System.out.println("Código do Usuário: " + alunos[i].getCodigoUsuario());
@@ -430,8 +437,8 @@ public class Sistema
             System.out.println();
         }
     }
+
     //gera os cursos que estão disponíveis para a matrícula 
-    
     /**
      * @param idAluno
      */
@@ -456,6 +463,7 @@ public class Sistema
             }
         }
     }
+
     public void carregarCursos() {
         String linha;
         try (BufferedReader br = new BufferedReader(new FileReader("\\Projeto\\cursos.csv"))) {
@@ -542,7 +550,6 @@ public class Sistema
      * @return
      */
     
-    
     public Aluno buscaAlunoPorCodigo(int codigo) 
     {
     
@@ -554,7 +561,8 @@ public class Sistema
         return null;
     }
 
-    public void mostrarCursosEProfessores() {
+    public void mostrarCursosEProfessores() 
+    {
         for (int i = 0; i < contadorCurso; i++) {
             Curso curso = cursos[i];
             System.out.println("Curso: " + curso.getNomeCurso());
@@ -665,7 +673,8 @@ public class Sistema
      * @return
      */
 
-    public int getQuantidadeAlunosMatriculados(int indiceCurso) {
+    public int getQuantidadeAlunosMatriculados(int indiceCurso) 
+    {
         return getCurso(indiceCurso).getQuantidadeAtualAlunos();
     }
 
@@ -735,7 +744,8 @@ public class Sistema
     /**
      * 
      */
-    public void carregarNotas() {
+    public void carregarNotas()
+    {
         String linha;
         try (BufferedReader br = new BufferedReader(new FileReader("notas.csv"))) {
             while ((linha = br.readLine()) != null) {
@@ -754,7 +764,8 @@ public class Sistema
         }
     }
 
-    public void salvarNotas() {
+    public void salvarNotas() 
+    {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("notas.csv"))) {
             for (int i = 0; i < contadorCurso; i++) {
                 Curso curso = cursos[i];
@@ -769,6 +780,7 @@ public class Sistema
             System.out.println("Erro ao salvar notas no arquivo notas.csv: " + e.getMessage());
         }
     }
+
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
     /**
      * @param i
@@ -840,7 +852,8 @@ public class Sistema
         } while(escolha != 8);
     }
 
-    public void carregarAdministradores() {
+    public void carregarAdministradores() 
+    {
         String linha;
         try (BufferedReader br = new BufferedReader(new FileReader("administradores.csv"))) {
             br.readLine();
@@ -863,7 +876,8 @@ public class Sistema
      * @param email
      * @return
      */
-    public boolean VerificaEmailAdministrador(String email) {
+    public boolean VerificaEmailAdministrador(String email) 
+    {
         carregarAdministradores();
         for (int indiceAdministradores = 0; indiceAdministradores < contadorAdministrador; indiceAdministradores++) {
             if (VerificaVariaveis(getAdministrador(indiceAdministradores).getEmail(), email)) {
@@ -873,7 +887,8 @@ public class Sistema
         return true;
     }
 
-    public void FormularioCadastroAdministrador() {
+    public void FormularioCadastroAdministrador() 
+    {
         String nome;
         String email;
         String senha;
@@ -923,16 +938,20 @@ public class Sistema
     public void CadastrarAdministrador(String nome, String email, String senha) 
     {
         int codigoUsuario; 
+
         codigoUsuario = GerarCodigoUsuario();
         Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
         setAdministrador(administrador);
         System.out.println("Conta Criada com Sucesso!");
     }
+
     /**
      * @param email
      * @return
      */
-    public boolean VerificaEmailExistente(String email) {
+    public boolean VerificaEmailExistente(String email) 
+    {
+
         for (int i = 0; i < contadorAdministrador; i++) {
             if (administradores[i].getEmail().equals(email)) {
                 return true;
@@ -956,11 +975,13 @@ public class Sistema
         setProfessoresSistema(professor);
         System.out.println("Conta Criada com Sucesso!");
     }
+
     /**
      * @param email
      * @return
      */
-    public boolean VerificaEmailProfessor(String email) {
+    public boolean VerificaEmailProfessor(String email) 
+    {
         for (int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) {
             if (VerificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email)) {
                 return false;
@@ -981,7 +1002,8 @@ public class Sistema
         }
     }
 
-    public void FormulariocadastroProfessor() {
+    public void FormulariocadastroProfessor() 
+    {
         String nome;
         String email;
         String senha;
@@ -1382,8 +1404,10 @@ public class Sistema
      * @param idProfessor
      */
 
-    public void MostrarDadosProfessores(int idProfessor) {
-        for (int i = 0; i < contadorProfessor; i++) {
+    public void MostrarDadosProfessores(int idProfessor)
+    {
+        for (int i = 0; i < contadorProfessor; i++) 
+        {
             System.out.println("Nome: " + professoresSistema[i].getNome());
             System.out.println("Código do Usuário: " + professoresSistema[i].getCodigoUsuario());
             System.out.println("Email: " + professoresSistema[i].getEmail());
