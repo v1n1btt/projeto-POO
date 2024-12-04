@@ -577,6 +577,7 @@ public class Sistema
                         break;
                     case 5:
                         Menu.limpaTela();
+                        CancelarMatriculaCurso(idAluno);
                         break;
                     case 6:
                         Menu.limpaTela();
@@ -724,7 +725,7 @@ public class Sistema
                     if(getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) 
                     {
                         getCurso(indiceCursos).setAlunosMatriculados(getAluno(idAluno));
-                        GeraArquivo.salvarMatricula(getCurso(indiceCursos), getAluno(idAluno));
+                        GeraArquivo.salvarMatricula(getCurso(indiceCursos), getAluno(idAluno), "Nulo");
                         Menu.limpaTela();
                         System.out.println();
                         System.out.println("Matricula feita com sucesso!");
@@ -764,7 +765,7 @@ public class Sistema
             if (verificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) {
                 if (VerificaAlunoMatriculado(idAluno, indiceCursos) == true) {
                     getCurso(indiceCursos).removerAlunoMatriculado(getAluno(idAluno));
-                    GeraArquivo.salvarMatricula(getCurso(indiceCursos), getAluno(idAluno));
+                    atualizarArquivoMatriculas(getCurso(indiceCursos), getAluno(idAluno));
                     Menu.limpaTela();
                     System.out.println();
                     System.out.println("Matrícula cancelada com sucesso!");
@@ -778,6 +779,61 @@ public class Sistema
                 }
             }
         }
+    }
+    public void cancelarMatriculaCursoPorArquivo(int idAluno) {
+        String codigoCurso;
+        System.out.print("Digite o código do curso que deseja cancelar a matrícula: ");
+        codigoCurso = teclado.nextLine();
+
+        try (BufferedReader brMatriculas = new BufferedReader(new FileReader("Projeto/matriculas.csv"));
+             BufferedWriter bw = new BufferedWriter(new FileWriter("Projeto/matriculas_temp.csv"))) {
+
+            String linhaMatricula;
+            boolean matriculaEncontrada = false;
+
+            while ((linhaMatricula = brMatriculas.readLine()) != null) {
+                String[] dadosMatricula = linhaMatricula.split(",");
+                String codigoCursoArquivo = dadosMatricula[0];
+                int codigoAlunoArquivo = Integer.parseInt(dadosMatricula[1]);
+
+                if (codigoCursoArquivo.equals(codigoCurso) && codigoAlunoArquivo == getAluno(idAluno).getCodigoUsuario()) {
+                    matriculaEncontrada = true;
+                } else {
+                    bw.write(linhaMatricula);
+                    bw.newLine();
+                }
+            }
+
+            if (matriculaEncontrada) {
+                System.out.println("Matrícula cancelada com sucesso!");
+            } else {
+                System.out.println("Matrícula não encontrada!");
+            }
+
+        } catch (IOException e) {
+            System.out.println("Erro ao processar o arquivo de matrículas: " + e.getMessage());
+        }
+
+        new File("Projeto/matriculas.csv").delete();
+        new File("Projeto/matriculas_temp.csv").renameTo(new File("Projeto/matriculas.csv"));
+    }
+
+    private void atualizarArquivoMatriculas(Curso curso, Aluno aluno) {
+        String linha;
+        try (BufferedReader br = new BufferedReader(new FileReader("Projeto/matriculas.csv"));
+             BufferedWriter bw = new BufferedWriter(new FileWriter("Projeto/matriculas_temp.csv"))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                if (!(dados[0].equals(curso.getCodigoCurso()) && dados[1].equals(String.valueOf(aluno.getCodigoUsuario())))) {
+                    bw.write(linha);
+                    bw.newLine();
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao atualizar matrículas no arquivo matriculas.csv: " + e.getMessage());
+        }
+        new File("Projeto/matriculas.csv").delete();
+        new File("Projeto/matriculas_temp.csv").renameTo(new File("Projeto/matriculas.csv"));
     }
     
     //Método que retorna true se um curso não estiver lotado e false se estiver

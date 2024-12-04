@@ -159,12 +159,23 @@ public class GeraArquivo {
     /**
      * @param curso
      * @param aluno
+     * @param notas
      */
-   
-    public static void salvarMatricula(Curso curso, Aluno aluno) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Projeto/matriculas.csv", true))) {
-            writer.write(curso.getCodigoCurso() + "," + aluno.getCodigoUsuario());
-            writer.newLine();
+    public static void salvarMatricula(Curso curso, Aluno aluno, String notas) {
+        try {
+            File arquivo = new File("Projeto/matriculas.csv");
+            boolean arquivoNovo = !arquivo.exists();
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
+                // Adiciona cabeçalho se o arquivo for novo
+                if (arquivoNovo) {
+                    writer.write("Código do Curso,Código do Aluno,Notas");
+                    writer.newLine();
+                }
+                // Escreve os dados da matrícula
+                writer.write(curso.getCodigoCurso() + "," + aluno.getCodigoUsuario() + "," + notas);
+                writer.newLine();
+            }
         } catch (IOException e) {
             System.out.println("Erro ao salvar matrícula: " + e.getMessage());
         }

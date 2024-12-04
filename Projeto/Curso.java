@@ -1,5 +1,11 @@
 package Projeto;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Curso 
 {
     private String nomeCurso;
@@ -275,5 +281,24 @@ public class Curso
 
     public void removerAlunoMatriculado(Aluno aluno) {
         throw new UnsupportedOperationException("Unimplemented method 'removerAlunoMatriculado'");
+    }
+
+    public void removerAlunoMatriculado(int codigoAluno) {
+        // Implementação do método para remover a matrícula do aluno
+        try {
+            List<String> linhas = Files.readAllLines(Paths.get("matriculas.csv"));
+            List<String> novasLinhas = new ArrayList<>();
+
+            for (String linha : linhas) {
+                String[] dados = linha.split(",");
+                if (!dados[1].equals(String.valueOf(codigoAluno))) {
+                    novasLinhas.add(linha);
+                }
+            }
+
+            Files.write(Paths.get("matriculas.csv"), novasLinhas);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
