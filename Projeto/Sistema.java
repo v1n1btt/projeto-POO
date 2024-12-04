@@ -771,7 +771,6 @@ public class Sistema
     }
 
     public void FormularioCadastroAdministrador() {
-        carregarAdministradores();
         String nome;
         String email;
         String senha;
@@ -822,7 +821,6 @@ public class Sistema
         System.out.println("Conta Criada com Sucesso!");
     }
     public boolean VerificaEmailExistente(String email) {
-        carregarAdministradores();
         for (int i = 0; i < contadorAdministrador; i++) {
             if (administradores[i].getEmail().equals(email)) {
                 return true;
@@ -842,7 +840,6 @@ public class Sistema
         System.out.println("Conta Criada com Sucesso!");
     }
     public boolean VerificaEmailProfessor(String email) {
-        carregarProfessores();
         for (int indiceProfessores = 0; indiceProfessores < contadorProfessor; indiceProfessores++) {
             if (VerificaVariaveis(getProfessoresSistema(indiceProfessores).getEmail(), email)) {
                 return false;
@@ -861,7 +858,6 @@ public class Sistema
     }
 
     public void FormulariocadastroProfessor() {
-        carregarProfessores();
         String nome;
         String email;
         String senha;
@@ -980,6 +976,7 @@ public class Sistema
             System.out.println("Esse professor não pode mais receber disciplinas!");
         }
     }
+    
     public void salvarCurso(Curso curso) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("cursos.csv", true))) {
             bw.write(curso.getNomeCurso() + "," + curso.getCodigoCurso() + "," + curso.getCargaHorariaCurso() + "," + curso.getEmenta() + "," + curso.getDateInicio() + "," + curso.getDateFim() + "," + curso.getHorario() + "," + curso.getQuantidadeMaximaAlunos() + "," + curso.getProfessor().getCodigoUsuario());
@@ -1054,7 +1051,6 @@ public class Sistema
 
     public void HabilitarCurso() 
     {
-        carregarCursos();
         String codigo; 
 
         DadosCursoAdministrativo();
@@ -1081,7 +1077,6 @@ public class Sistema
 
     public void DesabilitarCurso() 
     {
-        carregarCursos();
         String codigo; 
 
         DadosCursoAdministrativo();
@@ -1256,7 +1251,6 @@ public class Sistema
 
     //metodo que imprime os dados do professor
     public void MostrarDadosProfessores(int idProfessor) {
-        carregarProfessores();
         for (int i = 0; i < contadorProfessor; i++) {
             System.out.println("Nome: " + professoresSistema[i].getNome());
             System.out.println("Código do Usuário: " + professoresSistema[i].getCodigoUsuario());
@@ -1363,9 +1357,6 @@ public class Sistema
     //imprimia as notas de cada aluno de um curso 
     public void VerNotasAlunos(int idProfessor) 
     {
-        carregarCursos();
-        carregarProfessores();
-        carregarNotas();
         String codigo;
 
         CursosProfessor(idProfessor);
