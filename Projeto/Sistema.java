@@ -58,7 +58,6 @@ public class Sistema
      * @param indiceAdministrador
      * @return
      */
-
     public Administrador getAdministrador(int indiceAdministrador) 
     {
         return administradores[indiceAdministrador]; 
