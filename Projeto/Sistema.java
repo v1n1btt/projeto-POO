@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Sistema 
 {
-    private static int codigoUsuario = 1000;
+    private static int codigoUsuario = 1001;
     private static int contadorAluno = 0;
     private static int contadorAdministrador = 0;
     private static int contadorProfessor = 0; 
