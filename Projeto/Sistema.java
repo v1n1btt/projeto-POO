@@ -790,11 +790,14 @@ public class Sistema
     //Metodo que imprime todos os cursos que um aluno está matriculado
     public void cursosMatriculadoAluno(int idAluno) 
     {
+        int controle = 0;
+
         System.out.println("Cursos que você está matriculado: ");
-        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        for(int indiceCursos = 0; indiceCursos <= contadorCurso; indiceCursos++) 
         {   
             if (getCurso(indiceCursos).getStatus() == true && verificaAlunoMatriculado(idAluno, indiceCursos) == true) 
-            {
+            {   
+                controle++;
                 System.out.println();
                 System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
                 System.out.println("Código do curso: " + getCurso(indiceCursos).getCodigoCurso());
@@ -805,9 +808,14 @@ public class Sistema
                 System.out.println("Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
                 System.out.println("Horários e dias do curso: " + getCurso(indiceCursos).getHorario());
                 System.out.println("Quantidade de alunos matrículados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
-                //System.out.println("Sua nota é: " + getCurso(indiceCursos).getNota(indiceCursos));
                 System.out.println();
             }
+        }
+        if(controle == 0) 
+        {
+            System.out.println();
+            System.out.println("Não Há cursos disponíveis");
+            System.out.println();
         }
     }
     
