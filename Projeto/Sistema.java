@@ -718,10 +718,12 @@ public class Sistema
     //gera os cursos que estão disponíveis para a matrícula que estão ativos e que o aluno não se matrículou
     public void cursosDisponiveisAluno(int idAluno) 
     {
+        int controle = 0; 
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
         {
             if (getCurso(indiceCursos).getStatus() == true && verificaQuantidadeAlunosMatriculadosCurso(indiceCursos) == true && verificaAlunoMatriculado(idAluno, indiceCursos) == false) 
             {
+                controle++; 
                 System.out.println();
                 System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
                 System.out.println("Código do curso: " + getCurso(indiceCursos).getCodigoCurso());
@@ -734,6 +736,12 @@ public class Sistema
                 System.out.println("Quantidade de alunos matrículados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
                 System.out.println();
             }
+        }
+        if(controle == 0) 
+        {
+            System.out.println();
+            System.out.println("Não Há cursos disponíveis");
+            System.out.println();
         }
     }
 
