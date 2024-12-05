@@ -800,7 +800,7 @@ public class Sistema
         int controle = 0;
 
         System.out.println("Cursos que você está matriculado: ");
-        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        for(int indiceCursos = 0; indiceCursos <= contadorCurso; indiceCursos++) 
         {   
             if (getCurso(indiceCursos).getStatus() == true && verificaAlunoMatriculado(idAluno, indiceCursos) == true) 
             {   
