@@ -673,11 +673,11 @@ public class Sistema
                         break;
                     case 4:
                         Menu.limpaTela();
-                        cursosMatriculadosAluno(idAluno);
+                        cursosMatriculadoAluno(idAluno);
                         break;
                     case 5:
                         Menu.limpaTela();
-                        CancelarMatriculaCurso(idAluno);
+                        cancelarMatriculaCurso(idAluno);
                         break;
                     case 6:
                         Menu.limpaTela();
@@ -719,7 +719,7 @@ public class Sistema
     {
         for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
         {
-            if (getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true && VerificaAlunoMatriculado(idAluno, indiceCursos) == false) 
+            if (getCurso(indiceCursos).getStatus() == true && verificaQuantidadeAlunosMatriculadosCurso(indiceCursos) == true && verificaAlunoMatriculado(idAluno, indiceCursos) == false) 
             {
                 System.out.println();
                 System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
@@ -733,63 +733,6 @@ public class Sistema
                 System.out.println("Quantidade de alunos matrículados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
                 System.out.println();
             }
-        }
-    }
-
-    
-    /**
-    * @param idAluno
-    */
-    //Metodo que imprime todos os cursos que um aluno está matriculado
-    public void cursosMatriculadosAluno(int idAluno) 
-    {
-        System.out.println("Cursos que você está matriculado: ");
-        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
-        {   
-            if (getCurso(indiceCursos).getStatus() == true && VerificaAlunoMatriculado(idAluno, indiceCursos) == true) 
-            {
-                System.out.println();
-                System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
-                System.out.println("Código do curso: " + getCurso(indiceCursos).getCodigoCurso());
-                System.out.println("Carga iHorária do curso: " + getCurso(indiceCursos).getCargaHorariaCurso() + " Horas");
-                System.out.println("Ementa do curso: " + getCurso(indiceCursos).getEmenta());
-                System.out.println("Data Inicial do curso: " + getCurso(indiceCursos).getDateInicio());
-                System.out.println("Data Final do curso: " + getCurso(indiceCursos).getDateFim());
-                System.out.println("Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
-                System.out.println("Horários e dias do curso: " + getCurso(indiceCursos).getHorario());
-                System.out.println("Quantidade de alunos matrículados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
-                //System.out.println("Sua nota é: " + getCurso(indiceCursos).getNota(indiceCursos));
-                System.out.println();
-            }
-        }
-    }
-
-    /**
-     * @param codigo
-     * @return
-     */
-    //método que dado um código devolve a posição do aluno no array Alunos
-    public Aluno buscaAlunoPorCodigo(int codigo) 
-    {
-        for (int indiceAluno = 0; indiceAluno < contadorAluno; indiceAluno++) 
-        {
-            if (alunos[indiceAluno].getCodigoUsuario() == codigo) 
-            {
-                return alunos[indiceAluno];
-            }
-        }
-        return null;
-    }
-
-    public void mostrarCursosEProfessores() 
-    {
-        for (int i = 0; i < contadorCurso; i++) {
-            Curso curso = cursos[i];
-            System.out.println("Curso: " + curso.getNomeCurso());
-            System.out.println("Código: " + curso.getCodigoCurso());
-            System.out.println("Professor: " + curso.getProfessor().getNome());
-            System.out.println("Quantidade de alunos matriculados: " + curso.getQuantidadeAtualAlunos());
-            System.out.println();
         }
     }
 
@@ -810,9 +753,9 @@ public class Sistema
         {
             if(verificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
             {
-                if(VerificaAlunoMatriculado(idAluno, indiceCursos) == false)
+                if(verificaAlunoMatriculado(idAluno, indiceCursos) == false)
                 {
-                    if(getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) 
+                    if(getCurso(indiceCursos).getStatus() == true && verificaQuantidadeAlunosMatriculadosCurso(indiceCursos) == true) 
                     {
                         getCurso(indiceCursos).setAlunosMatriculados(getAluno(idAluno));
                         GeraArquivo.salvarMatricula(getCurso(indiceCursos), getAluno(idAluno), "Nulo");
@@ -840,21 +783,49 @@ public class Sistema
         }
     }
     
+    /**
+    * @param idAluno
+    */
+    //Metodo que imprime todos os cursos que um aluno está matriculado
+    public void cursosMatriculadoAluno(int idAluno) 
+    {
+        System.out.println("Cursos que você está matriculado: ");
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        {   
+            if (getCurso(indiceCursos).getStatus() == true && verificaAlunoMatriculado(idAluno, indiceCursos) == true) 
+            {
+                System.out.println();
+                System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
+                System.out.println("Código do curso: " + getCurso(indiceCursos).getCodigoCurso());
+                System.out.println("Carga iHorária do curso: " + getCurso(indiceCursos).getCargaHorariaCurso() + " Horas");
+                System.out.println("Ementa do curso: " + getCurso(indiceCursos).getEmenta());
+                System.out.println("Data Inicial do curso: " + getCurso(indiceCursos).getDateInicio());
+                System.out.println("Data Final do curso: " + getCurso(indiceCursos).getDateFim());
+                System.out.println("Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
+                System.out.println("Horários e dias do curso: " + getCurso(indiceCursos).getHorario());
+                System.out.println("Quantidade de alunos matrículados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
+                //System.out.println("Sua nota é: " + getCurso(indiceCursos).getNota(indiceCursos));
+                System.out.println();
+            }
+        }
+    }
     
     /**
     * @param idAluno
     */
-    //Método para que o aluno cancele a matrícula em um curso
-    public void CancelarMatriculaCurso(int idAluno) {
+    //Método para que o aluno cancela a matrícula em um curso
+    public void cancelarMatriculaCurso(int idAluno) 
+    {
         String codigo;
 
-        cursosMatriculadosAluno(idAluno);
+        cursosMatriculadoAluno(idAluno);
         System.out.print("Digite o código do curso que deseja cancelar a matrícula: ");
         codigo = teclado.nextLine();
-        for (int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
+        for (int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        {
             if (verificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
             {
-                if (VerificaAlunoMatriculado(idAluno, indiceCursos) == true) 
+                if (verificaAlunoMatriculado(idAluno, indiceCursos) == true) 
                 {
                     getCurso(indiceCursos).removerAlunoMatriculado(getAluno(idAluno));
                     atualizarArquivoMatriculas(getCurso(indiceCursos), getAluno(idAluno));
@@ -874,48 +845,10 @@ public class Sistema
         }
     }
 
-    //Método que retorna true se um curso não estiver lotado e false se estiver
     /**
-     * @param indiceCurso
-     * @return
-     */
-    public boolean VerificaQuantidadeAlunosMatriculados(int indiceCurso) 
-    {
-        if(getCurso(indiceCurso).getQuantidadeAtualAlunos() <= getCurso(indiceCurso).getQuantidadeMaximaAlunos()) 
-        {
-            return true; 
-        }
-        return false; 
-    }
-
-    // Método que retorna a quantidade de alunos matriculados em um curso
-    /**
-     * @param indiceCurso
-     * @return
-     */
-
-    //Métodoque verifica se um aluno está matriculado no curso
-    /**
-     * @param idAluno
-     * @param indiceCurso
-     * @return
-     */
-    public boolean VerificaAlunoMatriculado(int idAluno, int indiceCurso) 
-    {
-        for(int indiceAlunos = 0; indiceAlunos < getCurso(indiceCurso).getQuantidadeAtualAlunos(); indiceAlunos++)
-        {
-            if(getCurso(indiceCurso).getAlunosMatriculados(indiceAlunos) == getAluno(idAluno))
-            {
-                return true; 
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @param idAluno
-     */
-    public void GeraCertificadoAluno(int idAluno) 
+    * @param idAluno
+    */
+    public void geraCertificadoAluno(int idAluno) 
     {
         String codigo;
        
@@ -938,8 +871,67 @@ public class Sistema
             System.out.println("O aluno não atingiu a nota mínima para obter o certificado.");
         }
     }
-   
+
+    /**
+     * @param indiceCurso
+     * @return
+     */
+    //Método que retorna true se um curso não estiver lotado e false se estiver
+    public boolean verificaQuantidadeAlunosMatriculadosCurso(int indiceCurso) 
+    {
+        if(getCurso(indiceCurso).getQuantidadeAtualAlunos() <= getCurso(indiceCurso).getQuantidadeMaximaAlunos()) 
+        {
+            return true; 
+        }
+        return false; 
+    }
     
+    /**
+     * @param idAluno
+     * @param indiceCurso
+     * @return
+     */
+    //Métodoque verifica se um aluno está matriculado no curso
+    public boolean verificaAlunoMatriculado(int idAluno, int indiceCurso) 
+    {
+        for(int indiceAlunos = 0; indiceAlunos < getCurso(indiceCurso).getQuantidadeAtualAlunos(); indiceAlunos++)
+        {
+            if(getCurso(indiceCurso).getAlunosMatriculados(indiceAlunos) == getAluno(idAluno))
+            {
+                return true; 
+            }
+        }
+        return false;
+    }
+
+     /**
+     * @param codigo
+     * @return
+     */
+    //método que dado um código devolve a posição do aluno no array Alunos
+    public Aluno buscaAlunoPorCodigo(int codigo) 
+    {
+        for (int indiceAluno = 0; indiceAluno < contadorAluno; indiceAluno++) 
+        {
+            if (alunos[indiceAluno].getCodigoUsuario() == codigo) 
+            {
+                return alunos[indiceAluno];
+            }
+        }
+        return null;
+    }
+
+    public void mostrarCursosEProfessores() 
+    {
+        for (int i = 0; i < contadorCurso; i++) {
+            Curso curso = cursos[i];
+            System.out.println("Curso: " + curso.getNomeCurso());
+            System.out.println("Código: " + curso.getCodigoCurso());
+            System.out.println("Professor: " + curso.getProfessor().getNome());
+            System.out.println("Quantidade de alunos matriculados: " + curso.getQuantidadeAtualAlunos());
+            System.out.println();
+        }
+    }
 
     //AQUI COMEÇA TUDO O QUE ENVOLVE O ADMINISTRADOR!!!!
     /**
