@@ -114,14 +114,14 @@ public class GeraArquivo {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
                 // Adiciona cabeçalho se o arquivo for novo
                 if (arquivoNovo) {
-                    writer.write("Nome,Código do Usuário,Email,Senha,Nível de Acesso");
+                    writer.write("Nome,Código do Usuário,Email,Senha,Carga Horária,Nível de Acesso");
                     writer.newLine();
                 }
                 // Escreve os dados do professor
                 writer.write(professor.getNome() + "," +
                              professor.getCodigoUsuario() + "," +
                              professor.getEmail() + "," +
-                             professor.getSenhaPessoal() + "," +
+                             professor.getSenhaPessoal() + ",0," +
                              professor.getNivelAcesso());
                 writer.newLine();
             }

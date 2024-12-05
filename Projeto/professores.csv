@@ -1,4 +1,4 @@
-Nome,Código do Usuário,Email,Senha,Nível de Acesso
+Nome,Código do Usuário,Email,Senha,Carga Horária,Nível de Acesso
 
-Mirela,1004,mirela@gmail.com,123,professor
-Joao,1005,joao@gmail.com,123,professor
+Mirela,1004,mirela@gmail.com,123,0,professor
+Joao,1005,joao@gmail.com,123,0,professor

@@ -232,6 +232,7 @@ public class Sistema
                 String email = dados[2];
                 String senha = dados[3];
                 Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
+                professor.setCargaHorariaAtual(Integer.parseInt(dados[4]));
                 setProfessoresSistema(professor);
                 this.codigoUsuario++;
             }
