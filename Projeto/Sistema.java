@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Sistema 
 {
-    private static int codigoUsuario = 1001;
+    private static int codigoUsuario = 1000;
     private static int contadorAluno = 0;
     private static int contadorAdministrador = 0;
     private static int contadorProfessor = 0; 
@@ -233,6 +233,7 @@ public class Sistema
                 String senha = dados[3];
                 Professor professor = new Professor(nome, codigoUsuario, email, senha, "professor");
                 setProfessoresSistema(professor);
+                this.codigoUsuario++;
             }
         } catch (IOException e) {
             System.out.println("Erro ao carregar professores do arquivo professores.csv: " + e.getMessage());
@@ -254,6 +255,7 @@ public class Sistema
                 String senha = dados[4];
                 Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
                 setAluno(aluno);
+                this.codigoUsuario++;
             }
         } catch (IOException e) {
             System.out.println("Erro ao carregar alunos do arquivo alunos.csv: " + e.getMessage());
@@ -274,6 +276,7 @@ public class Sistema
                 String senha = dados[3];
                 Administrador administrador = new Administrador(nome, codigoUsuario, email, senha, "administrador");
                 setAdministrador(administrador);
+                this.codigoUsuario++;
             }
         } catch (IOException e) {
             System.out.println("Erro ao carregar administradores do arquivo administradores.csv: " + e.getMessage());
@@ -890,11 +893,6 @@ public class Sistema
      * @param indiceCurso
      * @return
      */
-
-    public int getQuantidadeAlunosMatriculados(int indiceCurso) 
-    {
-        return getCurso(indiceCurso).getQuantidadeAtualAlunos();
-    }
 
     //Métodoque verifica se um aluno está matriculado no curso
     /**
