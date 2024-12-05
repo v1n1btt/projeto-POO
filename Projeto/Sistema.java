@@ -117,7 +117,7 @@ public class Sistema
                 verificaVariaveis(getAluno(indiceAlunos).getSenhaPessoal(), senha) == true &&
                 verificaVariaveis(getAluno(indiceAlunos).getNivelAcesso(), "aluno") == true) {
                 sucesso = true;
-                MenuAluno(indiceAlunos);
+                menuAluno(indiceAlunos);
             }
         }
         if (sucesso == false) {
@@ -464,333 +464,6 @@ public class Sistema
         new File("professores_temp.csv").renameTo(new File("Projeto/professores.csv"));
     }
 
-    //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
-    //método que cria a conta do aluno
-    public void criarContaAluno() {
-        String nome;
-        String cpf;
-        String email;
-        String senha;
-        String confirmaSenha;
-        boolean controle = false;
-        int codigoUsuario;
-
-        System.out.println();
-        System.out.println("SISTEMA DE GESTÃO DE CURSOS\n\n");
-        System.out.print("====================\nCADASTRO ALUNO\n====================\n\n");
-        System.out.print("CPF (apenas números): ");
-        cpf = teclado.nextLine();
-        if (cpf.matches("[0-9]+") && cpf.length() == 11) {
-            System.out.print("Nome completo: ");
-            nome = teclado.nextLine();
-            System.out.print("Digite seu Email: ");
-            email = teclado.nextLine();
-            if (email.matches("(.*)@(.*).(.*)") && !email.substring(0, email.indexOf("@")).isEmpty() && !email.substring(email.indexOf("@") + 1, email.indexOf(".")).isEmpty() && !email.substring(email.indexOf(".") + 1).isEmpty()) {
-                if (VerificaCPF(cpf) == true && VerificaEmail(email) == true) {
-                    do {
-                        System.out.print("Senha: ");
-                        senha = teclado.nextLine();
-                        if (!senha.isEmpty()) {
-                            System.out.print("Confirme a senha: ");
-                            confirmaSenha = teclado.nextLine();
-                            boolean verifica = verificaVariaveis(senha, confirmaSenha);
-                            if (verifica == true) {
-                                controle = true;
-                                codigoUsuario = GerarCodigoUsuario();
-                                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
-                                setAluno(aluno);
-                                System.out.print("Conta Criada com Sucesso!");
-                                GeraArquivo.salvarAluno(aluno);
-                                teclado.nextLine();
-                            } else {
-                                System.out.println("A senha não é igual, tente Novamente.\n");
-                            }
-                        } else {
-                            System.out.println("A senha não pode estar em branco, tente novamente.\n");
-                        }
-                    } while (controle != true);
-                } else {
-                    System.out.println("Já existe um usuário cadastrado com esse CPF ou Email!\n");
-                }
-            } else {
-                System.out.println("Formato do email inválido, tente novamente.\n");
-                teclado.nextLine();
-            }
-        } else {
-            System.out.println("Formato do CPF inválido, tente novamente.\n");
-            teclado.nextLine();
-        }
-    }
-
-    /**
-     * @param email
-     * @return
-     */
-
-    public boolean VerificaEmail(String email) {
-        for (int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) {
-            if (verificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    //Gera o menu que o aluno vê 
-    /**
-     * @param idAluno
-     */
-
-    public void MenuAluno(int idAluno) 
-    {
-        int escolha = 0; 
-
-        do{
-            try
-            {
-                Menu.limpaTela();
-                System.out.println();
-                System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
-                System.out.println("MENU DO ALUNO\n");
-                System.out.println("Bem vindo: " + " " + getAluno(idAluno).getNome() + "\n");
-                System.out.println("    1 - Consultar seus Dados.");
-                System.out.println("    2 - Consultar Cursos disponíveis.");
-                System.out.println("    3 - Se matricular em Cursos disponíveis.");
-                System.out.println("    4 - Consultar os cursos que você está matriculado.");
-                System.out.println("    5 - Cancelar matricula em um curso.");
-                System.out.println("    6 - Obter o certificado de conclusão de um curso");
-                System.out.println("    7 - Sair.");
-                System.out.print("\nSelecione uma opção: ");
-
-                escolha = Integer.parseInt(teclado.nextLine());
-
-                switch(escolha) 
-                {
-                    case 1:
-                        Menu.limpaTela();
-                        dadosAluno(idAluno);
-                        System.out.print("\nPressione ENTER para continuar...");
-                        teclado.nextLine();
-                        break;
-                    case 2:
-                        Menu.limpaTela();
-                        cursosDisponiveisAluno(idAluno);
-                        System.out.print("\nPressione ENTER para continuar...");
-                        teclado.nextLine();
-                        break;
-                    case 3:
-                        Menu.limpaTela();
-                        MatricularCurso(idAluno);
-                        break;
-                    case 4:
-                        Menu.limpaTela();
-                        CursosMatriculadosAluno(idAluno);
-                        break;
-                    case 5:
-                        Menu.limpaTela();
-                        CancelarMatriculaCurso(idAluno);
-                        break;
-                    case 6:
-                        Menu.limpaTela();
-                        break;
-                    case 7:
-                        Menu.limpaTela();
-                        return;
-                    default:
-                        System.out.print("\nOpção inválida, tente novamente.");
-                        teclado.nextLine();
-                        break;
-                }
-            } catch(NumberFormatException numberFormatException)
-            {
-                System.out.print("\nEntrada inválida, tente novamente.");
-                teclado.nextLine();
-            }
-        } while(escolha != 7);
-    }
-
-    //gera os dados do aluno 
-    /**
-     * @param idAluno
-     */
-    
-    public void dadosAluno(int idAluno) 
-    {
-        System.out.println("Nome: " + getAluno(idAluno).getNome());
-        System.out.println("Codigo do Usuário: " + getAluno(idAluno).getCodigoUsuario());
-        System.out.println("Email: " + getAluno(idAluno).getEmail());
-        System.out.println("CPF: " + getAluno(idAluno).getCPF());
-    }
-
-    public void mostrarDadosAlunos() 
-    {
-        for (int i = 0; i < contadorAluno; i++) {
-            System.out.println("Nome: " + alunos[i].getNome());
-            System.out.println("Código do Usuário: " + alunos[i].getCodigoUsuario());
-            System.out.println("Email: " + alunos[i].getEmail());
-            System.out.println("CPF: " + alunos[i].getCPF());
-            System.out.println();
-        }
-    }
-
-    //gera os cursos que estão disponíveis para a matrícula 
-    /**
-     * @param idAluno
-     */
-    public void cursosDisponiveisAluno(int idAluno) 
-    {
-        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
-        {
-            if (getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true && VerificaAlunoMatriculado(idAluno, indiceCursos) == false) 
-            {
-                System.out.println();
-                System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
-                System.out.println("Código do curso: " + getCurso(indiceCursos).getCodigoCurso());
-                System.out.println("Carga Horária do curso: " + getCurso(indiceCursos).getCargaHorariaCurso() + " Horas");
-                System.out.println("Ementa do curso: " + getCurso(indiceCursos).getEmenta());
-                System.out.println("Data Inicial do curso: " + getCurso(indiceCursos).getDateInicio());
-                System.out.println("Data Final do curso: " + getCurso(indiceCursos).getDateFim());
-                System.out.println("Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
-                System.out.println("Horários e dias do curso: " + getCurso(indiceCursos).getHorario());
-                System.out.println("Quantidade de alunos matrículados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
-                System.out.println();
-            }
-        }
-    }
-
-    //Metodo que imprime todos os cursos que um aluno está matriculado
-    /**
-     * @param idAluno
-     */
-
-    public void CursosMatriculadosAluno(int idAluno) 
-    {
-        System.out.println("Cursos que você está matriculado: ");
-        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
-        {   
-            if (getCurso(indiceCursos).getStatus() == true && VerificaAlunoMatriculado(idAluno, indiceCursos) == true) 
-            {
-                System.out.println();
-                System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
-                System.out.println("Código do curso: " + getCurso(indiceCursos).getCodigoCurso());
-                System.out.println("Carga iHorária do curso: " + getCurso(indiceCursos).getCargaHorariaCurso() + " Horas");
-                System.out.println("Ementa do curso: " + getCurso(indiceCursos).getEmenta());
-                System.out.println("Data Inicial do curso: " + getCurso(indiceCursos).getDateInicio());
-                System.out.println("Data Final do curso: " + getCurso(indiceCursos).getDateFim());
-                System.out.println("Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
-                System.out.println("Horários e dias do curso: " + getCurso(indiceCursos).getHorario());
-                System.out.println("Quantidade de alunos matrículados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
-                //System.out.println("Sua nota é: " + getCurso(indiceCursos).getNota(indiceCursos));
-                System.out.println();
-            }
-        }
-    }
-
-    /**
-     * @param codigo
-     * @return
-     */
-    
-    public Aluno buscaAlunoPorCodigo(int codigo) 
-    {
-    
-        for (int i = 0; i < contadorAluno; i++) {
-            if (alunos[i].getCodigoUsuario() == codigo) {
-                return alunos[i];
-            }
-        }
-        return null;
-    }
-
-    public void mostrarCursosEProfessores() 
-    {
-        for (int i = 0; i < contadorCurso; i++) {
-            Curso curso = cursos[i];
-            System.out.println("Curso: " + curso.getNomeCurso());
-            System.out.println("Código: " + curso.getCodigoCurso());
-            System.out.println("Professor: " + curso.getProfessor().getNome());
-            System.out.println("Quantidade de alunos matriculados: " + curso.getQuantidadeAtualAlunos());
-            System.out.println();
-        }
-    }
-
-    //Método para o aluno se matricular em um curso disponível
-    /**
-     * @param idAluno
-     */
-
-    public void MatricularCurso(int idAluno) 
-    {
-        String codigo;
-
-        cursosDisponiveisAluno(idAluno); //imprime os cursos disponíveis 
-        System.out.print("Digite o código do curso: ");
-        codigo = teclado.nextLine();
-
-        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
-        {
-            if(verificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
-            {
-                if(VerificaAlunoMatriculado(idAluno, indiceCursos) == false)
-                {
-                    if(getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) 
-                    {
-                        getCurso(indiceCursos).setAlunosMatriculados(getAluno(idAluno));
-                        GeraArquivo.salvarMatricula(getCurso(indiceCursos), getAluno(idAluno), "Nulo");
-                        Menu.limpaTela();
-                        System.out.println();
-                        System.out.println("Matricula feita com sucesso!");
-                        System.out.println();
-                        break;
-                    } else 
-                    {
-                        Menu.limpaTela();
-                        System.out.println();
-                        System.out.println("Esse curso está lotado ou não está disponível, não foi possível se matrícular!");
-                        System.out.println();
-                        break;
-                    }
-                } else 
-                {
-                    Menu.limpaTela();
-                    System.out.println();
-                    System.out.println("ERRO! Você já está matriculado nesse curso! Não é possível se matrícular novamente");
-                    System.out.println();
-                }
-            } 
-        }
-    }
-    
-    //Método para que o aluno cancele a matrícula em um curso
-    /**
-     * @param idAluno
-     */
-
-    public void CancelarMatriculaCurso(int idAluno) {
-        String codigo;
-
-        System.out.print("Digite o código do curso que deseja cancelar a matrícula: ");
-        codigo = teclado.nextLine();
-
-        for (int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
-            if (verificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) {
-                if (VerificaAlunoMatriculado(idAluno, indiceCursos) == true) {
-                    getCurso(indiceCursos).removerAlunoMatriculado(getAluno(idAluno));
-                    atualizarArquivoMatriculas(getCurso(indiceCursos), getAluno(idAluno));
-                    Menu.limpaTela();
-                    System.out.println();
-                    System.out.println("Matrícula cancelada com sucesso!");
-                    System.out.println();
-                    break;
-                } else {
-                    Menu.limpaTela();
-                    System.out.println();
-                    System.out.println("ERRO! Você não está matriculado nesse curso!");
-                    System.out.println();
-                }
-            }
-        }
-    }
     public void cancelarMatriculaCursoPorArquivo(int idAluno) {
         String codigoCurso;
         System.out.print("Digite o código do curso que deseja cancelar a matrícula: ");
@@ -846,7 +519,358 @@ public class Sistema
         new File("Projeto/matriculas.csv").delete();
         new File("Projeto/matriculas_temp.csv").renameTo(new File("Projeto/matriculas.csv"));
     }
+
+    //AQUI COMEÇA TUDO O QUE ENVOLVE O ALUNO !!!!
+    //método que cria a conta do aluno
+    public void criarContaAluno() 
+    {
+        String nome;
+        String cpf;
+        String email;
+        String senha;
+        String confirmaSenha;
+        boolean controle = false;
+        int codigoUsuario;
+
+        System.out.println();
+        System.out.println("SISTEMA DE GESTÃO DE CURSOS\n\n");
+        System.out.print("====================\nCADASTRO ALUNO\n====================\n\n");
+        System.out.print("CPF (apenas números): ");
+        cpf = teclado.nextLine();
+        if (cpf.matches("[0-9]+") && cpf.length() == 11) 
+        {
+            System.out.print("Nome completo: ");
+            nome = teclado.nextLine();
+            System.out.print("Digite seu Email: ");
+            email = teclado.nextLine();
+            if (email.matches("(.*)@(.*).(.*)") && !email.substring(0, email.indexOf("@")).isEmpty() && !email.substring(email.indexOf("@") + 1, email.indexOf(".")).isEmpty() && !email.substring(email.indexOf(".") + 1).isEmpty()) {
+                if (verificaCPFAlunoRepitido(cpf) == true && verificaEmailRepetidoAluno(email) == true) 
+                {
+                    do 
+                    {
+                        System.out.print("Senha: ");
+                        senha = teclado.nextLine();
+                        if (!senha.isEmpty()) {
+                            System.out.print("Confirme a senha: ");
+                            confirmaSenha = teclado.nextLine();
+                            boolean verifica = verificaVariaveis(senha, confirmaSenha);
+                            if (verifica == true) {
+                                controle = true;
+                                codigoUsuario = GerarCodigoUsuario();
+                                Aluno aluno = new Aluno(nome, codigoUsuario, email, senha, "aluno", cpf);
+                                setAluno(aluno);
+                                System.out.print("Conta Criada com Sucesso!");
+                                GeraArquivo.salvarAluno(aluno);
+                                teclado.nextLine();
+                            } else 
+                            {
+                                System.out.println("A senha não é igual, tente Novamente.\n");
+                            }
+                        } else 
+                        {
+                            System.out.println("A senha não pode estar em branco, tente novamente.\n");
+                        }
+                    } while (controle != true);
+                } else 
+                {
+                    System.out.println("Já existe um usuário cadastrado com esse CPF ou Email!\n");
+                }
+            } else 
+            {
+                System.out.println("Formato do email inválido, tente novamente.\n");
+                teclado.nextLine();
+            }
+        } else 
+        {
+            System.out.println("Formato do CPF inválido, tente novamente.\n");
+            teclado.nextLine();
+        }
+    }
+
+    /**
+     * @param email
+     * @return
+     */
+    //metodo que verifica se um email já foi usado por um outro aluno
+    public boolean verificaEmailRepetidoAluno(String email) 
+    {
+        for (int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
+        {
+            if (verificaVariaveis(getAluno(indiceAlunos).getEmail(), email) == true) 
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+     /**
+     * @param cpf
+     * @return
+     */
+
+    //Método que verifica se o cfp não foi usado por outro aluno
+    public boolean verificaCPFAlunoRepitido(String cpf) 
+    {
+        for(int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
+        {
+            if(verificaVariaveis(getAluno(indiceAlunos).getCPF(), cpf) == true) 
+            {
+                return false;
+            } 
+        }
+        return true; 
+    }
+
+    /**
+    * @param idAluno
+    */
+    //Gera o menu do aluno 
+    public void menuAluno(int idAluno) 
+    {
+        int escolha = 0; 
+
+        do
+        {
+            try
+            {
+                Menu.limpaTela();
+                System.out.println();
+                System.out.println("===========================\nSISTEMA DE GESTÃO DE CURSOS\n===========================\n");
+                System.out.println("MENU DO ALUNO\n");
+                System.out.println("Bem vindo: " + " " + getAluno(idAluno).getNome() + "\n");
+                System.out.println("    1 - Consultar seus Dados.");
+                System.out.println("    2 - Consultar Cursos disponíveis.");
+                System.out.println("    3 - Se matricular em Cursos disponíveis.");
+                System.out.println("    4 - Consultar os cursos que você está matriculado.");
+                System.out.println("    5 - Cancelar matricula em um curso.");
+                System.out.println("    6 - Obter o certificado de conclusão de um curso");
+                System.out.println("    7 - Sair.");
+                System.out.print("\nSelecione uma opção: ");
+
+                escolha = Integer.parseInt(teclado.nextLine());
+
+                switch(escolha) 
+                {
+                    case 1:
+                        Menu.limpaTela();
+                        dadosAluno(idAluno);
+                        System.out.print("\nPressione ENTER para continuar...");
+                        teclado.nextLine();
+                        break;
+                    case 2:
+                        Menu.limpaTela();
+                        cursosDisponiveisAluno(idAluno);
+                        System.out.print("\nPressione ENTER para continuar...");
+                        teclado.nextLine();
+                        break;
+                    case 3:
+                        Menu.limpaTela();
+                        matricularCurso(idAluno);
+                        break;
+                    case 4:
+                        Menu.limpaTela();
+                        cursosMatriculadosAluno(idAluno);
+                        break;
+                    case 5:
+                        Menu.limpaTela();
+                        CancelarMatriculaCurso(idAluno);
+                        break;
+                    case 6:
+                        Menu.limpaTela();
+                        break;
+                    case 7:
+                        Menu.limpaTela();
+                        return;
+                    default:
+                        System.out.print("\nOpção inválida, tente novamente.");
+                        teclado.nextLine();
+                        break;
+                }
+            } catch(NumberFormatException numberFormatException)
+            {
+                System.out.print("\nEntrada inválida, tente novamente.");
+                teclado.nextLine();
+            }
+        } while(escolha != 7);
+    }
+
+    //gera os dados do aluno 
+    /**
+     * @param idAluno
+     */
     
+    public void dadosAluno(int idAluno) 
+    {
+        System.out.println("Nome: " + getAluno(idAluno).getNome());
+        System.out.println("Codigo do Usuário: " + getAluno(idAluno).getCodigoUsuario());
+        System.out.println("Email: " + getAluno(idAluno).getEmail());
+        System.out.println("CPF: " + getAluno(idAluno).getCPF());
+    }
+
+    /**
+     * @param idAluno
+     */
+    //gera os cursos que estão disponíveis para a matrícula que estão ativos e que o aluno não se matrículou
+    public void cursosDisponiveisAluno(int idAluno) 
+    {
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        {
+            if (getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true && VerificaAlunoMatriculado(idAluno, indiceCursos) == false) 
+            {
+                System.out.println();
+                System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
+                System.out.println("Código do curso: " + getCurso(indiceCursos).getCodigoCurso());
+                System.out.println("Carga Horária do curso: " + getCurso(indiceCursos).getCargaHorariaCurso() + " Horas");
+                System.out.println("Ementa do curso: " + getCurso(indiceCursos).getEmenta());
+                System.out.println("Data Inicial do curso: " + getCurso(indiceCursos).getDateInicio());
+                System.out.println("Data Final do curso: " + getCurso(indiceCursos).getDateFim());
+                System.out.println("Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
+                System.out.println("Horários e dias do curso: " + getCurso(indiceCursos).getHorario());
+                System.out.println("Quantidade de alunos matrículados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
+                System.out.println();
+            }
+        }
+    }
+
+    
+    /**
+    * @param idAluno
+    */
+    //Metodo que imprime todos os cursos que um aluno está matriculado
+    public void cursosMatriculadosAluno(int idAluno) 
+    {
+        System.out.println("Cursos que você está matriculado: ");
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        {   
+            if (getCurso(indiceCursos).getStatus() == true && VerificaAlunoMatriculado(idAluno, indiceCursos) == true) 
+            {
+                System.out.println();
+                System.out.println("Nome do curso: " + getCurso(indiceCursos).getNomeCurso());
+                System.out.println("Código do curso: " + getCurso(indiceCursos).getCodigoCurso());
+                System.out.println("Carga iHorária do curso: " + getCurso(indiceCursos).getCargaHorariaCurso() + " Horas");
+                System.out.println("Ementa do curso: " + getCurso(indiceCursos).getEmenta());
+                System.out.println("Data Inicial do curso: " + getCurso(indiceCursos).getDateInicio());
+                System.out.println("Data Final do curso: " + getCurso(indiceCursos).getDateFim());
+                System.out.println("Professor do curso: " + getCurso(indiceCursos).getProfessor().getNome());
+                System.out.println("Horários e dias do curso: " + getCurso(indiceCursos).getHorario());
+                System.out.println("Quantidade de alunos matrículados: " + getCurso(indiceCursos).getQuantidadeAtualAlunos());
+                //System.out.println("Sua nota é: " + getCurso(indiceCursos).getNota(indiceCursos));
+                System.out.println();
+            }
+        }
+    }
+
+    /**
+     * @param codigo
+     * @return
+     */
+    //método que dado um código devolve a posição do aluno no array Alunos
+    public Aluno buscaAlunoPorCodigo(int codigo) 
+    {
+        for (int indiceAluno = 0; indiceAluno < contadorAluno; indiceAluno++) 
+        {
+            if (alunos[indiceAluno].getCodigoUsuario() == codigo) 
+            {
+                return alunos[indiceAluno];
+            }
+        }
+        return null;
+    }
+
+    public void mostrarCursosEProfessores() 
+    {
+        for (int i = 0; i < contadorCurso; i++) {
+            Curso curso = cursos[i];
+            System.out.println("Curso: " + curso.getNomeCurso());
+            System.out.println("Código: " + curso.getCodigoCurso());
+            System.out.println("Professor: " + curso.getProfessor().getNome());
+            System.out.println("Quantidade de alunos matriculados: " + curso.getQuantidadeAtualAlunos());
+            System.out.println();
+        }
+    }
+
+    //Método para o aluno se matricular em um curso disponível
+    /**
+     * @param idAluno
+     */
+    //Método para o aluno se matricular em um curso disponível
+    public void matricularCurso(int idAluno) 
+    {
+        String codigo;
+
+        cursosDisponiveisAluno(idAluno); 
+        System.out.print("Digite o código do curso: ");
+        codigo = teclado.nextLine();
+
+        for(int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) 
+        {
+            if(verificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
+            {
+                if(VerificaAlunoMatriculado(idAluno, indiceCursos) == false)
+                {
+                    if(getCurso(indiceCursos).getStatus() == true && VerificaQuantidadeAlunosMatriculados(indiceCursos) == true) 
+                    {
+                        getCurso(indiceCursos).setAlunosMatriculados(getAluno(idAluno));
+                        GeraArquivo.salvarMatricula(getCurso(indiceCursos), getAluno(idAluno), "Nulo");
+                        Menu.limpaTela();
+                        System.out.println();
+                        System.out.println("Matricula feita com sucesso!");
+                        System.out.println();
+                        break;
+                    } else 
+                    {
+                        Menu.limpaTela();
+                        System.out.println();
+                        System.out.println("Esse curso está lotado ou não está disponível, não foi possível se matrícular!");
+                        System.out.println();
+                        break;
+                    }
+                } else 
+                {
+                    Menu.limpaTela();
+                    System.out.println();
+                    System.out.println("ERRO! Você já está matriculado nesse curso! Não é possível se matrícular novamente");
+                    System.out.println();
+                }
+            } 
+        }
+    }
+    
+    
+    /**
+    * @param idAluno
+    */
+    //Método para que o aluno cancele a matrícula em um curso
+    public void CancelarMatriculaCurso(int idAluno) {
+        String codigo;
+
+        cursosMatriculadosAluno(idAluno);
+        System.out.print("Digite o código do curso que deseja cancelar a matrícula: ");
+        codigo = teclado.nextLine();
+        for (int indiceCursos = 0; indiceCursos < contadorCurso; indiceCursos++) {
+            if (verificaVariaveis(getCurso(indiceCursos).getCodigoCurso(), codigo) == true) 
+            {
+                if (VerificaAlunoMatriculado(idAluno, indiceCursos) == true) 
+                {
+                    getCurso(indiceCursos).removerAlunoMatriculado(getAluno(idAluno));
+                    atualizarArquivoMatriculas(getCurso(indiceCursos), getAluno(idAluno));
+                    Menu.limpaTela();
+                    System.out.println();
+                    System.out.println("Matrícula cancelada com sucesso!");
+                    System.out.println();
+                    break;
+                } else 
+                {
+                    Menu.limpaTela();
+                    System.out.println();
+                    System.out.println("ERRO! Você não está matriculado nesse curso!");
+                    System.out.println();
+                }
+            }
+        }
+    }
+
     //Método que retorna true se um curso não estiver lotado e false se estiver
     /**
      * @param indiceCurso
@@ -870,24 +894,6 @@ public class Sistema
     public int getQuantidadeAlunosMatriculados(int indiceCurso) 
     {
         return getCurso(indiceCurso).getQuantidadeAtualAlunos();
-    }
-
-    //Método que verifica o CPF do aluno para não repetir
-    /**
-     * @param cpf
-     * @return
-     */
-
-    public boolean VerificaCPF(String cpf) 
-    {
-        for(int indiceAlunos = 0; indiceAlunos < contadorAluno; indiceAlunos++) 
-        {
-            if(verificaVariaveis(getAluno(indiceAlunos).getCPF(), cpf) == true) 
-            {
-                return false;
-            } 
-        }
-        return true; 
     }
 
     //Métodoque verifica se um aluno está matriculado no curso
