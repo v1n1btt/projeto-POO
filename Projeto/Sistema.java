@@ -455,7 +455,7 @@ public class Sistema
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(",");
                 if (dados[1].equals(String.valueOf(professor.getCodigoUsuario()))) {
-                    bw.write(professor.getNome() + "," + professor.getCodigoUsuario() + "," + professor.getEmail() + "," + professor.getSenhaPessoal() + ",professor," + professor.getCargaHorariaAtual());
+                    bw.write(professor.getNome() + "," + professor.getCodigoUsuario() + "," + professor.getEmail() + "," + professor.getSenhaPessoal() + "," + professor.getCargaHorariaAtual() + ",professor");
                 } else {
                     bw.write(linha);
                 }

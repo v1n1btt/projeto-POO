@@ -33,7 +33,7 @@ public class GeraArquivo {
                              curso.getHorario() + ",");
 
                 if (curso.getProfessor() != null) {
-                    writer.write(curso.getProfessor().getNome());
+                    writer.write(curso.getProfessor().getCodigoUsuario());
                 } else {
                     writer.write("Sem Professor");
                 }
